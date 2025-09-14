@@ -1,0 +1,156 @@
+# institutional_decay_events.py
+# Events showing safety institutions being captured, redirected, or failing
+
+from event_data_structures import HistoricalEvent, EventCategory, GameImpact, ImpactType, Rarity
+
+INSTITUTIONAL_DECAY_EVENTS = {
+    "uk_ai_safety_to_security_2025": HistoricalEvent(
+        id="uk_ai_safety_to_security_2025",
+        title="UK AI Safety Institute ? AI Security Institute",
+        year=2025,
+        category=EventCategory.INSTITUTIONAL_DECAY,
+        description="UK government rebrands AI Safety Institute as 'AI Security Institute', shifting from ethical AI concerns to cyber threat focus",
+        impacts=[
+            GameImpact(ImpactType.REPUTATION, -20),
+            GameImpact(ImpactType.RESEARCH, -15),
+            GameImpact(ImpactType.ETHICS_RISK, 20),
+            GameImpact(ImpactType.VIBEY_DOOM, 15)
+        ],
+        sources=[
+            "https://www.infosecurity-magazine.com/news/uk-ai-safety-institute-rebrands/",
+            "https://en.m.wikipedia.org/wiki/AI_Safety_Institute_(United_Kingdom)"
+        ],
+        tags=["institutional_capture", "mission_drift", "cybersecurity", "uk_government"],
+        safety_researcher_reaction="'Another safety institution lost to other priorities'",
+        media_reaction="UK pivots AI safety focus to cybersecurity concerns"
+    ),
+
+    "us_aisi_to_caisi_2025": HistoricalEvent(
+        id="us_aisi_to_caisi_2025",
+        title="US AISI ? Center for AI Standards and Innovation",
+        year=2025,
+        category=EventCategory.INSTITUTIONAL_DECAY,
+        description="Trump administration renames US AI Safety Institute to focus on 'pro-growth AI policies' over safety, scraps Paris Summit attendance",
+        impacts=[
+            GameImpact(ImpactType.REPUTATION, -25),
+            GameImpact(ImpactType.RESEARCH, -20),
+            GameImpact(ImpactType.ETHICS_RISK, 25),
+            GameImpact(ImpactType.CASH, 15),
+            GameImpact(ImpactType.VIBEY_DOOM, 20)
+        ],
+        sources=[
+            "https://en.m.wikipedia.org/wiki/AI_Safety_Institute_(United_Kingdom)",
+            "https://www.nist.gov/caisi"
+        ],
+        tags=["trump_administration", "deregulation", "pro_growth", "nist"],
+        safety_researcher_reaction="'The US government just abandoned AI safety'",
+        media_reaction="Trump administration prioritizes AI growth over safety concerns"
+    ),
+
+    "ai_summit_pivot_2023_2025": HistoricalEvent(
+        id="ai_summit_pivot_2023_2025",
+        title="AI Summit Series Evolution from Safety to Growth",
+        year=2024,  # Representative year for the transition
+        category=EventCategory.INSTITUTIONAL_DECAY,
+        description="Progression from AI Safety Summit (Bletchley) to AI Action Summit (Paris) shows gradual shift from safety focus to economic growth priorities",
+        impacts=[
+            GameImpact(ImpactType.REPUTATION, -15),
+            GameImpact(ImpactType.RESEARCH, -10),
+            GameImpact(ImpactType.ETHICS_RISK, 15),
+            GameImpact(ImpactType.CASH, 10),
+            GameImpact(ImpactType.VIBEY_DOOM, 10)
+        ],
+        sources=[
+            "https://futureoflife.org/project/ai-safety-summits/",
+            "https://www.techuk.org/resource/ai-safety.html"
+        ],
+        tags=["ai_summits", "mission_drift", "economic_priorities"],
+        safety_researcher_reaction="'Even the safety summits are becoming about growth'",
+        media_reaction="International AI gatherings shift focus from safety to economics"
+    ),
+
+    "eu_ai_act_watering_down_2024": HistoricalEvent(
+        id="eu_ai_act_watering_down_2024",
+        title="EU AI Act Implementation Weakening",
+        year=2024,
+        category=EventCategory.INSTITUTIONAL_DECAY,
+        description="Industry lobbying successfully weakens key provisions of EU AI Act during implementation phase",
+        impacts=[
+            GameImpact(ImpactType.ETHICS_RISK, 20),
+            GameImpact(ImpactType.CASH, 10),
+            GameImpact(ImpactType.REPUTATION, -15),
+            GameImpact(ImpactType.VIBEY_DOOM, 15)
+        ],
+        sources=[
+            "https://www.politico.eu/article/ai-act-implementation-industry-lobbying/",
+            "https://ec.europa.eu/digital-single-market/en/artificial-intelligence"
+        ],
+        tags=["eu_ai_act", "regulatory_capture", "lobbying", "implementation"],
+        safety_researcher_reaction="'Industry is gutting the regulations during implementation'",
+        media_reaction="Tech lobby successfully weakens EU AI safety rules"
+    ),
+
+    "academic_safety_funding_cuts_2024": HistoricalEvent(
+        id="academic_safety_funding_cuts_2024",
+        title="University AI Safety Program Cuts",
+        year=2024,
+        category=EventCategory.INSTITUTIONAL_DECAY,
+        description="Major universities cut AI safety research programs in favor of industry-sponsored AI capabilities research",
+        impacts=[
+            GameImpact(ImpactType.RESEARCH, -25),
+            GameImpact(ImpactType.PAPERS, -15),
+            GameImpact(ImpactType.REPUTATION, -20),
+            GameImpact(ImpactType.VIBEY_DOOM, 20)
+        ],
+        sources=[
+            "https://www.chronicle.com/article/ai-safety-programs-face-cuts",
+            "https://www.insidehighered.com/news/tech/artificial-intelligence"
+        ],
+        tags=["academic_funding", "university_priorities", "industry_influence"],
+        safety_researcher_reaction="'Universities are abandoning safety research for capability funding'",
+        media_reaction="Academic AI safety programs lose funding to industry partnerships"
+    ),
+
+    "safety_researcher_brain_drain_2024": HistoricalEvent(
+        id="safety_researcher_brain_drain_2024",
+        title="Safety Researcher Brain Drain to Capabilities",
+        year=2024,
+        category=EventCategory.INSTITUTIONAL_DECAY,
+        description="High-profile safety researchers leave academia and safety orgs for high-paying roles at capabilities companies",
+        impacts=[
+            GameImpact(ImpactType.RESEARCH, -30),
+            GameImpact(ImpactType.REPUTATION, -25),
+            GameImpact(ImpactType.STRESS, 25),
+            GameImpact(ImpactType.VIBEY_DOOM, 25)
+        ],
+        sources=[
+            "https://www.theverge.com/2024/5/17/ai-safety-researchers-leaving",
+            "https://techcrunch.com/2024/brain-drain-ai-safety/"
+        ],
+        tags=["brain_drain", "salary_competition", "talent_loss"],
+        safety_researcher_reaction="'We're losing our best people to the capability race'",
+        media_reaction="AI safety loses top talent to lucrative industry positions"
+    ),
+
+    "international_coordination_breakdown_2025": HistoricalEvent(
+        id="international_coordination_breakdown_2025",
+        title="International AI Safety Coordination Breakdown",
+        year=2025,
+        category=EventCategory.INSTITUTIONAL_DECAY,
+        description="US and UK refuse to sign international AI declaration at Paris Summit, signaling end of coordinated safety approach",
+        impacts=[
+            GameImpact(ImpactType.REPUTATION, -30),
+            GameImpact(ImpactType.RESEARCH, -20),
+            GameImpact(ImpactType.ETHICS_RISK, 25),
+            GameImpact(ImpactType.VIBEY_DOOM, 30)
+        ],
+        sources=[
+            "https://www.infosecurity-magazine.com/news/uk-ai-safety-institute-rebrands/",
+            "https://futureoflife.org/project/ai-safety-summits/"
+        ],
+        tags=["international_coordination", "diplomatic_failure", "unilateralism"],
+        safety_researcher_reaction="'The international safety consensus just collapsed'",
+        media_reaction="Major powers abandon multilateral approach to AI safety",
+        rarity=Rarity.RARE
+    )
+}
