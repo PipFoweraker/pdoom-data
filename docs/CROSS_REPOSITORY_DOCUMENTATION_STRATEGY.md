@@ -1,7 +1,7 @@
 <!--
 This file is automatically synced from pdoom1/docs/shared/CROSS_REPOSITORY_DOCUMENTATION_STRATEGY.md
-Last synced: 2025-09-16T06:01:32.435280
-Source commit: 2b37e2c55cfaf6819b8a272dd56a96a5103cffaa
+Last synced: 2025-10-09T11:29:33.673646
+Source commit: b021426f63d4157cf079fc875267ce69b1c8c0ba
 DO NOT EDIT DIRECTLY - Changes will be overwritten by sync
 -->
 
@@ -192,7 +192,7 @@ jobs:
 
 **File: `scripts/sync-docs.py`**
 ```python
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """
 Cross-repository documentation synchronization tool
 """
@@ -410,7 +410,7 @@ This endpoint is part of the {{REPO_NAME}} service in the P(Doom) ecosystem.
 
 **File: `scripts/validate-links.py`**
 ```python
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 """
 Validate cross-repository documentation links
 """
