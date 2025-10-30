@@ -1,0 +1,12 @@
+{
+  "source_dir": "data/raw/funding_sources",
+  "dest_dir": "data/transformed/validated",
+  "backup_dir": "data/_backups",
+  "log_dir": "logs/migration",
+  "state_file": "logs/migration/.migration_state.json",
+  "required_columns": ["grant_id", "amount", "date", "source"],
+  "validation_schema": "config/schemas/funding_data_v1.json",
+  "fail_on_warning": false,
+  "create_backups": true,
+  "operation": "copy"
+}

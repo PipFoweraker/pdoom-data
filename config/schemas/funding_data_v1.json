@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Funding Data Schema",
+  "description": "Schema for AI safety funding event data",
+  "type": "object",
+  "required": ["grant_id", "amount", "date", "source"],
+  "properties": {
+    "grant_id": {
+      "type": "string",
+      "description": "Unique identifier for the grant"
+    },
+    "amount": {
+      "type": "number",
+      "description": "Grant amount in USD",
+      "minimum": 0
+    },
+    "date": {
+      "type": "string",
+      "description": "Grant date in ISO 8601 format (YYYY-MM-DD)",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "source": {
+      "type": "string",
+      "description": "Funding source organization name",
+      "enum": [
+        "Survival and Flourishing Fund",
+        "Open Philanthropy",
+        "Schmidt Sciences AI2050",
+        "Macroscopic",
+        "GiveWiki",
+        "Cooperative AI Foundation",
+        "Catalyze Impact",
+        "Other"
+      ]
+    },
+    "recipient": {
+      "type": "string",
+      "description": "Grant recipient organization or individual"
+    },
+    "category": {
+      "type": "string",
+      "description": "Grant category",
+      "enum": [
+        "AI Safety Research",
+        "AI Governance",
+        "Technical Alignment",
+        "Policy Research",
+        "Public Outreach",
+        "Infrastructure",
+        "Other"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Grant description or purpose"
+    },
+    "url": {
+      "type": "string",
+      "description": "URL to grant announcement or details",
+      "format": "uri"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes or context"
+    }
+  }
+}
