@@ -66,7 +66,6 @@ def test_migration_basic():
         # Run migration
         migrator = DataMigrator()
         migrator.config = config
-        migrator.logger = migrator.logger  # Keep existing logger
         
         stats = migrator.migrate()
         
