@@ -1,0 +1,119 @@
+SFF Data Source Investigation Notes
+Date: 2025-10-30
+Investigator: Copilot Agent
+
+=== INVESTIGATION SUMMARY ===
+
+Investigation conducted for Survival and Flourishing Fund (SFF) data source.
+
+Source: https://survivalandflourishing.fund/
+
+=== NETWORK ACCESS LIMITATION ===
+
+During this investigation, direct access to the SFF website was blocked due to 
+network restrictions in the sandboxed environment. The investigation report is 
+based on:
+
+1. Publicly available information about SFF
+2. Typical philanthropic fund website structures
+3. Existing sample data in the repository
+4. Standard web scraping best practices
+
+=== NEXT STEPS FOR FULL INVESTIGATION ===
+
+To complete the investigation with real data:
+
+1. Access survivalandflourishing.fund directly from an unrestricted environment
+2. Navigate to grants/portfolio section
+3. Identify the actual HTML structure and data layout
+4. Extract 10-20 real grant records manually
+5. Document the specific CSS selectors and data patterns
+6. Update the extraction script with real selectors
+7. Perform full automated extraction
+
+=== WEBSITE STRUCTURE TO DOCUMENT ===
+
+When accessing the site, document:
+
+- Main navigation structure
+- Location of grants database (URL)
+- Grant listing format (table, cards, list)
+- Individual grant page structure
+- Pagination mechanism
+- Search/filter functionality
+- Any JavaScript-loaded content
+- robots.txt rules
+- Terms of service relevant to data extraction
+
+=== DATA FIELDS TO EXTRACT ===
+
+Priority fields:
+- Recipient name
+- Grant amount (if disclosed)
+- Grant date or announcement date
+- Grant type/category
+- Focus area (AI safety, existential risk, etc.)
+- Brief description
+- Source URL (direct link to grant)
+
+Optional fields:
+- Grant ID (if provided, otherwise generate)
+- Recipient type (organization vs individual)
+- Detailed description
+- Related links
+
+=== EXTRACTION TOOLS ===
+
+Recommended tools for extraction:
+- requests library for HTTP requests
+- BeautifulSoup4 for HTML parsing
+- Selenium/Playwright if JavaScript rendering required
+- pandas for data validation and transformation
+
+=== RESPONSIBLE SCRAPING ===
+
+Best practices to follow:
+- Check and respect robots.txt
+- Implement delays between requests (1-2 seconds)
+- Use descriptive User-Agent header
+- Don't overload the server
+- Cache responses to avoid re-requests
+- Handle errors gracefully
+- Document extraction date and method
+
+=== FILES CREATED ===
+
+1. INVESTIGATION_REPORT.md - Comprehensive investigation documentation
+2. dumps/2025-10-30_225651/ - Sample data structure demonstration
+3. This file - Investigation process notes
+
+=== SAMPLE DATA ===
+
+Sample demonstration data created in dumps/2025-10-30_225651/:
+- 3 example grants showing expected data structure
+- All required fields populated
+- Format follows project standards
+
+Note: This is demonstration data, not real SFF grants.
+
+=== READY FOR NEXT PHASE ===
+
+The investigation framework is complete:
+- Directory structure: Ready
+- Data format: Defined
+- Extraction process: Documented
+- Sample structure: Created
+
+Waiting on:
+- Website access verification
+- Real data extraction
+- Script development with actual selectors
+
+=== CONTACT ===
+
+For questions or to report website access:
+- Open issue in PipFoweraker/pdoom-data repository
+- Reference issue #12 (Investigate data availability: Survival and Flourishing Fund)
+
+---
+End of Notes
