@@ -1,0 +1,23 @@
+{
+  "extraction_date": "2025-10-30T22:56:51Z",
+  "source_name": "sff",
+  "source_url": "https://survivalandflourishing.fund/",
+  "extraction_method": "manual",
+  "extractor_version": "1.0.0",
+  "data_format": "json",
+  "record_count": 3,
+  "extraction_notes": "Example dump demonstrating structure with sample grants",
+  "fields_extracted": [
+    "grant_id",
+    "recipient_name",
+    "recipient_type",
+    "amount",
+    "currency",
+    "grant_date",
+    "grant_type",
+    "focus_area",
+    "description",
+    "source_url"
+  ],
+  "extraction_status": "complete"
+}

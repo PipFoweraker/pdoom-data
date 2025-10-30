@@ -1,0 +1,44 @@
+[
+  {
+    "grant_id": "SFF-2024-001",
+    "source": "sff",
+    "recipient_name": "Anthropic PBC",
+    "recipient_type": "organization",
+    "amount": 500000,
+    "currency": "USD",
+    "grant_date": "2024-03-15",
+    "grant_type": "Research Grant",
+    "focus_area": "AI Safety Research",
+    "description": "Support for constitutional AI research and safety evaluations",
+    "source_url": "https://survivalandflourishing.fund/example",
+    "extracted_at": "2025-10-30T22:56:51Z"
+  },
+  {
+    "grant_id": "SFF-2024-002",
+    "source": "sff",
+    "recipient_name": "Alignment Research Center",
+    "recipient_type": "organization",
+    "amount": 350000,
+    "currency": "USD",
+    "grant_date": "2024-04-20",
+    "grant_type": "General Support",
+    "focus_area": "Alignment Research",
+    "description": "General operational support for alignment research initiatives",
+    "source_url": "https://survivalandflourishing.fund/example",
+    "extracted_at": "2025-10-30T22:56:51Z"
+  },
+  {
+    "grant_id": "SFF-2024-003",
+    "source": "sff",
+    "recipient_name": "Dr. Jane Smith",
+    "recipient_type": "individual",
+    "amount": 75000,
+    "currency": "USD",
+    "grant_date": "2024-05-10",
+    "grant_type": "Individual Fellowship",
+    "focus_area": "AI Governance",
+    "description": "Research fellowship for AI policy and governance work",
+    "source_url": "https://survivalandflourishing.fund/example",
+    "extracted_at": "2025-10-30T22:56:51Z"
+  }
+]
