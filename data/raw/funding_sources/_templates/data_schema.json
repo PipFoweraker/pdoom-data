@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Funding Event Common Schema",
+  "description": "Common schema for funding event data across all sources",
+  "type": "object",
+  "required": [
+    "grant_id",
+    "source",
+    "recipient_name",
+    "amount",
+    "grant_date"
+  ],
+  "properties": {
+    "grant_id": {
+      "type": "string",
+      "description": "Unique identifier for the grant (source-specific format)",
+      "example": "SFF-2024-001"
+    },
+    "source": {
+      "type": "string",
+      "description": "Name of funding source organization",
+      "example": "sff"
+    },
+    "recipient_name": {
+      "type": "string",
+      "description": "Name of grant recipient (individual or organization)",
+      "example": "Anthropic PBC"
+    },
+    "recipient_type": {
+      "type": "string",
+      "enum": ["individual", "organization", "institution", "unknown"],
+      "description": "Type of recipient entity"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Grant amount in the specified currency",
+      "example": 500000
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "Currency code (ISO 4217)",
+      "default": "USD",
+      "example": "USD"
+    },
+    "grant_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date when grant was awarded (ISO 8601)",
+      "example": "2024-03-15"
+    },
+    "grant_type": {
+      "type": "string",
+      "description": "Type or category of grant",
+      "example": "Research Grant"
+    },
+    "focus_area": {
+      "type": "string",
+      "description": "Primary research or focus area",
+      "example": "AI Safety"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of grant purpose or project"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to original grant announcement or details"
+    },
+    "extracted_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this record was extracted",
+      "example": "2025-10-31T14:30:00Z"
+    },
+    "duration_months": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Grant duration in months (if applicable)"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Additional tags or categories for this grant"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Any additional notes or observations"
+    }
+  }
+}

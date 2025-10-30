@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Funding Event Extraction Metadata",
+  "description": "Metadata standard for funding event data dumps",
+  "type": "object",
+  "required": [
+    "extraction_date",
+    "source_name",
+    "source_url",
+    "extraction_method",
+    "data_format",
+    "extraction_status"
+  ],
+  "properties": {
+    "extraction_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when extraction was performed",
+      "example": "2025-10-31T14:30:00Z"
+    },
+    "source_name": {
+      "type": "string",
+      "description": "Name of the funding source",
+      "enum": ["sff", "open_philanthropy", "ai2050", "macroscopic", "givewiki", "cooperative_ai", "catalyze_impact"]
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL where data was extracted from"
+    },
+    "extraction_method": {
+      "type": "string",
+      "enum": ["web_scrape", "manual", "api"],
+      "description": "Method used to extract the data"
+    },
+    "extractor_version": {
+      "type": "string",
+      "description": "Version of the extraction script or tool used",
+      "example": "1.0.0"
+    },
+    "data_format": {
+      "type": "string",
+      "enum": ["json", "csv", "html", "xml"],
+      "description": "Format of the extracted data"
+    },
+    "record_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of records extracted"
+    },
+    "extraction_notes": {
+      "type": "string",
+      "description": "Any notes or observations about the extraction process"
+    },
+    "fields_extracted": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of field names extracted from source",
+      "example": ["grant_id", "recipient", "amount", "date"]
+    },
+    "extraction_status": {
+      "type": "string",
+      "enum": ["complete", "partial", "failed"],
+      "description": "Status of the extraction process"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of errors encountered during extraction"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of warnings from the extraction process"
+    }
+  }
+}
