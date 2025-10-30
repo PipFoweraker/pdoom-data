@@ -19,15 +19,15 @@ This repository implements a three-zone data architecture designed to maintain d
 **Directory Structure**:
 ```
 data/raw/
-├── funding_sources/          # Funding data organized by source
-│   ├── sff/                 # Survival & Flourishing Fund
-│   ├── open_philanthropy/   # Open Philanthropy
-│   ├── ai2050/              # Schmidt Sciences AI2050
-│   ├── macroscopic/         # Macroscopic
-│   ├── givewiki/            # GiveWiki
-│   ├── cooperative_ai/      # Cooperative AI Foundation
-│   └── catalyze_impact/     # Catalyze Impact
-└── _archive/                # Historical/superseded data
+|-- funding_sources/          # Funding data organized by source
+|   |-- sff/                 # Survival & Flourishing Fund
+|   |-- open_philanthropy/   # Open Philanthropy
+|   |-- ai2050/              # Schmidt Sciences AI2050
+|   |-- macroscopic/         # Macroscopic
+|   |-- givewiki/            # GiveWiki
+|   |-- cooperative_ai/      # Cooperative AI Foundation
+|   `-- catalyze_impact/     # Catalyze Impact
+`-- _archive/                # Historical/superseded data
 ```
 
 **Policies**:
@@ -53,13 +53,13 @@ data/raw/
 **Directory Structure**:
 ```
 data/transformed/
-├── validated/    # Schema-validated, structurally sound
-├── cleaned/      # Normalized and deduplicated
-└── enriched/     # With derived fields and aggregations
+|-- validated/    # Schema-validated, structurally sound
+|-- cleaned/      # Normalized and deduplicated
+`-- enriched/     # With derived fields and aggregations
 ```
 
 **Policies**:
-- Data flows: raw → validated → cleaned → enriched
+- Data flows: raw -> validated -> cleaned -> enriched
 - Each stage is idempotent and reproducible
 - All transformations are script-driven (no manual edits)
 - Failed transformations are logged and halt processing
@@ -81,8 +81,8 @@ data/transformed/
 **Directory Structure**:
 ```
 data/serveable/
-├── analytics/    # For dashboards and analysis tools
-└── api/          # API-ready formats (JSON, etc.)
+|-- analytics/    # For dashboards and analysis tools
+`-- api/          # API-ready formats (JSON, etc.)
 ```
 
 **Policies**:
@@ -125,7 +125,7 @@ data/serveable/
 
 ## Zone Transition Rules
 
-### Raw → Transformed
+### Raw -> Transformed
 
 **Process**: Migration script with validation
 **Script**: `scripts/migration/migrate.py`
@@ -140,7 +140,7 @@ data/serveable/
 - When schema or validation rules change
 - On-demand for reprocessing
 
-### Transformed → Serveable
+### Transformed -> Serveable
 
 **Process**: Publishing pipeline
 **Operations**:

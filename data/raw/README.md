@@ -15,15 +15,15 @@ This is the **immutable landing zone** for all source data. Data in this zone is
 
 ```
 raw/
-├── funding_sources/          # Funding data by source organization
-│   ├── sff/                 # Survival & Flourishing Fund
-│   ├── open_philanthropy/   # Open Philanthropy
-│   ├── ai2050/              # Schmidt Sciences AI2050
-│   ├── macroscopic/         # Macroscopic
-│   ├── givewiki/            # GiveWiki
-│   ├── cooperative_ai/      # Cooperative AI Foundation
-│   └── catalyze_impact/     # Catalyze Impact
-└── _archive/                # Historical/superseded data
+|-- funding_sources/          # Funding data by source organization
+|   |-- sff/                 # Survival & Flourishing Fund
+|   |-- open_philanthropy/   # Open Philanthropy
+|   |-- ai2050/              # Schmidt Sciences AI2050
+|   |-- macroscopic/         # Macroscopic
+|   |-- givewiki/            # GiveWiki
+|   |-- cooperative_ai/      # Cooperative AI Foundation
+|   `-- catalyze_impact/     # Catalyze Impact
+`-- _archive/                # Historical/superseded data
 ```
 
 ## File Naming Convention
@@ -47,21 +47,21 @@ Examples:
 - Unmodified source data
 
 ### What Doesn't Go Here
-- Transformed or cleaned data → use `data/transformed/`
-- Aggregated data → use `data/transformed/enriched/`
-- Production data → use `data/serveable/`
+- Transformed or cleaned data -> use `data/transformed/`
+- Aggregated data -> use `data/transformed/enriched/`
+- Production data -> use `data/serveable/`
 
 ### Operations
 
 **Allowed**:
-- ✅ Add new files
-- ✅ Read files
-- ✅ Copy files to other zones
+- [YES] Add new files
+- [YES] Read files
+- [YES] Copy files to other zones
 
 **Not Allowed**:
-- ❌ Modify existing files
-- ❌ Delete files (move to `_archive/` instead)
-- ❌ Manual data entry (use ingestion scripts)
+- [NO] Modify existing files
+- [NO] Delete files (move to `_archive/` instead)
+- [NO] Manual data entry (use ingestion scripts)
 
 ## Archiving
 

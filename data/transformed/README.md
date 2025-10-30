@@ -33,7 +33,7 @@ Analysis-ready data with derived fields:
 ## Data Flow
 
 ```
-raw → validated → cleaned → enriched → serveable
+raw -> validated -> cleaned -> enriched -> serveable
 ```
 
 Each stage is reproducible from the previous stage.
@@ -48,14 +48,14 @@ Each stage is reproducible from the previous stage.
 ## Operations
 
 **Allowed**:
-- ✅ Read data
-- ✅ Process via scripts
-- ✅ Delete and regenerate
+- [YES] Read data
+- [YES] Process via scripts
+- [YES] Delete and regenerate
 
 **Not Allowed**:
-- ❌ Manual file edits
-- ❌ Direct writes without logging
-- ❌ Skipping validation steps
+- [NO] Manual file edits
+- [NO] Direct writes without logging
+- [NO] Skipping validation steps
 
 ## Regenerating Data
 

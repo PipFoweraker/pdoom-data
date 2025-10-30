@@ -194,19 +194,19 @@ Fields calculated during transformation:
 Different sources may use different field names. Mapping:
 
 ### Survival & Flourishing Fund (SFF)
-- Source field `Grant ID` → `grant_id`
-- Source field `Amount` → `amount`
-- Source field `Grantee` → `recipient`
+- Source field `Grant ID` -> `grant_id`
+- Source field `Amount` -> `amount`
+- Source field `Grantee` -> `recipient`
 
 ### Open Philanthropy
-- Source field `Grant` → `grant_id`
-- Source field `Amount Awarded` → `amount`
-- Source field `Organization` → `recipient`
+- Source field `Grant` -> `grant_id`
+- Source field `Amount Awarded` -> `amount`
+- Source field `Organization` -> `recipient`
 
 ### Schmidt Sciences AI2050
-- Source field `Project ID` → `grant_id`
-- Source field `Funding` → `amount`
-- Source field `PI Organization` → `recipient`
+- Source field `Project ID` -> `grant_id`
+- Source field `Funding` -> `amount`
+- Source field `PI Organization` -> `recipient`
 
 *Note: Add specific mappings as sources are integrated*
 

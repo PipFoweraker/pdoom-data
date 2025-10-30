@@ -32,13 +32,13 @@ Data formatted for direct API serving:
 ## Operations
 
 **Allowed**:
-- ✅ Read data
-- ✅ Regenerate from transformed zone
-- ✅ Update via publishing pipeline
+- [YES] Read data
+- [YES] Regenerate from transformed zone
+- [YES] Update via publishing pipeline
 
 **Not Allowed**:
-- ❌ Manual edits
-- ❌ Direct writes without validation
+- [NO] Manual edits
+- [NO] Direct writes without validation
 
 ## Regenerating Data
 

@@ -233,11 +233,11 @@ External Source Systems
 **Raw Location**: `data/raw/funding_sources/sff/`
 
 **Field Mappings**:
-- `Grant ID` → `grant_id`
-- `Amount` → `amount`
-- `Date Awarded` → `date`
-- `Grantee` → `recipient`
-- `Focus Area` → `category`
+- `Grant ID` -> `grant_id`
+- `Amount` -> `amount`
+- `Date Awarded` -> `date`
+- `Grantee` -> `recipient`
+- `Focus Area` -> `category`
 
 **Known Issues**:
 - Date format varies (US vs ISO)
@@ -257,11 +257,11 @@ External Source Systems
 **Raw Location**: `data/raw/funding_sources/open_philanthropy/`
 
 **Field Mappings**:
-- `grant_id` → `grant_id` (direct)
-- `amount_awarded` → `amount`
-- `award_date` → `date`
-- `organization` → `recipient`
-- `focus_area` → `category`
+- `grant_id` -> `grant_id` (direct)
+- `amount_awarded` -> `amount`
+- `award_date` -> `date`
+- `organization` -> `recipient`
+- `focus_area` -> `category`
 
 **Known Issues**:
 - Multi-year grants shown as single amount
@@ -298,7 +298,7 @@ External Source Systems
 **Logic**:
 1. Remove currency symbols ($, EUR, etc.)
 2. Remove thousands separators (,)
-3. Expand K/M notation (50K → 50000)
+3. Expand K/M notation (50K -> 50000)
 4. Convert to float
 5. Round to 2 decimal places
 
@@ -398,10 +398,10 @@ To reprocess specific source:
 
 Data validated at each stage:
 
-1. **Raw → Validated**: Schema compliance, required fields
-2. **Validated → Cleaned**: Duplicates, data quality
-3. **Cleaned → Enriched**: Derived field consistency
-4. **Enriched → Serveable**: Format correctness, completeness
+1. **Raw -> Validated**: Schema compliance, required fields
+2. **Validated -> Cleaned**: Duplicates, data quality
+3. **Cleaned -> Enriched**: Derived field consistency
+4. **Enriched -> Serveable**: Format correctness, completeness
 
 ## Monitoring Lineage
 
