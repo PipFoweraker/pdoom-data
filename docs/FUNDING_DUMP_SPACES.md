@@ -240,10 +240,7 @@ python scripts/extraction/validate_dump.py --source sff --dump 2025-10-30_225651
 
 ## Example Dump
 
-An example dump is provided at:
-```
-data/raw/funding_sources/sff/dumps/2025-10-30_225651/
-```
+An example dump is provided to demonstrate the structure. You can find examples in the dumps directories with timestamped folders (format: YYYY-MM-DD_HHMMSS).
 
 This demonstrates:
 - Proper metadata structure

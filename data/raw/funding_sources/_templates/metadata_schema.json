@@ -62,7 +62,7 @@
     },
     "extraction_status": {
       "type": "string",
-      "enum": ["complete", "partial", "failed"],
+      "enum": ["complete", "partial", "failed", "pending"],
       "description": "Status of the extraction process"
     },
     "errors": {

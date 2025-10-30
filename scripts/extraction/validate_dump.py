@@ -123,6 +123,9 @@ def validate_dump(source, dump_name, base_dir=None):
     
     result.add_info(f"Validating: {dump_dir}")
     
+    # Initialize metadata variable
+    metadata = None
+    
     # Check for metadata file
     metadata_file = dump_dir / '_metadata.json'
     if not metadata_file.exists():
@@ -176,12 +179,9 @@ def validate_dump(source, dump_name, base_dir=None):
             if isinstance(data, list):
                 result.add_info(f"Data file contains {len(data)} records")
                 
-                # Validate record count matches metadata
-                if metadata_file.exists():
-                    with open(metadata_file, 'r', encoding='ascii') as f:
-                        metadata = json.load(f)
-                    if 'record_count' in metadata and metadata['record_count'] != len(data):
-                        result.add_warning(f"Record count mismatch: metadata says {metadata['record_count']}, data has {len(data)}")
+                # Validate record count matches metadata (if metadata was loaded successfully)
+                if metadata and 'record_count' in metadata and metadata['record_count'] != len(data):
+                    result.add_warning(f"Record count mismatch: metadata says {metadata['record_count']}, data has {len(data)}")
             else:
                 result.add_warning("Data file is not a JSON array")
                 
