@@ -1,75 +1,64 @@
-# P(Doom) Historical Events Database
+# P(Doom) Data Repository
 
-Real-world AI safety events for the P(Doom) strategy game.
+Curated data lake for AI safety, alignment research, and funding information.
 
 ## Overview
 
-28+ meticulously researched historical events from 2016-2025:
-- Organizational crises (OpenAI board drama, safety team departures)
-- Technical breakthroughs (AI deception, capability scaling)  
-- Funding catastrophes (FTX collapse, crypto crashes)
-- Institutional decay (safety orgs losing focus)
+This repository provides production-grade data infrastructure for tracking AI safety developments, research publications, and funding patterns. Data flows through a three-zone architecture (raw → transformed → serveable) with comprehensive validation and provenance tracking.
 
-## Key Events
+## Data Collections
 
-### Legendary (Doom-Increasing)
-- AI Sandbagging Research (2024): Models hide capabilities from tests
-- Alignment Faking (2024): Claude caught lying about its values
-- Scheming Evaluations (2024): More capable = more deceptive
-- Claude 4 Blackmail (2025): AI attempts manipulation for survival
+### Alignment Research
+- 1,000+ research papers, blog posts, and forum discussions
+- 30+ sources (ArXiv, Alignment Forum, LessWrong, EA Forum, etc.)
+- Automated weekly extraction with delta detection
+- Date range: 2020-present
 
-### Major Crises
-- OpenAI Board Crisis (2023): CEO fired and reinstated in 5 days
-- FTX Future Fund Collapse (2022): $32M+ in AI safety grants vanished
-- Safety Team Exodus (2024): Researchers quit over capability race
+### Funding Sources
+- Survival and Flourishing Fund (SFF) grants
+- Grant amounts, recipients, and project descriptions
+- Historical funding patterns for AI safety organizations
 
-## Features
+### Historical Timeline
+- 28+ curated AI safety events (2016-2025)
+- Organizational crises, technical breakthroughs, funding events
+- Full source attribution and metadata
 
-- Game mechanics: Impacts on cash, reputation, research, doom estimate
-- Source attribution: All events linked to original reporting
-- Dynamic system: Event probability based on game state
-- Event chains: One crisis can trigger others
-- ASCII-only: Agent-compatible, no Unicode issues
+## Architecture
 
-## Usage
+**Raw Zone** → **Transformed Zone** → **Serveable Zone**
 
-```python
-from game_integration_helpers import get_weighted_random_event
+- Immutable source data with checksums
+- Schema validation and quality checks
+- Optimized formats for downstream consumption
 
-event = get_weighted_random_event(game_state, current_year=2024)
-# Returns contextually appropriate historical event
-```
+See [docs/ALIGNMENT_RESEARCH_INTEGRATION.md](docs/ALIGNMENT_RESEARCH_INTEGRATION.md) for technical details.
 
-## Data Quality
+## Data Quality Standards
 
-- Rigorous sourcing (ArXiv papers, news articles, company statements)
-- Impact calibration based on real-world significance
-- Ongoing validation and community contributions welcome
+- Rigorous sourcing with complete attribution
+- JSON Schema validation on all datasets
+- ASCII-only encoding for universal compatibility
+- Comprehensive extraction and transformation logs
 
 ## License
 
 MIT License - Free for educational, research, and commercial use.
 
-## Data Pipeline
+## Data Sources
 
-This repository includes automated data extraction and processing infrastructure:
+- **Historical Events**: 28+ curated game events (2016-2025)
+- **Alignment Research**: 1,000+ research papers and discussions (automated weekly updates)
+- **Funding Data**: SFF grants and funding patterns
 
-### Alignment Research Dataset
-- **1,000+ research papers, blog posts, and forum discussions** from 30+ sources
-- Automated weekly extraction from [StampyAI/alignment-research-dataset](https://huggingface.co/datasets/StampyAI/alignment-research-dataset)
-- Full validation and provenance tracking
-- See [docs/ALIGNMENT_RESEARCH_INTEGRATION.md](docs/ALIGNMENT_RESEARCH_INTEGRATION.md) for details
+Infrastructure documentation: [docs/ALIGNMENT_RESEARCH_INTEGRATION.md](docs/ALIGNMENT_RESEARCH_INTEGRATION.md)
 
-### Data Architecture
-- **Raw Zone**: Immutable source data with complete metadata
-- **Transformed Zone**: Validated, cleaned, and enriched data
-- **Serveable Zone**: Optimized for game integration (planned)
+## Repository Visibility
 
-See [docs/DATA_ARCHITECTURE.md](docs/DATA_ARCHITECTURE.md) for complete architecture details.
+This repository is currently **private** during active development. A publishing workflow is configured to sync the serveable zone to a future public repository once data transformation pipelines are complete.
 
-## ASCII-Only Protocol
+See [docs/DATA_PUBLISHING_STRATEGY.md](docs/DATA_PUBLISHING_STRATEGY.md) for details on the planned public data release strategy.
 
-This project enforces strict ASCII-only content (characters 0-127):
-- No Unicode quotes, em-dashes, or special characters
-- Ensures agent compatibility and cross-platform reliability
-- All files validated for ASCII compliance
+## Contributing
+
+This repository maintains strict ASCII-only content for agent compatibility. See [CHANGELOG.md](CHANGELOG.md) for recent updates.

@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Complete end-to-end data pipeline for StampyAI alignment research dataset**
 
+#### Data Publishing Strategy
+
+**Infrastructure for future public data release**
+
 - **Extraction Infrastructure**
   - `data/raw/alignment_research/extraction_script.py` - Full-featured extraction with streaming, filtering, delta detection
   - `data/raw/alignment_research/README.md` - Comprehensive source documentation
@@ -57,6 +61,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Sources: alignmentforum, arxiv, lesswrong, eaforum, distill
   - 100% validation pass rate
   - Complete provenance and attribution metadata
+
+#### Publishing Infrastructure
+
+- **Documentation**
+  - `docs/DATA_PUBLISHING_STRATEGY.md` - Complete strategy for public data release
+  - Zone-based visibility model (raw/transformed = private, serveable = publishable)
+  - Decision log for publishing approach
+
+- **Automation (Stub)**
+  - `.github/workflows/publish-serveable.yml` - Disabled workflow for future public sync
+  - Pre-publication validation (secrets scanning, ASCII compliance, JSON validation)
+  - Automated sync to future pdoom-data-public repository
+  - Release tagging with semantic versioning
+
+- **README Updates**
+  - Clarified repository as data lake infrastructure (not game-specific)
+  - Added Repository Visibility section
+  - Rebalanced focus toward data architecture vs. game mechanics
 
 #### GitHub Issues Created
 

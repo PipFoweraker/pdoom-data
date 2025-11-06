@@ -1,0 +1,254 @@
+# DISABLED: Public Data Publishing Workflow
+#
+# This workflow will sync the serveable zone to a public repository once activated.
+#
+# Activation Checklist:
+# - [ ] Create public destination repo (e.g., pdoom-data-public)
+# - [ ] Configure PUBLISH_TOKEN secret with write access to public repo
+# - [ ] Verify serveable zone has production-ready data
+# - [ ] Complete data quality audit (100% validation pass)
+# - [ ] Remove this comment block and uncomment workflow below
+# - [ ] Update PUBLIC_REPO variable with actual repo name
+#
+# See docs/DATA_PUBLISHING_STRATEGY.md for full details
+
+# name: Publish Serveable Data to Public Repo
+#
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'data/serveable/**'
+#   workflow_dispatch:
+#     inputs:
+#       force_publish:
+#         description: 'Force publish even without changes'
+#         required: false
+#         type: boolean
+#         default: false
+#
+# env:
+#   PUBLIC_REPO: 'PipFoweraker/pdoom-data-public'  # UPDATE THIS
+#   SERVEABLE_PATH: 'data/serveable'
+#
+# jobs:
+#   validate-before-publish:
+#     name: Pre-Publication Validation
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#       - name: Checkout private repo
+#         uses: actions/checkout@v4
+#
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: '3.11'
+#
+#       - name: Install dependencies
+#         run: |
+#           pip install jsonschema jsonlines requests
+#
+#       - name: Run validation suite
+#         run: |
+#           echo "Running pre-publication validation..."
+#
+#           # Check serveable directory exists and has content
+#           if [ ! -d "${{ env.SERVEABLE_PATH }}" ]; then
+#             echo "ERROR: Serveable directory not found"
+#             exit 1
+#           fi
+#
+#           file_count=$(find ${{ env.SERVEABLE_PATH }} -type f | wc -l)
+#           if [ "$file_count" -eq 0 ]; then
+#             echo "ERROR: No files in serveable directory"
+#             exit 1
+#           fi
+#
+#           echo "Found $file_count files to publish"
+#
+#       - name: Scan for secrets/credentials
+#         run: |
+#           echo "Scanning for potential secrets..."
+#
+#           # Check for common secret patterns
+#           if grep -r -i "api.key\|token\|password\|secret" ${{ env.SERVEABLE_PATH }}; then
+#             echo "WARNING: Potential secrets found - manual review required"
+#             exit 1
+#           fi
+#
+#           echo "No obvious secrets detected"
+#
+#       - name: Verify ASCII compliance
+#         run: |
+#           echo "Checking ASCII compliance..."
+#
+#           # Find any files with non-ASCII characters
+#           non_ascii=$(find ${{ env.SERVEABLE_PATH }} -type f -exec file {} \; | grep -v ASCII | grep -v "empty" || true)
+#
+#           if [ ! -z "$non_ascii" ]; then
+#             echo "WARNING: Non-ASCII files found:"
+#             echo "$non_ascii"
+#           else
+#             echo "All files are ASCII compliant"
+#           fi
+#
+#       - name: Validate JSON files
+#         run: |
+#           echo "Validating JSON syntax..."
+#
+#           find ${{ env.SERVEABLE_PATH }} -name "*.json" -o -name "*.jsonl" | while read file; do
+#             if ! python -m json.tool "$file" > /dev/null 2>&1; then
+#               echo "ERROR: Invalid JSON in $file"
+#               exit 1
+#             fi
+#           done
+#
+#           echo "All JSON files valid"
+#
+#       - name: Check attribution metadata
+#         run: |
+#           echo "Verifying attribution and licensing..."
+#
+#           # Check for metadata files with attribution
+#           if ! find ${{ env.SERVEABLE_PATH }} -name "*metadata*.json" | grep -q .; then
+#             echo "WARNING: No metadata files found - verify attribution is present"
+#           fi
+#
+#           echo "Metadata check complete"
+#
+#   publish-to-public:
+#     name: Sync to Public Repository
+#     runs-on: ubuntu-latest
+#     needs: validate-before-publish
+#
+#     steps:
+#       - name: Checkout private repo
+#         uses: actions/checkout@v4
+#         with:
+#           path: private-repo
+#
+#       - name: Checkout public repo
+#         uses: actions/checkout@v4
+#         with:
+#           repository: ${{ env.PUBLIC_REPO }}
+#           token: ${{ secrets.PUBLISH_TOKEN }}
+#           path: public-repo
+#
+#       - name: Sync serveable directory
+#         run: |
+#           echo "Syncing serveable data to public repo..."
+#
+#           # Remove old content in public repo
+#           rm -rf public-repo/data/serveable/*
+#
+#           # Copy new content from private repo
+#           mkdir -p public-repo/data/serveable
+#           cp -r private-repo/${{ env.SERVEABLE_PATH }}/* public-repo/data/serveable/
+#
+#           echo "Sync complete"
+#
+#       - name: Generate publishing metadata
+#         run: |
+#           cd public-repo
+#
+#           cat > PUBLISHED_METADATA.json << EOF
+#           {
+#             "published_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+#             "source_repo": "${{ github.repository }}",
+#             "source_commit": "${{ github.sha }}",
+#             "workflow_run": "${{ github.run_id }}",
+#             "published_by": "automated-workflow",
+#             "license": "MIT"
+#           }
+#           EOF
+#
+#           echo "Publishing metadata generated"
+#
+#       - name: Update public repo README
+#         run: |
+#           cd public-repo
+#
+#           if [ ! -f README.md ]; then
+#             cat > README.md << 'EOF'
+#           # P(Doom) Public Data
+#
+#           Curated AI safety and alignment research datasets.
+#
+#           ## Overview
+#
+#           This repository contains production-ready datasets automatically published from the private pdoom-data repository. All data has been validated, attributed, and formatted for public consumption.
+#
+#           ## Data Collections
+#
+#           - **Alignment Research**: Research papers, blog posts, and forum discussions
+#           - **Funding Data**: AI safety funding information
+#           - **Historical Timeline**: Curated AI safety events
+#
+#           ## License
+#
+#           MIT License - See individual dataset metadata for attribution requirements.
+#
+#           ## Automated Publishing
+#
+#           This repository is automatically updated when new data is available in the serveable zone. Last published: See PUBLISHED_METADATA.json
+#
+#           ## Source
+#
+#           Generated from: https://github.com/${{ github.repository }}
+#           EOF
+#           fi
+#
+#       - name: Commit and push to public repo
+#         run: |
+#           cd public-repo
+#
+#           git config user.name "pdoom-data-bot"
+#           git config user.email "noreply@github.com"
+#
+#           git add .
+#
+#           if git diff --staged --quiet; then
+#             echo "No changes to publish"
+#             exit 0
+#           fi
+#
+#           git commit -m "chore: Automated data publish from ${{ github.sha }}
+#
+#           Published: $(date -u +%Y-%m-%d)
+#           Source commit: ${{ github.sha }}
+#           Workflow: ${{ github.run_id }}"
+#
+#           git push origin main
+#
+#           echo "Successfully published to public repository"
+#
+#       - name: Create release tag
+#         if: github.event_name == 'push'
+#         run: |
+#           cd public-repo
+#
+#           # Create semantic version tag based on date
+#           TAG="v$(date +%Y.%m.%d)-$(git rev-parse --short HEAD)"
+#
+#           git tag -a "$TAG" -m "Automated data release $TAG"
+#           git push origin "$TAG"
+#
+#           echo "Created release tag: $TAG"
+#
+#   notify-completion:
+#     name: Notify Publishing Complete
+#     runs-on: ubuntu-latest
+#     needs: publish-to-public
+#     if: always()
+#
+#     steps:
+#       - name: Report status
+#         run: |
+#           if [ "${{ needs.publish-to-public.result }}" == "success" ]; then
+#             echo "✅ Successfully published serveable data to public repository"
+#           else
+#             echo "❌ Publishing failed - check workflow logs"
+#             exit 1
+#           fi
