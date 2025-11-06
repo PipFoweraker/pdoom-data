@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Alignment Research Dataset Schema",
+  "description": "Schema for alignment research documents from StampyAI/Hugging Face dataset",
+  "version": "1.0.0",
+  "type": "object",
+  "required": [
+    "id",
+    "source",
+    "title",
+    "text",
+    "url",
+    "date_published"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the document",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "source": {
+      "type": "string",
+      "description": "Origin platform or publication venue",
+      "enum": [
+        "arxiv",
+        "alignmentforum",
+        "lesswrong",
+        "eaforum",
+        "distill",
+        "arbital",
+        "deepmind",
+        "openai",
+        "anthropic",
+        "miri",
+        "eleutherai",
+        "gwern",
+        "agi_safety_fundamentals",
+        "ai_safety_talks",
+        "youtube",
+        "stampy",
+        "other"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the document",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "text": {
+      "type": "string",
+      "description": "Full text content of the document",
+      "minLength": 1
+    },
+    "url": {
+      "type": "string",
+      "description": "Source URL of the document",
+      "format": "uri",
+      "pattern": "^https?://"
+    },
+    "date_published": {
+      "type": "string",
+      "description": "Publication date in ISO 8601 format",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2}))?$"
+    },
+    "authors": {
+      "type": "array",
+      "description": "List of authors",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "abstract": {
+      "type": "string",
+      "description": "Abstract or summary of the document"
+    },
+    "doi": {
+      "type": "string",
+      "description": "Digital Object Identifier",
+      "pattern": "^10\\.\\d{4,}/"
+    },
+    "primary_category": {
+      "type": "string",
+      "description": "Primary classification category (e.g., cs.AI)"
+    },
+    "categories": {
+      "type": "array",
+      "description": "All classification categories",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "User-defined tags for categorization",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_type": {
+      "type": "string",
+      "description": "Original document format or platform"
+    },
+    "converted_with": {
+      "type": "string",
+      "description": "Tool used for format conversion"
+    },
+    "alignment_text": {
+      "type": "string",
+      "description": "Alignment classification",
+      "enum": ["pos", "neg", "unlabeled"]
+    },
+    "confidence_score": {
+      "type": "number",
+      "description": "Confidence score for classification",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "journal_ref": {
+      "type": "string",
+      "description": "Journal reference information"
+    },
+    "author_comment": {
+      "type": "string",
+      "description": "Additional comments from authors"
+    },
+    "citation_level": {
+      "type": "integer",
+      "description": "Citation importance level"
+    },
+    "_provenance": {
+      "type": "object",
+      "description": "Metadata about data origin and processing",
+      "required": [
+        "source_system",
+        "ingestion_date",
+        "license"
+      ],
+      "properties": {
+        "source_system": {
+          "type": "string",
+          "description": "System from which data was extracted"
+        },
+        "ingestion_date": {
+          "type": "string",
+          "description": "Date when data was ingested",
+          "format": "date-time"
+        },
+        "source_file": {
+          "type": "string",
+          "description": "Path to source file"
+        },
+        "source_checksum": {
+          "type": "string",
+          "description": "SHA-256 checksum of source data"
+        },
+        "license": {
+          "type": "string",
+          "description": "Data license"
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Attribution requirement"
+        },
+        "citation": {
+          "type": "string",
+          "description": "Citation for dataset"
+        },
+        "extraction_method": {
+          "type": "string",
+          "enum": ["api", "web_scrape", "manual"]
+        },
+        "transformations": {
+          "type": "array",
+          "description": "List of transformations applied",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

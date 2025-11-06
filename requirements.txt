@@ -1,0 +1,43 @@
+# pdoom-data Requirements
+# Data pipeline for AI safety research project
+
+# Core dependencies
+datasets>=2.14.0          # HuggingFace datasets library for alignment research
+huggingface_hub>=0.17.0   # HuggingFace API client
+jsonschema>=4.19.0        # JSON schema validation
+jsonlines>=4.0.0          # JSONL file handling
+
+# Web scraping (for future data sources)
+beautifulsoup4>=4.12.0    # HTML parsing
+requests>=2.31.0          # HTTP requests
+lxml>=4.9.0               # XML/HTML parsing
+
+# Data processing
+pandas>=2.0.0             # Data manipulation (optional but recommended)
+numpy>=1.24.0             # Numerical operations (optional)
+
+# Utilities
+python-dateutil>=2.8.2    # Date parsing
+pytz>=2023.3              # Timezone support
+
+# Development
+pytest>=7.4.0             # Testing framework
+pytest-cov>=4.1.0         # Coverage reporting
+black>=23.7.0             # Code formatting
+flake8>=6.1.0             # Linting
+mypy>=1.5.0               # Type checking
+
+# Logging and monitoring (already in project)
+# Note: Custom logger in scripts/utils/logger.py
+
+# Documentation
+markdown>=3.4.0           # Markdown processing
+
+# Note: Install with:
+#   pip install -r requirements.txt
+#
+# For development:
+#   pip install -r requirements.txt
+#
+# For production (minimal):
+#   pip install datasets huggingface_hub jsonschema jsonlines beautifulsoup4 requests python-dateutil

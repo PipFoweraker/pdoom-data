@@ -1,0 +1,75 @@
+{
+  "extraction_date": "2025-11-06T10:40:43.312502+00:00",
+  "source_name": "alignment_research",
+  "source_url": "https://huggingface.co/datasets/StampyAI/alignment-research-dataset",
+  "extraction_method": "api",
+  "extractor_version": "1.0.0",
+  "data_format": "jsonl",
+  "record_count": 1000,
+  "extraction_type": "full",
+  "last_extraction_date": null,
+  "filters_applied": {
+    "date_range": "2020-01-01 to present",
+    "sources": [
+      "arxiv",
+      "alignmentforum",
+      "lesswrong",
+      "eaforum",
+      "distill",
+      "deepmind",
+      "openai",
+      "anthropic",
+      "miri",
+      "gwern",
+      "agi_safety_fundamentals"
+    ],
+    "keywords": [
+      "alignment",
+      "safety",
+      "interpretability",
+      "robustness",
+      "capabilities",
+      "x-risk",
+      "existential"
+    ],
+    "min_text_length": 100
+  },
+  "extraction_status": "complete",
+  "extraction_notes": "",
+  "fields_extracted": [
+    "id",
+    "source",
+    "title",
+    "text",
+    "url",
+    "date_published",
+    "authors",
+    "abstract",
+    "doi",
+    "categories",
+    "tags"
+  ],
+  "huggingface_dataset_version": "main",
+  "attribution": "StampyAI/AI Safety Info - MIT License",
+  "citation": "Kirchner, J. H., Smith, L., Thibodeau, J., McDonnell, K., and Reynolds, L. Understanding AI alignment research: A Systematic Analysis. arXiv preprint arXiv:2206.02841 (2022)",
+  "license": "MIT",
+  "rate_limit_info": {
+    "authenticated": false,
+    "requests_made": 1,
+    "time_elapsed_seconds": 3.767993
+  },
+  "extraction_statistics": {
+    "records_fetched": 1913,
+    "records_filtered": 913,
+    "records_written": 1000,
+    "errors_encountered": 0,
+    "start_time": "2025-11-06T10:40:39.544485+00:00",
+    "end_time": "2025-11-06T10:40:43.312478+00:00",
+    "duration_seconds": 3.767993
+  },
+  "data_quality": {
+    "missing_required_fields": 0,
+    "ascii_compliance_checked": false,
+    "schema_validation_passed": false
+  }
+}

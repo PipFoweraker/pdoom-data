@@ -1,0 +1,337 @@
+name: Weekly Data Refresh
+
+# This workflow automates the weekly extraction and validation of alignment research data
+# from the StampyAI Alignment Research Dataset on Hugging Face.
+#
+# Schedule: Every Monday at 2:00 AM UTC
+# Manual trigger: Available via workflow_dispatch
+#
+# Process:
+# 1. Extract delta (new records since last run)
+# 2. Validate extracted data against schema
+# 3. Commit and push updated data to repository
+#
+# Requirements:
+# - HF_TOKEN secret (optional but recommended for higher rate limits)
+# - Write permissions for repository
+
+on:
+  schedule:
+    # Run every Monday at 2:00 AM UTC
+    # Cron format: minute hour day-of-month month day-of-week
+    - cron: '0 2 * * 1'
+
+  workflow_dispatch:
+    # Allow manual triggering from GitHub UI
+    inputs:
+      mode:
+        description: 'Extraction mode'
+        required: false
+        default: 'delta'
+        type: choice
+        options:
+          - delta
+          - full
+      limit:
+        description: 'Record limit (optional, for testing)'
+        required: false
+        type: string
+
+env:
+  PYTHON_VERSION: '3.11'
+  LOG_RETENTION_DAYS: 30
+
+jobs:
+  refresh-alignment-data:
+    name: Extract and Validate Alignment Research Data
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Required to commit and push changes
+
+    steps:
+      # ============================================================
+      # Setup
+      # ============================================================
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for accurate delta detection
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install datasets huggingface_hub jsonschema jsonlines
+          echo "✓ Dependencies installed"
+
+      - name: Display environment info
+        run: |
+          echo "Python version: $(python --version)"
+          echo "Pip version: $(pip --version)"
+          echo "Working directory: $(pwd)"
+          echo "Disk space:"
+          df -h
+
+      # ============================================================
+      # Data Extraction
+      # ============================================================
+
+      - name: Extract alignment research data
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          MODE: ${{ inputs.mode || 'delta' }}
+          LIMIT: ${{ inputs.limit || '' }}
+        run: |
+          echo "=================================================="
+          echo "Starting Alignment Research Data Extraction"
+          echo "=================================================="
+          echo "Mode: ${MODE}"
+          echo "Limit: ${LIMIT:-unlimited}"
+          echo "Authentication: $([[ -n "$HF_TOKEN" ]] && echo "enabled (HF_TOKEN)" || echo "disabled (anonymous)")"
+          echo ""
+
+          # Build command
+          CMD="python data/raw/alignment_research/extraction_script.py --mode ${MODE}"
+
+          # Add limit if specified
+          if [[ -n "${LIMIT}" ]]; then
+            CMD="${CMD} --limit ${LIMIT}"
+          fi
+
+          # Add auth flag if no token
+          if [[ -z "$HF_TOKEN" ]]; then
+            CMD="${CMD} --no-auth"
+          fi
+
+          echo "Executing: ${CMD}"
+          echo ""
+
+          # Run extraction
+          ${CMD}
+
+          EXIT_CODE=$?
+
+          echo ""
+          echo "=================================================="
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "✓ Extraction completed successfully"
+          else
+            echo "✗ Extraction failed with exit code ${EXIT_CODE}"
+          fi
+          echo "=================================================="
+
+          exit $EXIT_CODE
+
+      # ============================================================
+      # Data Validation
+      # ============================================================
+
+      - name: Validate extracted data
+        run: |
+          echo "=================================================="
+          echo "Validating Extracted Data"
+          echo "=================================================="
+
+          # Find the most recent dump directory
+          LATEST_DUMP=$(ls -td data/raw/alignment_research/dumps/*/ 2>/dev/null | head -n 1)
+
+          if [[ -z "$LATEST_DUMP" ]]; then
+            echo "✗ No dump directory found"
+            exit 1
+          fi
+
+          echo "Validating: ${LATEST_DUMP}"
+          echo ""
+
+          # Run validation (skip ASCII check for efficiency)
+          python scripts/validation/validate_alignment_research.py \
+            "${LATEST_DUMP}" \
+            --no-ascii-check
+
+          EXIT_CODE=$?
+
+          echo ""
+          echo "=================================================="
+          if [ $EXIT_CODE -eq 0 ]; then
+            echo "✓ Validation passed"
+          else
+            echo "✗ Validation failed"
+          fi
+          echo "=================================================="
+
+          exit $EXIT_CODE
+
+      # ============================================================
+      # Statistics and Reporting
+      # ============================================================
+
+      - name: Generate extraction report
+        if: success()
+        run: |
+          echo "=================================================="
+          echo "Extraction Statistics"
+          echo "=================================================="
+
+          # Find latest dump
+          LATEST_DUMP=$(ls -td data/raw/alignment_research/dumps/*/ 2>/dev/null | head -n 1)
+
+          if [[ -n "$LATEST_DUMP" ]]; then
+            echo "Dump directory: ${LATEST_DUMP}"
+            echo ""
+
+            # Display metadata
+            if [[ -f "${LATEST_DUMP}_metadata.json" ]]; then
+              echo "Metadata:"
+              python -c "
+import json
+import sys
+with open('${LATEST_DUMP}_metadata.json') as f:
+    meta = json.load(f)
+    print(f\"  Source: {meta.get('source_name')}\" )
+    print(f\"  Extraction date: {meta.get('extraction_date')}\")
+    print(f\"  Extraction type: {meta.get('extraction_type')}\")
+    print(f\"  Record count: {meta.get('record_count')}\")
+    print(f\"  Status: {meta.get('extraction_status')}\")
+
+    stats = meta.get('extraction_statistics', {})
+    if stats:
+        print(f\"  Records fetched: {stats.get('records_fetched')}\")
+        print(f\"  Records filtered: {stats.get('records_filtered')}\")
+        print(f\"  Records written: {stats.get('records_written')}\")
+        print(f\"  Errors: {stats.get('errors_encountered')}\")
+        print(f\"  Duration: {stats.get('duration_seconds', 0):.1f}s\")
+"
+            fi
+
+            echo ""
+            echo "Files:"
+            ls -lh "${LATEST_DUMP}"
+
+            echo ""
+            echo "Total dump size:"
+            du -sh "${LATEST_DUMP}"
+          fi
+
+          echo "=================================================="
+
+      # ============================================================
+      # Upload Logs as Artifacts
+      # ============================================================
+
+      - name: Upload extraction logs
+        if: always()  # Upload logs even if workflow fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: alignment-extraction-logs-${{ github.run_number }}
+          path: |
+            logs/alignment_extraction/
+            logs/alignment_validation/
+          retention-days: ${{ env.LOG_RETENTION_DAYS }}
+          if-no-files-found: warn
+
+      # ============================================================
+      # Git Commit and Push
+      # ============================================================
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          # Check if there are any changes to commit
+          git add data/ logs/
+
+          if git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+
+            # Show what changed
+            echo ""
+            echo "Changed files:"
+            git diff --staged --name-only
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          # Configure git
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          # Get timestamp for commit message
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          # Get record count from latest metadata
+          LATEST_DUMP=$(ls -td data/raw/alignment_research/dumps/*/ 2>/dev/null | head -n 1)
+          RECORD_COUNT="unknown"
+
+          if [[ -f "${LATEST_DUMP}_metadata.json" ]]; then
+            RECORD_COUNT=$(python -c "import json; print(json.load(open('${LATEST_DUMP}_metadata.json')).get('record_count', 'unknown'))")
+          fi
+
+          # Create detailed commit message
+          cat > commit_message.txt << EOF
+data: weekly alignment research refresh
+
+Automated data refresh from StampyAI Alignment Research Dataset
+
+- Timestamp: ${TIMESTAMP}
+- Records: ${RECORD_COUNT}
+- Workflow run: ${{ github.run_number }}
+- Triggered by: ${{ github.event_name }}
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: GitHub Actions <actions@github.com>
+EOF
+
+          # Commit with detailed message
+          git commit -F commit_message.txt
+
+          # Push changes
+          git push
+
+          echo "✓ Changes committed and pushed successfully"
+
+      - name: No changes to commit
+        if: steps.check_changes.outputs.has_changes == 'false'
+        run: |
+          echo "ℹ No new data extracted - repository is up to date"
+          echo "This is expected for delta mode when there are no new records"
+
+      # ============================================================
+      # Failure Notification
+      # ============================================================
+
+      - name: Workflow failure summary
+        if: failure()
+        run: |
+          echo "=================================================="
+          echo "⚠️  WORKFLOW FAILED"
+          echo "=================================================="
+          echo ""
+          echo "Please check:"
+          echo "  1. Logs uploaded as artifacts"
+          echo "  2. HuggingFace dataset availability"
+          echo "  3. Rate limiting (add HF_TOKEN secret if needed)"
+          echo "  4. Schema validation errors"
+          echo ""
+          echo "Logs available in workflow artifacts for 30 days"
+          echo "=================================================="
+
+# Workflow summary:
+# - Runs weekly on Monday at 2am UTC
+# - Can be triggered manually with custom parameters
+# - Extracts delta (new records) by default
+# - Validates all extracted data
+# - Commits and pushes if changes detected
+# - Uploads logs as artifacts for debugging
+# - Handles failures gracefully with informative messages

@@ -21,7 +21,8 @@ VALID_SOURCES = [
     'macroscopic',
     'givewiki',
     'cooperative_ai',
-    'catalyze_impact'
+    'catalyze_impact',
+    'alignment_research'
 ]
 
 # Valid extraction methods
@@ -58,7 +59,11 @@ def create_dump_directory(source, method, base_dir=None):
     timestamp = datetime.now(timezone.utc).strftime('%Y-%m-%d_%H%M%S')
     
     # Construct dump directory path
-    source_dir = base_dir / 'data' / 'raw' / 'funding_sources' / source
+    # alignment_research is not in funding_sources subdirectory
+    if source == 'alignment_research':
+        source_dir = base_dir / 'data' / 'raw' / source
+    else:
+        source_dir = base_dir / 'data' / 'raw' / 'funding_sources' / source
     dump_dir = source_dir / 'dumps' / timestamp
     
     # Create directory
