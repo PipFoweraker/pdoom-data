@@ -1,0 +1,425 @@
+name: Automated Data Pipeline
+
+# This workflow runs the complete data transformation pipeline whenever raw data changes.
+#
+# Pipeline stages:
+# 1. Raw Zone (data/raw/) -> Validated Zone (data/transformed/validated/)
+# 2. Validated -> Cleaned Zone (data/transformed/cleaned/)
+# 3. Cleaned -> Enriched Zone (data/transformed/enriched/)
+# 4. Enriched -> Serveable Zone (data/serveable/)
+# 5. Generate unified manifest
+#
+# Triggers:
+# - Push to main branch with changes to data/raw/
+# - Manual workflow dispatch
+# - Can also be called by other workflows
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/raw/**'
+      - 'scripts/transformation/**'
+      - 'scripts/validation/**'
+      - 'config/schemas/**'
+
+  workflow_dispatch:
+    inputs:
+      skip_validation:
+        description: 'Skip validation step (use with caution)'
+        required: false
+        type: boolean
+        default: false
+      force_regenerate:
+        description: 'Force regeneration of all data'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # ============================================================
+  # Stage 1: Validation
+  # ============================================================
+  validate-raw-data:
+    name: Validate Raw Data
+    runs-on: ubuntu-latest
+    if: ${{ !inputs.skip_validation }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install jsonschema jsonlines
+
+      - name: Validate alignment research data
+        run: |
+          echo "=================================================="
+          echo "STAGE 1: VALIDATING RAW DATA"
+          echo "=================================================="
+
+          # Find latest alignment research dump
+          LATEST_DUMP=$(ls -td data/raw/alignment_research/dumps/*/ 2>/dev/null | head -n 1)
+
+          if [[ -n "$LATEST_DUMP" ]]; then
+            echo "Validating alignment research: ${LATEST_DUMP}"
+            python scripts/validation/validate_alignment_research.py "${LATEST_DUMP}"
+          else
+            echo "No alignment research data found to validate"
+          fi
+
+      - name: Upload validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-logs
+          path: logs/alignment_validation/
+          retention-days: 7
+
+  # ============================================================
+  # Stage 2: Clean Manual Events
+  # ============================================================
+  clean-manual-events:
+    name: Clean Manual Curated Events
+    runs-on: ubuntu-latest
+    needs: validate-raw-data
+    if: always() && !cancelled()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          pip install jsonschema
+
+      - name: Clean and transform manual events
+        run: |
+          echo "=================================================="
+          echo "STAGE 2A: CLEANING MANUAL EVENTS"
+          echo "=================================================="
+
+          python scripts/transformation/clean_events.py
+
+      - name: Upload manual events
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-events-serveable
+          path: data/serveable/api/timeline_events/
+          retention-days: 7
+
+  # ============================================================
+  # Stage 3: Clean Alignment Research
+  # ============================================================
+  clean-alignment-research:
+    name: Clean Alignment Research Data
+    runs-on: ubuntu-latest
+    needs: validate-raw-data
+    if: always() && !cancelled()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Clean validated data
+        run: |
+          echo "=================================================="
+          echo "STAGE 2B: CLEANING ALIGNMENT RESEARCH"
+          echo "=================================================="
+
+          # Check if validated data exists
+          if [ -d "data/transformed/validated/alignment_research/latest" ]; then
+            python scripts/transformation/clean.py \
+              --source data/transformed/validated/alignment_research/latest \
+              --output data/transformed/cleaned/alignment_research/latest \
+              --format jsonl
+          else
+            echo "No validated alignment research data found - skipping"
+          fi
+
+      - name: Upload cleaned data
+        uses: actions/upload-artifact@v4
+        with:
+          name: cleaned-alignment-research
+          path: data/transformed/cleaned/alignment_research/latest/
+          retention-days: 7
+          if-no-files-found: warn
+
+  # ============================================================
+  # Stage 4: Enrich Alignment Research
+  # ============================================================
+  enrich-alignment-research:
+    name: Enrich Alignment Research Data
+    runs-on: ubuntu-latest
+    needs: clean-alignment-research
+    if: always() && !cancelled()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Download cleaned data
+        uses: actions/download-artifact@v4
+        with:
+          name: cleaned-alignment-research
+          path: data/transformed/cleaned/alignment_research/latest/
+
+      - name: Enrich cleaned data
+        run: |
+          echo "=================================================="
+          echo "STAGE 3: ENRICHING ALIGNMENT RESEARCH"
+          echo "=================================================="
+
+          # Check if cleaned data exists
+          if [ -d "data/transformed/cleaned/alignment_research/latest" ]; then
+            python scripts/transformation/enrich.py \
+              --source data/transformed/cleaned/alignment_research/latest \
+              --output data/transformed/enriched/alignment_research/latest \
+              --format jsonl
+          else
+            echo "No cleaned alignment research data found - skipping"
+          fi
+
+      - name: Upload enriched data
+        uses: actions/upload-artifact@v4
+        with:
+          name: enriched-alignment-research
+          path: data/transformed/enriched/alignment_research/latest/
+          retention-days: 7
+          if-no-files-found: warn
+
+  # ============================================================
+  # Stage 5: Transform to Timeline Events
+  # ============================================================
+  transform-to-timeline-events:
+    name: Transform to Timeline Events
+    runs-on: ubuntu-latest
+    needs: enrich-alignment-research
+    if: always() && !cancelled()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Download enriched data
+        uses: actions/download-artifact@v4
+        with:
+          name: enriched-alignment-research
+          path: data/transformed/enriched/alignment_research/latest/
+
+      - name: Transform to timeline events
+        run: |
+          echo "=================================================="
+          echo "STAGE 4: TRANSFORMING TO TIMELINE EVENTS"
+          echo "=================================================="
+
+          # Check if enriched data exists
+          if [ -d "data/transformed/enriched/alignment_research/latest" ]; then
+            python scripts/transformation/transform_to_timeline_events.py \
+              --source data/transformed/enriched/alignment_research/latest \
+              --output data/serveable/api/timeline_events/alignment_research
+          else
+            echo "No enriched alignment research data found - skipping"
+          fi
+
+      - name: Upload timeline events
+        uses: actions/upload-artifact@v4
+        with:
+          name: alignment-research-events-serveable
+          path: data/serveable/api/timeline_events/alignment_research/
+          retention-days: 7
+          if-no-files-found: warn
+
+  # ============================================================
+  # Stage 6: Generate Unified Manifest
+  # ============================================================
+  generate-manifest:
+    name: Generate Unified Manifest
+    runs-on: ubuntu-latest
+    needs: [clean-manual-events, transform-to-timeline-events]
+    if: always() && !cancelled()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Download manual events
+        uses: actions/download-artifact@v4
+        with:
+          name: manual-events-serveable
+          path: data/serveable/api/timeline_events/
+
+      - name: Download alignment research events
+        uses: actions/download-artifact@v4
+        with:
+          name: alignment-research-events-serveable
+          path: data/serveable/api/timeline_events/alignment_research/
+          continue-on-error: true
+
+      - name: Generate manifest
+        run: |
+          echo "=================================================="
+          echo "STAGE 5: GENERATING MANIFEST"
+          echo "=================================================="
+
+          python scripts/publishing/generate_manifest.py \
+            --serveable-dir data/serveable
+
+      - name: Upload complete serveable zone
+        uses: actions/upload-artifact@v4
+        with:
+          name: serveable-zone-complete
+          path: data/serveable/
+          retention-days: 7
+
+  # ============================================================
+  # Stage 7: Commit Results
+  # ============================================================
+  commit-results:
+    name: Commit Processed Data
+    runs-on: ubuntu-latest
+    needs: generate-manifest
+    if: always() && !cancelled()
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all processed data
+        uses: actions/download-artifact@v4
+        with:
+          name: serveable-zone-complete
+          path: data/serveable/
+
+      - name: Download cleaned data (if exists)
+        uses: actions/download-artifact@v4
+        with:
+          name: cleaned-alignment-research
+          path: data/transformed/cleaned/alignment_research/latest/
+        continue-on-error: true
+
+      - name: Download enriched data (if exists)
+        uses: actions/download-artifact@v4
+        with:
+          name: enriched-alignment-research
+          path: data/transformed/enriched/alignment_research/latest/
+        continue-on-error: true
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git add data/serveable/ data/transformed/
+
+          if git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected:"
+            git diff --staged --name-only
+          fi
+
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          # Count events in manifest if available
+          EVENT_COUNT="unknown"
+          if [ -f "data/serveable/MANIFEST.json" ]; then
+            EVENT_COUNT=$(python -c "import json; print(json.load(open('data/serveable/MANIFEST.json'))['summary']['total_events'])" 2>/dev/null || echo "unknown")
+          fi
+
+          cat > commit_message.txt << EOF
+chore: automated data pipeline run
+
+Automated transformation pipeline completed
+
+- Timestamp: ${TIMESTAMP}
+- Total events: ${EVENT_COUNT}
+- Workflow run: ${{ github.run_number }}
+- Triggered by: ${{ github.event_name }}
+
+Pipeline stages:
+1. Validation of raw data
+2. Cleaning (deduplication, ASCII conversion)
+3. Enrichment (derived fields, metrics)
+4. Transformation to timeline events
+5. Manifest generation
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: GitHub Actions <actions@github.com>
+EOF
+
+          git commit -F commit_message.txt
+          git push
+
+      - name: Pipeline summary
+        if: always()
+        run: |
+          echo "=================================================="
+          echo "PIPELINE COMPLETE"
+          echo "=================================================="
+          echo ""
+          echo "Serveable data location: data/serveable/"
+          echo "Manifest: data/serveable/MANIFEST.json"
+          echo ""
+
+          if [ -f "data/serveable/MANIFEST.json" ]; then
+            echo "Dataset summary:"
+            python -c "
+import json
+with open('data/serveable/MANIFEST.json') as f:
+    manifest = json.load(f)
+    print(f\"  Total datasets: {manifest['summary']['total_datasets']}\")
+    print(f\"  Total events: {manifest['summary']['total_events']}\")
+    print(f\"  Formats: {', '.join(manifest['summary']['formats'])}\")
+"
+          fi
+
+          echo ""
+          echo "=================================================="

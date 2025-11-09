@@ -6,9 +6,10 @@
 
 ## Quick Start
 
-1. **Explore available data**: Check [MANIFEST.json](MANIFEST.json) for complete dataset catalog
-2. **Integration guide**: See [docs/INTEGRATION_GUIDE.md](../../docs/INTEGRATION_GUIDE.md)
-3. **Event schema**: Review [docs/EVENT_SCHEMA.md](../../docs/EVENT_SCHEMA.md)
+1. **5-minute setup**: See [docs/QUICK_START_INTEGRATION.md](../../docs/QUICK_START_INTEGRATION.md) for rapid integration
+2. **Explore available data**: Check [MANIFEST.json](MANIFEST.json) for complete dataset catalog
+3. **Full integration guide**: [docs/INTEGRATION_GUIDE.md](../../docs/INTEGRATION_GUIDE.md)
+4. **Event schema**: Review [docs/EVENT_SCHEMA.md](../../docs/EVENT_SCHEMA.md)
 
 ## Overview
 
