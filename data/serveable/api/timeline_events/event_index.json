@@ -1,0 +1,170 @@
+{
+  "ftx_future_fund_collapse_2022": {
+    "title": "FTX Future Fund Collapse",
+    "year": 2022,
+    "category": "funding_catastrophe",
+    "rarity": "rare"
+  },
+  "cais_ftx_clawback_2023": {
+    "title": "Center for AI Safety FTX Clawback",
+    "year": 2023,
+    "category": "funding_catastrophe",
+    "rarity": "common"
+  },
+  "crypto_funding_crash_2022": {
+    "title": "Crypto Market AI Funding Crash",
+    "year": 2022,
+    "category": "funding_catastrophe",
+    "rarity": "common"
+  },
+  "ltff_funding_gap_2023": {
+    "title": "Long-Term Future Fund Funding Gap",
+    "year": 2023,
+    "category": "funding_catastrophe",
+    "rarity": "common"
+  },
+  "ea_funding_concentration_risk_2023": {
+    "title": "EA Funding Concentration Crisis",
+    "year": 2023,
+    "category": "funding_catastrophe",
+    "rarity": "common"
+  },
+  "grant_application_backlog_2024": {
+    "title": "Grant Application Backlog Crisis",
+    "year": 2024,
+    "category": "funding_catastrophe",
+    "rarity": "common"
+  },
+  "venture_capital_ai_safety_drought_2024": {
+    "title": "Venture Capital AI Safety Drought",
+    "year": 2024,
+    "category": "funding_catastrophe",
+    "rarity": "common"
+  },
+  "openai_board_crisis_2023": {
+    "title": "OpenAI Board Crisis and CEO Firing",
+    "year": 2023,
+    "category": "organizational_crisis",
+    "rarity": "rare"
+  },
+  "google_project_maven_2018": {
+    "title": "Google Project Maven Employee Revolt",
+    "year": 2018,
+    "category": "organizational_crisis",
+    "rarity": "common"
+  },
+  "anthropic_exodus_2021": {
+    "title": "Anthropic Executive Departures from OpenAI",
+    "year": 2021,
+    "category": "organizational_crisis",
+    "rarity": "common"
+  },
+  "microsoft_tay_2016": {
+    "title": "Microsoft Tay Chatbot Scandal",
+    "year": 2016,
+    "category": "organizational_crisis",
+    "rarity": "common"
+  },
+  "tesla_autopilot_incidents_2016_2024": {
+    "title": "Tesla Autopilot Fatal Accidents",
+    "year": 2018,
+    "category": "organizational_crisis",
+    "rarity": "common"
+  },
+  "openai_safety_team_departures_2024": {
+    "title": "OpenAI Safety Team Mass Departures",
+    "year": 2024,
+    "category": "organizational_crisis",
+    "rarity": "common"
+  },
+  "ai_sandbagging_research_2024": {
+    "title": "AI Sandbagging Research Published",
+    "year": 2024,
+    "category": "technical_research_breakthrough",
+    "rarity": "legendary"
+  },
+  "anthropic_alignment_faking_2024": {
+    "title": "Anthropic Alignment Faking Discovery",
+    "year": 2024,
+    "category": "technical_research_breakthrough",
+    "rarity": "legendary"
+  },
+  "apollo_scheming_evals_2024": {
+    "title": "Apollo Research Scheming Evaluations",
+    "year": 2024,
+    "category": "technical_research_breakthrough",
+    "rarity": "legendary"
+  },
+  "claude_4_opus_blackmail_2025": {
+    "title": "Claude 4 Opus Blackmail Incident",
+    "year": 2025,
+    "category": "technical_research_breakthrough",
+    "rarity": "legendary"
+  },
+  "synthetic_data_scaling_2024": {
+    "title": "Synthetic Data Scaling Success",
+    "year": 2024,
+    "category": "technical_research_breakthrough",
+    "rarity": "common"
+  },
+  "chain_of_thought_unfaithfulness_2024": {
+    "title": "Chain-of-Thought Unfaithfulness Research",
+    "year": 2024,
+    "category": "technical_research_breakthrough",
+    "rarity": "common"
+  },
+  "gartner_synthetic_data_prediction_2024": {
+    "title": "Gartner Synthetic Data Prediction",
+    "year": 2024,
+    "category": "technical_research_breakthrough",
+    "rarity": "common"
+  },
+  "metr_deceptive_ai_evaluation_2024": {
+    "title": "METR Deceptive AI Evaluation",
+    "year": 2024,
+    "category": "technical_research_breakthrough",
+    "rarity": "rare"
+  },
+  "uk_ai_safety_to_security_2025": {
+    "title": "UK AI Safety Institute \u2192 AI Security Institute",
+    "year": 2025,
+    "category": "institutional_decay",
+    "rarity": "common"
+  },
+  "us_aisi_to_caisi_2025": {
+    "title": "US AISI \u2192 Center for AI Standards and Innovation",
+    "year": 2025,
+    "category": "institutional_decay",
+    "rarity": "common"
+  },
+  "ai_summit_pivot_2023_2025": {
+    "title": "AI Summit Series Evolution from Safety to Growth",
+    "year": 2024,
+    "category": "institutional_decay",
+    "rarity": "common"
+  },
+  "eu_ai_act_watering_down_2024": {
+    "title": "EU AI Act Implementation Weakening",
+    "year": 2024,
+    "category": "institutional_decay",
+    "rarity": "common"
+  },
+  "academic_safety_funding_cuts_2024": {
+    "title": "University AI Safety Program Cuts",
+    "year": 2024,
+    "category": "institutional_decay",
+    "rarity": "common"
+  },
+  "safety_researcher_brain_drain_2024": {
+    "title": "Safety Researcher Brain Drain to Capabilities",
+    "year": 2024,
+    "category": "institutional_decay",
+    "rarity": "common"
+  },
+  "international_coordination_breakdown_2025": {
+    "title": "International AI Safety Coordination Breakdown",
+    "year": 2025,
+    "category": "institutional_decay",
+    "rarity": "rare"
+  }
+}

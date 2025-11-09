@@ -1,0 +1,55 @@
+{
+  "anthropic_exodus_2021": {
+    "id": "anthropic_exodus_2021",
+    "title": "Anthropic Executive Departures from OpenAI",
+    "year": 2021,
+    "category": "organizational_crisis",
+    "description": "Mass departure from OpenAI to form safety-focused competitor after ideological conflicts over safety vs capability race",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -50,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": -10,
+        "condition": null
+      },
+      {
+        "variable": "technical_debt",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": -10,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://techcrunch.com/2021/05/28/former-openai-research-vp-dario-amodei-starts-anthropic-ai-safety-startup/",
+      "https://www.anthropic.com/news/introducing-claude"
+    ],
+    "tags": [
+      "anthropic",
+      "brain_drain",
+      "competition",
+      "safety_culture"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Safety researchers finally have a well-funded alternative",
+    "media_reaction": "OpenAI brain drain as safety concerns drive executive exodus"
+  }
+}

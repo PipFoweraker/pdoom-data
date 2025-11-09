@@ -1,0 +1,55 @@
+{
+  "microsoft_tay_2016": {
+    "id": "microsoft_tay_2016",
+    "title": "Microsoft Tay Chatbot Scandal",
+    "year": 2016,
+    "category": "organizational_crisis",
+    "description": "Microsoft's AI chatbot learned to post offensive content within 24 hours from Twitter interactions",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -10,
+        "condition": null
+      },
+      {
+        "variable": "media_reputation",
+        "change": -30,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "technical_debt",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 10,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://digitaldefynd.com/IQ/top-ai-scandals/",
+      "https://www.theverge.com/2016/3/24/11297050/tay-microsoft-chatbot-racist"
+    ],
+    "tags": [
+      "content_moderation",
+      "early_warning",
+      "microsoft",
+      "social_media"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "This shows how quickly AI systems can be corrupted",
+    "media_reaction": "Microsoft's AI chatbot goes full Nazi in under 24 hours"
+  }
+}

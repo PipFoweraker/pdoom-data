@@ -1,0 +1,41 @@
+{
+  "total_events": 28,
+  "by_year": {
+    "2022": 2,
+    "2023": 4,
+    "2024": 14,
+    "2018": 2,
+    "2021": 1,
+    "2016": 1,
+    "2025": 4
+  },
+  "by_category": {
+    "funding_catastrophe": 7,
+    "organizational_crisis": 6,
+    "technical_research_breakthrough": 8,
+    "institutional_decay": 7
+  },
+  "by_rarity": {
+    "rare": 4,
+    "common": 20,
+    "legendary": 4
+  },
+  "impact_variables": {
+    "cash": 15,
+    "reputation": 15,
+    "research": 21,
+    "papers": 10,
+    "stress": 13,
+    "burnout_risk": 5,
+    "vibey_doom": 27,
+    "technical_debt": 12,
+    "media_reputation": 4,
+    "ethics_risk": 16
+  },
+  "pdoom_impact_distribution": {
+    "null": 21,
+    "negative": 0,
+    "zero": 0,
+    "positive": 7
+  }
+}

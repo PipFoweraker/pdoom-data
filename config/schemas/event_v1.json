@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pdoom.com/schemas/event_v1.json",
+  "title": "PDoom Game Event Schema",
+  "description": "Schema for game timeline events in the pdoom data ecosystem",
+  "version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "year",
+    "category",
+    "description",
+    "impacts",
+    "sources",
+    "tags",
+    "rarity",
+    "pdoom_impact",
+    "safety_researcher_reaction",
+    "media_reaction"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the event (snake_case)",
+      "pattern": "^[a-z0-9_]+$",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable event title",
+      "minLength": 5,
+      "maxLength": 200
+    },
+    "year": {
+      "type": "integer",
+      "description": "Year the event occurred",
+      "minimum": 2000,
+      "maximum": 2100
+    },
+    "category": {
+      "type": "string",
+      "description": "Event category for classification",
+      "enum": [
+        "technical_research_breakthrough",
+        "funding_catastrophe",
+        "institutional_decay",
+        "organizational_crisis",
+        "policy_development",
+        "public_awareness",
+        "capability_advance",
+        "alignment_breakthrough",
+        "governance_milestone"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of what happened",
+      "minLength": 20,
+      "maxLength": 1000
+    },
+    "impacts": {
+      "type": "array",
+      "description": "Game variable impacts from this event",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["variable", "change", "condition"],
+        "additionalProperties": false,
+        "properties": {
+          "variable": {
+            "type": "string",
+            "description": "Game variable affected",
+            "enum": [
+              "cash",
+              "reputation",
+              "stress",
+              "research",
+              "papers",
+              "ethics_risk",
+              "technical_debt",
+              "burnout_risk",
+              "media_reputation",
+              "vibey_doom",
+              "regulatory_risk",
+              "talent_pool",
+              "collaboration_score"
+            ]
+          },
+          "change": {
+            "type": "number",
+            "description": "Amount of change (positive or negative)",
+            "minimum": -100,
+            "maximum": 100
+          },
+          "condition": {
+            "type": ["string", "null"],
+            "description": "Optional condition for this impact to apply (game logic)"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "description": "URLs to source material for this event",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags for filtering and categorization",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9_]+$"
+      }
+    },
+    "rarity": {
+      "type": "string",
+      "description": "Event rarity (affects frequency in game)",
+      "enum": ["common", "rare", "legendary"]
+    },
+    "pdoom_impact": {
+      "type": ["integer", "null"],
+      "description": "Direct impact on p(doom) percentage (null if no direct impact)",
+      "minimum": -50,
+      "maximum": 50
+    },
+    "safety_researcher_reaction": {
+      "type": "string",
+      "description": "Quote or paraphrase of safety researcher reaction",
+      "minLength": 10,
+      "maxLength": 500
+    },
+    "media_reaction": {
+      "type": "string",
+      "description": "How the media covered this event",
+      "minLength": 10,
+      "maxLength": 500
+    }
+  }
+}

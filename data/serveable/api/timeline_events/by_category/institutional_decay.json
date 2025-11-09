@@ -1,0 +1,309 @@
+{
+  "uk_ai_safety_to_security_2025": {
+    "id": "uk_ai_safety_to_security_2025",
+    "title": "UK AI Safety Institute \u2192 AI Security Institute",
+    "year": 2025,
+    "category": "institutional_decay",
+    "description": "UK government rebrands AI Safety Institute as 'AI Security Institute', shifting from ethical AI concerns to cyber threat focus",
+    "impacts": [
+      {
+        "variable": "reputation",
+        "change": -20,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 15,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://en.m.wikipedia.org/wiki/AI_Safety_Institute_(United_Kingdom)",
+      "https://www.infosecurity-magazine.com/news/uk-ai-safety-institute-rebrands/"
+    ],
+    "tags": [
+      "cybersecurity",
+      "institutional_capture",
+      "mission_drift",
+      "uk_government"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "'Another safety institution lost to other priorities'",
+    "media_reaction": "UK pivots AI safety focus to cybersecurity concerns"
+  },
+  "us_aisi_to_caisi_2025": {
+    "id": "us_aisi_to_caisi_2025",
+    "title": "US AISI \u2192 Center for AI Standards and Innovation",
+    "year": 2025,
+    "category": "institutional_decay",
+    "description": "Trump administration renames US AI Safety Institute to focus on 'pro-growth AI policies' over safety, scraps Paris Summit attendance",
+    "impacts": [
+      {
+        "variable": "reputation",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": -20,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "cash",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 20,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://en.m.wikipedia.org/wiki/AI_Safety_Institute_(United_Kingdom)",
+      "https://www.nist.gov/caisi"
+    ],
+    "tags": [
+      "deregulation",
+      "nist",
+      "pro_growth",
+      "trump_administration"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "'The US government just abandoned AI safety'",
+    "media_reaction": "Trump administration prioritizes AI growth over safety concerns"
+  },
+  "ai_summit_pivot_2023_2025": {
+    "id": "ai_summit_pivot_2023_2025",
+    "title": "AI Summit Series Evolution from Safety to Growth",
+    "year": 2024,
+    "category": "institutional_decay",
+    "description": "Progression from AI Safety Summit (Bletchley) to AI Action Summit (Paris) shows gradual shift from safety focus to economic growth priorities",
+    "impacts": [
+      {
+        "variable": "reputation",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": -10,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "cash",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 10,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://futureoflife.org/project/ai-safety-summits/",
+      "https://www.techuk.org/resource/ai-safety.html"
+    ],
+    "tags": [
+      "ai_summits",
+      "economic_priorities",
+      "mission_drift"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "'Even the safety summits are becoming about growth'",
+    "media_reaction": "International AI gatherings shift focus from safety to economics"
+  },
+  "eu_ai_act_watering_down_2024": {
+    "id": "eu_ai_act_watering_down_2024",
+    "title": "EU AI Act Implementation Weakening",
+    "year": 2024,
+    "category": "institutional_decay",
+    "description": "Industry lobbying successfully weakens key provisions of EU AI Act during implementation phase",
+    "impacts": [
+      {
+        "variable": "ethics_risk",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "cash",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 15,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://ec.europa.eu/digital-single-market/en/artificial-intelligence",
+      "https://www.politico.eu/article/ai-act-implementation-industry-lobbying/"
+    ],
+    "tags": [
+      "eu_ai_act",
+      "implementation",
+      "lobbying",
+      "regulatory_capture"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "'Industry is gutting the regulations during implementation'",
+    "media_reaction": "Tech lobby successfully weakens EU AI safety rules"
+  },
+  "academic_safety_funding_cuts_2024": {
+    "id": "academic_safety_funding_cuts_2024",
+    "title": "University AI Safety Program Cuts",
+    "year": 2024,
+    "category": "institutional_decay",
+    "description": "Major universities cut AI safety research programs in favor of industry-sponsored AI capabilities research",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -20,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 20,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://www.chronicle.com/article/ai-safety-programs-face-cuts",
+      "https://www.insidehighered.com/news/tech/artificial-intelligence"
+    ],
+    "tags": [
+      "academic_funding",
+      "industry_influence",
+      "university_priorities"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "'Universities are abandoning safety research for capability funding'",
+    "media_reaction": "Academic AI safety programs lose funding to industry partnerships"
+  },
+  "safety_researcher_brain_drain_2024": {
+    "id": "safety_researcher_brain_drain_2024",
+    "title": "Safety Researcher Brain Drain to Capabilities",
+    "year": 2024,
+    "category": "institutional_decay",
+    "description": "High-profile safety researchers leave academia and safety orgs for high-paying roles at capabilities companies",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": -30,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 25,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://techcrunch.com/2024/brain-drain-ai-safety/",
+      "https://www.theverge.com/2024/5/17/ai-safety-researchers-leaving"
+    ],
+    "tags": [
+      "brain_drain",
+      "salary_competition",
+      "talent_loss"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "'We're losing our best people to the capability race'",
+    "media_reaction": "AI safety loses top talent to lucrative industry positions"
+  },
+  "international_coordination_breakdown_2025": {
+    "id": "international_coordination_breakdown_2025",
+    "title": "International AI Safety Coordination Breakdown",
+    "year": 2025,
+    "category": "institutional_decay",
+    "description": "US and UK refuse to sign international AI declaration at Paris Summit, signaling end of coordinated safety approach",
+    "impacts": [
+      {
+        "variable": "reputation",
+        "change": -30,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": -20,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 30,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://futureoflife.org/project/ai-safety-summits/",
+      "https://www.infosecurity-magazine.com/news/uk-ai-safety-institute-rebrands/"
+    ],
+    "tags": [
+      "diplomatic_failure",
+      "international_coordination",
+      "unilateralism"
+    ],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "'The international safety consensus just collapsed'",
+    "media_reaction": "Major powers abandon multilateral approach to AI safety"
+  }
+}

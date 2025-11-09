@@ -1,0 +1,191 @@
+{
+  "cais_ftx_clawback_2023": {
+    "id": "cais_ftx_clawback_2023",
+    "title": "Center for AI Safety FTX Clawback",
+    "year": 2023,
+    "category": "funding_catastrophe",
+    "description": "FTX bankruptcy estate demanded return of $6.5M paid to CAIS between May-September 2022",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -65,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 30,
+        "condition": null
+      },
+      {
+        "variable": "technical_debt",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 15,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://cointelegraph.com/news/crypto-exchange-ftx-subpoena-center-ai-safety-group-bankruptcy-proceedings",
+      "https://www.bloomberg.com/news/articles/2023-10-25/ftx-probing-6-5-million-paid-to-leading-ai-safety-nonprofit"
+    ],
+    "tags": [
+      "bankruptcy",
+      "cais",
+      "clawback",
+      "legal_issues"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Legal system now pursuing our research funding",
+    "media_reaction": "Bankruptcy trustees target AI safety organization for clawback"
+  },
+  "ltff_funding_gap_2023": {
+    "id": "ltff_funding_gap_2023",
+    "title": "Long-Term Future Fund Funding Gap",
+    "year": 2023,
+    "category": "funding_catastrophe",
+    "description": "Long-Term Future Fund reports $450k/month funding gap after relationship changes with Open Philanthropy",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -45,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": -10,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 10,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://forum.effectivealtruism.org/posts/RueHqBuBKQBtSYkzp/observations-on-the-funding-landscape-of-ea-and-ai-safety",
+      "https://funds.effectivealtruism.org/funds/far-future"
+    ],
+    "tags": [
+      "institutional_funding",
+      "ltff",
+      "open_philanthropy"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Core funding infrastructure is breaking down",
+    "media_reaction": "AI safety funding faces institutional challenges"
+  },
+  "ea_funding_concentration_risk_2023": {
+    "id": "ea_funding_concentration_risk_2023",
+    "title": "EA Funding Concentration Crisis",
+    "year": 2023,
+    "category": "funding_catastrophe",
+    "description": "Major EA funders projected to spend less on AI safety in 2023 compared to 2022, revealing dangerous funding concentration",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -30,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": -20,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 20,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://forum.effectivealtruism.org/posts/RueHqBuBKQBtSYkzp/observations-on-the-funding-landscape-of-ea-and-ai-safety"
+    ],
+    "tags": [
+      "diversification",
+      "effective_altruism",
+      "funding_concentration"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "We put all our eggs in too few baskets",
+    "media_reaction": "AI safety funding reveals dangerous over-reliance on few donors"
+  },
+  "openai_board_crisis_2023": {
+    "id": "openai_board_crisis_2023",
+    "title": "OpenAI Board Crisis and CEO Firing",
+    "year": 2023,
+    "category": "organizational_crisis",
+    "description": "Sam Altman fired by OpenAI board on Nov 17 for being 'not consistently candid', reinstated 5 days later after employee revolt and Microsoft pressure",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -30,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 40,
+        "condition": null
+      },
+      {
+        "variable": "media_reputation",
+        "change": -20,
+        "condition": null
+      },
+      {
+        "variable": "burnout_risk",
+        "change": 30,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 15,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Removal_of_Sam_Altman_from_OpenAI",
+      "https://www.npr.org/2023/11/24/1215015362/chatgpt-openai-sam-altman-fired-explained"
+    ],
+    "tags": [
+      "board_governance",
+      "employee_revolt",
+      "leadership",
+      "microsoft"
+    ],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "The chaos shows how governance structures can fail at critical moments",
+    "media_reaction": "Tech world in shock as AI leader faces unprecedented boardroom drama"
+  }
+}

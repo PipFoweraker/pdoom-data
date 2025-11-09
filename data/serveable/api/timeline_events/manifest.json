@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "schema_version": "1.0.0",
+  "generated_at": "2025-11-09T02:12:35.672991Z",
+  "total_events": 28,
+  "years": [
+    2016,
+    2018,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "categories": [
+    "funding_catastrophe",
+    "institutional_decay",
+    "organizational_crisis",
+    "technical_research_breakthrough"
+  ],
+  "files": {
+    "all_events": "all_events.json",
+    "by_year": "by_year/{year}.json",
+    "by_category": "by_category/{category}.json",
+    "index": "event_index.json"
+  }
+}

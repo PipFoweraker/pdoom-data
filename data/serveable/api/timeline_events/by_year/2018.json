@@ -1,0 +1,108 @@
+{
+  "google_project_maven_2018": {
+    "id": "google_project_maven_2018",
+    "title": "Google Project Maven Employee Revolt",
+    "year": 2018,
+    "category": "organizational_crisis",
+    "description": "Thousands of Google employees signed petition against AI drone warfare project, dozens quit, Google dropped contract",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "technical_debt",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": -5,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://gizmodo.com/google-employees-resign-in-protest-against-pentagon-con-1825729300",
+      "https://www.washingtonpost.com/news/the-switch/wp/2018/06/01/google-to-drop-pentagon-ai-contract-after-employees-called-it-the-business-of-war/"
+    ],
+    "tags": [
+      "employee_activism",
+      "ethics",
+      "military_ai",
+      "pentagon"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Proves that safety concerns can influence corporate decisions",
+    "media_reaction": "Google faces internal rebellion over military AI contracts"
+  },
+  "tesla_autopilot_incidents_2016_2024": {
+    "id": "tesla_autopilot_incidents_2016_2024",
+    "title": "Tesla Autopilot Fatal Accidents",
+    "year": 2018,
+    "category": "organizational_crisis",
+    "description": "AIAAIC documented 20+ Tesla autonomous driving system failures leading to fatal accidents",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -35,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 30,
+        "condition": null
+      },
+      {
+        "variable": "media_reputation",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 20,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://aiaaic.org/",
+      "https://nucleo.jor.br/english/2025-03-31-aiaaic-ai-incidents-have-skyrocketed-since-2016/"
+    ],
+    "tags": [
+      "autonomous_vehicles",
+      "fatal_accidents",
+      "safety_critical",
+      "tesla"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Real-world deployment without adequate safety testing",
+    "media_reaction": "Tesla's autopilot faces scrutiny after multiple fatal crashes"
+  }
+}

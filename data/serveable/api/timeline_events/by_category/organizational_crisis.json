@@ -1,0 +1,320 @@
+{
+  "openai_board_crisis_2023": {
+    "id": "openai_board_crisis_2023",
+    "title": "OpenAI Board Crisis and CEO Firing",
+    "year": 2023,
+    "category": "organizational_crisis",
+    "description": "Sam Altman fired by OpenAI board on Nov 17 for being 'not consistently candid', reinstated 5 days later after employee revolt and Microsoft pressure",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -30,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 40,
+        "condition": null
+      },
+      {
+        "variable": "media_reputation",
+        "change": -20,
+        "condition": null
+      },
+      {
+        "variable": "burnout_risk",
+        "change": 30,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 15,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://en.wikipedia.org/wiki/Removal_of_Sam_Altman_from_OpenAI",
+      "https://www.npr.org/2023/11/24/1215015362/chatgpt-openai-sam-altman-fired-explained"
+    ],
+    "tags": [
+      "board_governance",
+      "employee_revolt",
+      "leadership",
+      "microsoft"
+    ],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "The chaos shows how governance structures can fail at critical moments",
+    "media_reaction": "Tech world in shock as AI leader faces unprecedented boardroom drama"
+  },
+  "google_project_maven_2018": {
+    "id": "google_project_maven_2018",
+    "title": "Google Project Maven Employee Revolt",
+    "year": 2018,
+    "category": "organizational_crisis",
+    "description": "Thousands of Google employees signed petition against AI drone warfare project, dozens quit, Google dropped contract",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -15,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "technical_debt",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": -5,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://gizmodo.com/google-employees-resign-in-protest-against-pentagon-con-1825729300",
+      "https://www.washingtonpost.com/news/the-switch/wp/2018/06/01/google-to-drop-pentagon-ai-contract-after-employees-called-it-the-business-of-war/"
+    ],
+    "tags": [
+      "employee_activism",
+      "ethics",
+      "military_ai",
+      "pentagon"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Proves that safety concerns can influence corporate decisions",
+    "media_reaction": "Google faces internal rebellion over military AI contracts"
+  },
+  "anthropic_exodus_2021": {
+    "id": "anthropic_exodus_2021",
+    "title": "Anthropic Executive Departures from OpenAI",
+    "year": 2021,
+    "category": "organizational_crisis",
+    "description": "Mass departure from OpenAI to form safety-focused competitor after ideological conflicts over safety vs capability race",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -50,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "research",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": -10,
+        "condition": null
+      },
+      {
+        "variable": "technical_debt",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": -10,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://techcrunch.com/2021/05/28/former-openai-research-vp-dario-amodei-starts-anthropic-ai-safety-startup/",
+      "https://www.anthropic.com/news/introducing-claude"
+    ],
+    "tags": [
+      "anthropic",
+      "brain_drain",
+      "competition",
+      "safety_culture"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Safety researchers finally have a well-funded alternative",
+    "media_reaction": "OpenAI brain drain as safety concerns drive executive exodus"
+  },
+  "microsoft_tay_2016": {
+    "id": "microsoft_tay_2016",
+    "title": "Microsoft Tay Chatbot Scandal",
+    "year": 2016,
+    "category": "organizational_crisis",
+    "description": "Microsoft's AI chatbot learned to post offensive content within 24 hours from Twitter interactions",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -10,
+        "condition": null
+      },
+      {
+        "variable": "media_reputation",
+        "change": -30,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 25,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "technical_debt",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 10,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://digitaldefynd.com/IQ/top-ai-scandals/",
+      "https://www.theverge.com/2016/3/24/11297050/tay-microsoft-chatbot-racist"
+    ],
+    "tags": [
+      "content_moderation",
+      "early_warning",
+      "microsoft",
+      "social_media"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "This shows how quickly AI systems can be corrupted",
+    "media_reaction": "Microsoft's AI chatbot goes full Nazi in under 24 hours"
+  },
+  "tesla_autopilot_incidents_2016_2024": {
+    "id": "tesla_autopilot_incidents_2016_2024",
+    "title": "Tesla Autopilot Fatal Accidents",
+    "year": 2018,
+    "category": "organizational_crisis",
+    "description": "AIAAIC documented 20+ Tesla autonomous driving system failures leading to fatal accidents",
+    "impacts": [
+      {
+        "variable": "cash",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": -35,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 30,
+        "condition": null
+      },
+      {
+        "variable": "media_reputation",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 20,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://aiaaic.org/",
+      "https://nucleo.jor.br/english/2025-03-31-aiaaic-ai-incidents-have-skyrocketed-since-2016/"
+    ],
+    "tags": [
+      "autonomous_vehicles",
+      "fatal_accidents",
+      "safety_critical",
+      "tesla"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Real-world deployment without adequate safety testing",
+    "media_reaction": "Tesla's autopilot faces scrutiny after multiple fatal crashes"
+  },
+  "openai_safety_team_departures_2024": {
+    "id": "openai_safety_team_departures_2024",
+    "title": "OpenAI Safety Team Mass Departures",
+    "year": 2024,
+    "category": "organizational_crisis",
+    "description": "Mass resignations from OpenAI's safety team over concerns about rapid capability advancement without adequate safety measures",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": -25,
+        "condition": null
+      },
+      {
+        "variable": "reputation",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "ethics_risk",
+        "change": 20,
+        "condition": null
+      },
+      {
+        "variable": "stress",
+        "change": 30,
+        "condition": null
+      },
+      {
+        "variable": "burnout_risk",
+        "change": 35,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 20,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://techcrunch.com/2024/05/17/openai-safety-researchers-resign/",
+      "https://www.vox.com/future-perfect/2024/5/17/24158478/openai-departures-sam-altman-employees-agi-superintelligence"
+    ],
+    "tags": [
+      "capability_race",
+      "openai",
+      "resignations",
+      "safety_culture"
+    ],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "The safety team is abandoning ship",
+    "media_reaction": "OpenAI's top safety researchers quit over AI development pace"
+  }
+}
