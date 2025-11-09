@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2025-11-09T03:00:15.823227Z",
+  "description": "PDoom Data Lake - Serveable Zone Manifest",
+  "repository": "https://github.com/PipFoweraker/pdoom-data",
+  "license": "MIT",
+  "summary": {
+    "total_datasets": 2,
+    "total_events": 1028,
+    "data_types": [
+      "timeline_events"
+    ],
+    "formats": [
+      "json"
+    ]
+  },
+  "api": {
+    "timeline_events": {
+      "path": "api/timeline_events/",
+      "description": "Game timeline events for pdoom1",
+      "datasets": {
+        "manual_events": {
+          "name": "Manual Curated Events",
+          "description": "Hand-curated game timeline events",
+          "source": "data/raw/events/",
+          "schema": "config/schemas/event_v1.json",
+          "count": 28,
+          "files": {
+            "all": "all_events.json",
+            "by_year": "by_year/{year}.json",
+            "by_category": "by_category/{category}.json",
+            "index": "event_index.json",
+            "manifest": "manifest.json",
+            "stats": "stats.json"
+          },
+          "years": [
+            2016,
+            2018,
+            2021,
+            2022,
+            2023,
+            2024,
+            2025
+          ],
+          "format": "json"
+        },
+        "alignment_research_events": {
+          "name": "Alignment Research Events",
+          "description": "Timeline events generated from alignment research dataset",
+          "source": "data/transformed/enriched/alignment_research/",
+          "schema": "config/schemas/event_v1.json",
+          "count": 1000,
+          "files": {
+            "all": "alignment_research/alignment_research_events.json",
+            "by_year": "alignment_research/by_year/{year}.json"
+          },
+          "years": [
+            2020,
+            2021,
+            2022
+          ],
+          "format": "json"
+        }
+      },
+      "schema": "config/schemas/event_v1.json",
+      "documentation": "docs/EVENT_SCHEMA.md"
+    }
+  },
+  "analytics": {
+    "description": "Analytics-ready data (future)",
+    "datasets": {}
+  },
+  "integration": {
+    "pdoom1_website": {
+      "description": "PostgreSQL database import",
+      "method": "Import timeline events to events table",
+      "api_endpoint": "GET /api/events",
+      "status": "planned"
+    },
+    "pdoom_game": {
+      "description": "Godot game integration",
+      "method": "Fetch from pdoom1-website API",
+      "status": "planned"
+    },
+    "pdoom_dashboard": {
+      "description": "Analytics dashboard",
+      "method": "Direct JSON load or API fetch",
+      "status": "planned"
+    }
+  },
+  "data_pipeline": {
+    "stages": [
+      "Raw Zone (data/raw/) - Immutable source data",
+      "Validated Zone (data/transformed/validated/) - Schema-validated",
+      "Cleaned Zone (data/transformed/cleaned/) - Normalized, ASCII-converted",
+      "Enriched Zone (data/transformed/enriched/) - With derived fields",
+      "Serveable Zone (data/serveable/) - Production-ready, optimized"
+    ],
+    "automation": {
+      "validation": "scripts/validation/validate_*.py",
+      "cleaning": "scripts/transformation/clean.py",
+      "enrichment": "scripts/transformation/enrich.py",
+      "event_transformation": "scripts/transformation/transform_to_timeline_events.py",
+      "event_cleaning": "scripts/transformation/clean_events.py"
+    }
+  },
+  "quality_guarantees": [
+    "Schema validated",
+    "ASCII compliant",
+    "Complete attribution",
+    "Versioned",
+    "Idempotent (safe to regenerate)"
+  ],
+  "related_documentation": [
+    "docs/DATA_ZONES.md - Data lake architecture",
+    "docs/EVENT_SCHEMA.md - Event schema details",
+    "docs/DATA_PUBLISHING_STRATEGY.md - Public data strategy",
+    "docs/LINEAGE.md - Data lineage tracking",
+    "data/serveable/README.md - Serveable zone guide"
+  ]
+}
