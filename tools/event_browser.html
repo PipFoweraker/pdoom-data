@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Impact Browser</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px 30px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+            min-height: calc(100vh - 160px);
+        }
+
+        .sidebar {
+            background: #ecf0f1;
+            padding: 20px;
+            border-right: 1px solid #bdc3c7;
+        }
+
+        .content {
+            padding: 20px 30px;
+        }
+
+        .filter-section {
+            margin-bottom: 25px;
+        }
+
+        .filter-section h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        button.secondary {
+            background: #95a5a6;
+        }
+
+        button.secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .event-list {
+            margin-bottom: 20px;
+        }
+
+        .event-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .event-card:hover {
+            background: #e9ecef;
+            border-color: #3498db;
+        }
+
+        .event-card.selected {
+            border-color: #3498db;
+            background: #e3f2fd;
+            border-width: 2px;
+        }
+
+        .event-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+        }
+
+        .event-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .event-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 10px;
+        }
+
+        .badge-critical { background: #e74c3c; color: white; }
+        .badge-high { background: #e67e22; color: white; }
+        .badge-medium { background: #f39c12; color: white; }
+        .badge-low { background: #95a5a6; color: white; }
+        .badge-unset { background: #ecf0f1; color: #7f8c8d; }
+
+        .event-meta {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 6px;
+        }
+
+        .event-description {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .event-detail {
+            background: #f8f9fa;
+            border: 2px solid #3498db;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .detail-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .detail-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .detail-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-section h4 {
+            font-size: 13px;
+            text-transform: uppercase;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+
+        .impacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .impact-item {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .impact-variable {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .impact-change {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .impact-positive { color: #27ae60; }
+        .impact-negative { color: #e74c3c; }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            background: #ecf0f1;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .metadata-editor {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .metadata-editor h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .stats {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .load-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 4px;
+        }
+
+        .load-section h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .file-input {
+            margin-bottom: 8px;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .pagination button {
+            width: auto;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Event Impact Browser</h1>
+            <div class="subtitle">Browse and annotate events for p(Doom)1 integration</div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <div class="load-section">
+                    <h3>Load Data</h3>
+                    <div class="file-input">
+                        <label style="font-size: 12px; display: block; margin-bottom: 4px;">Events JSON:</label>
+                        <input type="file" id="eventsFile" accept=".json">
+                    </div>
+                    <div class="file-input">
+                        <label style="font-size: 12px; display: block; margin-bottom: 4px;">Metadata JSON (optional):</label>
+                        <input type="file" id="metadataFile" accept=".json">
+                    </div>
+                </div>
+
+                <div class="stats" id="stats">
+                    <div class="stats-row">
+                        <span>Total Events:</span>
+                        <strong id="totalEvents">0</strong>
+                    </div>
+                    <div class="stats-row">
+                        <span>Filtered:</span>
+                        <strong id="filteredEvents">0</strong>
+                    </div>
+                    <div class="stats-row">
+                        <span>With Metadata:</span>
+                        <strong id="withMetadata">0</strong>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Filters</h3>
+                    <input type="text" id="searchText" placeholder="Search title/description...">
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                    <select id="impactLevelFilter">
+                        <option value="">All Impact Levels</option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                        <option value="unset">Unset</option>
+                    </select>
+                    <input type="number" id="yearMin" placeholder="Year min">
+                    <input type="number" id="yearMax" placeholder="Year max">
+                    <button onclick="applyFilters()">Apply Filters</button>
+                    <button class="secondary" onclick="clearFilters()">Clear Filters</button>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Actions</h3>
+                    <button onclick="exportMetadata()">Export Metadata JSON</button>
+                    <button class="secondary" onclick="exportFilteredEvents()">Export Filtered Events</button>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div id="alertContainer"></div>
+
+                <div class="pagination">
+                    <button onclick="previousPage()" id="prevBtn">← Previous</button>
+                    <span id="pageInfo">Page 1</span>
+                    <button onclick="nextPage()" id="nextBtn">Next →</button>
+                </div>
+
+                <div class="event-list" id="eventList">
+                    <div class="alert alert-info">
+                        Load an events JSON file to get started. You can find them in:<br>
+                        • data/serveable/api/timeline_events/all_events.json<br>
+                        • data/serveable/api/timeline_events/alignment_research/alignment_research_events.json
+                    </div>
+                </div>
+
+                <div id="eventDetail" style="display: none;">
+                    <!-- Event details will be populated here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        let allEvents = {};
+        let metadata = {};
+        let filteredEventIds = [];
+        let currentEventId = null;
+        let currentPage = 0;
+        const eventsPerPage = 20;
+
+        // Load events file
+        document.getElementById('eventsFile').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                const data = JSON.parse(text);
+
+                // Handle both dict and array formats
+                if (Array.isArray(data)) {
+                    allEvents = {};
+                    data.forEach(event => {
+                        allEvents[event.id] = event;
+                    });
+                } else {
+                    allEvents = data;
+                }
+
+                showAlert(`Loaded ${Object.keys(allEvents).length} events`, 'success');
+                populateCategoryFilter();
+                applyFilters();
+            } catch (err) {
+                showAlert(`Error loading events: ${err.message}`, 'error');
+            }
+        });
+
+        // Load metadata file
+        document.getElementById('metadataFile').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                metadata = JSON.parse(text);
+                showAlert(`Loaded metadata for ${Object.keys(metadata).length} events`, 'success');
+                applyFilters();
+            } catch (err) {
+                showAlert(`Error loading metadata: ${err.message}`, 'error');
+            }
+        });
+
+        function populateCategoryFilter() {
+            const categories = new Set();
+            Object.values(allEvents).forEach(event => {
+                if (event.category) categories.add(event.category);
+            });
+
+            const select = document.getElementById('categoryFilter');
+            select.innerHTML = '<option value="">All Categories</option>';
+            [...categories].sort().forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat.replace(/_/g, ' ');
+                select.appendChild(option);
+            });
+        }
+
+        function applyFilters() {
+            const searchText = document.getElementById('searchText').value.toLowerCase();
+            const category = document.getElementById('categoryFilter').value;
+            const impactLevel = document.getElementById('impactLevelFilter').value;
+            const yearMin = document.getElementById('yearMin').value;
+            const yearMax = document.getElementById('yearMax').value;
+
+            filteredEventIds = Object.entries(allEvents).filter(([id, event]) => {
+                // Search text
+                if (searchText) {
+                    const title = (event.title || '').toLowerCase();
+                    const desc = (event.description || '').toLowerCase();
+                    if (!title.includes(searchText) && !desc.includes(searchText)) {
+                        return false;
+                    }
+                }
+
+                // Category
+                if (category && event.category !== category) return false;
+
+                // Impact level
+                if (impactLevel) {
+                    const eventImpactLevel = metadata[id]?.impact_level;
+                    if (impactLevel === 'unset') {
+                        if (eventImpactLevel) return false;
+                    } else {
+                        if (eventImpactLevel !== impactLevel) return false;
+                    }
+                }
+
+                // Year range
+                if (yearMin && event.year < parseInt(yearMin)) return false;
+                if (yearMax && event.year > parseInt(yearMax)) return false;
+
+                return true;
+            }).map(([id]) => id);
+
+            currentPage = 0;
+            updateStats();
+            renderEventList();
+        }
+
+        function clearFilters() {
+            document.getElementById('searchText').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('impactLevelFilter').value = '';
+            document.getElementById('yearMin').value = '';
+            document.getElementById('yearMax').value = '';
+            applyFilters();
+        }
+
+        function updateStats() {
+            document.getElementById('totalEvents').textContent = Object.keys(allEvents).length;
+            document.getElementById('filteredEvents').textContent = filteredEventIds.length;
+            document.getElementById('withMetadata').textContent = Object.keys(metadata).length;
+        }
+
+        function renderEventList() {
+            const start = currentPage * eventsPerPage;
+            const end = start + eventsPerPage;
+            const pageEvents = filteredEventIds.slice(start, end);
+
+            const listEl = document.getElementById('eventList');
+            listEl.innerHTML = pageEvents.map(id => {
+                const event = allEvents[id];
+                const impactLevel = metadata[id]?.impact_level || 'unset';
+                const badgeClass = `badge-${impactLevel.toLowerCase()}`;
+
+                return `
+                    <div class="event-card ${currentEventId === id ? 'selected' : ''}" onclick="selectEvent('${id}')">
+                        <div class="event-card-header">
+                            <div class="event-title">${event.title || 'Untitled'}</div>
+                            <span class="event-badge ${badgeClass}">${impactLevel}</span>
+                        </div>
+                        <div class="event-meta">
+                            ${event.year || 'N/A'} • ${(event.category || 'uncategorized').replace(/_/g, ' ')}
+                        </div>
+                        <div class="event-description">${event.description || ''}</div>
+                    </div>
+                `;
+            }).join('');
+
+            // Update pagination
+            const totalPages = Math.ceil(filteredEventIds.length / eventsPerPage);
+            document.getElementById('pageInfo').textContent = `Page ${currentPage + 1} of ${totalPages || 1}`;
+            document.getElementById('prevBtn').disabled = currentPage === 0;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages - 1;
+        }
+
+        function selectEvent(id) {
+            currentEventId = id;
+            renderEventList();
+            renderEventDetail(id);
+        }
+
+        function renderEventDetail(id) {
+            const event = allEvents[id];
+            const eventMetadata = metadata[id] || {};
+
+            const detailEl = document.getElementById('eventDetail');
+            detailEl.style.display = 'block';
+
+            const impactScore = calculateImpactScore(event);
+
+            detailEl.innerHTML = `
+                <div class="event-detail">
+                    <div class="detail-header">
+                        <div class="detail-title">${event.title || 'Untitled'}</div>
+                        <div class="detail-meta">
+                            <span>ID: ${id}</span>
+                            <span>Year: ${event.year || 'N/A'}</span>
+                            <span>Category: ${(event.category || 'N/A').replace(/_/g, ' ')}</span>
+                            <span>Impact Score: ${impactScore}</span>
+                        </div>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Description</h4>
+                        <p style="font-size: 14px; line-height: 1.6;">${event.description || 'No description'}</p>
+                    </div>
+
+                    <div class="detail-section">
+                        <h4>Impacts</h4>
+                        <div class="impacts-grid">
+                            ${(event.impacts || []).map(imp => `
+                                <div class="impact-item">
+                                    <div class="impact-variable">${imp.variable}</div>
+                                    <div class="impact-change ${imp.change >= 0 ? 'impact-positive' : 'impact-negative'}">
+                                        ${imp.change >= 0 ? '+' : ''}${imp.change}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    ${event.tags && event.tags.length > 0 ? `
+                        <div class="detail-section">
+                            <h4>Tags</h4>
+                            <div class="tags">
+                                ${event.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${event.sources && event.sources.length > 0 ? `
+                        <div class="detail-section">
+                            <h4>Sources</h4>
+                            ${event.sources.map(src => `
+                                <div style="font-size: 13px; margin-bottom: 4px;">
+                                    <a href="${src}" target="_blank" style="color: #3498db;">${src}</a>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+
+                <div class="metadata-editor">
+                    <h3>Custom Metadata (Nondestructive)</h3>
+
+                    <div class="form-group">
+                        <label>Impact Level</label>
+                        <select id="meta_impact_level">
+                            <option value="">-- Not Set --</option>
+                            <option value="Critical" ${eventMetadata.impact_level === 'Critical' ? 'selected' : ''}>Critical</option>
+                            <option value="High" ${eventMetadata.impact_level === 'High' ? 'selected' : ''}>High</option>
+                            <option value="Medium" ${eventMetadata.impact_level === 'Medium' ? 'selected' : ''}>Medium</option>
+                            <option value="Low" ${eventMetadata.impact_level === 'Low' ? 'selected' : ''}>Low</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Game Relevance</label>
+                        <select id="meta_game_relevance">
+                            <option value="">-- Not Set --</option>
+                            <option value="essential" ${eventMetadata.game_relevance === 'essential' ? 'selected' : ''}>Essential</option>
+                            <option value="high" ${eventMetadata.game_relevance === 'high' ? 'selected' : ''}>High</option>
+                            <option value="medium" ${eventMetadata.game_relevance === 'medium' ? 'selected' : ''}>Medium</option>
+                            <option value="low" ${eventMetadata.game_relevance === 'low' ? 'selected' : ''}>Low</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Player Choice Event</label>
+                        <select id="meta_player_choice">
+                            <option value="">-- Not Set --</option>
+                            <option value="true" ${eventMetadata.player_choice_event === true ? 'selected' : ''}>Yes</option>
+                            <option value="false" ${eventMetadata.player_choice_event === false ? 'selected' : ''}>No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="meta_notes" placeholder="Add your notes about this event...">${eventMetadata.notes || ''}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Custom Field (JSON)</label>
+                        <textarea id="meta_custom" placeholder='{"key": "value"}'>${eventMetadata._custom ? JSON.stringify(eventMetadata._custom, null, 2) : ''}</textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button onclick="saveMetadata('${id}')">Save Metadata</button>
+                        <button class="secondary" onclick="clearEventMetadata('${id}')">Clear Metadata</button>
+                    </div>
+                </div>
+            `;
+
+            detailEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function calculateImpactScore(event) {
+            if (!event.impacts) return 0;
+            return event.impacts.reduce((sum, imp) => sum + Math.abs(imp.change || 0), 0);
+        }
+
+        function saveMetadata(id) {
+            if (!metadata[id]) {
+                metadata[id] = {};
+            }
+
+            const impactLevel = document.getElementById('meta_impact_level').value;
+            const gameRelevance = document.getElementById('meta_game_relevance').value;
+            const playerChoice = document.getElementById('meta_player_choice').value;
+            const notes = document.getElementById('meta_notes').value;
+            const customJson = document.getElementById('meta_custom').value;
+
+            if (impactLevel) metadata[id].impact_level = impactLevel;
+            else delete metadata[id].impact_level;
+
+            if (gameRelevance) metadata[id].game_relevance = gameRelevance;
+            else delete metadata[id].game_relevance;
+
+            if (playerChoice) metadata[id].player_choice_event = playerChoice === 'true';
+            else delete metadata[id].player_choice_event;
+
+            if (notes) metadata[id].notes = notes;
+            else delete metadata[id].notes;
+
+            if (customJson) {
+                try {
+                    metadata[id]._custom = JSON.parse(customJson);
+                } catch (e) {
+                    showAlert('Invalid JSON in custom field', 'error');
+                    return;
+                }
+            } else {
+                delete metadata[id]._custom;
+            }
+
+            // Remove empty metadata entries
+            if (Object.keys(metadata[id]).length === 0) {
+                delete metadata[id];
+            }
+
+            showAlert('Metadata saved!', 'success');
+            updateStats();
+            renderEventList();
+        }
+
+        function clearEventMetadata(id) {
+            if (confirm('Clear all metadata for this event?')) {
+                delete metadata[id];
+                showAlert('Metadata cleared', 'success');
+                updateStats();
+                renderEventList();
+                renderEventDetail(id);
+            }
+        }
+
+        function exportMetadata() {
+            const blob = new Blob([JSON.stringify(metadata, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'events_metadata.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showAlert('Metadata exported!', 'success');
+        }
+
+        function exportFilteredEvents() {
+            const filtered = {};
+            filteredEventIds.forEach(id => {
+                filtered[id] = {
+                    ...allEvents[id],
+                    _custom_metadata: metadata[id] || {}
+                };
+            });
+
+            const blob = new Blob([JSON.stringify(filtered, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'filtered_events.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showAlert(`Exported ${filteredEventIds.length} filtered events!`, 'success');
+        }
+
+        function previousPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                renderEventList();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(filteredEventIds.length / eventsPerPage);
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                renderEventList();
+            }
+        }
+
+        function showAlert(message, type = 'info') {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            container.appendChild(alert);
+
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+
+        // Add enter key support for filters
+        document.getElementById('searchText').addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') applyFilters();
+        });
+    </script>
+</body>
+</html>

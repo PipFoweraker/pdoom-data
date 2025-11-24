@@ -1,0 +1,86 @@
+{
+  "ftx_future_fund_collapse_2022": {
+    "impact_level": "Critical"
+  },
+  "cais_ftx_clawback_2023": {
+    "impact_level": "High"
+  },
+  "crypto_funding_crash_2022": {
+    "impact_level": "High"
+  },
+  "ltff_funding_gap_2023": {
+    "impact_level": "High"
+  },
+  "ea_funding_concentration_risk_2023": {
+    "impact_level": "High"
+  },
+  "grant_application_backlog_2024": {
+    "impact_level": "High"
+  },
+  "venture_capital_ai_safety_drought_2024": {
+    "impact_level": "Medium"
+  },
+  "openai_board_crisis_2023": {
+    "impact_level": "Critical"
+  },
+  "google_project_maven_2018": {
+    "impact_level": "High"
+  },
+  "anthropic_exodus_2021": {
+    "impact_level": "High"
+  },
+  "microsoft_tay_2016": {
+    "impact_level": "High"
+  },
+  "tesla_autopilot_incidents_2016_2024": {
+    "impact_level": "Critical"
+  },
+  "openai_safety_team_departures_2024": {
+    "impact_level": "High"
+  },
+  "ai_sandbagging_research_2024": {
+    "impact_level": "High"
+  },
+  "anthropic_alignment_faking_2024": {
+    "impact_level": "Critical"
+  },
+  "apollo_scheming_evals_2024": {
+    "impact_level": "Critical"
+  },
+  "claude_4_opus_blackmail_2025": {
+    "impact_level": "Critical"
+  },
+  "synthetic_data_scaling_2024": {
+    "impact_level": "Medium"
+  },
+  "chain_of_thought_unfaithfulness_2024": {
+    "impact_level": "High"
+  },
+  "gartner_synthetic_data_prediction_2024": {
+    "impact_level": "Medium"
+  },
+  "metr_deceptive_ai_evaluation_2024": {
+    "impact_level": "High"
+  },
+  "uk_ai_safety_to_security_2025": {
+    "impact_level": "Medium"
+  },
+  "us_aisi_to_caisi_2025": {
+    "impact_level": "High"
+  },
+  "ai_summit_pivot_2023_2025": {
+    "impact_level": "Medium"
+  },
+  "eu_ai_act_watering_down_2024": {
+    "impact_level": "Medium"
+  },
+  "academic_safety_funding_cuts_2024": {
+    "impact_level": "High"
+  },
+  "safety_researcher_brain_drain_2024": {
+    "impact_level": "High"
+  },
+  "international_coordination_breakdown_2025": {
+    "impact_level": "High"
+  }
+}

@@ -185,6 +185,22 @@ See [QUICK_START_INTEGRATION.md](docs/QUICK_START_INTEGRATION.md) for complete s
 
 ---
 
+## Tools
+
+### Event Browser
+
+**Interactive browser for reviewing and annotating events**
+
+Open `tools/event_browser.html` in your browser to:
+- Browse and filter 1,000+ timeline events
+- Add custom metadata for game integration
+- Tag events by impact level and game relevance
+- Export metadata for use in pdoom1 and pdoom1-website
+
+See [EVENT_BROWSER_GUIDE.md](docs/EVENT_BROWSER_GUIDE.md) for complete documentation.
+
+---
+
 ## Documentation
 
 ### Essential Guides
@@ -194,6 +210,7 @@ See [QUICK_START_INTEGRATION.md](docs/QUICK_START_INTEGRATION.md) for complete s
 | [QUICK_START_INTEGRATION.md](docs/QUICK_START_INTEGRATION.md) | 5-minute integration | Developers |
 | [INTEGRATION_GUIDE.md](docs/INTEGRATION_GUIDE.md) | Complete integration docs | Developers |
 | [EVENT_SCHEMA.md](docs/EVENT_SCHEMA.md) | Timeline event schema | Developers |
+| [EVENT_BROWSER_GUIDE.md](docs/EVENT_BROWSER_GUIDE.md) | Interactive event browser | Curators, Game Designers |
 | [DATA_ZONES.md](docs/DATA_ZONES.md) | Architecture overview | Engineers |
 | [RUNBOOK.md](docs/RUNBOOK.md) | Operations guide | Operators |
 | [DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md) | All documentation | All |
@@ -221,10 +238,13 @@ pdoom-data/
 │       ├── MANIFEST.json         # Complete data catalog
 │       └── api/
 │           └── timeline_events/  # 1,028 events ready for use
+├── tools/
+│   └── event_browser.html        # Interactive event browser (open in browser)
 ├── config/
 │   └── schemas/                  # JSON schemas
 │       └── event_v1.json         # Timeline event schema
 ├── scripts/
+│   ├── analysis/                 # Event analysis tools
 │   ├── transformation/           # Data pipeline scripts
 │   ├── validation/               # Schema validation
 │   ├── publishing/               # Manifest generation
@@ -381,7 +401,7 @@ This repository maintains strict ASCII-only content for agent compatibility. See
 
 ---
 
-**Last Updated**: 2025-11-09
+**Last Updated**: 2025-11-24
 
 **Maintained by**: pdoom-data team
 

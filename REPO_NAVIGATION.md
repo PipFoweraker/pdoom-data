@@ -6,58 +6,73 @@
 This is part of the P(Doom) project ecosystem consisting of three repositories:
 
 ### [DATA] [pdoom-data](https://github.com/PipFoweraker/pdoom-data)
-**Historical Events Database**
-- 28+ real AI safety events (2016-2025)
-- Game mechanics data and impacts
+**AI Safety Data Lake & Timeline Events**
+- 1,028 timeline events (28 curated + 1,000 alignment research)
+- Three-zone data architecture (raw → transformed → serveable)
+- Automated data pipeline with validation
+- Interactive event browser tool
 - JSON exports for integration
 - ASCII-only content for agent compatibility
 
 **Key Files:**
-- `event_data_structures.py` - Core data types
-- `*_events.py` - Event categories (funding, technical, organizational, institutional)
-- `game_integration_helpers.py` - Game logic utilities
-- `data/events/*.json` - Exported data formats
+- `data/serveable/api/timeline_events/` - Production-ready event data
+- `tools/event_browser.html` - Interactive event browser (open in browser)
+- `config/schemas/event_v1.json` - Timeline event schema
+- `scripts/transformation/` - Data pipeline scripts
+- `docs/QUICK_START_INTEGRATION.md` - Integration guide
 
-### [WEB] [pdoom-website](https://github.com/PipFoweraker/pdoom-website) 
-**Public Website**
-- Event timeline displays
+### [WEB] [pdoom-website](https://github.com/PipFoweraker/pdoom-website)
+**Public Website & API**
+- Event timeline displays with interactive browser
 - Game information and downloads
 - Documentation and guides
-- Community engagement
+- Community engagement and player feedback
+- PostgreSQL + FastAPI backend
 
 **Integration Points:**
-- Consumes JSON exports from pdoom-data
+- Imports timeline events from pdoom-data to PostgreSQL
 - Displays interactive event timelines
-- Links to game scenarios
-- Provides public API endpoints
+- Player feedback system (quarantined submissions)
+- RESTful API endpoints for events and metadata
+- Embeds event browser for community review
 
 ### [GAME] [pdoom1](https://github.com/PipFoweraker/pdoom1)
-**Strategy Game**
+**Strategy Game (Godot)**
 - Interactive P(Doom) simulation
-- Historical event integration
+- Historical event integration (1,028 events)
 - Player choice mechanics
+- Dynamic timeline system
 - Save/load game states
 
 **Integration Points:**
-- Imports event modules from pdoom-data
-- Processes historical events in gameplay
+- Loads timeline events from pdoom-data JSON files
+- Processes event impacts on game variables
 - Tracks player interactions with events
-- Provides gameplay analytics
+- Uses event metadata for game mechanics (rarity, player_choice, impact_level)
+- Provides gameplay analytics back to website
 
 ## INTEGRATION ARCHITECTURE
 
 ```
 pdoom-data (Source of Truth)
     |
-    |-- JSON Exports --> pdoom-website (Display)
-    |                        |
-    |                        v
-    |                   Public API
-    |
-    |-- Python Modules --> pdoom1 (Gameplay)
-                               |
-                               v
-                          Analytics
+    |-- Data Pipeline --> Serveable Zone (1,028 events)
+    |                         |
+    |                         |-- JSON --> pdoom1 (Godot Game)
+    |                         |              |
+    |                         |              v
+    |                         |         Gameplay & Analytics
+    |                         |
+    |                         |-- Import --> pdoom-website (PostgreSQL)
+    |                                            |
+    |                                            v
+    |                                   Public API & Event Browser
+    |                                            |
+    |                                            v
+    |                                   Player Feedback (Quarantined)
+    |                                            |
+    |                                            v
+    |                                   Community Metadata Layer
 ```
 
 ## DEVELOPMENT STANDARDS
@@ -87,19 +102,41 @@ When working on any P(Doom) repository:
 
 1. **Check related repos** for existing implementations
 2. **Maintain ASCII-only** content everywhere
-3. **Follow data schemas** defined in pdoom-data
+3. **Follow data schemas** defined in pdoom-data (`config/schemas/event_v1.json`)
 4. **Update integration docs** when making changes
 5. **Test cross-repo** functionality
+6. **Use Event Browser** (`tools/event_browser.html`) to review events interactively
+
+### Key Documentation Locations
+
+**pdoom-data**:
+- Integration: `docs/QUICK_START_INTEGRATION.md`
+- Event Schema: `docs/EVENT_SCHEMA.md`
+- Event Browser: `docs/EVENT_BROWSER_GUIDE.md`
+- Architecture: `docs/DATA_ZONES.md`
+- All Docs: `docs/DOCUMENTATION_INDEX.md`
+
+**pdoom-website**:
+- API Documentation (check repo)
+- Feedback Integration Guide (check repo)
+
+**pdoom1**:
+- Event System Documentation (check repo)
+- Game Integration Guide (check repo)
 
 ### Navigation Commands
 ```bash
 # Clone all related repositories
 git clone https://github.com/PipFoweraker/pdoom-data.git
-git clone https://github.com/PipFoweraker/pdoom-website.git  
+git clone https://github.com/PipFoweraker/pdoom-website.git
 git clone https://github.com/PipFoweraker/pdoom1.git
 
-# Validate ASCII compliance across all repos
-find . -name "*.py" -o -name "*.md" | xargs python validate_ascii.py
+# Open Event Browser
+cd pdoom-data
+# Then open tools/event_browser.html in your browser
+
+# Load event data
+# In browser: load data/serveable/api/timeline_events/all_events.json
 ```
 
 ## DATA FLOW PATTERNS
@@ -124,24 +161,37 @@ find . -name "*.py" -o -name "*.md" | xargs python validate_ascii.py
 
 ## COMMON TASKS
 
-### Adding New Historical Event:
-1. **In pdoom-data**: Add to appropriate `*_events.py` file
-2. **Test locally**: Run `python setup_clean.py`
-3. **Commit changes**: Triggers sync to other repos
-4. **Update website**: Event appears in timeline
-5. **Update game**: Event available in gameplay
+### Adding New Timeline Event:
+1. **In pdoom-data**: Add to `data/raw/events/*.json`
+2. **Run pipeline**: `python scripts/transformation/clean.py && python scripts/transformation/transform_to_timeline_events.py`
+3. **Review in browser**: Open `tools/event_browser.html` and load the event
+4. **Add metadata**: Tag impact level, game relevance, etc.
+5. **Commit changes**: Triggers automated pipeline (GitHub Actions)
+6. **Update website**: Re-import events to PostgreSQL
+7. **Update game**: Copy new JSON to game data folder
 
-### Updating Game Mechanics:
-1. **In pdoom-data**: Modify `game_integration_helpers.py`
-2. **Update schema**: Increment version if breaking
-3. **In pdoom1**: Update integration code
-4. **Test compatibility**: Ensure old saves work
+### Reviewing Large Event Datasets:
+1. **Open browser**: `tools/event_browser.html`
+2. **Load events**: Select JSON file from `data/serveable/api/timeline_events/`
+3. **Use filters**: Category, year range, search text
+4. **Annotate events**: Add impact level, game relevance, notes
+5. **Export metadata**: Download `*_metadata.json` file
+6. **Commit metadata**: Store in version control for team review
 
-### Website Content Updates:
-1. **In pdoom-website**: Update display components
-2. **Test with real data**: Use pdoom-data JSON exports
-3. **Verify mobile**: Responsive design
-4. **Update documentation**: Cross-repo impact
+### Integrating Player Feedback (Website):
+1. **Design feedback form**: Capture event ID, suggested changes, rationale
+2. **Create API endpoint**: `POST /api/events/feedback`
+3. **Quarantine submissions**: Store in `data/feedback/pending/`
+4. **Review in browser**: Load feedback alongside events
+5. **Approve feedback**: Move to `approved/` and update community metadata
+6. **Display on website**: Show community notes on event pages
+
+### Updating Event Schema:
+1. **Modify schema**: `config/schemas/event_v1.json`
+2. **Update documentation**: `docs/EVENT_SCHEMA.md`
+3. **Test pipeline**: Ensure validation passes
+4. **Update cross-repo code**: pdoom1, pdoom-website
+5. **Version bump**: Increment schema version if breaking
 
 ## TROUBLESHOOTING
 
@@ -173,12 +223,39 @@ For questions about:
 
 ## VERSION COMPATIBILITY
 
-Current stable versions:
-- pdoom-data: v1.0.0
+Current versions:
+- pdoom-data: v0.2.0 (In Development)
+- Event Schema: v1.0.0
 - pdoom-website: (check repo)
 - pdoom1: (check repo)
 
 Compatibility matrix and migration guides available in each repository's docs/ folder.
+
+## TOOLS & UTILITIES
+
+### Event Browser (`tools/event_browser.html`)
+**Purpose**: Interactive browser for reviewing and annotating events
+**How to use**:
+1. Open HTML file in browser
+2. Load events JSON
+3. Browse, filter, annotate
+4. Export metadata
+
+**Use cases**:
+- Review large event datasets
+- Tag events for game integration
+- Community feedback review
+- Quality assurance checks
+
+See `docs/EVENT_BROWSER_GUIDE.md` for complete documentation.
+
+### Data Pipeline Scripts (`scripts/`)
+- `transformation/clean.py` - Clean and normalize data
+- `transformation/enrich.py` - Add derived fields
+- `transformation/transform_to_timeline_events.py` - Convert to timeline format
+- `validation/validate_alignment_research.py` - Validate schema compliance
+- `publishing/generate_manifest.py` - Create data catalog
+- `analysis/event_impact_manager.py` - CLI tool for event management
 
 ---
 

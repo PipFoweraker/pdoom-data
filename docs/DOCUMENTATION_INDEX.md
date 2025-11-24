@@ -1,6 +1,6 @@
 # Documentation Index
 
-**Last Updated**: 2025-11-09
+**Last Updated**: 2025-11-24
 **Purpose**: Complete navigation guide for all pdoom-data documentation
 
 ---
@@ -15,6 +15,7 @@
 - **[INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)** - Complete integration documentation
 - **[EVENT_SCHEMA.md](EVENT_SCHEMA.md)** - Timeline event schema reference
 - **[DATA_ZONES.md](DATA_ZONES.md)** - Three-zone architecture explained
+- **[EVENT_BROWSER_GUIDE.md](EVENT_BROWSER_GUIDE.md)** - Interactive event browser tool
 
 ### For Data Engineers
 - **[RUNBOOK.md](RUNBOOK.md)** - Operational procedures
@@ -57,6 +58,7 @@
 | [DATA_DICTIONARY.md](DATA_DICTIONARY.md) | Data field definitions | Analysts |
 | [ALIGNMENT_RESEARCH_INTEGRATION.md](ALIGNMENT_RESEARCH_INTEGRATION.md) | Research data pipeline | Engineers |
 | [HISTORICAL_DATA_INTEGRATION.md](HISTORICAL_DATA_INTEGRATION.md) | Historical events integration | Curators |
+| [EVENT_BROWSER_GUIDE.md](EVENT_BROWSER_GUIDE.md) | Interactive event review tool | Curators, Game Designers |
 
 ### Operations & Maintenance
 
@@ -95,6 +97,12 @@
 1. Start: [QUICK_START_INTEGRATION.md](QUICK_START_INTEGRATION.md)
 2. Reference: [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)
 3. Schema: [EVENT_SCHEMA.md](EVENT_SCHEMA.md)
+
+### "I want to review and annotate events"
+
+1. Tool: [EVENT_BROWSER_GUIDE.md](EVENT_BROWSER_GUIDE.md)
+2. Open: `tools/event_browser.html` in browser
+3. Load: Events from `data/serveable/api/timeline_events/`
 
 ### "I want to understand the data pipeline"
 
