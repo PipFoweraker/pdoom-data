@@ -1,7 +1,7 @@
 <!--
 This file is automatically synced from pdoom1/docs/data/HISTORICAL_DATA_INTEGRATION.md
-Last synced: 2025-11-03T09:38:02.249334
-Source commit: 1981d8b0bc4cab7e490255708772ff0a826045a8
+Last synced: 2025-11-27T08:07:08.533258
+Source commit: 44fdcbc26ecaea6ccd7bfe8bc94dcc5c6804993b
 DO NOT EDIT DIRECTLY - Changes will be overwritten by sync
 -->
 
@@ -27,38 +27,38 @@ P(Doom) uses real historical events from the AI safety and capabilities landscap
 ## Data Flow Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│ pdoom-data Repository (separate repo)                   │
-│                                                          │
-│ raw/ → cleaned/ → transformed/                          │
-│                                                          │
-│ - Alignment Research Dataset                            │
-│ - Historical papers, conferences                        │
-│ - Organization founding dates                           │
-│ - Funding rounds, governance events                     │
-└─────────────────────────────────────────────────────────┘
-                           ↓
++-----------------------------------------------------------+
+| pdoom-data Repository (separate repo)                   |
+|                                                          |
+| raw/  ->  cleaned/  ->  transformed/                          |
+|                                                          |
+| - Alignment Research Dataset                            |
+| - Historical papers, conferences                        |
+| - Organization founding dates                           |
+| - Funding rounds, governance events                     |
+`-----------------------------------------------------------`
+                            v 
               [Automated Sync Pipeline]
-                           ↓
-┌─────────────────────────────────────────────────────────┐
-│ pdoom1 Game Repository                                  │
-│                                                          │
-│ shared/data/historical_timeline/                        │
-│ godot/data/historical_timeline/                         │
-│                                                          │
-│ Python Loader: src/data/historical_timeline_loader.py  │
-│ Godot Loader: godot/scripts/data/timeline_loader.gd    │
-└─────────────────────────────────────────────────────────┘
-                           ↓
+                            v 
++-----------------------------------------------------------+
+| pdoom1 Game Repository                                  |
+|                                                          |
+| shared/data/historical_timeline/                        |
+| godot/data/historical_timeline/                         |
+|                                                          |
+| Python Loader: src/data/historical_timeline_loader.py  |
+| Godot Loader: godot/scripts/data/timeline_loader.gd    |
+`-----------------------------------------------------------`
+                            v 
               [Game Loads Events at Runtime]
-                           ↓
-┌─────────────────────────────────────────────────────────┐
-│ Gameplay                                                │
-│                                                          │
-│ - Events trigger based on game date                     │
-│ - Player can interact with some events                  │
-│ - Default timeline establishes baseline p(doom)         │
-└─────────────────────────────────────────────────────────┘
+                            v 
++-----------------------------------------------------------+
+| Gameplay                                                |
+|                                                          |
+| - Events trigger based on game date                     |
+| - Player can interact with some events                  |
+| - Default timeline establishes baseline p(doom)         |
+`-----------------------------------------------------------`
 ```
 
 ---
@@ -69,31 +69,31 @@ P(Doom) uses real historical events from the AI safety and capabilities landscap
 
 ```
 pdoom1/
-├── shared/data/
-│   ├── historical_timeline/      # Timeline events (Python)
-│   │   ├── 2017.json
-│   │   ├── 2018.json
-│   │   └── ...
-│   ├── researchers/              # Researcher profiles (Python)
-│   └── organizations/            # Organization data (Python)
-│
-├── godot/data/
-│   ├── historical_timeline/      # Timeline events (Godot)
-│   │   ├── 2017.json
-│   │   ├── 2018.json
-│   │   └── ...
-│   ├── researchers/              # Researcher profiles (Godot)
-│   └── organizations/            # Organization data (Godot)
-│
-├── src/data/
-│   └── historical_timeline_loader.py  # Python data loader
-│
-├── godot/scripts/data/
-│   └── timeline_loader.gd       # Godot data loader
-│
-└── scripts/
-    ├── sync_from_pdoom_data.sh  # Sync script
-    └── validate_historical_data.py  # Validation script
+|--- shared/data/
+|   |--- historical_timeline/      # Timeline events (Python)
+|   |   |--- 2017.json
+|   |   |--- 2018.json
+|   |   `--- ...
+|   |--- researchers/              # Researcher profiles (Python)
+|   `--- organizations/            # Organization data (Python)
+|
+|--- godot/data/
+|   |--- historical_timeline/      # Timeline events (Godot)
+|   |   |--- 2017.json
+|   |   |--- 2018.json
+|   |   `--- ...
+|   |--- researchers/              # Researcher profiles (Godot)
+|   `--- organizations/            # Organization data (Godot)
+|
+|--- src/data/
+|   `--- historical_timeline_loader.py  # Python data loader
+|
+|--- godot/scripts/data/
+|   `--- timeline_loader.gd       # Godot data loader
+|
+`--- scripts/
+    |--- sync_from_pdoom_data.sh  # Sync script
+    `--- validate_historical_data.py  # Validation script
 ```
 
 ---
@@ -242,9 +242,9 @@ var quick_events = TimelineLoader.load_timeline(2017)
 
 ### What Gets Synced
 
-1. **Timeline Events**: `pdoom-data/transformed/timeline_events/` → `shared/data/historical_timeline/` and `godot/data/historical_timeline/`
-2. **Researcher Profiles**: `pdoom-data/transformed/researcher_profiles/` → `shared/data/researchers/` and `godot/data/researchers/`
-3. **Organizations**: `pdoom-data/cleaned/organizations/` → `shared/data/organizations/` and `godot/data/organizations/`
+1. **Timeline Events**: `pdoom-data/transformed/timeline_events/`  ->  `shared/data/historical_timeline/` and `godot/data/historical_timeline/`
+2. **Researcher Profiles**: `pdoom-data/transformed/researcher_profiles/`  ->  `shared/data/researchers/` and `godot/data/researchers/`
+3. **Organizations**: `pdoom-data/cleaned/organizations/`  ->  `shared/data/organizations/` and `godot/data/organizations/`
 
 ### Sync Manifest
 

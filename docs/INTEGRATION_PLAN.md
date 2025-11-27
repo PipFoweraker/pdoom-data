@@ -1,7 +1,7 @@
 <!--
 This file is automatically synced from pdoom1/docs/shared/INTEGRATION_PLAN.md
-Last synced: 2025-11-03T09:38:02.248375
-Source commit: 1981d8b0bc4cab7e490255708772ff0a826045a8
+Last synced: 2025-11-27T08:07:08.532398
+Source commit: 44fdcbc26ecaea6ccd7bfe8bc94dcc5c6804993b
 DO NOT EDIT DIRECTLY - Changes will be overwritten by sync
 -->
 
