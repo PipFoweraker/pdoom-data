@@ -22,7 +22,7 @@ Implement the game-side of ADR-001 (Game/Data Boundary) as documented in pdoom-d
 
 ## Background
 
-pdoom-data provides 1,028 timeline events with **sensible defaults** for game integration:
+pdoom-data provides 1,194 timeline events with **sensible defaults** for game integration:
 - Impact values (cash, stress, reputation, etc.)
 - Rarity (common/rare/legendary)
 - Flavor text (safety_researcher_reaction, media_reaction)

@@ -289,7 +289,7 @@ pdoom-data/
     transformed/          # Validated/cleaned/enriched
     serveable/            # Production-ready (consumers fetch from here)
       api/timeline_events/
-        all_events.json   # 1,028 events ready to use
+        all_events.json   # 1,194 events ready to use
   config/schemas/         # JSON schemas for validation
   scripts/                # Transformation pipelines
   tools/                  # Event Browser, utilities

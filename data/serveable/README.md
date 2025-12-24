@@ -20,7 +20,7 @@ This directory contains the final layer of the data lake architecture. Data here
 3. ✅ Enriched with derived fields (where applicable)
 4. ✅ Optimized for consumption (indexed, formatted, compressed)
 
-**Current Status**: 1,028 timeline events ready for game integration
+**Current Status**: 1,194 timeline events ready for game integration
 
 ## Directory Structure
 
@@ -28,11 +28,11 @@ This directory contains the final layer of the data lake architecture. Data here
 serveable/
 ├── MANIFEST.json           # Complete catalog of all serveable data
 ├── api/                    # API-ready formats (JSON, REST-friendly)
-│   └── timeline_events/    # Game timeline events (1,028 events)
+│   └── timeline_events/    # Game timeline events (1,194 events)
 │       ├── all_events.json           # Manual curated events (28)
 │       ├── by_year/                  # Manual events by year
 │       ├── by_category/              # Manual events by category
-│       ├── alignment_research/       # Research events (1,000)
+│       ├── enriched_alignment_research/  # A-tier research events (1,166)
 │       │   ├── alignment_research_events.json
 │       │   └── by_year/              # Research events by year
 │       └── manifest.json             # Timeline events metadata

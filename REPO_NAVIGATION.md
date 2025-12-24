@@ -7,7 +7,7 @@ This is part of the P(Doom) project ecosystem consisting of three repositories:
 
 ### [DATA] [pdoom-data](https://github.com/PipFoweraker/pdoom-data)
 **AI Safety Data Lake & Timeline Events**
-- 1,028 timeline events (28 curated + 1,000 alignment research)
+- 1,194 timeline events (28 curated + 1,166 A-tier alignment research)
 - Three-zone data architecture (raw → transformed → serveable)
 - Automated data pipeline with validation
 - Interactive event browser tool
@@ -39,7 +39,7 @@ This is part of the P(Doom) project ecosystem consisting of three repositories:
 ### [GAME] [pdoom1](https://github.com/PipFoweraker/pdoom1)
 **Strategy Game (Godot)**
 - Interactive P(Doom) simulation
-- Historical event integration (1,028 events)
+- Historical event integration (1,194 events)
 - Player choice mechanics
 - Dynamic timeline system
 - Save/load game states
@@ -102,7 +102,7 @@ LAYER 3-4: pdoom1 (Game Mechanics)
 ```
 pdoom-data (Source of Truth)
     |
-    |-- Data Pipeline --> Serveable Zone (1,028 events)
+    |-- Data Pipeline --> Serveable Zone (1,194 events)
     |                         |
     |                         |-- JSON --> pdoom1 (Godot Game)
     |                         |              |

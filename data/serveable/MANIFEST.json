@@ -6,7 +6,7 @@
   "license": "MIT",
   "summary": {
     "total_datasets": 2,
-    "total_events": 1028,
+    "total_events": 1194,
     "data_types": [
       "timeline_events"
     ],
@@ -45,19 +45,24 @@
           "format": "json"
         },
         "alignment_research_events": {
-          "name": "Alignment Research Events",
-          "description": "Timeline events generated from alignment research dataset",
-          "source": "data/transformed/enriched/alignment_research/",
+          "name": "Alignment Research Events (Enriched A-Tier)",
+          "description": "Timeline events from A-tier enriched alignment research (arxiv + distill)",
+          "source": "data/enrichment/alignment_research/",
           "schema": "config/schemas/event_v1.json",
-          "count": 1000,
+          "count": 1166,
           "files": {
-            "all": "alignment_research/alignment_research_events.json",
-            "by_year": "alignment_research/by_year/{year}.json"
+            "all": "enriched_alignment_research/enriched_alignment_research_events.json",
+            "by_year": "enriched_alignment_research/by_year/{year}.json"
           },
           "years": [
+            2016,
+            2017,
+            2018,
+            2019,
             2020,
             2021,
-            2022
+            2022,
+            2023
           ],
           "format": "json"
         }

@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Data Quality](https://img.shields.io/badge/Data%20Quality-100%25%20Validated-brightgreen)]()
-[![Events](https://img.shields.io/badge/Events-1%2C028-blue)]()
+[![Events](https://img.shields.io/badge/Events-1%2C194-blue)]()
 [![Weekly Updates](https://img.shields.io/badge/Updates-Weekly-orange)]()
 
 ---
@@ -25,9 +25,9 @@ pdoom-data provides a curated, validated, and production-ready data lake for AI 
 
 ### What's Inside
 
-**1,028 Timeline Events** (28 manual + 1,000 alignment research)
+**1,194 Timeline Events** (28 curated + 1,166 A-tier alignment research)
 - Hand-curated AI safety events (2016-2025)
-- Automated alignment research extraction (2020-2022)
+- A-tier enriched alignment research (2016-2023, arxiv + distill)
 - Schema-validated with complete source attribution
 - Organized by year, category, and rarity
 
@@ -48,7 +48,7 @@ pdoom-data provides a curated, validated, and production-ready data lake for AI 
 
 ### Timeline Events (`data/serveable/api/timeline_events/`)
 
-**Status**: Production Ready | **Events**: 1,028 | **Schema**: event_v1.json
+**Status**: Production Ready | **Events**: 1,194 | **Schema**: event_v1.json
 
 Two datasets available:
 
@@ -57,7 +57,7 @@ Two datasets available:
    - Full source attribution and metadata
    - Files: `all_events.json`, `by_year/`, `by_category/`
 
-2. **Alignment Research Events** (1,000 events, 2020-2022)
+2. **Alignment Research Events** (1,166 events, 2016-2023)
    - Generated from StampyAI Alignment Research Dataset
    - Research papers, forum posts, blog articles
    - Files: `alignment_research/alignment_research_events.json`, `by_year/`
@@ -121,7 +121,7 @@ See [DATA_ZONES.md](docs/DATA_ZONES.md) for architecture details.
 **pdoom1-website** (PostgreSQL + FastAPI):
 ```bash
 git submodule add https://github.com/PipFoweraker/pdoom-data.git data/pdoom-data
-python scripts/import_events.py  # Import 1,028 events to PostgreSQL
+python scripts/import_events.py  # Import 1,194 events to PostgreSQL
 # API endpoint: GET /api/events?year=2024&category=technical_research_breakthrough
 ```
 
@@ -156,7 +156,7 @@ See [QUICK_START_INTEGRATION.md](docs/QUICK_START_INTEGRATION.md) for complete s
 
 | Metric | Value |
 |--------|-------|
-| Total Events | 1,028 |
+| Total Events | 1,194 |
 | Schema Validation Pass Rate | 100% |
 | ASCII Compliance | 100% |
 | Source Attribution Complete | 100% |
@@ -237,7 +237,7 @@ pdoom-data/
 │   └── serveable/                # Production-ready
 │       ├── MANIFEST.json         # Complete data catalog
 │       └── api/
-│           └── timeline_events/  # 1,028 events ready for use
+│           └── timeline_events/  # 1,194 events ready for use
 ├── tools/
 │   └── event_browser.html        # Interactive event browser (open in browser)
 ├── config/
