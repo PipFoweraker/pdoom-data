@@ -9,6 +9,8 @@
 
 ### Start Here
 - **[README.md](../README.md)** - Repository overview and quick start
+- **[CLAUDE.md](../CLAUDE.md)** - AI assistant context (read this for LLM/agent work)
+- **[ARCHITECTURE_DECISION_RECORDS.md](ARCHITECTURE_DECISION_RECORDS.md)** - Key architectural decisions (ADR-001: Game/Data Boundary)
 - **[QUICK_START_INTEGRATION.md](QUICK_START_INTEGRATION.md)** - 5-minute integration guide for all platforms
 
 ### For Developers
@@ -35,6 +37,7 @@
 
 | Document | Purpose | Audience |
 |----------|---------|----------|
+| [ARCHITECTURE_DECISION_RECORDS.md](ARCHITECTURE_DECISION_RECORDS.md) | **Key decisions (ADR-001: Game/Data Boundary)** | **All** |
 | [DATA_ZONES.md](DATA_ZONES.md) | Three-zone data lake architecture | Engineers |
 | [DATA_ARCHITECTURE.md](../DATA_ARCHITECTURE.md) | Overall data architecture | Architects |
 | [ECOSYSTEM_OVERVIEW.md](ECOSYSTEM_OVERVIEW.md) | Cross-repo ecosystem | All |

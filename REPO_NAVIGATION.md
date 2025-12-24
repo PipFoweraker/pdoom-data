@@ -51,6 +51,52 @@ This is part of the P(Doom) project ecosystem consisting of three repositories:
 - Uses event metadata for game mechanics (rarity, player_choice, impact_level)
 - Provides gameplay analytics back to website
 
+## CRITICAL: GAME/DATA BOUNDARY (ADR-001)
+
+**This is the most important architectural decision in the ecosystem.**
+Full details: `docs/ARCHITECTURE_DECISION_RECORDS.md`
+
+### Layered Architecture
+
+```
+LAYER 1-2: pdoom-data (Facts + Defaults)
+----------------------------------------
+| Historical facts (immutable)         |
+| Default impacts, rarity, reactions   |
+| Community feedback (quarantined)     |
+----------------------------------------
+              |
+              v
+LAYER 3-4: pdoom1 (Game Mechanics)
+----------------------------------------
+| Impact overrides (balance tuning)    |
+| Event chains & triggers              |
+| Scenario assignments                 |
+| Dialogue trees, probability curves   |
+----------------------------------------
+```
+
+### What Goes Where
+
+| pdoom-data (this repo)               | pdoom1 (game repo)                   |
+|--------------------------------------|--------------------------------------|
+| id, title, year, description         | Impact overrides (cash: +10 -> +15)  |
+| category, tags, sources              | Rarity overrides for gameplay        |
+| Default impacts (sensible starting)  | "Appears after turn 50" triggers     |
+| Default rarity (common/rare/legend)  | "Event A unlocks Event B" chains     |
+| Reactions (safety_researcher, media) | Scenario assignments (Hard mode)     |
+| pdoom_impact (editorial assessment)  | Dialogue choices, player responses   |
+| Community feedback (quarantined)     | Probability curves, balancing        |
+
+### Key Rules
+
+1. **Events here are game-ready** - Usable out-of-box with defaults
+2. **pdoom1 can override anything** - Game team owns balance
+3. **NO trigger conditions here** - Game logic stays in game
+4. **NO event chains here** - Narrative design stays in game
+5. **Facts are immutable** - Title, year, sources never change
+6. **Impacts are defaults** - pdoom1 tunes for gameplay
+
 ## INTEGRATION ARCHITECTURE
 
 ```
@@ -60,6 +106,8 @@ pdoom-data (Source of Truth)
     |                         |
     |                         |-- JSON --> pdoom1 (Godot Game)
     |                         |              |
+    |                         |              +-- Applies overrides
+    |                         |              +-- Adds game mechanics
     |                         |              v
     |                         |         Gameplay & Analytics
     |                         |
