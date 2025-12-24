@@ -1,0 +1,1982 @@
+[
+  {
+    "id": "arxiv_42706567777fd6de",
+    "title": "Toward negotiable reinforcement learning: shifting priorities in Pareto optimal sequential decision-making",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1701.01302"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "42706567777fd6de60b6cc7f293041bf"
+  },
+  {
+    "id": "arxiv_26679affba27c265",
+    "title": "Enabling Robots to Communicate their Objectives",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "I Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1702.03465"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "26679affba27c26529db833017df9a72"
+  },
+  {
+    "id": "arxiv_68b377556f438319",
+    "title": "Right for the Right Reasons: Training Differentiable Models by Constraining their Explanations",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1703.03717"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "68b377556f43831964291a398603458e"
+  },
+  {
+    "id": "arxiv_3d2e35721e7e6af2",
+    "title": "Dynamic Safe Interruptibility for Decentralized Multi-Agent Reinforcement Learning",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1704.02882"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "3d2e35721e7e6af2493c419cc2c3365b"
+  },
+  {
+    "id": "arxiv_e0208f404de76bd7",
+    "title": "That is not dead which can eternal lie: the aestivation hypothesis for resolving Fermi's paradox",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.03394"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "e0208f404de76bd7b5b21d897aa45b57"
+  },
+  {
+    "id": "arxiv_dc62ec723cf1430d",
+    "title": "Robot Planning with Mathematical Models of Human State and Action",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "I Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.04226"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "dc62ec723cf1430d839c54a149073e76"
+  },
+  {
+    "id": "arxiv_56382c60c6c3e7b0",
+    "title": "Reinforcement Learning with a Corrupted Reward Channel",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.08417"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Academic research release",
+    "source_id": "56382c60c6c3e7b0d8f09fbe4da7e390"
+  },
+  {
+    "id": "arxiv_85d693126567d483",
+    "title": "When Will AI Exceed Human Performance? Evidence from AI Experts",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Supplementary Information\n-------------------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.08807"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "85d693126567d48366b4cb6c0adfbc03"
+  },
+  {
+    "id": "arxiv_9888ab8acacc8f4a",
+    "title": "Universal Reinforcement Learning Algorithms: Survey and Experiments",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.10557"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Published in academic venue",
+    "source_id": "9888ab8acacc8f4a0edc876afb49ef59"
+  },
+  {
+    "id": "arxiv_3bc060c075113a3a",
+    "title": "Low Impact Artificial Intelligences",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.10720"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "3bc060c075113a3acd60bdc9fee45db1"
+  },
+  {
+    "id": "arxiv_ac6144846c25f722",
+    "title": "Deep reinforcement learning from human preferences",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1706.03741"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "ac6144846c25f722ba9b2bba77ac908f"
+  },
+  {
+    "id": "arxiv_abbee081bc544819",
+    "title": "Trial without Error: Towards Safe Reinforcement Learning via Human Intervention",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1707.05173"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "abbee081bc54481999271ce83d546e3d"
+  },
+  {
+    "id": "arxiv_d83deddb25098692",
+    "title": "Pragmatic-Pedagogic Value Alignment",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1707.06354"
+    ],
+    "tags": [],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "d83deddb25098692a2b5bb7c85a4b94e"
+  },
+  {
+    "id": "arxiv_f0e7df67a2fa5a45",
+    "title": "Guidelines for Artificial Intelligence Containment",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 \n Guidelines  for Artificial Intelligence Containment  \n \n \nJames Babcock  \nCornell University  \njab299@cornell.edu   Janos Kramar  \nUniversity of Montreal  \njkramar@gmail.com   Roman V. Yampolskiy  \nUniversity of Louisville  \nroman.yampolskiy@louisville.edu  \n \nAbstract  \nWith almost daily improvements in capabilities of artificial intelligence it is more  important than ever to develop \nsafety software for use by the AI research community. Building on our previous work on AI Containment Problem \nwe propose a number of guidelines which should help AI safety researchers to develop reliable sandboxing software \nfor intelligent progr ams of all levels. Such safety container software will make it possible to study and analyze \nintelligent artificial agent while maintaining certain level of safety against information leakage, social engineering \nattacks and cyberattacks from within the con tainer.  \n \nKeywords:  AI Boxing, AI Containment,  AI Confinement!, AI Guidelines , AI Safety , ...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1707.08476"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "f0e7df67a2fa5a4543ddfa70efa5b668"
+  },
+  {
+    "id": "arxiv_5bba428001708f8d",
+    "title": "A Formal Approach to the Problem of Logical Non-Omniscience",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1707.08747"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "5bba428001708f8d96fcec39f81d9810"
+  },
+  {
+    "id": "arxiv_259e8b768252584d",
+    "title": "DropoutDAgger: A Bayesian Approach to Safe Imitation Learning",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "arXiv:1709.06166v1  [cs.AI]  18 Sep 2017DropoutDAgger: A Bayesian Approach to Safe Imitation Learn ing\nKunal Menda, Katherine Driggs-Campbell, and Mykel J. Koche nderfer\nAbstract ? While imitation learning is becoming com-\nmon practice in robotics, this approach often suffers\nfrom data mismatch and compounding errors. DAgger\nis an iterative algorithm that addresses these issues by\ncontinually aggregating training data from both the expert\nand novice policies, but does not consider the impact of\nsafety. We present a probabilistic extension to DAgger,\nwhich uses the distribution over actions provided by the\nnovice policy, for a given observation. Our method, which\nwe call DropoutDAgger, uses dropout to train the novice\nas a Bayesian neural network that provides insight to its\ncon?dence. Using the distribution over the novice?s action s,\nwe estimate a probabilistic measure of safety with respect\nto the expert action, tuned to balance exploration and\nexploitation. The utility of this ap...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1709.06166"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "259e8b768252584d63d8f7a6652637eb"
+  },
+  {
+    "id": "arxiv_1781dfeed21085a6",
+    "title": "Incorrigibility in the CIRL Framework",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction and Setup\n-------------------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1709.06275"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "1781dfeed21085a6a7ee0a0b68749e3e"
+  },
+  {
+    "id": "arxiv_b61d7e33ba6251a4",
+    "title": "Servant of Many Masters: Shifting priorities in Pareto-optimal sequential decision-making",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.00363"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "b61d7e33ba6251a41c6c156ef2e639a4"
+  },
+  {
+    "id": "arxiv_7e5e07b1807afa4e",
+    "title": "Good and safe uses of AI Oracles",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction: Formalising the challenge with Oracles\n-------------------------------------------------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.05541"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Published in academic venue",
+    "source_id": "7e5e07b1807afa4ed5462f42b26642d9"
+  },
+  {
+    "id": "arxiv_cab1fd1544e648fd",
+    "title": "Leave no Trace: Learning to Reset for Safe and Autonomous Reinforcement Learning",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.06782"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Academic research release",
+    "source_id": "cab1fd1544e648fd00584cde4e2007e1"
+  },
+  {
+    "id": "arxiv_9c5d157ee6114e5f",
+    "title": "AI Safety Gridworlds",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.09883"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "9c5d157ee6114e5f0c16006da7478fa0"
+  },
+  {
+    "id": "arxiv_0de42c1e48b1ed52",
+    "title": "A Low-Cost Ethics Shaping Approach for Designing Reinforcement Learning Agents",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1712.04172"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Academic research release",
+    "source_id": "0de42c1e48b1ed5251f903790c642a3e"
+  },
+  {
+    "id": "arxiv_bae9f6db20a311d3",
+    "title": "AI Safety and Reproducibility: Establishing Robust Foundations for the Neuropsychology of Human Values",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "I Anthropomorphic Design of Superintelligent AI Systems\n--------------------------------------------------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1712.04307"
+    ],
+    "tags": [],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "bae9f6db20a311d37cf63b106c587304"
+  },
+  {
+    "id": "arxiv_901b2797a974e580",
+    "title": "Occam's razor is insufficient to infer the preferences of irrational agents",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1712.05812"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "901b2797a974e58060ca150e820104fe"
+  },
+  {
+    "id": "arxiv_caf3b68cdb135855",
+    "title": "Indifference' methods for managing agent rewards",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1712.06365"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "caf3b68cdb1358556df0c374f522f8d0"
+  },
+  {
+    "id": "arxiv_402f917ef1f85b47",
+    "title": "Designing a Safe Autonomous Artificial Intelligence Agent based on Human Self-Regulation",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Designing a Safe Autonomous Artificial Intelligence Agent  based on Human Self -Regulation  \nMark Muraven  \nUniversity at Albany  \nJanuary 5, 2017  \nAuthor contact: muraven@albany.edu  \n \n Human Self -Regulation for AI  2 \nAbstract  \nThere is a growing focus on how to design safe artificial intelligent (AI) agents. As systems become more \ncomplex, poorly specified goals or control mechanism s may cause AI agents to engage in unwanted and \nharmful outcomes. Thus it is necessary to design AI agents that follow initial programming intentions as \nthe program grows in complexity. How to specify these initial intentions has also been an obstacle  to \ndesigning safe AI agents. Finally, there is a need for the AI agent to  have  redundant safety mechanisms \nto ensure that any programming errors do not cascade into major problems.  Humans are autonomous \nintelligent agents that have avoided these problems and t he present manuscript argues that by \nunderstanding human self -regulation and go...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1701.01487"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "402f917ef1f85b47c506866bb78d84f9"
+  },
+  {
+    "id": "arxiv_db731640470abad7",
+    "title": "Practical Reasoning with Norms for Autonomous Software Agents (Full Edition)",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Practical Reasoning with Norms\nfor Autonomous Software Agents (Full Edition)\nZohreh Shamsa,1,\u0003, Marina De Vosa, Julian Padgeta,\nWamberto W. Vasconcelosb\naDepartment of Computer Science, University of Bath, UK (BA2 6AH)\nbDepartment of Computing Science, University of Aberdeen, UK (AB24 3UE)\nAbstract\nAutonomous software agents operating in dynamic environments need to\nconstantly reason about actions in pursuit of their goals, while taking into\nconsideration norms which might be imposed on those actions. Normative\npractical reasoning supports agents making decisions about what is best for\nthem to (not) do in a given situation. What makes practical reasoning chal-\nlenging is the interplay between goals that agents are pursuing and the norms\nthat the agents are trying to uphold. We o\u000ber a formalisation to allow agents\nto plan for multiple goals and norms in the presence of durative actions that\ncan be executed concurrently . We compare plans based on decision-theoretic\nnotions (i.e. util...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1701.08306"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Academic research release",
+    "source_id": "db731640470abad78ef709a530ad95dc"
+  },
+  {
+    "id": "arxiv_d0d350b2ac6e04b8",
+    "title": "Plan Explanations as Model Reconciliation: Moving Beyond Explanation as Soliloquy",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1701.08317"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Published in academic venue",
+    "source_id": "d0d350b2ac6e04b80d5870a09dc10d04"
+  },
+  {
+    "id": "arxiv_26e147e49fc695c9",
+    "title": "Synergistic Team Composition",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1702.08222"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "26e147e49fc695c92311bc2395a9e663"
+  },
+  {
+    "id": "arxiv_beb12a23a4297645",
+    "title": "Don't Fear the Reaper: Refuting Bostrom's Superintelligence Argument",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Bostrom?s core argument and definitions\n------------------------------------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1702.08495"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "beb12a23a42976450182359dcde0702e"
+  },
+  {
+    "id": "arxiv_0e186b0d516bdeb5",
+    "title": "Strategically knowing how",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.05254"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "0e186b0d516bdeb5605722bc5e6c6948"
+  },
+  {
+    "id": "arxiv_e434ded2d51769f0",
+    "title": "The Singularity May Be Near",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "The Singularity May Be Near  \n \nRoman V. Yampolskiy  \nComputer Engineering and Computer Science  \nSpeed School of Engineering  \nUniversity of Louisville  \nroman.yampolskiy@louisville.edu    \n \n \nAbstract  \nToby Walsh in ?The Singularity May Never B e Near ? gives six arguments to support his point of \nview that  technological  singularity may happen but that it is unlikely. I n this paper,  we provide \nanalysis of  each one  of his arguments  and arrive at similar  conclusion s, but with more weight given \nto the ? likely to happen? probability .  \n \nKeywords:  Autogenous intelligence, Bootstrap fallacy ; Recursive self -improvement, self -\nmodifying software, Singularity;   \n \n1. Introduction  \nIn February of 2016 Toby Walsh presented his paper ?The Singularity May Never B e Near ? at \nAAAI16  [23], which was archived on February 20, 2016 ( http://arxiv.org/abs/1602.06462 ). In it, \nWalsh  analyzes the concept of technological singularity. He does not argue that AI will fail to \nac...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1706.01303"
+    ],
+    "tags": [],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "e434ded2d51769f0242d251fba5544f0"
+  },
+  {
+    "id": "arxiv_90075e5d06ca1445",
+    "title": "Responsible Autonomy",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1706.02513"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "90075e5d06ca1445c532c2e9d7e2b9a2"
+  },
+  {
+    "id": "arxiv_3f2a112d14cc4080",
+    "title": "RAIL: Risk-Averse Imitation Learning",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1707.06658"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "3f2a112d14cc408019266ba6954d54f1"
+  },
+  {
+    "id": "arxiv_b995fa8df519db15",
+    "title": "Using Program Induction to Interpret Transition System Dynamics",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1708.00376"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Academic research release",
+    "source_id": "b995fa8df519db15caae77bb73062d03"
+  },
+  {
+    "id": "arxiv_7cdb1233cf82deb9",
+    "title": "Safe Reinforcement Learning via Shielding",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1708.08611"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "7cdb1233cf82deb93064bb2177ffb77a"
+  },
+  {
+    "id": "arxiv_01e708118256c867",
+    "title": "Knowledge Transfer Between Artificial Intelligence Systems",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1709.01547"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "01e708118256c8679df0d69f97d1af1c"
+  },
+  {
+    "id": "arxiv_05f3a92ca4a98b9f",
+    "title": "Autonomous Agents Modelling Other Agents: A Comprehensive Survey and Open Problems",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1709.08071"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Published in academic venue",
+    "source_id": "05f3a92ca4a98b9f2206b81662131b4a"
+  },
+  {
+    "id": "arxiv_08b82a9d28b9a5af",
+    "title": "Using KL-divergence to focus Deep Visual Explanation",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.06431"
+    ],
+    "tags": [],
+    "rarity": "common",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "08b82a9d28b9a5af07a4dc3f8032b3a5"
+  },
+  {
+    "id": "arxiv_a8804756ba4b9e2c",
+    "title": "Deterministic Policy Optimization by Combining Pathwise and Score Function Estimators for Discrete Action Spaces",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Introduction\n------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.08068"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Published in academic venue",
+    "source_id": "a8804756ba4b9e2cd91deecd611d5501"
+  },
+  {
+    "id": "arxiv_b05147510dbab92f",
+    "title": "A Berkeley View of Systems Challenges for AI",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1. Introduction\n----------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1712.05855"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "b05147510dbab92f01b5919f178ba32a"
+  },
+  {
+    "id": "arxiv_17f6f61338a0d2b0",
+    "title": "Constrained Policy Optimization",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.10528"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "17f6f61338a0d2b08005d3b077bdb349"
+  },
+  {
+    "id": "arxiv_858b9038e0a18fff",
+    "title": "Repeated Inverse Reinforcement Learning.",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1705.05427"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Academic research release",
+    "source_id": "858b9038e0a18fffa0c742d763b09aec"
+  },
+  {
+    "id": "arxiv_7065ba6b881fd64f",
+    "title": "Do You Want Your Autonomous Car to Drive Like You?.",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1802.01636"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "7065ba6b881fd64f9b13a53f2347a8c0"
+  },
+  {
+    "id": "arxiv_21f2bad360e8a7d2",
+    "title": "Self-confirming price-prediction strategies for simultaneous one-shot auctions.",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Self-Con?rming Price Prediction Strategies for\nSimultaneous One-Shot Auctions\nMichael P. Wellman\nComputer Science & Engineering\nUniversity of MichiganEric Sodomka\nComputer Science\nBrown UniversityAmy Greenwald\nComputer Science\nBrown University\nAbstract\nBidding in simultaneous auctions is challeng-\ning because an agent?s value for a good in one\nauction may depend on the uncertain outcome\nof other auctions: the so-called exposure prob-\nlem. Given the gap in understanding of gen-\neral simultaneous auction games, previous works\nhave tackled this problem with heuristic strate-\ngies that employ probabilistic price predictions.\nWe de?ne a concept of self-con?rming prices ,\nand show that within an independent private\nvalue model, Bayes-Nash equilibrium can be\nfully characterized as a pro?le of optimal price-\nprediction strategies with self-con?rming predic-\ntions. We exhibit practical procedures to com-\npute approximately optimal bids given a proba-\nbilistic price prediction, and near self-...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1210.4915"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "21f2bad360e8a7d2095c0303a997d179"
+  },
+  {
+    "id": "arxiv_0e8afc013c84e4e7",
+    "title": "Causality, Responsibility and Blame in Team Plans.",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2005.10297"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "0e8afc013c84e4e740d4bcf89b1df551"
+  },
+  {
+    "id": "arxiv_73592b70a3f5a792",
+    "title": "Translating Neuralese.",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1704.06960"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "73592b70a3f5a792afd4c896bf5148de"
+  },
+  {
+    "id": "arxiv_838c66e61a6f18fb",
+    "title": "Towards Deep Learning Models Resistant to Adversarial Attacks",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Towards Deep Learning Models Resistant to Adversarial\nAttacks\nAleksander M ? adry\u0003\nMIT\nmadry@mit.eduAleksandar Makelov\u0003\nMIT\namakelov@mit.eduLudwig Schmidt\u0003\nMIT\nludwigs@mit.edu\nDimitris Tsipras\u0003\nMIT\ntsipras@mit.eduAdrian Vladu\u0003\nMIT\navladu@mit.edu\nAbstract\nRecent work has demonstrated that deep neural networks are vulnerable to adversarial\nexamples?inputs that are almost indistinguishable from natural data and yet classi?ed incor-\nrectly by the network. In fact, some of the latest ?ndings suggest that the existence of adversarial\nattacks may be an inherent weakness of deep learning models. To address this problem, we\nstudy the adversarial robustness of neural networks through the lens of robust optimization.\nThis approach provides us with a broad and unifying view on much of the prior work on this\ntopic. Its principled nature also enables us to identify methods for both training and attacking\nneural networks that are reliable and, in a certain sense, universal. In particular, they spe...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1706.06083"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "838c66e61a6f18fb27673c2ff4daef22"
+  },
+  {
+    "id": "arxiv_4b13c4aa7548bc21",
+    "title": "Inverse Reward Design.",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.02827"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Academic research release",
+    "source_id": "4b13c4aa7548bc21ee3e7e8f47a87027"
+  },
+  {
+    "id": "arxiv_4d20560a864f229f",
+    "title": "Towards A Rigorous Science of Interpretable Machine Learning",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 What is Interpretability?\n----------------------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1702.08608"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "4d20560a864f229ffe534516bd8a8096"
+  },
+  {
+    "id": "arxiv_846a5ff7a4b4af28",
+    "title": "Evaluating Robustness of Neural Networks with Mixed Integer Programming",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.07356"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "846a5ff7a4b4af28bf3e50c603553773"
+  },
+  {
+    "id": "arxiv_c6b7c317d780f22b",
+    "title": "A Learning and Masking Approach to Secure Learning",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1. Introduction\n----------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1709.04447"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Academic research release",
+    "source_id": "c6b7c317d780f22b37b6125efcd7590f"
+  },
+  {
+    "id": "arxiv_267f825a372778dc",
+    "title": "Fixing Weight Decay Regularization in Adam",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1711.05101"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "267f825a372778dc9a7b49aaabc411ab"
+  },
+  {
+    "id": "arxiv_22c9d63fe77ad418",
+    "title": "Adversarial Examples for Evaluating Reading Comprehension Systems",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1707.07328"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "22c9d63fe77ad41859beca6a341f1d36"
+  },
+  {
+    "id": "arxiv_784d797528d0ab87",
+    "title": "Interpretable Explanations of Black Boxes by Meaningful Perturbation",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1704.03296"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Academic research release",
+    "source_id": "784d797528d0ab874992d1190123c1a8"
+  },
+  {
+    "id": "arxiv_be90c7a8998cd326",
+    "title": "Network Dissection: \nQuantifying Interpretability of Deep Visual Representations",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1704.05796"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "be90c7a8998cd326115556a0993409e4"
+  },
+  {
+    "id": "arxiv_681635096b39624d",
+    "title": "BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/1708.06733"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Published in academic venue",
+    "source_id": "681635096b39624d8c2cb8df45778133"
+  },
+  {
+    "id": "distill_5445aad20630afcd",
+    "title": "Sequence Modeling with CTC",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Introduction\n------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 5,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://distill.pub/2017/ctc"
+    ],
+    "tags": [],
+    "rarity": "legendary",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Interactive research publication",
+    "source_id": "5445aad20630afcd10626117b6df4dcc"
+  },
+  {
+    "id": "distill_467d4af00cf674a3",
+    "title": "Feature Visualization",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "There is a growing sense that neural networks need to be interpretable to humans.\n The field of neural network interpretability has formed in response to these concerns.\n As it matures, two major threads of research have begun to coalesce: feature visualization and attribution.",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 5,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://distill.pub/2017/feature-visualization"
+    ],
+    "tags": [],
+    "rarity": "legendary",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Visual machine learning research",
+    "source_id": "467d4af00cf674a3225b371b2652faa6"
+  },
+  {
+    "id": "distill_4c8e11a1925e403b",
+    "title": "Why Momentum Really Works",
+    "year": 2017,
+    "category": "technical_research_breakthrough",
+    "description": "Why Momentum Really Works\n=========================",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 5,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "http://distill.pub/2017/momentum"
+    ],
+    "tags": [],
+    "rarity": "legendary",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Visual machine learning research",
+    "source_id": "4c8e11a1925e403bf42b0b3a19850332"
+  }
+]

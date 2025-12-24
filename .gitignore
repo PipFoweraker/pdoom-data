@@ -17,6 +17,10 @@ data/_backups/
 data/raw/_archive/
 *.bak
 
+# Large raw data dumps (regenerable via scripts/extraction/)
+# To regenerate: python scripts/extraction/extract_alignment_research.py --min-date 2016-01-01
+data/raw/alignment_research/dumps/*/data.jsonl
+
 # Temporary files
 .tmp_*
 tmp/

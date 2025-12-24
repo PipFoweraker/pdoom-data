@@ -1,0 +1,794 @@
+[
+  {
+    "id": "arxiv_b29568681c7d3227",
+    "title": "An Overview of Catastrophic AI Risks",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "Executive Summary\n-----------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2306.12001"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "b29568681c7d32279ac192f2aa579bc2"
+  },
+  {
+    "id": "arxiv_93539db90a16dfab",
+    "title": "TASRA: a Taxonomy and Analysis of Societal-Scale Risks from AI",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2306.06924"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "93539db90a16dfabd0f5c054b1185c78"
+  },
+  {
+    "id": "arxiv_393a7a93bd7a4f33",
+    "title": "Studying Large Language Model Generalization with Influence Functions",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "Studying Large Language Model Generalization\nwith Influence Functions\nRoger Grosse?:, Juhan Bae?:, Cem Anil?:\nNelson Elhage;\nAlex Tamkin, Amirhossein Tajdini, Benoit Steiner, Dustin Li, Esin Durmus,\nEthan Perez, Evan Hubinger, Kamil? e Luko?i? ut? e, Karina Nguyen, Nicholas Joseph,\nSam McCandlish\nJared Kaplan, Samuel R. Bowman\nAbstract\nWhen trying to gain better visibility into a machine learning model in order to understand\nand mitigate the associated risks, a potentially valuable source of evidence is: which\ntraining examples most contribute to a given behavior? Influence functions aim to answer a\ncounterfactual: how would the model?s parameters (and hence its outputs) change if a given\nsequence were added to the training set? While influence functions have produced insights for\nsmall models, they are difficult to scale to large language models (LLMs) due to the difficulty\nof computing an inverse-Hessian-vector product (IHVP). We use the Eigenvalue-corrected\nKronecker-Factored App...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2308.03296"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Academic research release",
+    "source_id": "393a7a93bd7a4f3365f15f1072e40213"
+  },
+  {
+    "id": "arxiv_e30130fcf4ab2d16",
+    "title": "Finding Neurons in a Haystack:  Case Studies with Sparse Probing",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2305.01610"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "e30130fcf4ab2d1649701de9666e2e47"
+  },
+  {
+    "id": "arxiv_8bea59ce45262782",
+    "title": "Towards Automated Circuit Discovery\nfor Mechanistic Interpretability",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2304.14997"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "8bea59ce4526278233f0bfa854c2aea2"
+  },
+  {
+    "id": "arxiv_436ef00c5c5fad81",
+    "title": "A Toy Model of Universality:\nReverse Engineering How Networks Learn Group Operations",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2302.03025"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Academic research release",
+    "source_id": "436ef00c5c5fad81706d3da1c133e8a3"
+  },
+  {
+    "id": "arxiv_04ec3ee050cc9518",
+    "title": "How does GPT-2 compute greater-than?: Interpreting mathematical abilities in a pre-trained language model",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2305.00586"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "04ec3ee050cc951838ba9c9b29c1f48f"
+  },
+  {
+    "id": "arxiv_28dfb02c5189ee73",
+    "title": "Natural Selection Favors AIs over Humans",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2303.16200"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "28dfb02c5189ee73bb02f80a540a6acf"
+  },
+  {
+    "id": "arxiv_bd5055688c17e701",
+    "title": "Towards Measuring the Representation of Subjective Global Opinions in Language Models",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2306.16388"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Published in academic venue",
+    "source_id": "bd5055688c17e7010cb5c3c50b7b9731"
+  },
+  {
+    "id": "arxiv_4efe878bf48a28f3",
+    "title": "Do the Rewards Justify the Means? Measuring Trade-Offs Between \nRewards and Ethical Behavior in the Machiavelli?Benchmark",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2304.03279"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Published in academic venue",
+    "source_id": "4efe878bf48a28f377071b10b6587eef"
+  },
+  {
+    "id": "arxiv_d88381ef1676ad6a",
+    "title": "Improving Code Generation by Training with Natural Language Feedback",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2303.16749"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "d88381ef1676ad6ad7c7e94ad753313c"
+  },
+  {
+    "id": "arxiv_dfb9b33fc00b483f",
+    "title": "Eliciting Latent Predictions from Transformers with the Tuned Lens",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2303.08112"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Published in academic venue",
+    "source_id": "dfb9b33fc00b483ff506c4b172ed95bd"
+  },
+  {
+    "id": "arxiv_c61fe8a59ccfaa31",
+    "title": "Pretraining Language Models with Human Preferences",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2302.08582"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Peer-reviewed publication",
+    "source_id": "c61fe8a59ccfaa311d231acaf9fc16c0"
+  },
+  {
+    "id": "arxiv_a1cdc1892cbdbd73",
+    "title": "The Quantization Model of Neural Scaling",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2303.13506"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "a1cdc1892cbdbd73d54630e5957a9a06"
+  },
+  {
+    "id": "arxiv_faac12c9336f2e64",
+    "title": "Evaluating the Moral Beliefs Encoded in LLMs  Warning: This paper contains moral scenarios which are controversial and offensive in nature.",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2307.14324"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "faac12c9336f2e64da814b9a48b7bbe6"
+  },
+  {
+    "id": "arxiv_c27c6f2ef9ae28b1",
+    "title": "Inverse Scaling: When Bigger Isn?t Better",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2306.09479"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "c27c6f2ef9ae28b18c0a4f30f2a1b2aa"
+  },
+  {
+    "id": "arxiv_162b2e1f034993c7",
+    "title": "Localizing Model Behavior With Path Patching",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2304.05969"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "162b2e1f034993c7d80bbcb1f823103a"
+  },
+  {
+    "id": "arxiv_3d78f1acd91ad10a",
+    "title": "The Capacity for Moral Self-Correction in Large Language Models",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2302.07459"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "3d78f1acd91ad10a7f7d68e7658ea5fa"
+  },
+  {
+    "id": "arxiv_0b9103d6dc8b3c04",
+    "title": "Specific versus General Principles for Constitutional AI",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2310.13798"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "0b9103d6dc8b3c04d62a406082e800e2"
+  },
+  {
+    "id": "arxiv_2a755dc71d8b939c",
+    "title": "Towards Understanding  Sycophancy in Language Models",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2310.13548"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Valuable research for alignment",
+    "media_reaction": "Academic research release",
+    "source_id": "2a755dc71d8b939c0ba58ba4eb68b837"
+  },
+  {
+    "id": "arxiv_1051dda54eaf8c38",
+    "title": "Representation Engineering: A Top-Down Approach to AI Transparency",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2310.01405"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Advances our understanding of AI safety",
+    "media_reaction": "Academic research release",
+    "source_id": "1051dda54eaf8c38f429413cd3a13d44"
+  },
+  {
+    "id": "arxiv_b08e5f64b6d25f47",
+    "title": "AI Deception: A Survey of Examples, Risks, and Potential Solutions",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "Executive summary\n-----------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2308.14752"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Significant technical contribution",
+    "media_reaction": "Published in academic venue",
+    "source_id": "b08e5f64b6d25f472e6ab9280b84c153"
+  },
+  {
+    "id": "arxiv_c67778b1627c19d8",
+    "title": "Codebook Features: Sparse and Discrete Interpretability for Neural Networks",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "CODEBOOK FEATURES : SPARSE AND DISCRETE\nINTERPRETABILITY FOR NEURAL NETWORKS\nAlex Tamkin\nAnthropic?Mohammad Taufeeque\nFAR AINoah D. Goodman\nStanford University\nABSTRACT\nUnderstanding neural networks is challenging in part because of the dense, con-\ntinuous nature of their hidden states. We explore whether we can train neural\nnetworks to have hidden states that are sparse, discrete, and more interpretable by\nquantizing their continuous features into what we call codebook features . Code-\nbook features are produced by finetuning neural networks with vector quantization\nbottlenecks at each layer, producing a network whose hidden features are the sum\nof a small number of discrete vector codes chosen from a larger codebook. Sur-\nprisingly, we find that neural networks can operate under this extreme bottleneck\nwith only modest degradation in performance. This sparse, discrete bottleneck\nalso provides an intuitive way of controlling neural network behavior: first, find\ncodes that activate ...",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2310.17230"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Notable work on AI safety",
+    "media_reaction": "Published in academic venue",
+    "source_id": "c67778b1627c19d8b7d8cd73cc31b9e0"
+  },
+  {
+    "id": "arxiv_ca4359c33a477287",
+    "title": "Vision-Language Models are Zero-Shot  Reward Models for Reinforcement Learning",
+    "year": 2023,
+    "category": "technical_research_breakthrough",
+    "description": "1 Introduction\n---------------",
+    "impacts": [
+      {
+        "variable": "research",
+        "change": 15,
+        "condition": null
+      },
+      {
+        "variable": "papers",
+        "change": 10,
+        "condition": null
+      },
+      {
+        "variable": "vibey_doom",
+        "change": 3,
+        "condition": null
+      }
+    ],
+    "sources": [
+      "https://arxiv.org/abs/2310.12921"
+    ],
+    "tags": [],
+    "rarity": "rare",
+    "pdoom_impact": null,
+    "safety_researcher_reaction": "Important contribution to the field",
+    "media_reaction": "Academic research release",
+    "source_id": "ca4359c33a477287b56491cb81ac1e0d"
+  }
+]
