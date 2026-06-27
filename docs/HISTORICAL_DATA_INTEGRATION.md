@@ -1,7 +1,7 @@
 <!--
 This file is automatically synced from pdoom1/docs/data/HISTORICAL_DATA_INTEGRATION.md
-Last synced: 2025-11-27T08:07:08.533258
-Source commit: 44fdcbc26ecaea6ccd7bfe8bc94dcc5c6804993b
+Last synced: 2026-06-27T03:17:43.910635
+Source commit: a84ec294e6ad57cfb82779bf75cdc8b5b8b304b0
 DO NOT EDIT DIRECTLY - Changes will be overwritten by sync
 -->
 
