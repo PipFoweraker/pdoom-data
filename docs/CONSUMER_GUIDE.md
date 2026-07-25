@@ -171,7 +171,19 @@ python scripts/build/project_candidates.py
 ```
 
 Output under `data/serveable/api/candidates/` is derived and disposable.
-Delete it, re-run, and you should get identical bytes. `LINEAGE.json` records
+The feed is byte identical across rebuilds; `LINEAGE.json` differs only in its
+`built_at` wall clock stamp. To assert exactly that:
+
+```
+python scripts/build/project_candidates.py --check
+```
+
+which exits 1 if committed output has drifted from a fresh build. That is the
+intended CI gate, and it is the property the older `all_events.json` pipeline
+lost -- which is how `manifest.json` came to claim 28 events while the feed
+held 1194 for seven months.
+
+`LINEAGE.json` records
 the input dumps with their hashes, the profiles applied, the review layers
 merged, the realised tier cut points, and every dropped record with a reason.
 

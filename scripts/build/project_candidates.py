@@ -2,8 +2,10 @@
 """Project bronze-zone dumps into a candidate feed.
 
 This is a BUILD STEP. Its output is derived and disposable: delete
-data/serveable/api/candidates/ and re-run, and you get the same bytes back.
-Nothing here is hand-edited. That property is the whole point -- the existing
+data/serveable/api/candidates/ and re-run to reproduce it. The feed is byte
+identical across rebuilds; LINEAGE.json differs only in its built_at wall
+clock stamp. Run with --check to assert exactly that, which is the intended
+CI gate. Nothing here is hand-edited. That property is the whole point -- the existing
 serveable zone lost it, which is why manifest.json has said 28 events while
 all_events.json said 1194 since 2025-12-24.
 
@@ -41,6 +43,7 @@ must honour tombstones; this is the one obligation that is not optional.
 Usage:
     python scripts/build/project_candidates.py
     python scripts/build/project_candidates.py --dry-run
+    python scripts/build/project_candidates.py --check   # CI gate
 """
 
 import argparse
@@ -388,9 +391,59 @@ def project(records, tombstones, registry, profiles, reviews):
     return kept, dropped, cuts_by_profile
 
 
+VOLATILE_LINEAGE_KEYS = ("built_at",)
+
+
+def check_against_disk(feed_path, feed_text, lineage_path, lineage_text):
+    """Compare a fresh build against committed output. Returns an exit code.
+
+    The feed must match byte for byte. LINEAGE.json is compared with the
+    genuinely volatile keys removed -- built_at is a wall-clock stamp and
+    changes on every run by design, so demanding equality there would make
+    this gate permanently red and therefore ignored.
+    """
+    problems = []
+
+    if not os.path.isfile(feed_path):
+        problems.append("missing %s" % feed_path)
+    else:
+        on_disk = open(feed_path, encoding="ascii", newline="").read()
+        if on_disk != feed_text:
+            problems.append(
+                "feed differs: %d bytes on disk vs %d rebuilt"
+                % (len(on_disk), len(feed_text)))
+
+    if not os.path.isfile(lineage_path):
+        problems.append("missing %s" % lineage_path)
+    else:
+        def strip(text):
+            data = json.loads(text)
+            for key in VOLATILE_LINEAGE_KEYS:
+                data.pop(key, None)
+            return json.dumps(data, sort_keys=True)
+        if strip(open(lineage_path, encoding="ascii").read()) != strip(lineage_text):
+            problems.append("lineage differs (ignoring %s)"
+                            % ", ".join(VOLATILE_LINEAGE_KEYS))
+
+    if problems:
+        print("CHECK FAILED:")
+        for problem in problems:
+            print("  - %s" % problem)
+        print("Committed output does not match a fresh build. Re-run without "
+              "--check and commit the result.")
+        return 1
+    print("CHECK OK: committed output matches a fresh build "
+          "(feed byte-identical; lineage identical ignoring %s)"
+          % ", ".join(VOLATILE_LINEAGE_KEYS))
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--check", action="store_true",
+                        help="rebuild and compare against what is on disk; "
+                             "exit 1 on drift. Intended as a CI gate.")
     args = parser.parse_args()
 
     tombstones = load_tombstones()
@@ -443,14 +496,14 @@ def main():
         print("dry run; nothing written")
         return 0
 
-    os.makedirs(OUT_ROOT, exist_ok=True)
     primary = profiles[0]["profile_id"]
     kept.sort(key=lambda r: (-r["salience_by_profile"][primary], r["id"]))
 
     feed_path = os.path.join(OUT_ROOT, "all_candidates.jsonl")
-    with open(feed_path, "w", encoding="ascii", newline="\n") as handle:
-        for record in kept:
-            handle.write(json.dumps(record, ensure_ascii=True, sort_keys=True) + "\n")
+    feed_text = "".join(
+        json.dumps(record, ensure_ascii=True, sort_keys=True) + "\n"
+        for record in kept
+    )
 
     by_year = defaultdict(int)
     for record in kept:
@@ -504,9 +557,17 @@ def main():
         },
     }
     lineage_path = os.path.join(OUT_ROOT, "LINEAGE.json")
+    lineage_text = json.dumps(
+        lineage, ensure_ascii=True, indent=2, sort_keys=True) + "\n"
+
+    if args.check:
+        return check_against_disk(feed_path, feed_text, lineage_path, lineage_text)
+
+    os.makedirs(OUT_ROOT, exist_ok=True)
+    with open(feed_path, "w", encoding="ascii", newline="\n") as handle:
+        handle.write(feed_text)
     with open(lineage_path, "w", encoding="ascii", newline="\n") as handle:
-        json.dump(lineage, handle, ensure_ascii=True, indent=2, sort_keys=True)
-        handle.write("\n")
+        handle.write(lineage_text)
 
     print("wrote %s" % os.path.relpath(feed_path, REPO_ROOT))
     print("wrote %s" % os.path.relpath(lineage_path, REPO_ROOT))
