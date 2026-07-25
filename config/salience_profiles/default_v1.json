@@ -1,0 +1,76 @@
+{
+  "profile_id": "default_v1",
+  "version": "1.0.0",
+  "author": "pdoom-data maintainers",
+  "created": "2026-07-25",
+  "status": "provisional",
+
+  "description": "Default candidate-ordering profile. Estimates how notable a record is likely to be, from external signals only. This is a WEIGHTING CHOICE, not a property of the world -- another consumer weighting differently is not wrong, they are answering a different question.",
+
+  "what_this_is_not": [
+    "Not source quality. That is a separate axis (provenance and length).",
+    "Not an editorial verdict. Human verdicts live in attributed reviews[].",
+    "Not authoritative. Add your own profile file rather than forking records."
+  ],
+
+  "method": "For each (kind, year) group: score records by the kind's signal, convert to percentile rank within the group, shrink toward 0.5 by group size, then multiply by topical relevance. Grouping by year prevents a 2016 model competing against a 2026 one; shrinkage stops the top member of a tiny group scoring a perfect 1.0 on the strength of one comparison.",
+
+  "shrinkage_k": 12,
+  "shrinkage_note": "A group needs roughly this many members before its internal percentile is trusted at full strength. Set to 0 to disable.",
+
+  "tier_quantiles": [["A", 0.05], ["B", 0.20], ["C", 0.50]],
+  "tier_note": "Fractions of the ranked population, not absolute score thresholds. Remainder falls to D. Absolute thresholds against a percentile-derived score pile almost everything into the bottom band.",
+
+  "kind_scoring": {
+    "model_release": {
+      "primary_signal": "training_compute_flop",
+      "transform": "log10",
+      "bonus_field": "frontier_model",
+      "bonus_values": ["true", "yes", "1"],
+      "bonus": 1.0,
+      "fallback_signal": "citations",
+      "fallback_transform": "log10_plus1",
+      "rationale": "Training compute spans orders of magnitude and separates frontier runs from fine-tunes better than any other single available field."
+    },
+    "forum_post": {
+      "primary_signal": "karma",
+      "transform": "identity",
+      "rationale": "Karma is the community's own response. A good candidate generator; a poor arbiter, since it also rewards memorials, community drama and in-jokes."
+    },
+    "publication": {
+      "primary_signal": "citations",
+      "transform": "log10_plus1",
+      "rationale": "Citation counts are heavy-tailed; log compresses them into a usable ranking."
+    },
+    "incident": {
+      "primary_signal": null,
+      "transform": "identity",
+      "rationale": "No external signal wired yet. Records score neutral until one exists."
+    }
+  },
+
+  "relevance": {
+    "note": "Topical relevance is kept SEPARATE from the score and multiplied in at the end, so it stays visible rather than being buried inside one number.",
+    "kinds_always_relevant": ["model_release"],
+    "kinds_always_relevant_note": "Some sources are AI-by-construction. Every row of an AI-models database is on topic regardless of whether the model NAME contains a matching word.",
+    "weights": {"two_or_more_hits": 1.0, "one_hit": 0.75, "no_hits": 0.25},
+    "matching": "word_boundary_regex",
+    "matching_note": "Substring matching makes 'ai' hit 'training', 'domain' and 'explain', which turns this signal into noise.",
+    "terms": [
+      "ai", "agi", "a\\.i\\.", "alignment", "aligned", "interpretability",
+      "machine learning", "ml", "language model", "llms?", "existential risk",
+      "x-risk", "compute", "scaling", "governance", "safety", "forecasting",
+      "takeoff", "mesa-?optimi", "deceptive", "eval(uation)?s?", "robustness",
+      "superintelligence", "transformer", "neural", "frontier model",
+      "agent(ic)?", "doom", "catastroph", "extinction", "anthropic", "openai",
+      "deepmind", "gpt", "claude", "llama"
+    ]
+  },
+
+  "known_weaknesses": [
+    "Keyword relevance is English-only and misses topical records phrased unusually.",
+    "Karma and citations both accrue over time, so older records are advantaged within their year group unless observation dates are accounted for.",
+    "No signal yet distinguishes a landmark paper from a well-promoted one.",
+    "incident kind is unscored pending a signal."
+  ]
+}

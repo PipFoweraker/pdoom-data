@@ -8,24 +8,35 @@ serveable zone lost it, which is why manifest.json has said 28 events while
 all_events.json said 1194 since 2025-12-24.
 
 What it does, in order:
-  1. Load the latest dump per source (or an explicit dump via --dump).
+  1. Load the latest dump per source.
   2. Drop tombstoned records (see "Privacy" below).
-  3. Screen for possible privacy concerns; flag, never silently delete.
-  4. Score salience within kind and year; derive an importance tier.
-  5. Stamp review_status; nothing is game-facing until a human flips it.
-  6. Emit the feed plus a LINEAGE.json accounting for every input record.
+  3. Resolve source-level facts from config/sources.json.
+  4. Score salience under EVERY profile in config/salience_profiles/.
+  5. Merge attributed human reviews from data/enrichment/human_review/.
+  6. Screen for possible privacy concerns; flag, never silently delete.
+  7. Emit the feed plus a LINEAGE.json accounting for every input record.
 
-Every record that enters and does not leave is accounted for in LINEAGE.json.
-There is no silent truncation anywhere in this file.
+FACTS VERSUS OPINIONS
+---------------------
+Every field in an emitted record is one or the other, and they are kept
+structurally distinct so a consumer can take the facts and ignore the
+opinions, or inherit the opinions deliberately.
+
+  Facts    title, the four clocks, actors, source_urls, signals, license
+  Opinions salience_by_profile (a weighting choice, named and versioned)
+           reviews (attributed to a named reviewer, never anonymous)
+
+There is deliberately no bare `salience` field and no `game_facing` flag.
+A bare number reads as a property of the record; an unattributed verdict
+makes one person's taste indistinguishable from a source-derived fact. Both
+would force a disagreeing consumer to fork rather than ignore.
 
 Privacy
 -------
 Raw dumps are immutable, with exactly one exception: content that should not
-have been ingested (private individuals, personal circumstances, anything
-identifying that serves no analytic purpose). Removal is by tombstone --
-data/raw/_tombstones/<source_id>.jsonl records the id, the date, the reason
-CATEGORY, and who decided. It never records the content. The audit trail
-survives the erasure.
+have been ingested. Removal is by tombstone -- data/raw/_tombstones/ records
+the id, date and reason CATEGORY, never the content. Downstream consumers
+must honour tombstones; this is the one obligation that is not optional.
 
 Usage:
     python scripts/build/project_candidates.py
@@ -33,6 +44,7 @@ Usage:
 """
 
 import argparse
+import glob
 import json
 import math
 import os
@@ -45,49 +57,22 @@ sys.path.insert(0, os.path.join(REPO_ROOT, "scripts", "adapters"))
 
 import _base  # noqa: E402
 
-BUILD_VERSION = "0.1.0"
+BUILD_VERSION = "0.2.0"
 RAW_ROOT = os.path.join(REPO_ROOT, "data", "raw")
 OUT_ROOT = os.path.join(REPO_ROOT, "data", "serveable", "api", "candidates")
 TOMBSTONE_ROOT = os.path.join(RAW_ROOT, "_tombstones")
-
-# Sources this build consumes. Deliberately explicit: a new adapter does not
-# silently enter the feed just by existing.
-SOURCES = ["epoch_ai", "forum_lesswrong", "forum_eaforum"]
+REVIEW_ROOT = os.path.join(REPO_ROOT, "data", "enrichment", "human_review")
 
 # Source-level facts (notably source_available_at) are resolved here at build
 # time rather than stamped by adapters. They are properties of the SOURCE, not
 # of any particular fetch, so correcting one must not require re-downloading a
 # dump. This supersedes the "adapter stamps it" wording in ADAPTER_SPEC v0.1.
 SOURCE_REGISTRY_PATH = os.path.join(REPO_ROOT, "config", "sources.json")
+PROFILE_DIR = os.path.join(REPO_ROOT, "config", "salience_profiles")
 
-# Tier bands are QUANTILES of the final salience distribution, not absolute
-# cut points. Absolute thresholds against a percentile-derived score pile
-# almost everything into the bottom band, which makes the review queue useless.
-# These sizes are chosen for a human reader: a short A band worth full
-# attention, a B band worth skimming, and the rest available but not urgent.
-TIER_QUANTILES = [("A", 0.05), ("B", 0.20), ("C", 0.50)]
-
-# Shrinkage constant: a group needs roughly this many members before its
-# internal percentile is trusted at full strength.
-SHRINKAGE_K = 12
-
-# Terms marking a record as topically relevant to AI safety. Matched on WORD
-# BOUNDARIES: plain substring matching makes "ai" hit "training", "domain",
-# and "explain", which turns this signal into noise.
-# Non-matching records are KEPT (per the data-lake posture) but scored down,
-# so they sink in the review queue rather than vanishing from it.
-AI_TAG_PATTERNS = [
-    r"\bai\b", r"\bagi\b", r"\ba\.i\.", r"\balignment\b", r"\baligned\b",
-    r"\binterpretability\b", r"\bmachine learning\b", r"\bml\b",
-    r"\blanguage model", r"\bllms?\b", r"\bexistential risk\b", r"\bx-risk\b",
-    r"\bcompute\b", r"\bscaling\b", r"\bgovernance\b", r"\bsafety\b",
-    r"\bforecasting\b", r"\btakeoff\b", r"\bmesa-?optimi", r"\bdeceptive\b",
-    r"\beval(uation)?s?\b", r"\brobustness\b", r"\bsuperintelligence\b",
-    r"\btransformer\b", r"\bneural\b", r"\bfrontier model\b", r"\bagent(ic)?\b",
-    r"\bdoom\b", r"\bcatastroph", r"\bextinction\b", r"\banthropic\b",
-    r"\bopenai\b", r"\bdeepmind\b", r"\bgpt\b", r"\bclaude\b", r"\bllama\b",
-]
-AI_TAG_RE = re.compile("|".join(AI_TAG_PATTERNS), re.IGNORECASE)
+# Sources this build consumes. Deliberately explicit: a new adapter does not
+# silently enter the feed just by existing.
+SOURCES = ["epoch_ai", "forum_lesswrong", "forum_eaforum"]
 
 # Heuristic privacy screen. Deliberately over-inclusive: a false flag costs a
 # reviewer ten seconds, a miss can publish something about a real person who
@@ -125,122 +110,10 @@ def load_tombstones():
         with open(os.path.join(TOMBSTONE_ROOT, name), encoding="ascii") as handle:
             for line in handle:
                 line = line.strip()
-                if not line:
-                    continue
-                entry = json.loads(line)
-                tombstones[entry["id"]] = entry
+                if line:
+                    entry = json.loads(line)
+                    tombstones[entry["id"]] = entry
     return tombstones
-
-
-def topical_relevance(record):
-    """0.0 to 1.0. Transparent and separate from salience, not folded into it."""
-    # Some sources are AI-by-construction: every row in an AI-models database
-    # is on-topic regardless of whether the model's NAME happens to contain a
-    # matching word. Keyword scoring only makes sense where topicality is
-    # genuinely uncertain, which for now means general-interest forums.
-    if record.get("kind") == "model_release":
-        return 1.0
-    haystack = " ".join(
-        [record.get("title", "")]
-        + list(record.get("extra", {}).get("forum_tags", []) or [])
-        + [record.get("extra", {}).get("notability_criteria") or ""]
-    ).lower()
-    hits = len(set(match.group(0).lower() for match in AI_TAG_RE.finditer(haystack)))
-    if hits >= 2:
-        return 1.0
-    if hits == 1:
-        return 0.75
-    return 0.25
-
-
-def raw_salience_score(record):
-    """A within-kind comparable number. Higher is more salient.
-
-    Returns (score, method) so the provenance envelope can say how it was
-    derived rather than presenting a bare number as fact.
-    """
-    kind = record.get("kind")
-    signals = record.get("signals") or {}
-
-    def latest(name):
-        series = signals.get(name)
-        if not series:
-            return None
-        return series[-1].get("value")
-
-    if kind == "model_release":
-        compute = latest("training_compute_flop")
-        if compute and compute > 0:
-            score = math.log10(compute)
-            if str(record.get("extra", {}).get("frontier_model", "")).lower() in (
-                "true", "yes", "1"
-            ):
-                score += 1.0
-            return score, "log10_training_compute_plus_frontier_flag"
-        citations = latest("citations")
-        if citations is not None:
-            return math.log10(citations + 1.0), "log_citations_fallback"
-        return 0.0, "no_signal_available"
-
-    if kind == "forum_post":
-        karma = latest("karma")
-        if karma is not None:
-            return float(karma), "karma"
-        return 0.0, "no_signal_available"
-
-    if kind == "publication":
-        citations = latest("citations")
-        if citations is not None:
-            return math.log10(citations + 1.0), "log_citations"
-        return 0.0, "no_signal_available"
-
-    return 0.0, "unscored_kind"
-
-
-def percentile_within_group(values):
-    """Map each value to its percentile rank in [0,1]. Ties share a rank."""
-    ordered = sorted(set(values))
-    if len(ordered) <= 1:
-        return {value: 0.5 for value in values}
-    lookup = {}
-    for index, value in enumerate(ordered):
-        lookup[value] = index / float(len(ordered) - 1)
-    return lookup
-
-
-def assign_tiers(records):
-    """Assign A/B/C/D by quantile of the realised salience distribution.
-
-    Returns the cut points so LINEAGE.json can record exactly where the bands
-    fell for this build. Tier membership is therefore reproducible and
-    explainable rather than a magic constant.
-    """
-    if not records:
-        return {}
-    ordered = sorted(records, key=lambda r: -r["salience"])
-    total = len(ordered)
-    cuts = {}
-    start = 0
-    for name, fraction in TIER_QUANTILES:
-        end = min(total, start + max(1, int(round(fraction * total))))
-        for record in ordered[start:end]:
-            record["salience_tier"] = name
-        if end > start:
-            cuts[name] = {
-                "count": end - start,
-                "salience_max": ordered[start]["salience"],
-                "salience_min": ordered[end - 1]["salience"],
-            }
-        start = end
-    for record in ordered[start:]:
-        record["salience_tier"] = "D"
-    if start < total:
-        cuts["D"] = {
-            "count": total - start,
-            "salience_max": ordered[start]["salience"],
-            "salience_min": ordered[total - 1]["salience"],
-        }
-    return cuts
 
 
 def load_source_registry():
@@ -250,12 +123,66 @@ def load_source_registry():
         return json.load(handle)
 
 
-def apply_source_registry(record, registry):
-    """Stamp source-level facts, recording where each came from.
+def load_profiles():
+    """Every profile in config/salience_profiles/ is applied.
 
-    Leaves the clock null when the registry has no verified date. Null is
-    ungated and honest; a guess is indistinguishable from a fact later.
+    Adding a profile file is how a consumer expresses a different weighting
+    without forking records or arguing with anyone else's.
     """
+    profiles = []
+    for path in sorted(glob.glob(os.path.join(PROFILE_DIR, "*.json"))):
+        with open(path, encoding="ascii") as handle:
+            profile = json.load(handle)
+        rel = profile.get("relevance", {})
+        terms = rel.get("terms", [])
+        profile["_relevance_re"] = (
+            re.compile("|".join(r"\b(?:%s)\b" % t for t in terms), re.IGNORECASE)
+            if terms else None
+        )
+        profiles.append(profile)
+    return profiles
+
+
+def load_reviews():
+    """id -> list of attributed review entries.
+
+    Reviews are opinions with an author. Storing them unattributed would make
+    one person's taste indistinguishable from a source-derived property, and
+    a disagreeing consumer would have to fork rather than filter.
+    """
+    reviews = defaultdict(list)
+    layers = []
+    if not os.path.isdir(REVIEW_ROOT):
+        return reviews, layers
+    for path in sorted(glob.glob(os.path.join(REVIEW_ROOT, "*.json"))):
+        with open(path, encoding="ascii") as handle:
+            payload = json.load(handle)
+        meta = payload.get("_metadata", {})
+        reviewer = meta.get("reviewer") or "unknown"
+        count = 0
+        for record_id, entry in (payload.get("records") or {}).items():
+            if not entry.get("verdict") and not entry.get("tier_override") \
+                    and not entry.get("note"):
+                continue
+            reviews[record_id].append({
+                "reviewer": entry.get("reviewer") or reviewer,
+                "verdict": entry.get("verdict"),
+                "tier_override": entry.get("tier_override"),
+                "note": entry.get("note"),
+                "at": entry.get("at") or entry.get("reviewed_at"),
+                "layer": os.path.basename(path),
+            })
+            count += 1
+        layers.append({
+            "file": os.path.basename(path),
+            "reviewer": reviewer,
+            "records": count,
+        })
+    return reviews, layers
+
+
+def apply_source_registry(record, registry):
+    """Stamp source-level facts, recording where each came from."""
     source_id = str(record.get("id", "")).split(":", 1)[0]
     entry = registry.get(source_id)
     if not entry:
@@ -274,8 +201,157 @@ def apply_source_registry(record, registry):
     }
 
 
-def project(records, tombstones, registry):
-    """Returns (kept, dropped) where dropped explains every exclusion."""
+def topical_relevance(record, profile):
+    rel = profile.get("relevance", {})
+    if record.get("kind") in (rel.get("kinds_always_relevant") or []):
+        return 1.0
+    pattern = profile.get("_relevance_re")
+    if pattern is None:
+        return 1.0
+    haystack = " ".join(
+        [record.get("title", "") or ""]
+        + list((record.get("extra") or {}).get("forum_tags") or [])
+        + [(record.get("extra") or {}).get("notability_criteria") or ""]
+    ).lower()
+    hits = len(set(m.group(0).lower() for m in pattern.finditer(haystack)))
+    weights = rel.get("weights", {})
+    if hits >= 2:
+        return float(weights.get("two_or_more_hits", 1.0))
+    if hits == 1:
+        return float(weights.get("one_hit", 0.75))
+    return float(weights.get("no_hits", 0.25))
+
+
+def apply_transform(value, name):
+    if value is None:
+        return None
+    if name == "log10":
+        return math.log10(value) if value > 0 else None
+    if name == "log10_plus1":
+        return math.log10(value + 1.0) if value >= 0 else None
+    return float(value)
+
+
+def raw_salience_score(record, profile):
+    """Return (score, method) so provenance can say how it was derived."""
+    spec = (profile.get("kind_scoring") or {}).get(record.get("kind"))
+    if not spec:
+        return 0.0, "kind_not_scored_by_profile"
+
+    signals = record.get("signals") or {}
+
+    def latest(name):
+        series = signals.get(name) if name else None
+        return series[-1].get("value") if series else None
+
+    primary = apply_transform(latest(spec.get("primary_signal")),
+                              spec.get("transform", "identity"))
+    if primary is not None:
+        method = "%s:%s" % (spec.get("primary_signal"), spec.get("transform"))
+        bonus_field = spec.get("bonus_field")
+        if bonus_field:
+            raw = str((record.get("extra") or {}).get(bonus_field, "")).lower()
+            if raw in [str(v).lower() for v in (spec.get("bonus_values") or [])]:
+                primary += float(spec.get("bonus", 0.0))
+                method += "+" + bonus_field
+        return primary, method
+
+    fallback = apply_transform(latest(spec.get("fallback_signal")),
+                               spec.get("fallback_transform", "identity"))
+    if fallback is not None:
+        return fallback, "fallback:%s" % spec.get("fallback_signal")
+
+    return 0.0, "no_signal_available"
+
+
+def percentile_within_group(values):
+    """Map each value to its percentile rank in [0,1]. Ties share a rank."""
+    ordered = sorted(set(values))
+    if len(ordered) <= 1:
+        return {value: 0.5 for value in values}
+    return {value: index / float(len(ordered) - 1)
+            for index, value in enumerate(ordered)}
+
+
+def score_profile(kept, profile):
+    """Compute this profile's salience and tiers. Returns the tier cut points."""
+    pid = profile["profile_id"]
+    shrinkage_k = float(profile.get("shrinkage_k", 0))
+
+    groups = defaultdict(list)
+    for record in kept:
+        year = (record.get("published_at") or "____")[:4]
+        groups[(record.get("kind"), year)].append(record)
+
+    scored = {}
+    for (kind, year), members in groups.items():
+        raws = {}
+        for record in members:
+            score, method = raw_salience_score(record, profile)
+            raws[record["id"]] = (score, method)
+        lookup = percentile_within_group([v[0] for v in raws.values()])
+        shrink = len(members) / float(len(members) + shrinkage_k) if shrinkage_k \
+            else 1.0
+        for record in members:
+            score, method = raws[record["id"]]
+            shrunk = 0.5 + (lookup[score] - 0.5) * shrink
+            relevance = topical_relevance(record, profile)
+            scored[record["id"]] = {
+                "salience": round(shrunk * relevance, 4),
+                "topical_relevance": relevance,
+                "method": method,
+                "raw_score": round(score, 4),
+                "group": "kind=%s,year=%s" % (kind, year),
+                "group_size": len(members),
+                "shrinkage": round(shrink, 3),
+            }
+
+    ordered = sorted(kept, key=lambda r: -scored[r["id"]]["salience"])
+    cuts = {}
+    start = 0
+    total = len(ordered)
+    for name, fraction in profile.get("tier_quantiles", []):
+        end = min(total, start + max(1, int(round(fraction * total))))
+        for record in ordered[start:end]:
+            scored[record["id"]]["tier"] = name
+        if end > start:
+            cuts[name] = {
+                "count": end - start,
+                "salience_max": scored[ordered[start]["id"]]["salience"],
+                "salience_min": scored[ordered[end - 1]["id"]]["salience"],
+            }
+        start = end
+    for record in ordered[start:]:
+        scored[record["id"]]["tier"] = "D"
+    if start < total:
+        cuts["D"] = {
+            "count": total - start,
+            "salience_max": scored[ordered[start]["id"]]["salience"],
+            "salience_min": scored[ordered[total - 1]["id"]]["salience"],
+        }
+
+    for record in kept:
+        entry = scored[record["id"]]
+        record.setdefault("salience_by_profile", {})[pid] = entry["salience"]
+        record.setdefault("salience_tier_by_profile", {})[pid] = entry["tier"]
+        record.setdefault("salience_basis_by_profile", {})[pid] = {
+            "profile_version": profile.get("version"),
+            "method": entry["method"],
+            "raw_score": entry["raw_score"],
+            "topical_relevance": entry["topical_relevance"],
+            "percentile_within": entry["group"],
+            "group_size": entry["group_size"],
+            "shrinkage": entry["shrinkage"],
+            "note": (
+                "A weighting choice under profile '%s', not a property of the "
+                "record. Add your own profile rather than forking." % pid
+            ),
+        }
+    return cuts
+
+
+def project(records, tombstones, registry, profiles, reviews):
+    """Returns (kept, dropped, cuts_by_profile). Every exclusion is explained."""
     kept = []
     dropped = []
 
@@ -291,56 +367,25 @@ def project(records, tombstones, registry):
             continue
         kept.append(dict(record))
 
-    # Salience is relative, so it must be computed per (kind, year) group
-    # rather than globally: a 2016 model and a 2026 model are not competing.
-    groups = defaultdict(list)
-    for record in kept:
-        year = (record.get("published_at") or "____")[:4]
-        groups[(record.get("kind"), year)].append(record)
-
-    for (kind, year), members in groups.items():
-        scores = []
-        for record in members:
-            score, method = raw_salience_score(record)
-            record["_salience_raw"] = score
-            record["_salience_method"] = method
-            scores.append(score)
-        lookup = percentile_within_group(scores)
-        # Shrink toward 0.5 when the group is small. Without this, the top
-        # member of a 2-record group scores a perfect 1.0 on the strength of
-        # one comparison, and a 2001 decision-tree model outranks Alignment
-        # Faking. Standard regularisation: trust the observed percentile in
-        # proportion to how much evidence produced it.
-        shrink = len(members) / float(len(members) + SHRINKAGE_K)
-        for record in members:
-            percentile = lookup[record["_salience_raw"]]
-            shrunk = 0.5 + (percentile - 0.5) * shrink
-            relevance = topical_relevance(record)
-            record["salience"] = round(shrunk * relevance, 4)
-            record["topical_relevance"] = relevance
-            record["salience_shrinkage"] = round(shrink, 3)
-            record["salience_basis"] = {
-                "method": record.pop("_salience_method"),
-                "raw_score": round(record.pop("_salience_raw"), 4),
-                "percentile_within": "kind=%s,year=%s" % (kind, year),
-                "group_size": len(members),
-                "note": (
-                    "salience = percentile * topical_relevance. This measures "
-                    "estimated importance, NOT source quality. It is a "
-                    "candidate-ordering signal, not an editorial verdict."
-                ),
-            }
-
-    tier_cuts = assign_tiers(kept)
-
     for record in kept:
         apply_source_registry(record, registry)
+
+    cuts_by_profile = {}
+    for profile in profiles:
+        cuts_by_profile[profile["profile_id"]] = score_profile(kept, profile)
+
+    for record in kept:
+        record["reviews"] = reviews.get(record["id"], [])
         flagged = bool(PRIVACY_RE.search(record.get("title", "") or ""))
         record["privacy_review_required"] = flagged
-        record["review_status"] = "needs_privacy_review" if flagged else "unreviewed"
-        record["game_facing"] = False
+        if record["reviews"]:
+            record["review_status"] = "reviewed"
+        elif flagged:
+            record["review_status"] = "needs_privacy_review"
+        else:
+            record["review_status"] = "unreviewed"
 
-    return kept, dropped, tier_cuts
+    return kept, dropped, cuts_by_profile
 
 
 def main():
@@ -350,9 +395,15 @@ def main():
 
     tombstones = load_tombstones()
     registry = load_source_registry()
+    profiles = load_profiles()
+    reviews, review_layers = load_reviews()
+
+    if not profiles:
+        print("ERROR: no salience profiles in %s" % PROFILE_DIR)
+        return 1
+
     inputs = []
     records = []
-
     for source_id in SOURCES:
         dump_dir = latest_dump(source_id)
         if dump_dir is None:
@@ -370,73 +421,86 @@ def main():
         })
         print("loaded %-18s %5d records" % (source_id, len(loaded)))
 
-    kept, dropped, tier_cuts = project(records, tombstones, registry)
+    kept, dropped, cuts = project(records, tombstones, registry, profiles, reviews)
 
-    tier_counts = defaultdict(int)
-    for record in kept:
-        tier_counts[record["salience_tier"]] += 1
     flagged = sum(1 for r in kept if r["privacy_review_required"])
-
+    reviewed = sum(1 for r in kept if r["reviews"])
     print("---")
     print("input records      : %d" % len(records))
-    print("dropped            : %d" % len(dropped))
+    print("dropped (tombstone): %d" % len(dropped))
     print("kept               : %d" % len(kept))
     print("privacy-flagged    : %d" % flagged)
-    print("tiers              : %s" % dict(sorted(tier_counts.items())))
-    print("game-facing        : 0 (nothing promotes without human review)")
+    print("with human reviews : %d (from %d layer file(s))"
+          % (reviewed, len(review_layers)))
+    for profile in profiles:
+        pid = profile["profile_id"]
+        counts = defaultdict(int)
+        for record in kept:
+            counts[record["salience_tier_by_profile"][pid]] += 1
+        print("profile %-12s : %s" % (pid, dict(sorted(counts.items()))))
 
     if args.dry_run:
         print("dry run; nothing written")
         return 0
 
     os.makedirs(OUT_ROOT, exist_ok=True)
-    kept.sort(key=lambda r: (-(r["salience"]), r["id"]))
+    primary = profiles[0]["profile_id"]
+    kept.sort(key=lambda r: (-r["salience_by_profile"][primary], r["id"]))
 
     feed_path = os.path.join(OUT_ROOT, "all_candidates.jsonl")
     with open(feed_path, "w", encoding="ascii", newline="\n") as handle:
         for record in kept:
             handle.write(json.dumps(record, ensure_ascii=True, sort_keys=True) + "\n")
 
-    by_year = defaultdict(list)
+    by_year = defaultdict(int)
     for record in kept:
-        by_year[(record.get("published_at") or "unknown")[:4]].append(record["id"])
+        by_year[(record.get("published_at") or "unknown")[:4]] += 1
 
     lineage = {
         "build_version": BUILD_VERSION,
         "built_at": _base.utc_now_iso(),
         "adapter_framework_version": _base.ADAPTER_FRAMEWORK_VERSION,
         "inputs": inputs,
-        "source_registry": {
-            "path": "config/sources.json",
-            "sources_resolved": sorted(set(
-                str(r.get("id", "")).split(":", 1)[0] for r in kept)),
-        },
+        "source_registry": {"path": "config/sources.json"},
+        "salience_profiles": [
+            {"profile_id": p["profile_id"], "version": p.get("version"),
+             "status": p.get("status")} for p in profiles
+        ],
+        "human_review_layers": review_layers,
+        "ordering": "file is sorted by profile '%s'; this is presentation only"
+                    % primary,
         "counts": {
             "input_records": len(records),
             "dropped": len(dropped),
             "kept": len(kept),
             "privacy_flagged": flagged,
-            "game_facing": 0,
-            "by_tier": dict(sorted(tier_counts.items())),
-            "tier_cut_points": tier_cuts,
-            "by_year": {y: len(ids) for y, ids in sorted(by_year.items())},
+            "with_human_reviews": reviewed,
+            "by_year": dict(sorted(by_year.items())),
+            "tier_cut_points_by_profile": cuts,
         },
         "dropped_records": dropped,
         "policy": {
-            "salience": (
-                "percentile within (kind, year) times topical_relevance; "
-                "measures estimated importance, not source quality"
+            "facts_vs_opinions": (
+                "Facts: title, clocks, actors, source_urls, signals, license. "
+                "Opinions: salience_by_profile (named weighting) and reviews "
+                "(attributed to a named reviewer). No bare salience field and "
+                "no game_facing flag, so a disagreeing consumer can ignore "
+                "rather than fork."
             ),
             "review": (
-                "every record is review_status=unreviewed or "
-                "needs_privacy_review; game_facing is false for all records "
-                "and only a human review pass may flip it"
+                "Reviews are attributed opinions. Consumers may inherit a "
+                "reviewer's judgement, filter to reviewers they trust, or "
+                "ignore reviews entirely."
             ),
             "privacy": (
-                "raw dumps are immutable except by tombstone; tombstones "
-                "record id, date, and reason category, never content"
+                "Raw dumps are immutable except by tombstone; tombstones "
+                "record id, date and reason category, never content. "
+                "Downstream consumers must honour tombstones."
             ),
-            "truncation": "none; every input record is either kept or listed in dropped_records",
+            "truncation": (
+                "None. Every input record is either kept or listed in "
+                "dropped_records with a reason."
+            ),
         },
     }
     lineage_path = os.path.join(OUT_ROOT, "LINEAGE.json")

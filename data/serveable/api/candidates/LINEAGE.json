@@ -1,14 +1,8 @@
 {
   "adapter_framework_version": "0.1.0",
-  "build_version": "0.1.0",
-  "built_at": "2026-07-25T00:43:01.047319+00:00",
+  "build_version": "0.2.0",
+  "built_at": "2026-07-25T02:42:53.692964+00:00",
   "counts": {
-    "by_tier": {
-      "A": 172,
-      "B": 687,
-      "C": 1717,
-      "D": 858
-    },
     "by_year": {
       "1950": 1,
       "1952": 1,
@@ -74,34 +68,37 @@
       "2026": 644
     },
     "dropped": 0,
-    "game_facing": 0,
     "input_records": 3434,
     "kept": 3434,
     "privacy_flagged": 23,
-    "tier_cut_points": {
-      "A": {
-        "count": 172,
-        "salience_max": 0.9902,
-        "salience_min": 0.788
-      },
-      "B": {
-        "count": 687,
-        "salience_max": 0.7865,
-        "salience_min": 0.4158
-      },
-      "C": {
-        "count": 1717,
-        "salience_max": 0.4153,
-        "salience_min": 0.064
-      },
-      "D": {
-        "count": 858,
-        "salience_max": 0.0637,
-        "salience_min": 0.0025
+    "tier_cut_points_by_profile": {
+      "default_v1": {
+        "A": {
+          "count": 172,
+          "salience_max": 0.9902,
+          "salience_min": 0.788
+        },
+        "B": {
+          "count": 687,
+          "salience_max": 0.7865,
+          "salience_min": 0.415
+        },
+        "C": {
+          "count": 1717,
+          "salience_max": 0.4143,
+          "salience_min": 0.0637
+        },
+        "D": {
+          "count": 858,
+          "salience_max": 0.0635,
+          "salience_min": 0.0025
+        }
       }
-    }
+    },
+    "with_human_reviews": 0
   },
   "dropped_records": [],
+  "human_review_layers": [],
   "inputs": [
     {
       "dump": "data/raw/epoch_ai/dumps/2026-07-24_233701",
@@ -122,18 +119,21 @@
       "source_id": "forum_eaforum"
     }
   ],
+  "ordering": "file is sorted by profile 'default_v1'; this is presentation only",
   "policy": {
-    "privacy": "raw dumps are immutable except by tombstone; tombstones record id, date, and reason category, never content",
-    "review": "every record is review_status=unreviewed or needs_privacy_review; game_facing is false for all records and only a human review pass may flip it",
-    "salience": "percentile within (kind, year) times topical_relevance; measures estimated importance, not source quality",
-    "truncation": "none; every input record is either kept or listed in dropped_records"
+    "facts_vs_opinions": "Facts: title, clocks, actors, source_urls, signals, license. Opinions: salience_by_profile (named weighting) and reviews (attributed to a named reviewer). No bare salience field and no game_facing flag, so a disagreeing consumer can ignore rather than fork.",
+    "privacy": "Raw dumps are immutable except by tombstone; tombstones record id, date and reason category, never content. Downstream consumers must honour tombstones.",
+    "review": "Reviews are attributed opinions. Consumers may inherit a reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+    "truncation": "None. Every input record is either kept or listed in dropped_records with a reason."
   },
+  "salience_profiles": [
+    {
+      "profile_id": "default_v1",
+      "status": "provisional",
+      "version": "1.0.0"
+    }
+  ],
   "source_registry": {
-    "path": "config/sources.json",
-    "sources_resolved": [
-      "epoch_ai",
-      "forum_eaforum",
-      "forum_lesswrong"
-    ]
+    "path": "config/sources.json"
   }
 }

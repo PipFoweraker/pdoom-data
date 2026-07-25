@@ -92,6 +92,8 @@ kbd {
     <span class="d-unsure" id="nUns">0</span> unsure /
     <span class="d-privacy" id="nPriv">0</span> priv</span>
   <span class="stat">rate <span id="rate">0</span>/min</span>
+  <label class="stat">reviewer <input id="reviewer" size="10" placeholder="your name"></label>
+  <select id="profile"></select>
   <select id="sort">
     <option value="salience">sort: salience</option>
     <option value="spread">sort: signal spread</option>
@@ -133,8 +135,11 @@ kbd {
 
 <script>
 "use strict";
-var STORE_KEY = "pdoom_review_v1";
-var TOOL_VERSION = "0.1.0";
+var STORE_KEY = "pdoom_review_v2";
+var REVIEWER_KEY = "pdoom_reviewer";
+var TOOL_VERSION = "0.2.0";
+var profileId = null;
+var profileIds = [];
 
 var all = [];        // every loaded record
 var view = [];       // current filtered+sorted order
@@ -153,6 +158,18 @@ function save() {
   catch (e) { console.warn("save failed", e); }
 }
 
+function sal(rec) {
+  var m = rec.salience_by_profile || {};
+  var v = m[profileId];
+  return typeof v === "number" ? v : 0;
+}
+function tierOf(rec) {
+  var m = rec.salience_tier_by_profile || {};
+  return m[profileId] || "D";
+}
+function basisOf(rec) {
+  return (rec.salience_basis_by_profile || {})[profileId] || {};
+}
 function latestSignal(rec, name) {
   var s = rec.signals && rec.signals[name];
   if (!s || !s.length) return null;
@@ -165,8 +182,9 @@ function latestSignal(rec, name) {
 // crude stand-in until more independent signals exist.
 function spread(rec) {
   var parts = [];
-  if (typeof rec.salience === "number") parts.push(rec.salience);
-  if (typeof rec.topical_relevance === "number") parts.push(rec.topical_relevance);
+  parts.push(sal(rec));
+  var rel = basisOf(rec).topical_relevance;
+  if (typeof rel === "number") parts.push(rel);
   var karma = latestSignal(rec, "karma");
   if (karma !== null) parts.push(Math.min(1, karma / 600));
   var cites = latestSignal(rec, "citations");
@@ -183,18 +201,18 @@ function rebuild() {
   view = all.filter(function (r) {
     var d = decisions[r.id];
     if (f === "undecided") return !d || !d.decision;
-    if (f === "A") return r.salience_tier === "A";
-    if (f === "AB") return r.salience_tier === "A" || r.salience_tier === "B";
+    if (f === "A") return tierOf(r) === "A";
+    if (f === "AB") return tierOf(r) === "A" || tierOf(r) === "B";
     if (f === "flagged") return r.privacy_review_required;
     return true;
   });
   view.sort(function (a, b) {
-    if (s === "salience") return b.salience - a.salience;
+    if (s === "salience") return sal(b) - sal(a);
     if (s === "spread") return spread(b) - spread(a);
     if (s === "privacy") {
       var pa = a.privacy_review_required ? 1 : 0, pb = b.privacy_review_required ? 1 : 0;
       if (pa !== pb) return pb - pa;
-      return b.salience - a.salience;
+      return sal(b) - sal(a);
     }
     return String(b.published_at || "").localeCompare(String(a.published_at || ""));
   });
@@ -234,11 +252,11 @@ function render() {
   }
 
   var d = decisions[rec.id] || {};
-  var tier = d.tier_override || rec.salience_tier;
+  var tier = d.tier_override || tierOf(rec);
   var karma = latestSignal(rec, "karma");
   var cites = latestSignal(rec, "citations");
   var flop = latestSignal(rec, "training_compute_flop");
-  var basis = rec.salience_basis || {};
+  var basis = basisOf(rec);
 
   var html = "";
   if (rec.privacy_review_required) {
@@ -252,7 +270,7 @@ function render() {
     "<span class='pill t" + tier + "'>" + tier + "</span>" +
     "<span>" + esc(rec.kind) + "</span>" +
     "<span>" + esc(rec.published_at || "no date") + "</span>" +
-    "<span>salience " + (rec.salience !== undefined ? rec.salience.toFixed(3) : "-") + "</span>" +
+    "<span>salience " + sal(rec).toFixed(3) + " (" + esc(profileId) + ")</span>" +
     "<span>spread " + spread(rec).toFixed(3) + "</span>" +
     "<span>" + esc((rec.actors || []).join(", ")) + "</span>" +
     "</div>";
@@ -263,7 +281,7 @@ function render() {
   if (karma !== null) html += "<span>karma <b>" + karma + "</b></span>";
   if (cites !== null) html += "<span>citations <b>" + cites + "</b></span>";
   if (flop !== null) html += "<span>compute <b>" + flop.toExponential(1) + "</b> FLOP</span>";
-  html += "<span>relevance <b>" + (rec.topical_relevance || 0) + "</b></span>";
+  html += "<span>relevance <b>" + (basisOf(rec).topical_relevance || 0) + "</b></span>";
   html += "</div>";
 
   html += "<div class='meta'>scored by " + esc(basis.method || "?") +
@@ -323,8 +341,8 @@ function renderSide() {
     var mark = d.decision ? ({ accept: "+", reject: "-", unsure: "?", privacy: "!" }[d.decision]) : " ";
     html += "<div class='row" + (real === idx ? " cur" : "") + "' data-i='" + real + "'>" +
       "<span class='d-" + (d.decision || "") + "'>" + mark + "</span>" +
-      "<span class='pill t" + (d.tier_override || r.salience_tier) + "'>" +
-      (d.tier_override || r.salience_tier) + "</span>" +
+      "<span class='pill t" + (d.tier_override || tierOf(r)) + "'>" +
+      (d.tier_override || tierOf(r)) + "</span>" +
       "<span class='t'>" + esc(r.title) + "</span>" +
       "<span class='stat'>" + esc(String(r.published_at || "").slice(0, 4)) + "</span></div>";
   }
@@ -351,6 +369,7 @@ function decide(kind) {
   undoStack.push({ id: rec.id, prev: decisions[rec.id] ? JSON.parse(JSON.stringify(decisions[rec.id])) : null, idx: idx });
   var d = decisions[rec.id] || {};
   d.decision = kind;
+  d.reviewer = reviewerName();
   d.reviewed_at = new Date().toISOString();
   decisions[rec.id] = d;
   stamps.push(Date.now());
@@ -364,6 +383,7 @@ function setTier(t) {
   undoStack.push({ id: rec.id, prev: decisions[rec.id] ? JSON.parse(JSON.stringify(decisions[rec.id])) : null, idx: idx });
   var d = decisions[rec.id] || {};
   d.tier_override = t;
+  d.reviewer = reviewerName();
   d.reviewed_at = new Date().toISOString();
   decisions[rec.id] = d;
   save();
@@ -373,6 +393,7 @@ function setTier(t) {
 function setNote(id, text) {
   var d = decisions[id] || {};
   d.note = text;
+  d.reviewer = reviewerName();
   d.reviewed_at = new Date().toISOString();
   decisions[id] = d;
   save();
@@ -416,6 +437,33 @@ document.addEventListener("keydown", function (ev) {
   }
 });
 
+function reviewerName() {
+  var el = document.getElementById("reviewer");
+  var name = (el && el.value || "").trim();
+  return name || "unattributed";
+}
+
+function discoverProfiles() {
+  var seen = {};
+  for (var i = 0; i < all.length; i++) {
+    var m = all[i].salience_by_profile || {};
+    for (var k in m) seen[k] = true;
+  }
+  profileIds = Object.keys(seen).sort();
+  if (!profileId || profileIds.indexOf(profileId) === -1) {
+    profileId = profileIds[0] || null;
+  }
+  var sel = document.getElementById("profile");
+  sel.innerHTML = "";
+  for (var j = 0; j < profileIds.length; j++) {
+    var opt = document.createElement("option");
+    opt.value = profileIds[j];
+    opt.textContent = "profile: " + profileIds[j];
+    if (profileIds[j] === profileId) opt.selected = true;
+    sel.appendChild(opt);
+  }
+}
+
 function ingest(text) {
   all = [];
   var lines = text.split("\n");
@@ -426,6 +474,7 @@ function ingest(text) {
     catch (e) { /* tolerate a trailing partial line */ }
   }
   if (all.length === 1 && Array.isArray(all[0])) all = all[0];
+  discoverProfiles();
   idx = 0;
   rebuild();
 }
@@ -448,6 +497,15 @@ document.addEventListener("drop", function (e) {
   reader.readAsText(f);
 });
 
+document.getElementById("profile").addEventListener("change", function () {
+  profileId = this.value; rebuild();
+});
+var reviewerEl = document.getElementById("reviewer");
+reviewerEl.value = localStorage.getItem(REVIEWER_KEY) || "";
+reviewerEl.addEventListener("change", function () {
+  localStorage.setItem(REVIEWER_KEY, this.value.trim());
+});
+reviewerEl.addEventListener("keydown", function (ev) { ev.stopPropagation(); });
 document.getElementById("sort").addEventListener("change", rebuild);
 document.getElementById("filter").addEventListener("change", rebuild);
 
@@ -463,17 +521,18 @@ document.getElementById("export").addEventListener("click", function () {
     var d = decisions[id];
     if (!d || (!d.decision && !d.tier_override && !d.note)) continue;
     records[id] = {
-      decision: d.decision || null,
+      reviewer: d.reviewer || reviewerName(),
+      verdict: d.decision || null,
       tier_override: d.tier_override || null,
       note: d.note || null,
-      reviewed_at: d.reviewed_at || null
+      at: d.reviewed_at || null
     };
     if (d.decision === "privacy") {
       tombstones.push({
         id: id,
         category: "privacy",
         tombstoned_at: d.reviewed_at || new Date().toISOString(),
-        decided_by: "human_review",
+        decided_by: reviewerName(),
         note: "proposed via review_queue.html; content deliberately not recorded"
       });
     }
@@ -481,7 +540,9 @@ document.getElementById("export").addEventListener("click", function () {
   var payload = {
     _metadata: {
       layer: "human_review",
+      reviewer: reviewerName(),
       precedence: "highest",
+      nature: "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
       tool: "tools/review_queue.html",
       tool_version: TOOL_VERSION,
       exported_at: new Date().toISOString(),
