@@ -1,0 +1,47 @@
+[
+  {
+    "category": "Entity",
+    "description": "The risk is caused by a decision or action made by an AI system",
+    "level": "AI"
+  },
+  {
+    "category": "Entity",
+    "description": "The risk is caused by a decision or action made by humans",
+    "level": "Human"
+  },
+  {
+    "category": "Entity",
+    "description": "The risk is caused by some other reason or is ambiguous",
+    "level": "Other"
+  },
+  {
+    "category": "Intent",
+    "description": "The risk occurs due to an expected outcome from pursuing a goal",
+    "level": "Intentional"
+  },
+  {
+    "category": "Intent",
+    "description": "The risk occurs due to an unexpected outcome from pursuing a goal",
+    "level": "Unintentional"
+  },
+  {
+    "category": "Intent",
+    "description": "The risk is presented as occurring without clearly specifying the intentionality",
+    "level": "Other"
+  },
+  {
+    "category": "Timing",
+    "description": "The risk occurs before the AI is deployed",
+    "level": "Pre- deployment"
+  },
+  {
+    "category": "Timing",
+    "description": "The risk occurs after the AI model has been trained and deployed",
+    "level": "Post- deployment"
+  },
+  {
+    "category": "Timing",
+    "description": "The risk is presented without a clearly specified time of occurrence",
+    "level": "Other"
+  }
+]
