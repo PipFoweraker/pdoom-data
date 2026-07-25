@@ -1,7 +1,25 @@
 {
   "adapter_framework_version": "0.1.0",
+  "airr_tag_layers": [
+    {
+      "evaluation": {
+        "abstained": 10,
+        "accuracy_when_attempted": 0.8232,
+        "attempted": 311,
+        "caveat": "Upper bound only. Measured on AIRR risk descriptions; candidates are forum-post and model-release titles, a different and much shorter text distribution. Real accuracy on candidates is UNMEASURED and expected to be materially lower.",
+        "coverage": 0.9688,
+        "majority_class_baseline": 0.26,
+        "test_size": 321,
+        "train_size": 1281
+      },
+      "file": "machine_v1.json",
+      "layer_id": "machine_v1",
+      "nature": "MACHINE OPINION, not fact. Domain assignment inferred from token statistics, not read by a person.",
+      "tagged_count": 3135
+    }
+  ],
   "build_version": "0.2.0",
-  "built_at": "2026-07-25T03:44:21.460191+00:00",
+  "built_at": "2026-07-25T05:48:28.544851+00:00",
   "counts": {
     "by_year": {
       "1950": 1,
@@ -101,8 +119,8 @@
   "human_review_layers": [],
   "inputs": [
     {
-      "dump": "data/raw/epoch_ai/dumps/2026-07-24_233701",
-      "dump_data_sha256": "1693955acb22043ac7257dcfd8d47018e480bd1d9d1a7742751f7d82663f0139",
+      "dump": "data/raw/epoch_ai/dumps/2026-07-25_053622",
+      "dump_data_sha256": "aa0d01333140451f8cb8eb6810ea54d4d5601a6418438a02b051b38790e5cd5f",
       "records": 1034,
       "source_id": "epoch_ai"
     },

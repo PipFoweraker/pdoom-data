@@ -65,6 +65,7 @@ RAW_ROOT = os.path.join(REPO_ROOT, "data", "raw")
 OUT_ROOT = os.path.join(REPO_ROOT, "data", "serveable", "api", "candidates")
 TOMBSTONE_ROOT = os.path.join(RAW_ROOT, "_tombstones")
 REVIEW_ROOT = os.path.join(REPO_ROOT, "data", "enrichment", "human_review")
+AIRR_TAG_ROOT = os.path.join(REPO_ROOT, "data", "enrichment", "airr_tags")
 
 # Source-level facts (notably source_available_at) are resolved here at build
 # time rather than stamped by adapters. They are properties of the SOURCE, not
@@ -182,6 +183,32 @@ def load_reviews():
             "records": count,
         })
     return reviews, layers
+
+
+def load_airr_tags():
+    """layer_id -> {record_id: tag}. Machine tags are opinions, not facts.
+
+    Kept in their own namespace so a human tagging pass can sit alongside at
+    higher precedence without either overwriting the other.
+    """
+    layers = {}
+    meta = []
+    if not os.path.isdir(AIRR_TAG_ROOT):
+        return layers, meta
+    for path in sorted(glob.glob(os.path.join(AIRR_TAG_ROOT, "*.json"))):
+        with open(path, encoding="ascii") as handle:
+            payload = json.load(handle)
+        info = payload.get("_metadata", {})
+        layer_id = info.get("layer_id") or os.path.basename(path)
+        layers[layer_id] = payload.get("tags") or {}
+        meta.append({
+            "layer_id": layer_id,
+            "file": os.path.basename(path),
+            "nature": info.get("nature"),
+            "tagged_count": info.get("tagged_count"),
+            "evaluation": info.get("evaluation"),
+        })
+    return layers, meta
 
 
 def apply_source_registry(record, registry):
@@ -353,7 +380,7 @@ def score_profile(kept, profile):
     return cuts
 
 
-def project(records, tombstones, registry, profiles, reviews):
+def project(records, tombstones, registry, profiles, reviews, airr_layers):
     """Returns (kept, dropped, cuts_by_profile). Every exclusion is explained."""
     kept = []
     dropped = []
@@ -378,6 +405,14 @@ def project(records, tombstones, registry, profiles, reviews):
         cuts_by_profile[profile["profile_id"]] = score_profile(kept, profile)
 
     for record in kept:
+        by_layer = {}
+        for layer_id, mapping in airr_layers.items():
+            hit = mapping.get(record["id"])
+            if hit:
+                by_layer[layer_id] = hit
+        if by_layer:
+            record["airr_tags_by_layer"] = by_layer
+        record.pop("airr_tags", None)   # empty adapter placeholder
         record["reviews"] = reviews.get(record["id"], [])
         flagged = bool(PRIVACY_RE.search(record.get("title", "") or ""))
         record["privacy_review_required"] = flagged
@@ -450,6 +485,7 @@ def main():
     registry = load_source_registry()
     profiles = load_profiles()
     reviews, review_layers = load_reviews()
+    airr_layers, airr_meta = load_airr_tags()
 
     if not profiles:
         print("ERROR: no salience profiles in %s" % PROFILE_DIR)
@@ -474,7 +510,8 @@ def main():
         })
         print("loaded %-18s %5d records" % (source_id, len(loaded)))
 
-    kept, dropped, cuts = project(records, tombstones, registry, profiles, reviews)
+    kept, dropped, cuts = project(records, tombstones, registry, profiles,
+                                  reviews, airr_layers)
 
     flagged = sum(1 for r in kept if r["privacy_review_required"])
     reviewed = sum(1 for r in kept if r["reviews"])
@@ -520,6 +557,7 @@ def main():
              "status": p.get("status")} for p in profiles
         ],
         "human_review_layers": review_layers,
+        "airr_tag_layers": airr_meta,
         "ordering": "file is sorted by profile '%s'; this is presentation only"
                     % primary,
         "counts": {

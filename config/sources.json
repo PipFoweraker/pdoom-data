@@ -11,7 +11,6 @@
     "policy": "Never guess a date. A fabricated clock is indistinguishable from a real one later and silently corrupts the in-game gating mechanic. Leave null and record the attempt.",
     "last_reviewed": "2026-07-25"
   },
-
   "epoch_ai": {
     "name": "Epoch AI, Data on Notable AI Models",
     "url": "https://epoch.ai/data/notable-ai-models",
@@ -29,7 +28,6 @@
     ],
     "notes": "Day unknown; pinned to month start. Predecessor datasets on compute trends existed from approximately 2022 (Sevilla et al., Compute Trends Across Three Eras of Machine Learning), so an earlier gate could be argued for compute data specifically. Single-sourced -- worth a first-party confirmation before the gating mechanic ships."
   },
-
   "forum_lesswrong": {
     "name": "LessWrong",
     "url": "https://www.lesswrong.com/",
@@ -53,7 +51,6 @@
     ],
     "notes": "Two defensible gates. Site readability by a player dates from 2009-03 and is what source_available_at records. The GraphQL API this repo actually uses only exists from LessWrong 2.0 (2017-09-20), which matters for reproducibility but not for in-game knowledge gating. Predecessor Overcoming Bias launched November 2006."
   },
-
   "forum_eaforum": {
     "name": "EA Forum",
     "url": "https://forum.effectivealtruism.org/",
@@ -71,7 +68,6 @@
     ],
     "notes": "Year known, month not. Pinned to year start, which biases the gate EARLY by up to eleven months. If the gating mechanic proves sensitive to this, pin down the month before relying on it."
   },
-
   "openalex": {
     "name": "OpenAlex",
     "url": "https://openalex.org/",
@@ -89,7 +85,6 @@
     ],
     "notes": "Adapter not yet written. Predecessor Microsoft Academic Graph was available from approximately 2015 to 2021-12-31, so scholarly-graph tooling as a capability predates OpenAlex itself."
   },
-
   "arxiv": {
     "name": "arXiv",
     "url": "https://arxiv.org/",
@@ -99,15 +94,14 @@
     "corpus_start": "1991-08",
     "evidence": [
       {
-        "claim": "arXiv began as an automated e-print server in August 1991.",
-        "url": "https://arxiv.org/about",
+        "claim": "arXiv was founded by Paul Ginsparg in 1991.",
+        "url": "https://info.arxiv.org/about/index.html",
         "retrieved_at": "2026-07-25",
-        "via": "recalled from general knowledge; NOT independently verified in this pass"
+        "via": "first-party About page"
       }
     ],
-    "notes": "LOW-RIGOUR ENTRY. The August 1991 date is widely known but was not verified against the first-party page during this research pass. Confirm before relying on it. Metadata licensing varies by paper; per-paper licence must be checked if full text is ever retained."
+    "notes": "Year is first-party confirmed; the MONTH is not. August 1991 is widely cited (hep-th began then) but the About page states only the year, so the date is pinned to 1991-08-01 with the month unverified. Metadata licensing varies by paper; per-paper licence must be checked if full text is ever retained."
   },
-
   "aiid": {
     "name": "AI Incident Database",
     "url": "https://incidentdatabase.ai/",
@@ -125,7 +119,6 @@
     ],
     "notes": "NOT INGESTED. Reuse terms are not stated on the snapshots page and could not be confirmed as CC-BY compatible, so this source is excluded under the repo's CC-BY-4.0 posture until terms are established. Snapshot route if terms clear: weekly tar.bz2 at the R2 bucket linked from incidentdatabase.ai/research/snapshots/."
   },
-
   "mit_airr": {
     "name": "MIT AI Risk Repository",
     "url": "https://airisk.mit.edu/",
@@ -147,6 +140,6 @@
         "via": "arXiv identifier encodes August 2024"
       }
     ],
-    "notes": "Adapter not yet written; this is the intended tagging spine. Day unknown, pinned to month start. Database access via Google Sheets copy link and OneDrive mirror linked from the /risks page. Now also published in Patterns (2026). The initiative additionally hosts an AI Incident Tracker, an AI Governance database, and expert survey results under the same licence -- all unexplored."
+    "notes": "Adapter landed 2026-07-25 (scripts/adapters/mit_airr.py); this is the tagging spine. Licence additionally confirmed inside the workbook itself. Day unknown, pinned to month start. Database access via Google Sheets copy link and OneDrive mirror linked from the /risks page. Now also published in Patterns (2026). The initiative additionally hosts an AI Incident Tracker, an AI Governance database, and expert survey results under the same licence -- all unexplored."
   }
 }

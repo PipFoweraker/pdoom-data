@@ -189,7 +189,9 @@ day and is the difference between a collaborator and an extractive scraper.
 
 - `actors` is free text. It needs an entity resolution pass before it can be
   joined across sources. Deferred deliberately.
-- `airr_tags` are empty until the MIT AI Risk Repository taxonomy adapter
-  lands. That adapter is the categorisation spine for everything else.
+- `airr_tags` on raw records are a placeholder and are dropped by the build.
+  Tags now arrive as enrichment layers under `data/enrichment/airr_tags/`
+  and surface as `airr_tags_by_layer`, so a machine pass and a human pass
+  can coexist without either overwriting the other.
 - `source_available_at` is null for most sources pending a per-source
   research pass. Roughly 15 sources, perhaps an hour of work total.

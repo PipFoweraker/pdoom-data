@@ -92,6 +92,27 @@ which is exactly the trap this structure avoids.
 `review_status` is a *factual* statement about whether any review exists
 (`unreviewed`, `needs_privacy_review`, `reviewed`). It is not a verdict.
 
+### Risk-domain tags
+
+`airr_tags_by_layer` maps a tagging layer to an inferred MIT AI Risk
+Repository domain:
+
+```json
+"airr_tags_by_layer": {"machine_v1":
+  {"domain": "7. AI System Safety, Failures, & Limitations",
+   "margin": 0.41, "tokens_used": 31, "confidence": "medium"}}
+```
+
+`machine_v1` is inferred by a token-statistics classifier trained on the AI
+Risk Database's own labelled descriptions. On held-out descriptions it scores
+82% top-1 accuracy against a 26% majority baseline. **On short titles it is
+materially worse and that gap is unmeasured** -- it misfiled
+"SolidGoldMagikarp" and "The Rise of Parasitic AI" as Privacy & Security when
+both are system-safety findings. Treat `very_low` and `low` confidence tags as
+a starting filter, never as a label. Roughly 300 records are deliberately
+untagged, because abstaining costs a reviewer nothing and a confident wrong
+tag costs trust.
+
 ---
 
 ## 4. Two temporal gates, not one
