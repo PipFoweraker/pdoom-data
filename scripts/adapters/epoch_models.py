@@ -51,8 +51,16 @@ SOURCE_AVAILABLE_AT_NOTE = (
 )
 
 
+# Characters that carry meaning in model names. Stripping them silently
+# merged distinct models: PointNet++ onto PointNet, DeepLabV3+ onto DeepLabV3.
+NAME_SUBSTITUTIONS = [("++", "_plusplus"), ("+", "_plus"), ("#", "_sharp")]
+
+
 def slugify(text):
-    slug = re.sub(r"[^a-z0-9]+", "_", _base.to_ascii(text).lower()).strip("_")
+    name = _base.to_ascii(text).lower()
+    for symbol, replacement in NAME_SUBSTITUTIONS:
+        name = name.replace(symbol, replacement)
+    slug = re.sub(r"[^a-z0-9]+", "_", name).strip("_")
     return slug or "unnamed"
 
 

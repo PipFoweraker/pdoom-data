@@ -220,10 +220,20 @@ def write_dump(source_id, candidates, raw_records, metadata):
     reaches disk is treated as immutable and gets committed.
     """
     failures = []
+    seen_ids = {}
     for index, record in enumerate(candidates):
         problems = validate_candidate(record)
+        record_id = record.get("id")
+        # Duplicate ids are silent corruption: a consumer keying by id loses
+        # one of the pair, and an attributed review lands on the wrong record.
+        # Caught here rather than downstream, where it looks like a mystery.
+        if record_id in seen_ids:
+            problems.append("duplicate id, first seen at index %d"
+                            % seen_ids[record_id])
+        else:
+            seen_ids[record_id] = index
         if problems:
-            failures.append((index, record.get("id", "?"), problems))
+            failures.append((index, record_id or "?", problems))
     if failures:
         raise ValueError(
             "%d of %d candidates failed validation; first few: %r"
