@@ -28,3 +28,9 @@
 .gitignore export-ignore
 pre-commit-hook.sh export-ignore
 ASCII_CODING_STANDARDS.md export-ignore
+
+# Data files are hash-verified against MANIFEST.sha256. With
+# core.autocrlf=true these would check out as CRLF on Windows and every
+# integrity check would fail, so pin them to LF explicitly.
+*.jsonl text eol=lf
+*.sha256 text eol=lf

@@ -7,6 +7,8 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+# ...but scripts/build/ is source, not a Python build artifact
+!scripts/build/
 
 # Data pipeline
 logs/
