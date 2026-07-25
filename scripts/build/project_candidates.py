@@ -54,6 +54,12 @@ TOMBSTONE_ROOT = os.path.join(RAW_ROOT, "_tombstones")
 # silently enter the feed just by existing.
 SOURCES = ["epoch_ai", "forum_lesswrong", "forum_eaforum"]
 
+# Source-level facts (notably source_available_at) are resolved here at build
+# time rather than stamped by adapters. They are properties of the SOURCE, not
+# of any particular fetch, so correcting one must not require re-downloading a
+# dump. This supersedes the "adapter stamps it" wording in ADAPTER_SPEC v0.1.
+SOURCE_REGISTRY_PATH = os.path.join(REPO_ROOT, "config", "sources.json")
+
 # Tier bands are QUANTILES of the final salience distribution, not absolute
 # cut points. Absolute thresholds against a percentile-derived score pile
 # almost everything into the bottom band, which makes the review queue useless.
@@ -237,7 +243,38 @@ def assign_tiers(records):
     return cuts
 
 
-def project(records, tombstones):
+def load_source_registry():
+    if not os.path.isfile(SOURCE_REGISTRY_PATH):
+        return {}
+    with open(SOURCE_REGISTRY_PATH, encoding="ascii") as handle:
+        return json.load(handle)
+
+
+def apply_source_registry(record, registry):
+    """Stamp source-level facts, recording where each came from.
+
+    Leaves the clock null when the registry has no verified date. Null is
+    ungated and honest; a guess is indistinguishable from a fact later.
+    """
+    source_id = str(record.get("id", "")).split(":", 1)[0]
+    entry = registry.get(source_id)
+    if not entry:
+        record["_provenance"]["source_available_at"] = {
+            "layer": "registry", "method": "source_not_in_registry",
+            "confidence": "low",
+        }
+        return
+    available = entry.get("source_available_at")
+    record["source_available_at"] = available
+    record["_provenance"]["source_available_at"] = {
+        "layer": "registry",
+        "method": "config/sources.json",
+        "confidence": entry.get("confidence", "low") if available else "low",
+        "evidence_count": len(entry.get("evidence") or []),
+    }
+
+
+def project(records, tombstones, registry):
     """Returns (kept, dropped) where dropped explains every exclusion."""
     kept = []
     dropped = []
@@ -297,6 +334,7 @@ def project(records, tombstones):
     tier_cuts = assign_tiers(kept)
 
     for record in kept:
+        apply_source_registry(record, registry)
         flagged = bool(PRIVACY_RE.search(record.get("title", "") or ""))
         record["privacy_review_required"] = flagged
         record["review_status"] = "needs_privacy_review" if flagged else "unreviewed"
@@ -311,6 +349,7 @@ def main():
     args = parser.parse_args()
 
     tombstones = load_tombstones()
+    registry = load_source_registry()
     inputs = []
     records = []
 
@@ -331,7 +370,7 @@ def main():
         })
         print("loaded %-18s %5d records" % (source_id, len(loaded)))
 
-    kept, dropped, tier_cuts = project(records, tombstones)
+    kept, dropped, tier_cuts = project(records, tombstones, registry)
 
     tier_counts = defaultdict(int)
     for record in kept:
@@ -367,6 +406,11 @@ def main():
         "built_at": _base.utc_now_iso(),
         "adapter_framework_version": _base.ADAPTER_FRAMEWORK_VERSION,
         "inputs": inputs,
+        "source_registry": {
+            "path": "config/sources.json",
+            "sources_resolved": sorted(set(
+                str(r.get("id", "")).split(":", 1)[0] for r in kept)),
+        },
         "counts": {
             "input_records": len(records),
             "dropped": len(dropped),

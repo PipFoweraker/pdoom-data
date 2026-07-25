@@ -69,12 +69,31 @@ the existing `year` integer makes.
 | `source_available_at` | when the containing DATASET became public| can a player in year Y have this tool |
 | `ingested_at`         | when pdoom-data snapshotted it           | audit only, never game-visible |
 
-`source_available_at` is a property of the source, not the record, so it lives
-in the adapter and is stamped onto every record it emits.
+`source_available_at` is a property of the source, not the record. It lives in
+`config/sources.json` and is resolved by the build, NOT stamped by adapters.
+(v0.1 of this spec said adapters stamp it. That was wrong: correcting a date
+would then require re-downloading every dump. Superseded 2026-07-25.)
 
 Set a clock to `null` rather than guessing. A null clock is ungated and
 honest; a fabricated clock silently corrupts the gating mechanic and cannot be
-distinguished from a real one later.
+distinguished from a real one later. Every non-null date in the registry
+carries an `evidence` entry naming what was read; a date without evidence is
+not permitted.
+
+### Two gates, not one
+
+These clocks answer different questions and must not be combined into a single
+visibility test:
+
+| Gate | Test | Governs |
+|------|------|---------|
+| Fact visibility | `published_at <= game_date` | whether a player can know a thing happened |
+| Dataset unlock | `source_available_at <= game_date` | whether a player has the source as a research instrument |
+
+Combining them hides every pre-2024 model release from every pre-2024 player,
+because Epoch's database did not exist until 2024-06 even though AlphaGo was
+public in 2016. The record carries both clocks; which gate applies to which
+mechanic is a game decision and therefore belongs in pdoom1, not here.
 
 ## Candidate record shape
 

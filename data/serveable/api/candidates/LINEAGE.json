@@ -1,7 +1,7 @@
 {
   "adapter_framework_version": "0.1.0",
   "build_version": "0.1.0",
-  "built_at": "2026-07-25T00:05:23.920950+00:00",
+  "built_at": "2026-07-25T00:43:01.047319+00:00",
   "counts": {
     "by_tier": {
       "A": 172,
@@ -127,5 +127,13 @@
     "review": "every record is review_status=unreviewed or needs_privacy_review; game_facing is false for all records and only a human review pass may flip it",
     "salience": "percentile within (kind, year) times topical_relevance; measures estimated importance, not source quality",
     "truncation": "none; every input record is either kept or listed in dropped_records"
+  },
+  "source_registry": {
+    "path": "config/sources.json",
+    "sources_resolved": [
+      "epoch_ai",
+      "forum_eaforum",
+      "forum_lesswrong"
+    ]
   }
 }

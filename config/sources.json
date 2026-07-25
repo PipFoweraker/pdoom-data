@@ -1,0 +1,152 @@
+{
+  "_schema": {
+    "version": "0.1.0",
+    "purpose": "Registry of source-level facts that are properties of the SOURCE rather than of any particular fetch. Resolved at build time by scripts/build/project_candidates.py, so correcting an entry here never requires re-downloading a dump.",
+    "fields": {
+      "source_available_at": "ISO date the source dataset or site first became publicly available. Gates whether a player at a given in-game date could plausibly have this source as a tool. Null means ungated.",
+      "confidence": "high = first-party or multiple independent sources agree on a specific date; medium = single credible secondary source, or month known but not day; low = inferred.",
+      "evidence": "What was actually read, with the URL. A date with no evidence entry is not permitted.",
+      "corpus_start": "Earliest content the source covers, where different from source_available_at."
+    },
+    "policy": "Never guess a date. A fabricated clock is indistinguishable from a real one later and silently corrupts the in-game gating mechanic. Leave null and record the attempt.",
+    "last_reviewed": "2026-07-25"
+  },
+
+  "epoch_ai": {
+    "name": "Epoch AI, Data on Notable AI Models",
+    "url": "https://epoch.ai/data/notable-ai-models",
+    "license_spdx": "CC-BY-4.0",
+    "source_available_at": "2024-06-01",
+    "confidence": "medium",
+    "corpus_start": "1950",
+    "evidence": [
+      {
+        "claim": "Epoch AI's data hub, including the public model database, launched in June 2024. Epoch AI itself was founded June 2022.",
+        "url": "https://epoch.ai/data",
+        "retrieved_at": "2026-07-25",
+        "via": "web search summary of first-party pages"
+      }
+    ],
+    "notes": "Day unknown; pinned to month start. Predecessor datasets on compute trends existed from approximately 2022 (Sevilla et al., Compute Trends Across Three Eras of Machine Learning), so an earlier gate could be argued for compute data specifically. Single-sourced -- worth a first-party confirmation before the gating mechanic ships."
+  },
+
+  "forum_lesswrong": {
+    "name": "LessWrong",
+    "url": "https://www.lesswrong.com/",
+    "license_spdx": "NOASSERTION",
+    "source_available_at": "2009-03-01",
+    "confidence": "high",
+    "corpus_start": "2009-03",
+    "evidence": [
+      {
+        "claim": "In early March 2009, Yudkowsky founded LessWrong, repurposing his contributions to Overcoming Bias as seed content.",
+        "url": "https://www.lesswrong.com/posts/S69ogAGXcc9EQjpcZ/a-brief-history-of-lesswrong",
+        "retrieved_at": "2026-07-25",
+        "via": "first-party site history post, corroborated by Wikipedia"
+      },
+      {
+        "claim": "LessWrong 2.0 open beta began 2017-09-20; full launch March 2018.",
+        "url": "https://www.lesswrong.com/posts/bxctncS8qcgeCEMGN/lw-2-0-open-beta-starts-9-20",
+        "retrieved_at": "2026-07-25",
+        "via": "first-party announcement post"
+      }
+    ],
+    "notes": "Two defensible gates. Site readability by a player dates from 2009-03 and is what source_available_at records. The GraphQL API this repo actually uses only exists from LessWrong 2.0 (2017-09-20), which matters for reproducibility but not for in-game knowledge gating. Predecessor Overcoming Bias launched November 2006."
+  },
+
+  "forum_eaforum": {
+    "name": "EA Forum",
+    "url": "https://forum.effectivealtruism.org/",
+    "license_spdx": "NOASSERTION",
+    "source_available_at": "2014-01-01",
+    "confidence": "medium",
+    "corpus_start": "2012",
+    "evidence": [
+      {
+        "claim": "The EA Forum launched in 2014, with seed content from a group blog that ran between 2012 and 2014. A newer version launched in 2018 on a new codebase.",
+        "url": "https://forum.effectivealtruism.org/topics/effective-altruism-forum-1",
+        "retrieved_at": "2026-07-25",
+        "via": "first-party topic page"
+      }
+    ],
+    "notes": "Year known, month not. Pinned to year start, which biases the gate EARLY by up to eleven months. If the gating mechanic proves sensitive to this, pin down the month before relying on it."
+  },
+
+  "openalex": {
+    "name": "OpenAlex",
+    "url": "https://openalex.org/",
+    "license_spdx": "CC0-1.0",
+    "source_available_at": "2022-01-01",
+    "confidence": "high",
+    "corpus_start": "pre-1900",
+    "evidence": [
+      {
+        "claim": "OpenAlex was released on 1 January 2022 by OurResearch as a replacement for Microsoft Academic Graph, which Microsoft retired at the end of 2021.",
+        "url": "https://arxiv.org/pdf/2205.01833",
+        "retrieved_at": "2026-07-25",
+        "via": "OpenAlex whitepaper plus contemporaneous reporting"
+      }
+    ],
+    "notes": "Adapter not yet written. Predecessor Microsoft Academic Graph was available from approximately 2015 to 2021-12-31, so scholarly-graph tooling as a capability predates OpenAlex itself."
+  },
+
+  "arxiv": {
+    "name": "arXiv",
+    "url": "https://arxiv.org/",
+    "license_spdx": "NOASSERTION",
+    "source_available_at": "1991-08-01",
+    "confidence": "medium",
+    "corpus_start": "1991-08",
+    "evidence": [
+      {
+        "claim": "arXiv began as an automated e-print server in August 1991.",
+        "url": "https://arxiv.org/about",
+        "retrieved_at": "2026-07-25",
+        "via": "recalled from general knowledge; NOT independently verified in this pass"
+      }
+    ],
+    "notes": "LOW-RIGOUR ENTRY. The August 1991 date is widely known but was not verified against the first-party page during this research pass. Confirm before relying on it. Metadata licensing varies by paper; per-paper licence must be checked if full text is ever retained."
+  },
+
+  "aiid": {
+    "name": "AI Incident Database",
+    "url": "https://incidentdatabase.ai/",
+    "license_spdx": null,
+    "source_available_at": "2020-11-18",
+    "confidence": "high",
+    "corpus_start": "1983",
+    "evidence": [
+      {
+        "claim": "The AI Incident Database launched publicly in November 2020 via Partnership on AI, announced by Sean McGregor on 2020-11-18.",
+        "url": "https://partnershiponai.org/aiincidentdatabase/",
+        "retrieved_at": "2026-07-25",
+        "via": "Partnership on AI announcement plus contemporaneous mailing list post"
+      }
+    ],
+    "notes": "NOT INGESTED. Reuse terms are not stated on the snapshots page and could not be confirmed as CC-BY compatible, so this source is excluded under the repo's CC-BY-4.0 posture until terms are established. Snapshot route if terms clear: weekly tar.bz2 at the R2 bucket linked from incidentdatabase.ai/research/snapshots/."
+  },
+
+  "mit_airr": {
+    "name": "MIT AI Risk Repository",
+    "url": "https://airisk.mit.edu/",
+    "license_spdx": "CC-BY-4.0",
+    "source_available_at": "2024-08-01",
+    "confidence": "medium",
+    "corpus_start": "n/a (taxonomy, not a timeline)",
+    "evidence": [
+      {
+        "claim": "Site states: Data from the MIT AI Risk Initiative is licensed under CC BY 4.0.",
+        "url": "https://airisk.mit.edu/",
+        "retrieved_at": "2026-07-25",
+        "via": "first-party page"
+      },
+      {
+        "claim": "Repository published with Slattery et al. 2024, arXiv:2408.12622, August 2024.",
+        "url": "https://doi.org/10.48550/arXiv.2408.12622",
+        "retrieved_at": "2026-07-25",
+        "via": "arXiv identifier encodes August 2024"
+      }
+    ],
+    "notes": "Adapter not yet written; this is the intended tagging spine. Day unknown, pinned to month start. Database access via Google Sheets copy link and OneDrive mirror linked from the /risks page. Now also published in Patterns (2026). The initiative additionally hosts an AI Incident Tracker, an AI Governance database, and expert survey results under the same licence -- all unexplored."
+  }
+}
