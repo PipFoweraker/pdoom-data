@@ -1,0 +1,43 @@
+{
+  "adapter_framework_version": "0.1.0",
+  "adapter_version": "0.1.0",
+  "extraction_date": "2026-07-25T05:36:22.485431+00:00",
+  "extraction_method": "bulk_csv_download",
+  "extraction_statistics": {
+    "errors": 0,
+    "fetched": 1039,
+    "skipped_no_date": 5,
+    "skipped_window": 0,
+    "written": 1034
+  },
+  "filters_applied": {
+    "requires_publication_date": true,
+    "since": null,
+    "until": null
+  },
+  "license": {
+    "attribution": "Epoch AI, Data on Notable AI Models",
+    "citation": "Epoch AI. Data on Notable AI Models. Retrieved from https://epoch.ai/data/notable-ai-models",
+    "source_terms_url": "https://epoch.ai/data/ai-models-documentation",
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "verified_at": "2026-07-25",
+    "verified_by": "web search of first-party Epoch AI documentation pages"
+  },
+  "notes": "Bulk CSV, updated daily upstream. Re-running produces a new dump directory; diffs between dumps are evidence of upstream change.",
+  "query_window": {
+    "since": null,
+    "until": null
+  },
+  "raw_record_count": 1034,
+  "record_count": 1034,
+  "source_available_at": null,
+  "source_available_at_note": "UNVERIFIED. Needs a first-party check of when the notable-models database was first published. Until then this source is ungated.",
+  "source_id": "epoch_ai",
+  "source_name": "Epoch AI Notable AI Models",
+  "source_payload_sha256": "3d3662b117d659c659ce056a98ff124cb23baefbb4e73388f7899c45ba985e5a",
+  "source_url": "https://epoch.ai/data/notable_ai_models.csv",
+  "tool_versions": {
+    "python": "3.11.9"
+  }
+}

@@ -259,3 +259,6 @@ README.md (start here)
 **Maintained by**: pdoom-data team
 **Last audit**: 2025-11-09
 **Next review**: When new major features added
+
+- [CONSUMER_GUIDE.md](CONSUMER_GUIDE.md) - For anyone building on this data: facts vs opinions, salience profiles, inheriting or ignoring human reviews, the two temporal gates, and obligations (tombstones, licensing).
+- [ADAPTER_SPEC.md](ADAPTER_SPEC.md) - Contract every external source implements before entering the repo.

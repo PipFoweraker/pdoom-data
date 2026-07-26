@@ -1,0 +1,157 @@
+{
+  "adapter_framework_version": "0.1.0",
+  "airr_tag_layers": [
+    {
+      "evaluation": {
+        "abstained": 10,
+        "accuracy_when_attempted": 0.8232,
+        "attempted": 311,
+        "caveat": "Upper bound only. Measured on AIRR risk descriptions; candidates are forum-post and model-release titles, a different and much shorter text distribution. Real accuracy on candidates is UNMEASURED and expected to be materially lower.",
+        "coverage": 0.9688,
+        "majority_class_baseline": 0.26,
+        "test_size": 321,
+        "train_size": 1281
+      },
+      "file": "machine_v1.json",
+      "layer_id": "machine_v1",
+      "nature": "MACHINE OPINION, not fact. Domain assignment inferred from token statistics, not read by a person.",
+      "tagged_count": 3135
+    }
+  ],
+  "build_version": "0.2.0",
+  "built_at": "2026-07-25T05:48:28.544851+00:00",
+  "counts": {
+    "by_year": {
+      "1950": 1,
+      "1952": 1,
+      "1954": 1,
+      "1955": 2,
+      "1957": 1,
+      "1959": 3,
+      "1960": 2,
+      "1962": 2,
+      "1963": 1,
+      "1965": 1,
+      "1966": 1,
+      "1968": 2,
+      "1969": 1,
+      "1973": 1,
+      "1975": 1,
+      "1976": 1,
+      "1980": 1,
+      "1981": 1,
+      "1982": 1,
+      "1983": 1,
+      "1984": 1,
+      "1986": 4,
+      "1987": 3,
+      "1988": 2,
+      "1989": 7,
+      "1990": 6,
+      "1991": 1,
+      "1992": 4,
+      "1993": 3,
+      "1994": 6,
+      "1995": 2,
+      "1996": 3,
+      "1997": 4,
+      "1998": 1,
+      "1999": 4,
+      "2000": 2,
+      "2001": 3,
+      "2002": 1,
+      "2003": 4,
+      "2004": 2,
+      "2005": 3,
+      "2006": 9,
+      "2007": 6,
+      "2008": 6,
+      "2009": 13,
+      "2010": 10,
+      "2011": 11,
+      "2012": 13,
+      "2013": 19,
+      "2014": 33,
+      "2015": 29,
+      "2016": 49,
+      "2017": 55,
+      "2018": 37,
+      "2019": 68,
+      "2020": 50,
+      "2021": 79,
+      "2022": 91,
+      "2023": 719,
+      "2024": 698,
+      "2025": 703,
+      "2026": 644
+    },
+    "dropped": 0,
+    "input_records": 3434,
+    "kept": 3434,
+    "privacy_flagged": 23,
+    "tier_cut_points_by_profile": {
+      "default_v1": {
+        "A": {
+          "count": 172,
+          "salience_max": 0.9902,
+          "salience_min": 0.788
+        },
+        "B": {
+          "count": 687,
+          "salience_max": 0.7865,
+          "salience_min": 0.415
+        },
+        "C": {
+          "count": 1717,
+          "salience_max": 0.4143,
+          "salience_min": 0.0637
+        },
+        "D": {
+          "count": 858,
+          "salience_max": 0.0635,
+          "salience_min": 0.0025
+        }
+      }
+    },
+    "with_human_reviews": 0
+  },
+  "dropped_records": [],
+  "human_review_layers": [],
+  "inputs": [
+    {
+      "dump": "data/raw/epoch_ai/dumps/2026-07-25_053622",
+      "dump_data_sha256": "aa0d01333140451f8cb8eb6810ea54d4d5601a6418438a02b051b38790e5cd5f",
+      "records": 1034,
+      "source_id": "epoch_ai"
+    },
+    {
+      "dump": "data/raw/forum_lesswrong/dumps/2026-07-24_235157",
+      "dump_data_sha256": "d04fd28ecb2bd7c0d867fb99b2451b898a7c632cc0d7f0fc65a8d2816f8c5627",
+      "records": 1200,
+      "source_id": "forum_lesswrong"
+    },
+    {
+      "dump": "data/raw/forum_eaforum/dumps/2026-07-24_235237",
+      "dump_data_sha256": "c10f428e6c0bbfdc3c5cec7dc0513ea36bbad29540c1f883d7756bb6c53d1128",
+      "records": 1200,
+      "source_id": "forum_eaforum"
+    }
+  ],
+  "ordering": "file is sorted by profile 'default_v1'; this is presentation only",
+  "policy": {
+    "facts_vs_opinions": "Facts: title, clocks, actors, source_urls, signals, license. Opinions: salience_by_profile (named weighting) and reviews (attributed to a named reviewer). No bare salience field and no game_facing flag, so a disagreeing consumer can ignore rather than fork.",
+    "privacy": "Raw dumps are immutable except by tombstone; tombstones record id, date and reason category, never content. Downstream consumers must honour tombstones.",
+    "review": "Reviews are attributed opinions. Consumers may inherit a reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+    "truncation": "None. Every input record is either kept or listed in dropped_records with a reason."
+  },
+  "salience_profiles": [
+    {
+      "profile_id": "default_v1",
+      "status": "provisional",
+      "version": "1.0.0"
+    }
+  ],
+  "source_registry": {
+    "path": "config/sources.json"
+  }
+}

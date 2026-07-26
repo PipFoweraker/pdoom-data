@@ -1,0 +1,47 @@
+{
+  "adapter_framework_version": "0.1.0",
+  "adapter_version": "0.1.0",
+  "extraction_date": "2026-07-24T23:52:37.953631+00:00",
+  "extraction_method": "graphql_api",
+  "extraction_statistics": {
+    "errors": 0,
+    "fetched": 1200,
+    "per_year": {
+      "2023": 300,
+      "2024": 300,
+      "2025": 300,
+      "2026": 300
+    },
+    "written": 1200
+  },
+  "filters_applied": {
+    "sorted_by": "top",
+    "text_retained": false,
+    "top_per_year": 300
+  },
+  "license": {
+    "attribution": "EA Forum (https://forum.effectivealtruism.org/). Post authors retain all rights to their content.",
+    "citation": "EA Forum, post metadata retrieved via public GraphQL API",
+    "reuse_basis": "facts_and_link_only",
+    "source_terms_url": "https://forum.effectivealtruism.org/",
+    "spdx": "NOASSERTION",
+    "url": null,
+    "verified_at": "2026-07-25",
+    "verified_by": "No license relied upon. Bibliographic metadata and hyperlink only; no post text is stored. Terms not separately reviewed because no copyrightable expression is retained."
+  },
+  "notes": "Metadata and hyperlink only; no post text retained. Karma is an external salience signal, stored as a dated observation because scores keep accruing after publication.",
+  "query_window": {
+    "since": 2023,
+    "until": 2026
+  },
+  "raw_record_count": 1200,
+  "record_count": 1200,
+  "source_available_at": null,
+  "source_available_at_note": "UNVERIFIED. Candidate values to check before enabling gating: LessWrong approx 2009 (LessWrong 2.0 approx 2017-2018, a materially different site); EA Forum approx 2011. Recorded as hints, not as data.",
+  "source_id": "forum_eaforum",
+  "source_name": "EA Forum",
+  "source_url": "https://forum.effectivealtruism.org/graphql",
+  "tool_versions": {
+    "python": "3.11.9"
+  }
+}

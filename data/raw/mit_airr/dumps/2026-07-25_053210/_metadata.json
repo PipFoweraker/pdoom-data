@@ -1,0 +1,81 @@
+{
+  "adapter_version": "0.1.0",
+  "content_note": "NOT candidate events. This dump is reference data: the shared vocabulary other records get tagged against, plus the labelled database that vocabulary was derived from.",
+  "content_type": "reference_taxonomy_and_labelled_database",
+  "database_columns": [
+    "Title",
+    "QuickRef",
+    "Ev_ID",
+    "Paper_ID",
+    "Cat_ID",
+    "SubCat_ID",
+    "AddEv_ID",
+    "Category level",
+    "Risk category",
+    "Risk subcategory",
+    "Description",
+    "Additional ev.",
+    "P.Def",
+    "p.AddEv",
+    "Entity",
+    "Intent",
+    "Timing",
+    "Domain",
+    "Sub-domain"
+  ],
+  "extraction_method": "google_sheets_xlsx_export",
+  "extraction_statistics": {
+    "causal_taxonomy_entries": 9,
+    "domain_taxonomy_entries": 24,
+    "errors": 0,
+    "included_resources": 80,
+    "risk_database_labelled_rows": 1430,
+    "risk_database_rows": 2574
+  },
+  "license": {
+    "attribution": "MIT AI Risk Repository (MIT AI Risk Initiative)",
+    "citation": "Slattery, P., Saeri, A. K., Grundy, E. A. C., Graham, J., Noetel, M., Uuk, R., Dao, J., Pour, S., Casper, S., & Thompson, N. (2024). The AI Risk Repository: A Comprehensive Meta-Review, Database, and Taxonomy of Risks from Artificial Intelligence. arXiv:2408.12622",
+    "source_terms_url": "https://airisk.mit.edu/",
+    "spdx": "CC-BY-4.0",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "verified_at": "2026-07-25",
+    "verified_by": "first-party site statement plus an in-artifact statement on the Domain Taxonomy sheet: 'This work is licensed under CC BY 4.0'"
+  },
+  "notes": "Upstream is a live Google Sheet updated in place, so the payload hash is the only fixed record of what a given dump saw. Sheet titles are version-stamped upstream (v1 taxonomies, v4 database); a bump there is a breaking change worth noticing.",
+  "resources_columns": [
+    "",
+    "Included",
+    "Paper_ID",
+    "QuickRef",
+    "Title",
+    "Authors (full)",
+    "Authors (short)",
+    "Year",
+    "DOI",
+    "URL",
+    "Citations (28 May 2024)",
+    "Cites/yr",
+    "Item type",
+    ""
+  ],
+  "source_id": "mit_airr",
+  "source_name": "MIT AI Risk Repository",
+  "source_payload_sha256": "96e855e80fe9bd279e27fdd08931aa90bb865f6d4e3956777916c01bb805eecc",
+  "source_url": "https://docs.google.com/spreadsheets/d/15LeHcpeuZC9txkvcaMoh3sUhkMvdMMry69xxXL46DT0/export?format=xlsx",
+  "tool_versions": {
+    "python": "3.11.9"
+  },
+  "workbook_sheets": [
+    "Contents",
+    "Causal Taxonomy of AI Risks v1",
+    "Domain Taxonomy of AI Risks v1",
+    "AI Risk Database v4",
+    "AI Risk Database explainer",
+    "Causal Taxonomy statistics",
+    "Domain Taxonomy statistics",
+    "Causal x Domain Taxonomy compar",
+    "Included resources",
+    "Resources being considered",
+    "Change Log"
+  ]
+}
