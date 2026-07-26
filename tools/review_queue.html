@@ -120,8 +120,10 @@ kbd {
          Output at <code>data/serveable/api/candidates/all_candidates.jsonl</code></p>
       <div id="help" style="text-align:left; margin-top: 26px;">
         <b>Keys</b><br>
-        <kbd>a</kbd> accept &nbsp; <kbd>x</kbd> reject &nbsp; <kbd>s</kbd> unsure
-        &nbsp; <kbd>p</kbd> privacy problem (proposes tombstone)<br>
+        <kbd>a</kbd> accept -- could be a game event<br>
+        <kbd>x</kbd> reject -- definitely not<br>
+        <kbd>s</kbd> unsure -- can't tell without more context; revisit later<br>
+        <kbd>p</kbd> privacy problem -- proposes removal, needs confirming<br>
         <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> override tier A/B/C/D
         &nbsp; <kbd>n</kbd> note &nbsp; <kbd>o</kbd> open source link<br>
         <kbd>j</kbd>/<kbd>k</kbd> or arrows: next/prev &nbsp;
@@ -277,6 +279,17 @@ function render() {
 
   if (rec.summary) html += "<div class='summary'>" + esc(rec.summary) + "</div>";
 
+  var ex = rec.extra || {};
+  if (ex.notability_criteria || ex.frontier_model || ex.country || ex.open_weights) {
+    html += "<div class='sig'>";
+    if (ex.notability_criteria)
+      html += "<span>notable for <b>" + esc(ex.notability_criteria) + "</b></span>";
+    if (String(ex.frontier_model).toLowerCase() === "true")
+      html += "<span><b>frontier model</b></span>";
+    if (ex.open_weights) html += "<span>open weights <b>" + esc(ex.open_weights) + "</b></span>";
+    if (ex.country) html += "<span>" + esc(ex.country) + "</span>";
+    html += "</div>";
+  }
   html += "<div class='sig'>";
   if (karma !== null) html += "<span>karma <b>" + karma + "</b></span>";
   if (cites !== null) html += "<span>citations <b>" + cites + "</b></span>";
@@ -304,6 +317,12 @@ function render() {
   html += "<div><input id='note' placeholder='note (press n to focus, Enter to save)' value='" +
     esc(d.note || "") + "'></div>";
 
+  var prior = rec.reviews || [];
+  for (var pi = 0; pi < prior.length; pi++) {
+    html += "<div class='meta'>reviewed by <b>" + esc(prior[pi].reviewer) +
+      "</b>: <b class='d-" + esc(prior[pi].verdict) + "'>" + esc(prior[pi].verdict) +
+      "</b> " + esc((prior[pi].at || "").slice(0, 10)) + "</div>";
+  }
   if (d.decision) {
     html += "<div class='meta'>current: <b class='d-" + d.decision + "'>" +
       esc(d.decision) + "</b>" + (d.tier_override ? " tier->" + esc(d.tier_override) : "") +

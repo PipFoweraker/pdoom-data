@@ -1,0 +1,1474 @@
+{
+  "_metadata": {
+    "layer": "human_review",
+    "reviewer": "Pip Foweraker",
+    "precedence": "highest",
+    "nature": "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+    "tool": "tools/review_queue.html",
+    "tool_version": "0.2.0",
+    "exported_at": "2026-07-26T10:57:01.362Z",
+    "record_count": 206,
+    "tombstone_count": 2,
+    "note": "Merge at top precedence. Tombstones go to data/raw/_tombstones/."
+  },
+  "records": {
+    "forum_lesswrong:iKm2FhpWkuuBojm82": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "privacy",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:00.301Z"
+    },
+    "forum_lesswrong:6ZnznCaTcbGYsCmqu": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:38.730Z"
+    },
+    "forum_lesswrong:aPeJE8bSo6rAFoLqg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:42.272Z"
+    },
+    "forum_lesswrong:TpSFoqoG2M5MAAesg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:44.652Z"
+    },
+    "forum_lesswrong:5CfBDiQNg9upfipWk": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:46.998Z"
+    },
+    "forum_lesswrong:iNsy7MsbodCyNTwKs": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:51.137Z"
+    },
+    "forum_lesswrong:5jjk4CDnj9tA7ugxr": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:53.739Z"
+    },
+    "forum_lesswrong:D7PumeYTDPfBTp3i7": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:36:55.063Z"
+    },
+    "forum_eaforum:cPFBJ8YkkzS9niBuo": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "privacy",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:03.038Z"
+    },
+    "forum_lesswrong:njAZwT8nkHnjipJku": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:06.445Z"
+    },
+    "forum_lesswrong:Xwrajm92fdjd7cqnN": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:13.309Z"
+    },
+    "epoch_ai:gemini_1_0_ultra": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:18.850Z"
+    },
+    "forum_lesswrong:gTZ2SxesbHckJ3CkF": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:38.038Z"
+    },
+    "forum_lesswrong:xwdRzJxyqFqgXTWbH": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:41.845Z"
+    },
+    "forum_lesswrong:pFzctpJBat95SrCyC": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:43.764Z"
+    },
+    "epoch_ai:grok_4": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:48.832Z"
+    },
+    "epoch_ai:llama_3_1_405b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:50.496Z"
+    },
+    "epoch_ai:gpt_4_jun_2023": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:51.561Z"
+    },
+    "epoch_ai:gpt_4_mar_2023": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:52.221Z"
+    },
+    "epoch_ai:minerva_540b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:53.905Z"
+    },
+    "forum_eaforum:R8AAG4QBZi5puvogR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:37:58.899Z"
+    },
+    "epoch_ai:inflection_2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:03.406Z"
+    },
+    "epoch_ai:flan_137b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:06.180Z"
+    },
+    "epoch_ai:gpt_3_5_davinci_002": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:08.076Z"
+    },
+    "epoch_ai:grok_2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:10.945Z"
+    },
+    "forum_lesswrong:vpNG99GhbBoLov9og": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:19.235Z"
+    },
+    "epoch_ai:alphastar": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:21.271Z"
+    },
+    "epoch_ai:palm_2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:22.940Z"
+    },
+    "epoch_ai:gpt_4_5": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:38:23.798Z"
+    },
+    "epoch_ai:ernie_3_0_titan": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": "I need more context to understand the relevance of things introduced by this model in order to judge his prior to doing so mechanistically",
+      "at": "2026-07-26T10:38:52.369Z"
+    },
+    "epoch_ai:flan_palm_540b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:12.127Z"
+    },
+    "forum_eaforum:L6ZmggEJw8ri4KB8X": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:21.304Z"
+    },
+    "forum_lesswrong:5spBue2z2tw4JuDCx": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:23.185Z"
+    },
+    "forum_lesswrong:ioZxrP7BhS5ArK59w": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:25.085Z"
+    },
+    "epoch_ai:amazon_titan": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:29.743Z"
+    },
+    "epoch_ai:openai_five": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:32.512Z"
+    },
+    "forum_eaforum:zmbfZjK54xF4oGjSB": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:37.150Z"
+    },
+    "forum_lesswrong:gpyqWzWYADWmLYLeX": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:38.643Z"
+    },
+    "epoch_ai:claude_3_5_sonnet": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:39.339Z"
+    },
+    "epoch_ai:megatron_turing_nlg_530b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:43.102Z"
+    },
+    "epoch_ai:jft": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:45.500Z"
+    },
+    "epoch_ai:u_palm_540b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:46.381Z"
+    },
+    "forum_lesswrong:xmWSnxJ5qfYRD9PfR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:52.457Z"
+    },
+    "forum_lesswrong:nH4c3Q9t9F3nJ7y8W": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:55.092Z"
+    },
+    "epoch_ai:claude_2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:39:56.030Z"
+    },
+    "forum_lesswrong:3EzbtNLdcnZe8og8b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:02.975Z"
+    },
+    "epoch_ai:gpt_3_175b_davinci": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:04.212Z"
+    },
+    "forum_lesswrong:d8xDGzCEYE639qqEv": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:06.519Z"
+    },
+    "epoch_ai:gnmt": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:09.036Z"
+    },
+    "forum_lesswrong:kAmgdEjq2eYQkB5PP": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:11.598Z"
+    },
+    "epoch_ai:grok_3": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:12.294Z"
+    },
+    "epoch_ai:gopher_280b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:13.592Z"
+    },
+    "epoch_ai:t5_11b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:16.218Z"
+    },
+    "epoch_ai:palm_540b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:17.277Z"
+    },
+    "forum_eaforum:Yk4D4DZpx6eriMDyY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:19.095Z"
+    },
+    "forum_eaforum:JN3kHaiosmdA7kgNY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:39.714Z"
+    },
+    "epoch_ai:falcon_180b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:40.957Z"
+    },
+    "forum_lesswrong:3PaLrzxagpbnNtPLT": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:42.914Z"
+    },
+    "epoch_ai:nemotron_4_340b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:43.739Z"
+    },
+    "epoch_ai:alphago_zero": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:44.384Z"
+    },
+    "epoch_ai:composer_2_5": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:45.110Z"
+    },
+    "forum_lesswrong:RryyWNmJNnLowbhfC": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:53.308Z"
+    },
+    "forum_lesswrong:PMc65HgRFvBimEpmJ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:40:58.073Z"
+    },
+    "epoch_ai:jurassic_1_jumbo": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:02.013Z"
+    },
+    "forum_lesswrong:epjuxGnSPof3GnMSL": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:03.158Z"
+    },
+    "epoch_ai:meena": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:05.160Z"
+    },
+    "forum_eaforum:aJwcgm2nqiZu6zq2S": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:07.520Z"
+    },
+    "epoch_ai:chinchilla": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:08.598Z"
+    },
+    "epoch_ai:noisy_student_l2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:10.361Z"
+    },
+    "epoch_ai:grok_1": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:11.231Z"
+    },
+    "forum_lesswrong:iGF7YcnQkEbwvYLPA": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:12.315Z"
+    },
+    "forum_lesswrong:F2voF4pr3BfejJawL": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:16.989Z"
+    },
+    "epoch_ai:nasv3_cifar_10": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:17.891Z"
+    },
+    "epoch_ai:resnext_101_32x48d": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:18.995Z"
+    },
+    "epoch_ai:doubao_pro": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:20.107Z"
+    },
+    "epoch_ai:openai_ti7_dota_1v1": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:20.621Z"
+    },
+    "epoch_ai:yuan_1_0": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:24.793Z"
+    },
+    "epoch_ai:llama_4_behemoth_preview": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:26.392Z"
+    },
+    "epoch_ai:qwen_72b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:28.400Z"
+    },
+    "epoch_ai:parti": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:34.694Z"
+    },
+    "epoch_ai:megatron_bert": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:36.507Z"
+    },
+    "forum_lesswrong:f5DKLsTsRRhbipH4r": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:37.973Z"
+    },
+    "epoch_ai:mt5_xxl": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:41:39.138Z"
+    },
+    "forum_lesswrong:d4HNRdw6z7Xqbnu5E": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:42:10.427Z"
+    },
+    "forum_lesswrong:jtoPawEhLNXNxvgTT": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:42:14.598Z"
+    },
+    "epoch_ai:snm_skip": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:42:16.002Z"
+    },
+    "epoch_ai:internlm": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:42:17.453Z"
+    },
+    "epoch_ai:hyperclova_204b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:42:22.056Z"
+    },
+    "epoch_ai:blenderbot_3": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:42:24.498Z"
+    },
+    "epoch_ai:opt_175b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:42:26.939Z"
+    },
+    "epoch_ai:libratus": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:06.704Z"
+    },
+    "epoch_ai:aramco_metabrain_ai": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:08.424Z"
+    },
+    "epoch_ai:xlm_roberta": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:09.477Z"
+    },
+    "forum_lesswrong:bb5Tnjdrptu89rcyY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:12.714Z"
+    },
+    "epoch_ai:llama_2_70b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:17.379Z"
+    },
+    "epoch_ai:big_transformer_for_back_translation": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:18.547Z"
+    },
+    "forum_lesswrong:xiTBpBDwubnr4MLRe": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:24.397Z"
+    },
+    "epoch_ai:alphago_lee": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:25.330Z"
+    },
+    "epoch_ai:gshard_dense": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:26.541Z"
+    },
+    "epoch_ai:alphago_fan": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:27.651Z"
+    },
+    "forum_lesswrong:xJWBofhLQjf3KmRgg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:31.988Z"
+    },
+    "epoch_ai:bloom_176b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:34.010Z"
+    },
+    "epoch_ai:switch": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:34.706Z"
+    },
+    "epoch_ai:gpt_5": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:44.334Z"
+    },
+    "forum_lesswrong:HcJPJxkyCsrpSdCii": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:45.677Z"
+    },
+    "epoch_ai:megatron_lm_8_3b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:46.340Z"
+    },
+    "epoch_ai:mixtral_8x7b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:47.662Z"
+    },
+    "epoch_ai:alphago_master": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:51.158Z"
+    },
+    "epoch_ai:reka_core": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:43:54.223Z"
+    },
+    "forum_lesswrong:gutiw8MBrYDiD2u5z": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:03.255Z"
+    },
+    "epoch_ai:lamda": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:05.105Z"
+    },
+    "epoch_ai:glam": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:07.247Z"
+    },
+    "epoch_ai:seq2seq_lstm": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:07.973Z"
+    },
+    "epoch_ai:luke": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:12.849Z"
+    },
+    "epoch_ai:xtrimopglm_100b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:13.744Z"
+    },
+    "forum_lesswrong:4mvphwx5pdsZLMmpY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:18.450Z"
+    },
+    "forum_lesswrong:nwpyhyagpPYDn4dAW": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:21.518Z"
+    },
+    "epoch_ai:t5_3b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:23.117Z"
+    },
+    "epoch_ai:bert_large": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:24.204Z"
+    },
+    "forum_lesswrong:9kQFure4hdDmRBNdH": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:28.899Z"
+    },
+    "forum_eaforum:CKKAga4HfQyAranaC": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:32.837Z"
+    },
+    "epoch_ai:xception": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:34.321Z"
+    },
+    "epoch_ai:glm_130b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:34.897Z"
+    },
+    "epoch_ai:byt5_xxl": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:37.330Z"
+    },
+    "epoch_ai:claude_3_7_sonnet": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:39.948Z"
+    },
+    "forum_lesswrong:cGcwQDKAKbQ68BGuR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:44.399Z"
+    },
+    "epoch_ai:alphazero": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:44:46.485Z"
+    },
+    "epoch_ai:yi_34b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:09.737Z"
+    },
+    "epoch_ai:inflection_2_5": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:12.256Z"
+    },
+    "epoch_ai:inception_v3": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:24.961Z"
+    },
+    "forum_eaforum:8P2GZFLnv8HW9ozLB": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:29.155Z"
+    },
+    "forum_lesswrong:vKA2BgpESFZSHaQnT": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:30.727Z"
+    },
+    "epoch_ai:composer_2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:32.827Z"
+    },
+    "epoch_ai:turing_nlg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:37.066Z"
+    },
+    "epoch_ai:roberta_large": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:47.818Z"
+    },
+    "forum_lesswrong:AP7YDke5jjY4v3X9Z": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:51.140Z"
+    },
+    "epoch_ai:dallae_2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:53.148Z"
+    },
+    "forum_lesswrong:KXujJjnmP85u8eM6B": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:57.991Z"
+    },
+    "epoch_ai:codex": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:59.223Z"
+    },
+    "epoch_ai:pali_x": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:45:59.727Z"
+    },
+    "forum_lesswrong:PwnadG4BFjaER3MGf": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:03.582Z"
+    },
+    "forum_lesswrong:wAczufCpMdaamF9fy": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:06.037Z"
+    },
+    "epoch_ai:vgg16": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:06.555Z"
+    },
+    "forum_lesswrong:EexsebbYhbe2gXkPP": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:09.987Z"
+    },
+    "epoch_ai:impala": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:11.747Z"
+    },
+    "forum_lesswrong:KFFaKu27FNugCHFmh": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:14.443Z"
+    },
+    "forum_lesswrong:ZAsJv7xijKTfZkMtr": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:15.730Z"
+    },
+    "epoch_ai:moe_multi": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:17.902Z"
+    },
+    "epoch_ai:llama_3_1_nemotron_70b_instruct": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:18.608Z"
+    },
+    "epoch_ai:galactica": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:24.040Z"
+    },
+    "epoch_ai:xlnet": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:25.093Z"
+    },
+    "epoch_ai:polynet": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:26.770Z"
+    },
+    "epoch_ai:distbelief_nnlm": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:32.463Z"
+    },
+    "epoch_ai:llama_65b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:33.845Z"
+    },
+    "forum_lesswrong:ifechgnJRtJdduFGC": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:35.516Z"
+    },
+    "epoch_ai:vit_g_14": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:38.099Z"
+    },
+    "epoch_ai:contextnet_plus_noisy_student": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:49.708Z"
+    },
+    "forum_lesswrong:ceEgAEXcL7cC2Ddiy": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:57.016Z"
+    },
+    "epoch_ai:qwen3_max": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:46:58.600Z"
+    },
+    "epoch_ai:instructgpt_175b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:47:03.042Z"
+    },
+    "epoch_ai:pangu_i": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:47:03.864Z"
+    },
+    "forum_lesswrong:jb4bBdeEEeypNkqzj": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:54:56.238Z"
+    },
+    "forum_lesswrong:xLDwCemt5qvchzgHd": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:54:57.574Z"
+    },
+    "epoch_ai:msra_c_prelu": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:54:58.914Z"
+    },
+    "epoch_ai:openai_five_rerun": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:02.142Z"
+    },
+    "forum_lesswrong:kjnQj6YujgeMN9Erq": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:06.156Z"
+    },
+    "epoch_ai:florence": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:07.853Z"
+    },
+    "epoch_ai:convs2s_ensemble_of_8_models": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:08.775Z"
+    },
+    "forum_lesswrong:2pkNCvBtK6G6FKoNn": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:10.860Z"
+    },
+    "epoch_ai:llama_3_70b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:11.737Z"
+    },
+    "epoch_ai:mesh_tensorflow_transformer_4_9b_language": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:12.823Z"
+    },
+    "epoch_ai:conformer_plus_wav2vec_2_0_plus_noisy_student": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:15.100Z"
+    },
+    "forum_lesswrong:kcKrE9mzEHrdqtDpE": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:15.976Z"
+    },
+    "epoch_ai:funsearch": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:17.503Z"
+    },
+    "forum_lesswrong:SieLowPgNgRSPGhFw": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:18.674Z"
+    },
+    "epoch_ai:st_moe": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:19.681Z"
+    },
+    "epoch_ai:vgg19": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:21.749Z"
+    },
+    "epoch_ai:resnet_200": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:23.193Z"
+    },
+    "forum_lesswrong:zaaGsFBeDTpCsYHef": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:24.781Z"
+    },
+    "forum_lesswrong:yRWv5kkDD4YhzwRLq": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:27.888Z"
+    },
+    "epoch_ai:meta_pseudo_labels": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:36.414Z"
+    },
+    "epoch_ai:gpt_2_1_5b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:40.455Z"
+    },
+    "epoch_ai:pangu_ultra": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:42.856Z"
+    },
+    "forum_eaforum:8c7LycgtkypkgYjZx": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:44.313Z"
+    },
+    "forum_lesswrong:dLXdCjxbJMGtDBWTH": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:48.400Z"
+    },
+    "epoch_ai:nekomata_14b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:52.027Z"
+    },
+    "epoch_ai:deepstack": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:52.748Z"
+    },
+    "forum_eaforum:53Gc35vDLK2u5nBxP": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:55.927Z"
+    },
+    "epoch_ai:qwen2_5_instruct_72b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:56.607Z"
+    },
+    "epoch_ai:alphacode": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:55:57.642Z"
+    },
+    "epoch_ai:esm1b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:05.196Z"
+    },
+    "forum_lesswrong:5uw26uDdFbFQgKzih": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:08.004Z"
+    },
+    "epoch_ai:transe": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:10.722Z"
+    },
+    "epoch_ai:dall_e": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:12.227Z"
+    },
+    "forum_eaforum:DaRvpDHHdaoad9Tfu": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:13.908Z"
+    },
+    "forum_lesswrong:bxt7uCiHam4QXrQAA": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:16.358Z"
+    },
+    "epoch_ai:megatron_lm_1_2b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:17.303Z"
+    },
+    "forum_eaforum:vBjSyNNnmNtJvmdAg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:18.332Z"
+    },
+    "epoch_ai:skywork_13b": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:19.743Z"
+    },
+    "epoch_ai:mesh_tensorflow_transformer_2_9b_translation": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:20.502Z"
+    },
+    "epoch_ai:saf_r_cnn": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:23.944Z"
+    },
+    "forum_lesswrong:LNA8mubrByG7SFacm": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:26.199Z"
+    },
+    "forum_lesswrong:cAC4AXiNC5ig6jQnc": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:27.897Z"
+    },
+    "forum_lesswrong:msnGbm52ZcG3xYcFo": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:28.938Z"
+    },
+    "epoch_ai:flamingo": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:31.438Z"
+    },
+    "epoch_ai:lcnp_mnist": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-07-26T10:56:34.607Z"
+    }
+  },
+  "proposed_tombstones": [
+    {
+      "id": "forum_lesswrong:iKm2FhpWkuuBojm82",
+      "category": "privacy",
+      "tombstoned_at": "2026-07-26T10:36:00.301Z",
+      "decided_by": "Pip Foweraker",
+      "note": "proposed via review_queue.html; content deliberately not recorded"
+    },
+    {
+      "id": "forum_eaforum:cPFBJ8YkkzS9niBuo",
+      "category": "privacy",
+      "tombstoned_at": "2026-07-26T10:37:03.038Z",
+      "decided_by": "Pip Foweraker",
+      "note": "proposed via review_queue.html; content deliberately not recorded"
+    }
+  ]
+}

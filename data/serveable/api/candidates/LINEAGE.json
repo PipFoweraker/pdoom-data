@@ -19,7 +19,7 @@
     }
   ],
   "build_version": "0.2.0",
-  "built_at": "2026-07-25T05:48:28.544851+00:00",
+  "built_at": "2026-07-26T11:14:23.136291+00:00",
   "counts": {
     "by_year": {
       "1950": 1,
@@ -113,10 +113,16 @@
         }
       }
     },
-    "with_human_reviews": 0
+    "with_human_reviews": 206
   },
   "dropped_records": [],
-  "human_review_layers": [],
+  "human_review_layers": [
+    {
+      "file": "human_review_2026-07-26.json",
+      "records": 206,
+      "reviewer": "Pip Foweraker"
+    }
+  ],
   "inputs": [
     {
       "dump": "data/raw/epoch_ai/dumps/2026-07-25_053622",
