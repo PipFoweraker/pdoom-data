@@ -107,6 +107,7 @@ kbd {
     <option value="AB">show: tier A+B</option>
     <option value="flagged">show: privacy-flagged</option>
   </select>
+  <label class="stat"><input type="checkbox" id="notesmode" checked> notes mode</label>
   <button id="export">export layer</button>
   <button id="reset">reset session</button>
 </header>
@@ -120,10 +121,15 @@ kbd {
          Output at <code>data/serveable/api/candidates/all_candidates.jsonl</code></p>
       <div id="help" style="text-align:left; margin-top: 26px;">
         <b>Keys</b><br>
-        <kbd>a</kbd> accept -- could be a game event<br>
-        <kbd>x</kbd> reject -- definitely not<br>
-        <kbd>s</kbd> unsure -- can't tell without more context; revisit later<br>
-        <kbd>p</kbd> privacy problem -- proposes removal, needs confirming<br>
+        <b>Notes mode is on by default: every letter you type goes into the
+        note. Decisions live on punctuation, so writing never breaks stride.</b><br>
+        <kbd>`</kbd> accept -- could be a game event<br>
+        <kbd>]</kbd> reject -- definitely not<br>
+        <kbd>\\</kbd> unsure -- can't tell without more context; revisit later<br>
+        <kbd>[</kbd> privacy problem -- proposes removal, needs confirming<br>
+        <kbd>=</kbd> skip &nbsp; <kbd>-</kbd> back &nbsp; <kbd>Tab</kbd> cycle tier
+        &nbsp; <kbd>~</kbd> undo &nbsp; <kbd>Esc</kbd> clear note<br>
+        Whatever is in the note box is saved with your verdict automatically.<br>
         <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> override tier A/B/C/D
         &nbsp; <kbd>n</kbd> note &nbsp; <kbd>o</kbd> open source link<br>
         <kbd>j</kbd>/<kbd>k</kbd> or arrows: next/prev &nbsp;
@@ -141,6 +147,7 @@ var STORE_KEY = "pdoom_review_v2";
 var REVIEWER_KEY = "pdoom_reviewer";
 var TOOL_VERSION = "0.2.0";
 var profileId = null;
+var notesMode = true;   // letters type, punctuation acts
 var profileIds = [];
 
 var all = [];        // every loaded record
@@ -314,8 +321,10 @@ function render() {
       esc(urls[0]) + "</a></div>";
   }
 
-  html += "<div><input id='note' placeholder='note (press n to focus, Enter to save)' value='" +
-    esc(d.note || "") + "'></div>";
+  html += "<div><input id='note' placeholder='" +
+    (notesMode ? "type freely -- notes save with your verdict"
+               : "press n to focus, Enter to save") +
+    "' value='" + esc(d.note || "") + "'></div>";
 
   var prior = rec.reviews || [];
   for (var pi = 0; pi < prior.length; pi++) {
@@ -330,20 +339,31 @@ function render() {
   }
 
   if (helpOn) {
-    html += "<div id='help' style='margin-top:18px'><kbd>a</kbd> accept " +
-      "<kbd>x</kbd> reject <kbd>s</kbd> unsure <kbd>p</kbd> privacy " +
-      "<kbd>1-4</kbd> tier <kbd>n</kbd> note <kbd>o</kbd> open " +
-      "<kbd>j</kbd>/<kbd>k</kbd> move <kbd>u</kbd> undo <kbd>?</kbd> help</div>";
+    html += "<div id='help' style='margin-top:18px'>" + (notesMode
+      ? "<b>notes mode</b>: letters type into the note. " +
+        "<kbd>`</kbd> accept &nbsp; <kbd>\\</kbd> unsure &nbsp; " +
+        "<kbd>]</kbd> reject &nbsp; <kbd>[</kbd> privacy &nbsp; " +
+        "<kbd>=</kbd> skip &nbsp; <kbd>-</kbd> back &nbsp; " +
+        "<kbd>Tab</kbd> tier &nbsp; <kbd>~</kbd> undo &nbsp; " +
+        "<kbd>Esc</kbd> clear note"
+      : "<kbd>a</kbd> accept <kbd>x</kbd> reject <kbd>s</kbd> unsure " +
+        "<kbd>p</kbd> privacy <kbd>1-4</kbd> tier <kbd>o</kbd> open " +
+        "<kbd>j</kbd>/<kbd>k</kbd> move <kbd>u</kbd> undo") + "</div>";
   }
 
   focus.innerHTML = html;
   var note = document.getElementById("note");
   if (note) {
     note.addEventListener("keydown", function (ev) {
+      if (ACTION_KEYS[ev.key]) return;   // let the global handler act
       ev.stopPropagation();
-      if (ev.key === "Enter") { setNote(rec.id, note.value); note.blur(); }
-      if (ev.key === "Escape") note.blur();
+      if (ev.key === "Enter") { setNote(rec.id, note.value); }
     });
+    if (notesMode) {
+      note.focus();
+      var carried = (decisions[rec.id] || {}).note;
+      note.value = carried || "";
+    }
   }
   renderSide();
 }
@@ -385,6 +405,15 @@ function esc(s) {
 function decide(kind) {
   var rec = view[idx];
   if (!rec) return;
+  // Commit whatever is in the note box with the verdict, so a thought typed
+  // mid-read is never lost to an un-pressed save key.
+  var box = document.getElementById("note");
+  if (box && box.value.trim()) {
+    var existing = decisions[rec.id] || {};
+    existing.note = box.value.trim();
+    existing.reviewer = reviewerName();
+    decisions[rec.id] = existing;
+  }
   undoStack.push({ id: rec.id, prev: decisions[rec.id] ? JSON.parse(JSON.stringify(decisions[rec.id])) : null, idx: idx });
   var d = decisions[rec.id] || {};
   d.decision = kind;
@@ -432,9 +461,55 @@ function undo() {
 function next() { if (idx < view.length - 1) idx++; render(); }
 function prev() { if (idx > 0) idx--; render(); }
 
+// Punctuation chosen so it never appears mid-sentence: a note can be typed
+// without any key silently triggering a verdict.
+var ACTION_KEYS = {
+  "`": function () { decide("accept"); },
+  "\\": function () { decide("unsure"); },
+  "]": function () { decide("reject"); },
+  "[": function () { decide("privacy"); },
+  "=": function () { next(); },
+  "-": function () { prev(); },
+  "~": function () { undo(); },
+  "Tab": function () { cycleTier(); },
+  "Escape": function () {
+    var box = document.getElementById("note");
+    if (box) { box.value = ""; }
+  }
+};
+
+var TIER_CYCLE = [null, "A", "B", "C", "D"];
+
+function cycleTier() {
+  var rec = view[idx];
+  if (!rec) return;
+  var d = decisions[rec.id] || {};
+  var at = TIER_CYCLE.indexOf(d.tier_override || null);
+  setTier(TIER_CYCLE[(at + 1) % TIER_CYCLE.length]);
+}
+
 document.addEventListener("keydown", function (ev) {
   if (!all.length) return;
   var k = ev.key;
+
+  if (ACTION_KEYS[k] && !ev.ctrlKey && !ev.metaKey && !ev.altKey) {
+    ACTION_KEYS[k]();
+    ev.preventDefault();
+    ev.stopPropagation();
+    return;
+  }
+
+  if (notesMode) {
+    // Everything else belongs to the note. Keep focus in the box so typing
+    // never lands nowhere.
+    var box = document.getElementById("note");
+    if (box && document.activeElement !== box &&
+        k.length === 1 && !ev.ctrlKey && !ev.metaKey && !ev.altKey) {
+      box.focus();
+    }
+    return;
+  }
+
   if (k === "a") { decide("accept"); ev.preventDefault(); }
   else if (k === "x") { decide("reject"); ev.preventDefault(); }
   else if (k === "s") { decide("unsure"); ev.preventDefault(); }
@@ -447,10 +522,7 @@ document.addEventListener("keydown", function (ev) {
   else if (k === "k" || k === "ArrowUp") { prev(); ev.preventDefault(); }
   else if (k === "u") { undo(); ev.preventDefault(); }
   else if (k === "?") { helpOn = !helpOn; render(); }
-  else if (k === "n") {
-    var note = document.getElementById("note");
-    if (note) { note.focus(); ev.preventDefault(); }
-  } else if (k === "o") {
+  else if (k === "o") {
     var rec = view[idx];
     if (rec && rec.source_urls && rec.source_urls[0]) window.open(rec.source_urls[0], "_blank");
   }
@@ -525,6 +597,9 @@ reviewerEl.addEventListener("change", function () {
   localStorage.setItem(REVIEWER_KEY, this.value.trim());
 });
 reviewerEl.addEventListener("keydown", function (ev) { ev.stopPropagation(); });
+document.getElementById("notesmode").addEventListener("change", function () {
+  notesMode = this.checked; render();
+});
 document.getElementById("sort").addEventListener("change", rebuild);
 document.getElementById("filter").addEventListener("change", rebuild);
 
