@@ -278,6 +278,38 @@ class EventCleaner:
 
 
 if __name__ == '__main__':
+    # SAFETY GUARD, added 2026-07-26.
+    #
+    # This script previously ran its full pipeline on ANY invocation --
+    # including `--help` -- and rewrote data/serveable/api/timeline_events/
+    # in place, collapsing all_events.json from 1194 records to 28. It is
+    # stage 2A of .github/workflows/data-pipeline-automation.yml, which
+    # triggers on pushes to data/raw/**. The only thing preventing a
+    # data-clobbering auto-commit was a YAML syntax error in that workflow.
+    #
+    # It now refuses to write unless told explicitly, and exits non-zero so a
+    # future CI run fails loudly instead of silently destroying data.
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Clean and export event log data. WRITES to the serveable "
+                    "zone; requires --write.")
+    parser.add_argument("--write", action="store_true",
+                        help="actually perform the rewrite (destructive)")
+    args = parser.parse_args()
+
+    if not args.write:
+        print("REFUSING TO RUN without --write.")
+        print("")
+        print("This script rewrites data/serveable/api/timeline_events/ in")
+        print("place. Its output is currently 28 records; all_events.json")
+        print("holds 1194. Running it unintentionally destroys the larger set.")
+        print("")
+        print("Before passing --write, settle which producer is canonical for")
+        print("the serveable zone. See docs/PDOOM1_INTEGRATION_BRIEF.md and")
+        print("the ADR-002 discussion on serveable-as-projection.")
+        sys.exit(2)
+
     cleaner = EventCleaner()
     success = cleaner.run()
     sys.exit(0 if success else 1)

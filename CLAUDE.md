@@ -367,3 +367,58 @@ Check `gh issue list` for current work. Key labels:
 ---
 
 **Last Updated**: 2024-12-24
+
+---
+
+## OPERATIONAL NOTES (added 2026-07-26)
+
+Read this before touching the pipeline. Each item is here because it already
+went wrong once.
+
+### Landmines
+
+**`scripts/transformation/clean_events.py` rewrites the serveable zone.** It
+used to do so on *any* invocation, including `--help`, collapsing
+`all_events.json` from 1,194 records to 28. It now refuses without `--write`
+and exits 2. Do not remove that guard. Do not pass `--write` until the
+question of which producer is canonical for the serveable zone is settled.
+
+**The broken CI is currently load-bearing.** All four workflows fail;
+`data-pipeline-automation.yml` and `weekly-data-refresh.yml` have YAML syntax
+errors (heredoc bodies at column 0 inside a `run:` block). Repairing the YAML
+without simultaneously de-arming the `push`/`schedule` triggers arms a
+workflow that runs the script above on any push to `data/raw/**` and
+auto-commits the result. **The fix and the de-arm must land in the same
+commit.** A full plan exists in the session notes.
+
+**Never open an existing file with `encoding="ascii"` for writing.** Python
+truncates on open, then raises on the first non-ASCII byte, destroying the
+file before the error surfaces. This ate two files in one session. Write to a
+temp file and `os.replace()`.
+
+### Where things are
+
+    docs/CONSUMER_GUIDE.md          the contract: facts vs opinions, obligations
+    docs/ADAPTER_SPEC.md            how a source gets in
+    docs/PDOOM1_INTEGRATION_BRIEF.md  what the game needs to know
+    scripts/adapters/README.md      adding a source, and its traps
+    scripts/build/README.md         the projection, and why serveable is derived
+    config/sources.json             source-level facts, with evidence per date
+
+### Standing rules worth not relearning
+
+- **`data/serveable/` is a build output.** Never hand-edit it. Assert with
+  `python scripts/build/project_candidates.py --check`.
+- **Raw dumps are immutable.** Re-run an adapter to produce a *new* dump. The
+  only exception is a privacy tombstone, which records id, date and reason
+  category but never content.
+- **Never guess a date.** `null` is ungated and honest; a fabricated clock is
+  indistinguishable from a real one later. Every date in `config/sources.json`
+  carries an evidence entry.
+- **Opinions must be namespaced or attributed.** No bare `salience`, no
+  anonymous verdicts. The test: if another consumer disagreed, would they have
+  to fork the data, or could they ignore a field?
+- **Measure claims before writing them down.** Every documented claim checked
+  this session was slightly wrong until measured -- rebuild idempotence, tagger
+  accuracy, tier distribution. `python scripts/validation/check_invariants.py`
+  exists so the lessons fail loudly instead of decaying in prose.
