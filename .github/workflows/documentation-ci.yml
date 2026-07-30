@@ -95,8 +95,8 @@ jobs:
         CURRENT_VERSION=$(cat VERSION)
         
         # Check setup script has matching version
-        if ! grep -q "$CURRENT_VERSION" setup_clean.py; then
-          echo "[WARNING] setup_clean.py may need version update"
+        if ! grep -q "$CURRENT_VERSION" legacy/2025-09_prototype/setup_clean.py; then
+          echo "[WARNING] legacy/2025-09_prototype/setup_clean.py may need version update"
         fi
         
         # Check integration docs reference current version  

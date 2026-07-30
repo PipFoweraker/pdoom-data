@@ -2,7 +2,88 @@
 
 ## Overview
 
-This repository implements a three-zone data architecture designed to maintain data integrity, enable safe transformations, and provide production-ready datasets for consumption.
+This repository implements a four-zone data architecture designed to maintain data integrity, enable safe transformations, and provide production-ready datasets for consumption.
+
+> **Updated 2026-07-30: a Curated zone was added.** The document below still
+> describes three zones in places; the sections that have not caught up are
+> accurate about Raw, Transformed and Serveable, and silent about Curated.
+> Read this section first.
+
+### Why a fourth zone
+
+The original three zones distinguish data by *how processed* it is. They have
+no way to say **who decided**. Machine-derived enrichment and human judgement
+were both landing in `data/enrichment/`, which meant a reviewer's verdict and a
+tagger's output sat in the same place and looked alike.
+
+That matters here more than in most repositories, because the fact/opinion
+firewall is the thing this data hub sells. If a human judgement cannot be
+located by zone, it cannot be audited, attributed, or filtered out by a
+consumer who disagrees.
+
+### The zones, and the progression
+
+    Raw        immutable dumps, exactly as ingested. Re-running an adapter
+               produces a NEW dump; nothing is ever edited in place.
+                 |
+                 |  validate, clean, standardise
+                 v
+    Transformed  machine-derived only. Deduplication, ASCII normalisation,
+               derived fields, taxonomy tags. Reproducible from Raw by
+               running code -- no human is in the loop.
+                 |
+                 |  a person decides something
+                 v
+    Curated      HUMAN JUDGEMENT. Review verdicts, inclusion calls, editorial
+               reasons, hand-researched records. Everything here is an
+               opinion with an author, or a fact a person went and found.
+               NOT reproducible by re-running code: if you delete it, it is
+               gone, and someone has to decide again.
+                 |
+                 |  project, conform to a published schema, validate
+                 v
+    Serveable    build output. Byte-identical to a fresh projection, asserted
+               by --check. Never hand-edited. What consumers fetch.
+
+This maps onto the standard lake progression as
+Raw -> Curated -> Conformed -> Served, with two local deviations worth naming:
+
+- **Conforming is not a zone here, it is the projection step.** Schema
+  conformance happens on the way into Serveable, enforced by
+  `config/schemas/*.json` plus a `--check` that asserts the committed output
+  matches a fresh build. Giving it a directory would create a second producer
+  writing to the same place, which is precisely the failure that left this
+  repo with `MANIFEST.json` saying 28 events while `all_events.json` said
+  1,194.
+- **Transformed sits between Raw and Curated** rather than being folded into
+  cleansing, because machine-derived enrichment must stay separable from human
+  judgement. That separation is the whole point of the new zone.
+
+### What lives in Curated (`data/curated/`)
+
+    human_review/     attributed review verdicts. Every entry names its
+                      reviewer; there are no anonymous verdicts.
+    frontier_labs/    hand-researched organisation records, split into
+                      research/ (what was read, with verbatim quotes) and
+                      curation_table.json (the judgement calls). Split so
+                      evidence and judgement can be reviewed separately.
+
+`data/enrichment/` retains `airr_tags/` and `alignment_research/`, which are
+machine-derived and belong on the Transformed side of the line.
+
+### Rules for Curated
+
+1. **Everything carries an author.** A verdict, tier override or inclusion
+   decision without a named person is a bug, not a default.
+2. **It is not reproducible.** Raw can be re-fetched and Transformed can be
+   re-derived. Curated cannot. Treat deletion as data loss.
+3. **Evidence and judgement stay separate where practical.** A research record
+   states what was read; a curation record states what was decided about it.
+   Editing the former to change the latter destroys the audit trail.
+4. **Promotion out of Curated does not launder an opinion into a fact.** The
+   `reviewed` collection carries its reviewer attribution all the way to the
+   consumer, and its LINEAGE says in words that acceptance is an attributed
+   opinion and not an endorsement.
 
 ## Zone Definitions
 

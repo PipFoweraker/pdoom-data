@@ -1,0 +1,26 @@
+{
+  "collection": "reviewed",
+  "built_by": "scripts/build/project_reviewed.py",
+  "projected_from": "data/serveable/api/candidates/all_candidates.jsonl",
+  "note": "A second-order projection: the input is itself a build output. Run project_candidates.py first.",
+  "selection": "records carrying at least one attributed review with verdict 'accept', minus anything flagged for privacy review",
+  "meaning": "ATTRIBUTED OPINION, not fact. One named reviewer said accept. Not verified, not endorsed, not game-ready. Promotion into a game remains the consumer's call.",
+  "review_layers": [
+    {
+      "file": "data/curated/human_review/human_review_2026-07-26.json",
+      "reviewer": "Pip Foweraker",
+      "layer": "human_review",
+      "nature": "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+      "tool": "tools/review_queue.html",
+      "tool_version": "0.2.0",
+      "record_count": 206
+    }
+  ],
+  "counts": {
+    "promoted": 140,
+    "scanned": 3434
+  },
+  "accepts_by_reviewer": {
+    "Pip Foweraker": 140
+  }
+}

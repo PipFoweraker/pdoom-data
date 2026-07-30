@@ -50,7 +50,7 @@ if [[ ${#failed_files[@]} -gt 0 ]]; then
     echo "3. Replace ellipsis with three dots"
     echo "4. Remove or replace other Unicode characters"
     echo ""
-    echo "Run: python setup_script.py to auto-fix some issues"
+    echo "Run: python legacy/2025-09_prototype/setup_script.py to auto-fix some issues"
     exit 1
 else
     echo "✅ All files are ASCII-compliant"

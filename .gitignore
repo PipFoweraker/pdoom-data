@@ -49,3 +49,8 @@ Thumbs.db
 .env
 .venv
 venv/
+
+# Local dev metrics database. Untracked from 2026-07-30: it is a binary
+# artefact that was tracked despite matching a gitignore pattern, so every
+# local run produced a spurious diff.
+dev_metrics.db
