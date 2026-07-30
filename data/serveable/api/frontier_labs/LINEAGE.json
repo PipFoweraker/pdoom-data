@@ -1,0 +1,49 @@
+{
+  "collection": "frontier_labs",
+  "schema": "frontier_labs_v1",
+  "built_by": "scripts/build/project_frontier_labs.py",
+  "inputs": {
+    "research": [
+      "data/enrichment/frontier_labs/research/batch1.json",
+      "data/enrichment/frontier_labs/research/batch2.json",
+      "data/enrichment/frontier_labs/research/batch3.json",
+      "data/enrichment/frontier_labs/research/batch4.json"
+    ],
+    "curation_table": "data/enrichment/frontier_labs/curation_table.json",
+    "epoch_dump": "data/raw/epoch_ai/dumps/2026-07-25_053622/raw.jsonl"
+  },
+  "inclusion_rule": {
+    "epoch_frontier_model": "Credited on at least one model flagged 'Frontier model' in the Epoch AI notable-models database with a publication date in 2000 or later. Mechanical: it is a query, not a judgement.",
+    "editorial": "Included despite the mechanical rule not selecting it. Requires inclusion_reason naming what the rule missed. Necessary because Epoch's flag is sparse -- 123 of 1,034 rows in the dump carry it -- so its absence is not evidence an organisation is not frontier.",
+    "lab_kind": "Provided so a consumer counting 'how many frontier labs exist' picks its own filter rather than inheriting ours. Counting dedicated_ai_lab gives a very different number from counting every row."
+  },
+  "counts": {
+    "total": 46,
+    "by_inclusion_basis": {
+      "editorial": 22,
+      "epoch_frontier_model": 24
+    },
+    "by_lab_kind": {
+      "corporate_division": 11,
+      "corporate_parent": 10,
+      "dedicated_ai_lab": 19,
+      "research_collective": 1,
+      "research_institute": 5
+    },
+    "by_evidence_strength": {
+      "first_party": 15,
+      "none": 4,
+      "press": 8,
+      "registry": 5,
+      "secondary": 14
+    },
+    "by_status": {
+      "active": 39,
+      "defunct": 1,
+      "merged": 4,
+      "renamed": 2
+    },
+    "founded_null": 4,
+    "founded_contested": 16
+  }
+}
