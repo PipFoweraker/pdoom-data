@@ -192,36 +192,52 @@ jobs:
         
         echo "[PASS] Version increment check completed"
 
-  documentation-publish:
-    runs-on: ubuntu-latest
-    name: Publish Development Notes
-    if: github.ref == 'refs/heads/main'
-    needs: [documentation-quality, version-increment-check]
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Generate Build Timestamp
-      run: |
-        echo "BUILD_TIME=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
-        echo "BUILD_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-    
-    - name: Update Build Info
-      run: |
-        echo "" >> DEVBLOG.md
-        echo "---" >> DEVBLOG.md
-        echo "**Build Info**: $BUILD_TIME | SHA: $BUILD_SHA" >> DEVBLOG.md
-        echo "**CI Status**: All documentation tests passed" >> DEVBLOG.md
-        echo "**Permanent URL**: https://github.com/PipFoweraker/pdoom-data/blob/$BUILD_SHA/DEVBLOG.md" >> DEVBLOG.md
-    
-    - name: Commit Updated Documentation
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add DEVBLOG.md
-        if git diff --staged --quiet; then
-          echo "No documentation changes to commit"
-        else
-          git commit -m "docs: Update build info and permanent links [skip ci]"
-          git push
-        fi
+  # DE-ARMED 2026-07-30. This job is a latent auto-commit bot.
+  #
+  # It appended five lines to DEVBLOG.md with `echo >>` -- never a rewrite -- and
+  # pushed, on every push to main. DEVBLOG.md therefore grows without bound, one
+  # block per merged commit, and concurrent pushes race on it.
+  #
+  # It has never actually run: it `needs` documentation-quality, which fails on
+  # the ASCII gate (20 files of box-drawing and arrows). That makes it a trap of
+  # the same shape as the one in data-pipeline-automation.yml -- an agent told
+  # "fix the failing ASCII check" would, as a side effect, arm this. Recording it
+  # here so the next person meets the comment before the behaviour.
+  #
+  # If build provenance in DEVBLOG.md is still wanted, the fix is a rewritten
+  # marker block (replace between sentinels) rather than an append, and it should
+  # be a release-time action, not a per-push one. That is a call for the owner.
+  #
+  # documentation-publish:
+  #   runs-on: ubuntu-latest
+  #   name: Publish Development Notes
+  #   if: github.ref == 'refs/heads/main'
+  #   needs: [documentation-quality, version-increment-check]
+  #
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #
+  #   - name: Generate Build Timestamp
+  #     run: |
+  #       echo "BUILD_TIME=$(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_ENV
+  #       echo "BUILD_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+  #
+  #   - name: Update Build Info
+  #     run: |
+  #       echo "" >> DEVBLOG.md
+  #       echo "---" >> DEVBLOG.md
+  #       echo "**Build Info**: $BUILD_TIME | SHA: $BUILD_SHA" >> DEVBLOG.md
+  #       echo "**CI Status**: All documentation tests passed" >> DEVBLOG.md
+  #       echo "**Permanent URL**: https://github.com/PipFoweraker/pdoom-data/blob/$BUILD_SHA/DEVBLOG.md" >> DEVBLOG.md
+  #
+  #   - name: Commit Updated Documentation
+  #     run: |
+  #       git config --local user.email "action@github.com"
+  #       git config --local user.name "GitHub Action"
+  #       git add DEVBLOG.md
+  #       if git diff --staged --quiet; then
+  #         echo "No documentation changes to commit"
+  #       else
+  #         git commit -m "docs: Update build info and permanent links [skip ci]"
+  #         git push
+  #       fi

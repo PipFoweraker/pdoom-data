@@ -1,0 +1,75 @@
+name: Data Integrity
+
+# Read-only assertions about the data and the pipeline. This workflow never
+# writes to the repository and has no write permissions, which is why it is safe
+# to arm on push and pull_request while the other data workflows are de-armed.
+#
+# What it asserts, and why each one is here:
+#
+#   check_workflow_disarm.py   the workflows that can commit stay unable to run
+#                              unattended. A comment saying so is one careless
+#                              edit from gone; this fails a build instead.
+#
+#   check_invariants.py        the claims this repo documents about itself are
+#                              true right now -- manifest checksums, feed counts,
+#                              zone boundaries. Every documented claim that got
+#                              measured during the 2026-07 forward-fill turned
+#                              out to be slightly wrong, so they are asserted
+#                              rather than written down.
+#
+#   project_candidates --check data/serveable/ is a build output, byte-identical
+#                              to a fresh projection. The repo previously lost
+#                              this property for seven months: MANIFEST.json said
+#                              28 events while all_events.json said 1,194,
+#                              because two producers wrote to one zone and
+#                              nothing compared them.
+#
+#   tests/test_*.py            run directly. pytest is in requirements.txt but
+#                              these are standalone runners and both pass without
+#                              it; invoking python directly keeps this job free of
+#                              any pip install, so it cannot break on dependency
+#                              drift.
+#
+# Only PyYAML is installed, for the de-arm guard. Everything else is stdlib.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    name: Assert data and pipeline invariants
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
+      - name: Write-capable workflows are de-armed
+        run: python scripts/validation/check_workflow_disarm.py
+
+      - name: Repository invariants hold
+        run: python scripts/validation/check_invariants.py
+
+      - name: Serveable zone matches a fresh build
+        run: python scripts/build/project_candidates.py --check
+
+      - name: Dump-space tests
+        run: python tests/test_dump_spaces.py
+
+      - name: Migration tests
+        run: python tests/test_migration.py
