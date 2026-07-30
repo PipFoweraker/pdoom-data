@@ -1,0 +1,378 @@
+[
+  {
+    "name": "OpenAI",
+    "founded": "2015-12",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/OpenAI",
+      "quote": "In December 2015, OpenAI was founded as the nonprofit organization OpenAI, Inc.",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2015-12-11",
+        "url": "https://techcrunch.com/2015/12/11/non-profit-openai-launches-with-backing-from-elon-musk-and-sam-altman/",
+        "quote": "Today, OpenAI, a nonprofit artificial intelligence research company was announced to the world.",
+        "what_it_represents": "public announcement; the sentence says 'Today' and the day comes from the article dateline of 2015-12-11"
+      },
+      {
+        "date": "2015-12-08",
+        "what_it_represents": "Delaware incorporation of OpenAI, Inc. per Wikipedia's infobox, which cites OpenCorporates. UNVERIFIED: opencorporates.com returned a CAPTCHA, sec.gov returned 403, and the musk-v-altman complaint PDFs could not be text-extracted. No quote is given because no page carrying this date was successfully read."
+      },
+      {
+        "date": "2015",
+        "url": "https://news.delaware.gov/2025/10/28/ag-jennings-completes-review-of-openai-recapitalization/",
+        "quote": "OpenAI, Inc. was incorporated as a Delaware nonprofit corporation in 2015",
+        "what_it_represents": "the Delaware Attorney General's own characterisation of the original incorporation, year precision. The strongest official confirmation obtained."
+      },
+      {
+        "date": "2019-03-11",
+        "url": "https://medium.com/syncedreview/openai-establishes-for-profit-company-9d595cc5f3c9",
+        "quote": "OpenAI today announced the creation of a new for-profit company",
+        "what_it_represents": "creation of the capped-profit OpenAI LP under the nonprofit"
+      }
+    ],
+    "status": "active",
+    "status_date": "2025-10-28",
+    "status_evidence": {
+      "url": "https://www.delawareinc.com/blog/openai-is-now-a-pbc/",
+      "quote": "On October 28, 2025, at 8:07 a.m. the Delaware Division of Corporation approved a 30-page Certificate of Incorporation (COI) for OPENAI GROUP PBC"
+    },
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Founding is genuinely ill-defined: Delaware incorporation of the nonprofit (reported 2015-12-08, unverified), public announcement (2015-12-11, well sourced), then two structural events -- OpenAI LP capped-profit (2019-03-11) and recapitalisation into OpenAI Group PBC (2025-10-28). openai.com returns 403 to the fetcher and web.archive.org was blocked, so no OpenAI first-party page could be read. Status left active: the entity continues, restructured."
+  },
+  {
+    "name": "Anthropic",
+    "founded": "2021-01",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Anthropic",
+      "quote": "Anthropic was founded in January 2021",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2021-01-26",
+        "url": "https://www.highergov.com/awardee/anthropic-pbc-782300426/",
+        "quote": "Jan. 26, 2021",
+        "what_it_represents": "Date Founded field in HigherGov's US federal awardee record for Anthropic PBC; matches Wikipedia's infobox, which cites OpenCorporates for the Delaware entity"
+      },
+      {
+        "date": "2021-02-03",
+        "url": "https://www.bizprofile.net/ca/san-francisco/anthropic-inc",
+        "quote": "Officially filed on February 3, 2021, this corporation is recognized under the document number 4688086.",
+        "what_it_represents": "California Secretary of State filing, a separate later act from the Delaware formation. Not in conflict; a different event."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "anthropic.com/company was fetched and contains no founding date, so no first-party date exists to cite. The day-precision 2021-01-26 rests on HigherGov and on OpenCorporates via Wikipedia's infobox; opencorporates.com itself returned a CAPTCHA and could not be verified directly. Month precision is what the readable evidence supports."
+  },
+  {
+    "name": "xAI",
+    "founded": "2023-03-09",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://www.ktnv.com/news/elon-musk-files-nevada-business-formation-for-x-ai",
+      "quote": "The filing was from March 9, 2023.",
+      "publisher": "KTNV Las Vegas (Scripps), reporting from Nevada Secretary of State business records"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2023-03-09",
+        "url": "https://en.wikipedia.org/wiki/XAI_(company)",
+        "quote": "Elon Musk founded xAI on March 9, 2023.",
+        "what_it_represents": "incorporation of X.AI Corp. in Nevada"
+      },
+      {
+        "date": "2023-07-12",
+        "url": "https://en.wikipedia.org/wiki/XAI_(company)",
+        "quote": "Musk announced xAI on July 12, 2023.",
+        "what_it_represents": "public announcement of the company and founding technical team, four months after incorporation"
+      }
+    ],
+    "status": "merged",
+    "status_date": "2025-03-28",
+    "status_evidence": {
+      "url": "https://en.wikipedia.org/wiki/XAI_(company)",
+      "quote": "On March 28, 2025, Musk announced that xAI acquired sister company X Corp., the developer of social media platform X."
+    },
+    "parent_org": null,
+    "country": "United States",
+    "notes": "x.ai returns 403 to the fetcher, so no first-party page was read. The Nevada filing date is corroborated by a local outlet that inspected the Secretary of State record; the record itself was not reached. Status merged reflects xAI acquiring X Corp. in an all-stock deal placing both under a holding company; xAI is the surviving AI operation, not the acquired party, but the corporate perimeter changed materially."
+  },
+  {
+    "name": "Meta AI",
+    "founded": "2013-12",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://www.forbes.com/sites/richardnieva/2023/11/30/meta-ai-yann-lecun-fair-10th-anniversary/",
+      "quote": "Zuckerberg and former Facebook CTO Mike Schroepfer launched FAIR in December 2013, tapping LeCun, a professor of computer science at NYU, to lead the project.",
+      "publisher": "Forbes"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2013",
+        "url": "https://ai.meta.com/blog/fair-10-year-anniversary-open-science-meta/",
+        "quote": "The launch of FAIR dates back to late 2013.",
+        "what_it_represents": "Meta's own statement, year precision only. Meta does not publish a day."
+      },
+      {
+        "date": "2013-12-09",
+        "url": "https://techcrunch.com/2013/12/09/facebook-artificial-intelligence-lab-lecun/",
+        "quote": "So today the company announced that one of the world's leading deep learning and machine learning scientists, NYU's Professor Yann LeCun, will lead its new artificial intelligence laboratory.",
+        "what_it_represents": "public announcement of the lab and of LeCun as its head; the sharpest dated public event"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Meta Platforms",
+    "country": "United States",
+    "notes": "FAIR has no incorporation date; it is an internal research division, so founding means when the lab was stood up, which is inherently fuzzy. Meta's own blog says only 'late 2013'. The same TechCrunch piece notes MIT Technology Review first reported the lab in September, so internal formation predates the announcement. Later renamed from Facebook AI Research to Fundamental AI Research; no citable date for that rename was found."
+  },
+  {
+    "name": "Meta Platforms",
+    "founded": "2004-02-04",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Meta_Platforms",
+      "quote": "February 4, 2004; 22 years ago (2004-02-04) in Cambridge, Massachusetts, U.S.",
+      "publisher": "Wikipedia (infobox)"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2004",
+        "url": "https://www.meta.com/about/company-info/",
+        "quote": "When Facebook launched in 2004, it changed the way that people connect.",
+        "what_it_represents": "Meta's own company-info page, year precision only; Meta does not publish a founding day"
+      },
+      {
+        "date": "2004-07",
+        "what_it_represents": "Delaware incorporation, separately reported as July 2004 in Meta's SEC 10-K filings. UNVERIFIED: sec.gov returns 403 to the fetcher and Meta's own annual-report PDF could not be text-extracted, so no verbatim quote exists. No quote is given rather than repeating one that does not carry this date."
+      }
+    ],
+    "status": "renamed",
+    "status_date": "2021-10-28",
+    "status_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Meta_Platforms",
+      "quote": "The metaverse vision and the name change from Facebook, Inc. to Meta Platforms was introduced at Facebook Connect on October 28, 2021."
+    },
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Originally established as TheFacebook, Inc. Meta's own newsroom post on the rename is date-stamped 2021-10-28 but its prose says 'Today at Connect 2021' rather than the explicit date, so the Wikipedia sentence carrying the date inline is used instead. Three distinct dates: 2004-02-04 (TheFacebook launched, Cambridge MA), July 2004 (Delaware incorporation, unverified), 2021-10-28 (rename)."
+  },
+  {
+    "name": "Inflection AI",
+    "founded": "2022",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Inflection_AI",
+      "quote": "founded in 2022",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2022-03",
+        "url": "https://www.theregister.com/2022/03/09/linkedin_hoffman_ai/",
+        "quote": "LinkedIn co-founder Reid Hoffman, DeepMind co-founder Mustafa Suleyman, and ex-DeepMind AI expert Karen Simonyan announced on Tuesday a new venture of theirs named Inflection AI.",
+        "what_it_represents": "public announcement; the sentence says 'on Tuesday' and the article dateline of 2022-03-09 makes that Tuesday 2022-03-08"
+      }
+    ],
+    "status": "active",
+    "status_date": "2024-03-19",
+    "status_evidence": {
+      "url": "https://blogs.microsoft.com/blog/2024/03/19/mustafa-suleyman-deepmind-and-inflection-co-founder-joins-microsoft-to-lead-copilot/",
+      "quote": "Mustafa Suleyman and Karen Simonyan are joining Microsoft to form a new organization called Microsoft AI"
+    },
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Status is active, NOT acquired: Microsoft hired the founders and most staff and paid a licensing fee rather than buying the company; the entity continued under a new CEO with a B2B model. The widely reported 650 million USD figure and headcount are deliberately NOT recorded, because Microsoft's post does not state them and no filing was read. Karen Simonyan's name carries an accent in the sources; transliterated to ASCII."
+  },
+  {
+    "name": "AI21 Labs",
+    "founded": "2017",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://research.contrary.com/company/ai21-labs",
+      "quote": "AI21 Labs was founded in 2017 in Israel.",
+      "publisher": "Contrary Research"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2017-11",
+        "url": "https://en.wikipedia.org/wiki/AI21_Labs",
+        "quote": "AI21 Labs was founded in November 2017 by Yoav Shoham, Ori Goshen, and Amnon Shashua in Tel Aviv, Israel.",
+        "what_it_represents": "month precision, but WEAKLY SOURCED: the researcher followed Wikipedia's cited source through to the Globes article on AI21's 35 million USD raise, and that page contains NO founding date at all. So Wikipedia's own citation does not support its month. Curator downgraded founded to year precision for this reason."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "Israel",
+    "notes": "CURATOR DOWNGRADE. The researcher reported 2017-11 at month precision; that has been reduced to 2017 at year precision, because following Wikipedia's citation through disproved the support for the month. The year is solid, corroborated independently. startupnationcentral.org returned 403 and no first-party AI21 page giving a founding date was located. This row is a worked example of why evidence_strength grades source class: a confident-sounding month with a citation that does not check out is weaker than a plain year that does."
+  },
+  {
+    "name": "Technology Innovation Institute",
+    "founded": "2020",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://www.tii.ae/news/abu-dhabi-unveils-pioneering-global-center-advanced-technology-research",
+      "quote": "Teams of international scientists and researchers joined the institute from around the world within two months of the first board meeting in August 2020.",
+      "publisher": "Technology Innovation Institute (first-party newsroom)"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2020-08",
+        "url": "https://www.tii.ae/news/abu-dhabi-unveils-pioneering-global-center-advanced-technology-research",
+        "quote": "Teams of international scientists and researchers joined the institute from around the world within two months of the first board meeting in August 2020.",
+        "what_it_represents": "first board meeting, the earliest concretely dated institutional event, first-party"
+      },
+      {
+        "date": "2020-11-10",
+        "url": "https://www.tii.ae/news/abu-dhabi-unveils-pioneering-global-center-advanced-technology-research",
+        "quote": "Abu Dhabi has unveiled the Technology Innovation Institute (TII), the dedicated applied research pillar of the Advanced Technology Research Council (ATRC), committed to reinforcing Abu Dhabi and the UAE's status as a global hub for innovation and advanced technologies.",
+        "what_it_represents": "public unveiling; the date is the page's dateline of 2020-11-10"
+      },
+      {
+        "date": "2020-05",
+        "what_it_represents": "Wikipedia's claimed founding month. UNVERIFIED: the researcher tried three times to reach the cited BusinessWire source (two timeouts, one ECONNRESET) and could not confirm that May 2020 appears in it. No quote given."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Advanced Technology Research Council",
+    "country": "United Arab Emirates",
+    "notes": "A government-established research institute with no incorporation record, so founding is ill-defined. tii.ae/about-us contains no founding date. Three candidates: May 2020 (unverified), August 2020 (first board meeting, first-party), 2020-11-10 (public unveiling, first-party). Year precision because the month cannot be honestly resolved from what was read. TII is the lab behind the Falcon model family."
+  },
+  {
+    "name": "NAVER",
+    "founded": "1999-06",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://www.navercorp.com/en/company/history",
+      "quote": "1999 (June): NAVER.com incorporated and launched Search Portal 'NAVER'",
+      "publisher": "NAVER Corporation (first-party history timeline)"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "1999-06-02",
+        "url": "https://en.wikipedia.org/wiki/Naver_Corporation",
+        "quote": "June 2, 1999; 27 years ago (1999-06-02)",
+        "what_it_represents": "day-precision incorporation from the infobox; the article body says only 'in 1999' and provides no fetchable reference for the day, so the day is unverified"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "South Korea",
+    "notes": "Month precision is first-party-solid from NAVER's own history timeline. The company originated as an in-house venture inside Samsung SDS before spinning out; no citable date for that internal origin was found. Original entity name was Naver Comm."
+  },
+  {
+    "name": "NAVER AI Lab",
+    "founded": null,
+    "founded_precision": null,
+    "founded_evidence": null,
+    "founded_contested": false,
+    "founded_alternatives": [],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "NAVER Cloud",
+    "country": "South Korea",
+    "notes": "NULL BY DESIGN. NAVER's own careers page for the lab states its mission and research fields but gives no founding date of any kind. Searches surfaced only adjacent, differently-scoped facts -- CLOVA platform introduced 2017-03, HyperCLOVA launched 2021-05, CLOVA integrated into NAVER Cloud in 2023 -- and no source stating when NAVER AI Lab itself was established, nor any documenting a rename from Clova AI Research. Reporting a date here would be reconstruction.",
+    "sources_extra": ["https://naver-career.github.io/en/teams/naver-ai-lab/"]
+  },
+  {
+    "name": "NAVER Cloud",
+    "founded": "2009-05-01",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://www.navercloudcorp.com/en/info/",
+      "quote": "Date of Establishment: May 1, 2009",
+      "publisher": "NAVER Cloud Corporation (first-party)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2020",
+        "url": "https://www.navercloudcorp.com/en/info/",
+        "quote": "Changed the company name to NAVER Cloud",
+        "what_it_represents": "rename from NAVER Business Platform; the year comes from the timeline's structure rather than from prose containing it"
+      }
+    ],
+    "status": "renamed",
+    "status_date": "2020",
+    "status_evidence": {
+      "url": "https://www.navercloudcorp.com/en/info/",
+      "quote": "Changed the company name to NAVER Cloud"
+    },
+    "parent_org": "NAVER",
+    "country": "South Korea",
+    "notes": "Founded as NAVER Business Platform on 2009-05-01 per the company's own info page; renamed NAVER Cloud in 2020. HyperCLOVA X and NAVER's AI product work sit under this entity. The rename year is weaker than the establishment date because it comes from page structure rather than prose."
+  },
+  {
+    "name": "Baidu",
+    "founded": "2000-01-18",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Baidu",
+      "quote": "Baidu was incorporated on 18 January 2000 by Robin Li and Eric Xu.",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2000-01",
+        "url": "https://www.ebsco.com/research-starters/history/baidu-inc",
+        "quote": "Li and Xu went to China and founded Baidu in January 2000 to provide search services to portals in China.",
+        "what_it_represents": "month-precision corroboration from an independent reference publisher"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "China",
+    "notes": "The day refers to incorporation of Baidu, Inc. in the Cayman Islands. The researcher tried four times to reach Baidu's own 20-F filings on ir.baidu.com for the first-party incorporation language (three timeouts, one ECONNRESET) and sec.gov returns 403, so the day rests on Wikipedia plus an independent month-precision corroboration rather than the filing. Operations began in Beijing; the Cayman entity is the listed holding company."
+  },
+  {
+    "name": "Baidu Research",
+    "founded": "2014-05-16",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://www.prnewswire.com/news-releases/baidu-opens-silicon-valley-lab-appoints-andrew-ng-as-head-of-baidu-research-259539471.html",
+      "quote": "Baidu, Inc. (NASDAQ: BIDU), the leading Chinese language Internet search provider, today announced the appointment of pioneering Artificial Intelligence (AI) researcher Andrew Ng as Chief Scientist of Baidu. Mr. Ng will lead Baidu Research, with labs in Beijing and Silicon Valley.",
+      "publisher": "PR Newswire, release issued by Baidu, Inc. (first-party), dateline 2014-05-16"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2013",
+        "what_it_represents": "Baidu's Institute of Deep Learning, the predecessor lab folded into Baidu Research, is widely reported as established in 2013. UNVERIFIED: research.baidu.com serves only a maintenance notice and Wikipedia's Baidu article does not mention IDL at all. No quote given rather than attaching one that does not carry this date."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Baidu",
+    "country": "China",
+    "notes": "An internal division with no incorporation record, assembled around a pre-existing lab rather than created from nothing. 2014-05-16 is the day Baidu itself named and launched Baidu Research publicly, at the grand opening of its Sunnyvale R&D centre; the release describes Baidu Research as comprising the Silicon Valley AI Lab, the Beijing Deep Learning Lab and the Beijing Big Data Lab. research.baidu.com was fetched twice and returned only a maintenance notice."
+  }
+]

@@ -6,6 +6,87 @@
     "lab_kind": "Provided so a consumer counting 'how many frontier labs exist' picks its own filter rather than inheriting ours. Counting dedicated_ai_lab gives a very different number from counting every row."
   },
   "labs": {
+    "OpenAI": {
+      "id": "openai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["OpenAI"]
+    },
+    "Anthropic": {
+      "id": "anthropic",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Anthropic"]
+    },
+    "xAI": {
+      "id": "xai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["xAI", "X.AI Corp."]
+    },
+    "Meta AI": {
+      "id": "meta_ai",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Meta AI", "FAIR", "Facebook AI Research", "Fundamental AI Research"]
+    },
+    "Meta Platforms": {
+      "id": "meta_platforms",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Facebook", "Facebook AI", "TheFacebook, Inc."]
+    },
+    "Inflection AI": {
+      "id": "inflection_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Inflection AI"]
+    },
+    "AI21 Labs": {
+      "id": "ai21_labs",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["AI21 Labs"]
+    },
+    "Technology Innovation Institute": {
+      "id": "technology_innovation_institute",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Technology Innovation Institute", "TII"]
+    },
+    "NAVER": {
+      "id": "naver",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["NAVER", "Naver Corporation", "Naver Comm"]
+    },
+    "NAVER Cloud": {
+      "id": "naver_cloud",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch under this name. Included because HyperCLOVA X and NAVER's model work sit under this entity rather than under NAVER Corporation, so a consumer following parent_org from NAVER AI Lab needs it to exist.",
+      "aliases": ["NAVER Business Platform", "NBP"]
+    },
+    "NAVER AI Lab": {
+      "id": "naver_ai_lab",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch. Included as NAVER's dedicated AI research lab, and retained despite having no sourceable founding date at all -- a null row with a documented search is more useful to a consumer than a silent absence, because it distinguishes 'we looked and could not find' from 'we did not consider this'.",
+      "aliases": ["Clova AI Research"]
+    },
+    "Baidu": {
+      "id": "baidu",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Baidu"]
+    },
+    "Baidu Research": {
+      "id": "baidu_research",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch under this name; the flagged Baidu row attaches to the parent. Included separately because Baidu Research has a distinct, well-dated public launch (2014-05-16) and was the organisational home of Baidu's frontier work under Andrew Ng.",
+      "aliases": ["Institute of Deep Learning", "Silicon Valley AI Lab"]
+    },
     "Google": {
       "id": "google",
       "lab_kind": "corporate_parent",

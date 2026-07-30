@@ -225,6 +225,10 @@ def build():
         sev = row.get("status_evidence") or {}
         if sev.get("url"):
             urls.append(sev["url"])
+        # A row whose date is null still consulted pages. sources_extra records
+        # what was checked and found wanting, which is the evidence that the
+        # null is a finding rather than an omission.
+        urls.extend(row.get("sources_extra", []))
         seen = set()
         row["sources"] = [u for u in urls if not (u in seen or seen.add(u))]
         if not row["sources"]:
@@ -317,6 +321,54 @@ def validate(records):
     return errs
 
 
+def sanity_check(records):
+    """Cross-check the curated dates against Epoch, and against themselves.
+
+    The useful test here is the cross-source one: an organisation cannot be
+    credited on a frontier model published BEFORE it existed. Founding dates
+    and Epoch publication dates come from entirely independent sources, so a
+    violation means one of them is wrong -- and neither would look wrong on its
+    own. Cross-checking two numbers that should agree is what found the
+    PointNet id collision last session; reading the code found nothing.
+
+    Comparison is on the common prefix, so a year-precision founding date is
+    only compared at year granularity. Otherwise '2015' would spuriously fail
+    against a 2015-03 model.
+    """
+    problems = []
+    for r in records:
+        f = r["founded"]
+        if f is not None:
+            year = int(f[:4])
+            if not (1900 <= year <= 2030):
+                problems.append("%s: founded year %d is outside 1900-2030"
+                                % (r["id"], year))
+
+        first = r["epoch_first_frontier_model"]
+        if f and first:
+            n = min(len(f), len(first))
+            if first[:n] < f[:n]:
+                problems.append(
+                    "%s: credited on an Epoch frontier model published %s, "
+                    "which is BEFORE its founding date %s. One of the two "
+                    "sources is wrong, or the Epoch alias matches the wrong "
+                    "organisation." % (r["id"], first, f))
+
+        sd = r["status_date"]
+        if f and sd:
+            n = min(len(f), len(sd))
+            if sd[:n] < f[:n]:
+                problems.append("%s: status_date %s precedes founded %s"
+                                % (r["id"], sd, f))
+
+        # A null date must not be dressed up with a precision or a strength
+        # that implies one exists.
+        if f is None and r["founded_precision"] is not None:
+            problems.append("%s: founded is null but founded_precision is %r"
+                            % (r["id"], r["founded_precision"]))
+    return problems
+
+
 def ascii_check(records):
     bad = []
     for r in records:
@@ -397,13 +449,16 @@ def main():
 
     errs = validate(records)
     bad = ascii_check(records)
+    sane = sanity_check(records)
     for e in errs:
         print("SCHEMA: " + e)
     for b in bad:
         print("ASCII: " + b)
+    for s in sane:
+        print("SANITY: " + s)
     if errs and not errs[0].startswith("jsonschema not installed"):
         return 1
-    if bad:
+    if bad or sane:
         return 1
 
     payload, lineage = render(records, epoch_path, research_files, inclusion_rule)

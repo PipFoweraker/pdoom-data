@@ -97,7 +97,7 @@ honest; a fabricated clock is indistinguishable from a real one later. Every
 non-null `founded` carries `founded_evidence` with the URL that was read and
 the verbatim sentence containing the date.
 
-**Three rows have `founded: null` on purpose.**
+**Four rows have `founded: null` on purpose.**
 
 - **Google Research** -- the only date available is an *uncited* Wikipedia
   infobox value. Google Research appears to be an organisational label that
@@ -110,6 +110,21 @@ the verbatim sentence containing the date.
   traces to the phrase "founded two years ago" in an article datelined
   2024-06-28. The well-evidenced public launch (2022-04-26) is in
   `founded_alternatives`, labelled as a launch.
+- **NAVER AI Lab** -- NAVER's own careers page for the lab describes its
+  mission and research fields and gives no date. Only adjacent facts are
+  sourceable (CLOVA introduced 2017-03, HyperCLOVA 2021-05, CLOVA folded into
+  NAVER Cloud in 2023). The row is kept rather than dropped, because a null
+  with a documented search distinguishes "we looked and could not find" from
+  "we did not consider this".
+
+**One row was downgraded by the curator against the researcher's finding.**
+AI21 Labs came back at month precision (November 2017) on Wikipedia's
+authority. Following Wikipedia's own cited source through -- a Globes article
+on AI21's funding round -- shows it contains no founding date at all. The month
+is therefore unsupported by the citation offered for it, and `founded` is
+recorded as `2017` at year precision with the month demoted to
+`founded_alternatives` and the reason stated. A confident-sounding month whose
+citation does not check out is weaker evidence than a plain year that does.
 
 ### `evidence_strength` grades the source class, not the confidence
 
@@ -179,6 +194,25 @@ Split so evidence and judgement can be reviewed separately. The projection
 asserts both directions: a researched organisation missing from the curation
 table fails the build rather than being silently dropped, and a curation entry
 for something nobody researched fails too.
+
+## Coverage, measured
+
+46 organisations: 24 by the mechanical rule, 22 editorial. Evidence grades:
+5 `registry`, 15 `first_party`, 8 `press`, 14 `secondary`, 4 `none`. Sixteen
+rows carry `founded_contested: true`.
+
+That `secondary` count is the honest weak spot. Roughly a third of rows rest on
+an encyclopedia or a trade-press line rather than a register or a first-party
+statement, usually because the organisation is an internal division with no
+incorporation record to appeal to. Upgrading those is the obvious next pass.
+
+**A cross-source check runs on every build.** An organisation cannot be
+credited on an Epoch frontier model published before it existed, and founding
+dates and Epoch publication dates come from entirely independent sources, so a
+violation means one of them is wrong. It currently exercises 22 of 46 rows and
+is not vacuous: the tightest margin is Google DeepMind, founded 2023-04-20 with
+its first flagged model on 2023-12-06, so a founding date wrong by a year would
+fire it.
 
 ## Rebuilding
 

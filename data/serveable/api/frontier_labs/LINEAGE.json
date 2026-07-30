@@ -5,6 +5,7 @@
   "inputs": {
     "research": [
       "data/enrichment/frontier_labs/research/batch1.json",
+      "data/enrichment/frontier_labs/research/batch2.json",
       "data/enrichment/frontier_labs/research/batch3.json",
       "data/enrichment/frontier_labs/research/batch4.json"
     ],
@@ -17,31 +18,32 @@
     "lab_kind": "Provided so a consumer counting 'how many frontier labs exist' picks its own filter rather than inheriting ours. Counting dedicated_ai_lab gives a very different number from counting every row."
   },
   "counts": {
-    "total": 33,
+    "total": 46,
     "by_inclusion_basis": {
-      "editorial": 19,
-      "epoch_frontier_model": 14
+      "editorial": 22,
+      "epoch_frontier_model": 24
     },
     "by_lab_kind": {
-      "corporate_division": 7,
-      "corporate_parent": 7,
-      "dedicated_ai_lab": 14,
+      "corporate_division": 11,
+      "corporate_parent": 10,
+      "dedicated_ai_lab": 19,
       "research_collective": 1,
-      "research_institute": 4
+      "research_institute": 5
     },
     "by_evidence_strength": {
-      "first_party": 11,
-      "none": 3,
-      "press": 5,
+      "first_party": 15,
+      "none": 4,
+      "press": 8,
       "registry": 5,
-      "secondary": 9
+      "secondary": 14
     },
     "by_status": {
-      "active": 29,
+      "active": 39,
       "defunct": 1,
-      "merged": 3
+      "merged": 4,
+      "renamed": 2
     },
-    "founded_null": 3,
-    "founded_contested": 7
+    "founded_null": 4,
+    "founded_contested": 16
   }
 }
