@@ -71,6 +71,9 @@ jobs:
       - name: Serveable zone matches a fresh build (frontier labs)
         run: python scripts/build/project_frontier_labs.py --check
 
+      - name: Serveable zone matches a fresh build (promoted reviews)
+        run: python scripts/build/project_reviewed.py --check
+
       - name: Dump-space tests
         run: python tests/test_dump_spaces.py
 

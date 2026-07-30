@@ -13,12 +13,12 @@ than aspirational.
 
 Inputs are split so that evidence and judgement can be reviewed separately:
 
-    data/enrichment/frontier_labs/research/*.json   what was read. Each row
+    data/curated/frontier_labs/research/*.json   what was read. Each row
                                                     carries the URL and the
                                                     verbatim sentence. Treat as
                                                     an evidence record and do
                                                     not edit to change a verdict.
-    data/enrichment/frontier_labs/curation_table.json  the judgement calls: id,
+    data/curated/frontier_labs/curation_table.json  the judgement calls: id,
                                                     lab_kind, inclusion_basis
                                                     and, for editorial rows, the
                                                     reason the mechanical rule
@@ -42,7 +42,7 @@ import sys
 from collections import defaultdict
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-LABS_DIR = os.path.join(REPO_ROOT, "data", "enrichment", "frontier_labs")
+LABS_DIR = os.path.join(REPO_ROOT, "data", "curated", "frontier_labs")
 RESEARCH_GLOB = os.path.join(LABS_DIR, "research", "*.json")
 CURATION_TABLE = os.path.join(LABS_DIR, "curation_table.json")
 EPOCH_GLOB = os.path.join(REPO_ROOT, "data", "raw", "epoch_ai", "dumps", "*", "raw.jsonl")

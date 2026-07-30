@@ -147,6 +147,28 @@ The reviewer reported "lots of inspiration" that went nowhere, because writing
 a note meant pressing `n` and breaking stride. Verdicts are cheap; the design
 thinking is the scarce output, and the tool was optimised for the wrong one.
 
+> **CORRECTION, 2026-07-30.** The paragraph above overreached, and the two
+> paragraphs after it inherit the error. Asked directly, the reviewer's own
+> account of that session was: the verdicts were genuine human filtering, the
+> single note may have been a misclick or an experiment, and the run *felt*
+> like it was unlocking the next step in the pipeline rather than starving him
+> of somewhere to write.
+>
+> One note out of 206 is not a measurement. The inference ran from a count to a
+> claim about the reviewer's experience without asking the reviewer, and the
+> first-hand account contradicts it. The interface rebuild that followed may
+> still be an improvement, but **it was not evidence-driven**, and the
+> "verdicts are cheap, notes are the scarce output" framing should not be
+> repeated as an established finding.
+>
+> What the pass did produce is 140 attributed accepts, which were promoted to
+> `data/serveable/api/reviewed/` on 2026-07-30. That is the concrete output,
+> and it went unpromoted for four days because attention was on the notes
+> theory instead.
+>
+> Lesson, and it generalises past this repo: a behavioural claim about a person
+> is checkable by asking them, and asking is cheaper than rebuilding a tool.
+
 Fixed by inverting the interface: notes mode is now default, every letter
 types into the note, and decisions live on punctuation that never occurs
 mid-sentence (`` ` `` accept, `\` unsure, `]` reject, `[` privacy). A verdict

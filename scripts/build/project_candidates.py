@@ -14,7 +14,7 @@ What it does, in order:
   2. Drop tombstoned records (see "Privacy" below).
   3. Resolve source-level facts from config/sources.json.
   4. Score salience under EVERY profile in config/salience_profiles/.
-  5. Merge attributed human reviews from data/enrichment/human_review/.
+  5. Merge attributed human reviews from data/curated/human_review/.
   6. Screen for possible privacy concerns; flag, never silently delete.
   7. Emit the feed plus a LINEAGE.json accounting for every input record.
 
@@ -64,7 +64,7 @@ BUILD_VERSION = "0.2.0"
 RAW_ROOT = os.path.join(REPO_ROOT, "data", "raw")
 OUT_ROOT = os.path.join(REPO_ROOT, "data", "serveable", "api", "candidates")
 TOMBSTONE_ROOT = os.path.join(RAW_ROOT, "_tombstones")
-REVIEW_ROOT = os.path.join(REPO_ROOT, "data", "enrichment", "human_review")
+REVIEW_ROOT = os.path.join(REPO_ROOT, "data", "curated", "human_review")
 AIRR_TAG_ROOT = os.path.join(REPO_ROOT, "data", "enrichment", "airr_tags")
 
 # Source-level facts (notably source_available_at) are resolved here at build
