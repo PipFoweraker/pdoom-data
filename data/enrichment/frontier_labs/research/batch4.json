@@ -1,0 +1,309 @@
+[
+  {
+    "name": "DeepSeek",
+    "founded": "2023-07-17",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://baike.baidu.com/en/item/Hangzhou%20DeepSeek%20Artificial%20Intelligence%20Co.,%20Ltd/978595",
+      "quote": "Hangzhou DeepSeek Artificial Intelligence Co., Ltd. (commonly known as DeepSeek) was founded on July 17, 2023",
+      "publisher": "Baidu Baike (English edition)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2023-07-17",
+        "url": "https://en.wikipedia.org/wiki/DeepSeek",
+        "quote": "On 17 July 2023, that lab was spun off into an independent company.",
+        "what_it_represents": "spin-off of High-Flyer's internal AGI research lab into an independent company"
+      },
+      {
+        "date": "2023",
+        "url": "https://www.forbes.com/sites/tylerroush/2025/01/28/who-is-behind-deepseek-heres-what-to-know-about-founder-liang-wenfeng/",
+        "quote": "Liang founded DeepSeek in 2023, and the company relied on maximizing the output of processors available in China",
+        "what_it_represents": "year-only corroboration"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "High-Flyer",
+    "country": "China",
+    "notes": "Owned and funded by the quantitative hedge fund High-Flyer; Liang Wenfeng is CEO of both. High-Flyer's own founding is contested because two legal entities exist: Zhejiang High-Flyer Asset Management Co., Ltd. (2015) and Ningbo High-Flyer Quant Investment Management Partnership LLP (2016), the latter now doing business as High-Flyer. The first-party page high-flyer.cn/en/about returned 404, so no first-party confirmation. The registered DeepSeek entity appears in sources as both 'Hangzhou DeepSeek Artificial Intelligence Co., Ltd.' and 'Hangzhou DeepSeek Artificial Intelligence Basic Technology Research Co., Ltd.'"
+  },
+  {
+    "name": "Alibaba DAMO Academy",
+    "founded": "2017-10",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://baike.baidu.com/en/item/Damo%20Academy/653561",
+      "quote": "In October 2017, the Damo Academy was established, dedicated to exploring the unknown in science and technology and conducting research in basic science and innovative technologies.",
+      "publisher": "Baidu Baike (English edition)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2017-10-11",
+        "url": "https://en.people.cn/n3/2017/1012/c90000-9278941.html",
+        "quote": "The Alibaba Group announced Wednesday it will set up a new research institute and invest over 100 billion yuan (about 15 billion U.S. dollars) over the next three years in advanced technology development.",
+        "what_it_represents": "announcement at The Computing Conference 2017 in Hangzhou, Wednesday 2017-10-11"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Alibaba Group",
+    "country": "China",
+    "notes": "Founding here means public establishment of an internal Alibaba unit at the Computing Conference on 2017-10-11; there is no incorporation date. First-party attempts all failed: damo.alibaba.com/about returned scaffolding only, alibabacloud.com press release empty, alizila.com 403. IMPORTANT FOR SCOPING: the Qwen team is NOT inside DAMO today. Caixin Global reports that in late 2022 Alibaba merged DAMO's language and vision AI teams into Alibaba Cloud and created Tongyi Lab, headed by Alibaba Cloud CTO Zhou Jingren. Qwen sits in Tongyi Lab, not DAMO. No day-precision date for Tongyi Lab was found."
+  },
+  {
+    "name": "Moonshot AI",
+    "founded": "2023-03",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Moonshot_AI",
+      "quote": "Moonshot was founded in March 2023 by Yang Zhilin, Zhou Xinyu and Wu Yuxin who were schoolfriends at Tsinghua University.",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2023",
+        "url": "https://www.moonshot.ai/about",
+        "quote": "Moonshot AI was founded in early 2023, with a core technical team that brings together the inventors of multiple key AI technologies including Transformer-XL, RoPE, Group Normalization, ShuffleNet, MuonClip, Mooncake, and others, dedicated to finding the optimal solution for converting energy into intelligence.",
+        "what_it_represents": "first-party but vaguer than Wikipedia: 'early 2023' only, consistent with March"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "China",
+    "notes": "First-party site says only 'early 2023'; the month comes from Wikipedia, whose cited reference was not resolvable from the fetched rendering. Chinese legal entity appears in the site footer as Beijing Moonshot AI Technology Co., Ltd. Researcher's stated confidence: month ~0.8, year high."
+  },
+  {
+    "name": "Zhipu AI",
+    "founded": "2019-06-11",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://baike.baidu.com/en/item/Beijing%20Zhipu%20Huazhang%20Technology%20Co.,%20Ltd./949212",
+      "quote": "Beijing Zhipu Huazhang Technology Co., Ltd., with the stock abbreviation Z.AI and stock code 02513, is a company limited by shares primarily engaged in the science and technology promotion and application services industry...It was founded on June 11, 2019.",
+      "publisher": "Baidu Baike (English edition)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2019-06",
+        "url": "https://baike.baidu.com/en/item/Beijing%20Zhipu%20Huazhang%20Technology%20Co.,%20Ltd./949212",
+        "quote": "In June 2019, Z.AI was formally established, originating from the technological achievements transfer of the Tsinghua University Computer Science Department Knowledge Engineering Laboratory (KEG).",
+        "what_it_represents": "month-precision restatement tying the company to the Tsinghua KEG spin-out"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "China",
+    "notes": "Rebrand, not a legal rename: the company rebranded internationally as Z.ai in July 2025 alongside GLM-4.5, but the registered entity remains Beijing Zhipu Huazhang Technology Co., Ltd. Z.AI is the international brand and HKEX stock abbreviation, code 02513. Listed on HKEX 2026-01-08; that IPO prospectus would be the strongest source for the incorporation date but was not fetched. z.ai/about returned 404, so the day rests on Baidu Baike alone. Researcher's stated confidence: day ~0.75, month/year high."
+  },
+  {
+    "name": "01.AI",
+    "founded": "2023",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://www.01.ai/about.html",
+      "quote": "01.AI was founded in Beijing in May 2023 under the leadership of Dr. Kai-Fu Lee and became a unicorn within six months.",
+      "publisher": "01.AI (first-party)"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2023-05",
+        "url": "https://www.01.ai/about.html",
+        "quote": "01.AI was founded in Beijing in May 2023 under the leadership of Dr. Kai-Fu Lee and became a unicorn within six months.",
+        "what_it_represents": "first-party statement"
+      },
+      {
+        "date": "2023-03",
+        "url": "https://en.wikipedia.org/wiki/01.AI",
+        "quote": "01.AI was founded in March 2023 by former Microsoft and Google executive and Sinovation Ventures co-founder Kai-Fu Lee.",
+        "what_it_represents": "widely repeated secondary consensus, citing Bloomberg 2023-11-05; consistent with TechNode's 2023-03-20 report of Kai-Fu Lee founding the startup"
+      }
+    ],
+    "status": "active",
+    "status_date": "2025-03",
+    "status_evidence": {
+      "url": "https://en.wikipedia.org/wiki/01.AI",
+      "quote": "In March 2025, 01.AI stopped 'pre-training' large language models to focus on selling tailored AI business solutions using DeepSeek's models."
+    },
+    "parent_org": null,
+    "country": "China",
+    "notes": "Reported at YEAR precision deliberately: the month is genuinely contested and the first-party source (May 2023) disagrees with the secondary consensus (March 2023). Plausible but UNVERIFIED reconciliation: March = public announcement / incubation inside Sinovation Ventures, May = incorporation of Beijing Lingyi Wanwu Information Technology Co., Ltd. Do not collapse without a registry record. MATERIAL FOR ANY FRONTIER-LAB COUNT: 01.AI remains an operating company but stopped pre-training its own frontier models in 2025-03 (Financial Times, 2025-03-22), so counting it as a frontier lab after that date is misleading."
+  },
+  {
+    "name": "ByteDance Seed",
+    "founded": "2023",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://github.com/ByteDance-Seed",
+      "quote": "Established in 2023, the ByteDance Seed team is dedicated to discovering new approaches to general intelligence and pushing the boundaries of AI.",
+      "publisher": "ByteDance Seed (first-party GitHub organisation profile)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2023",
+        "url": "https://en.wikipedia.org/wiki/ByteDance",
+        "quote": "ByteDance's AI team known as 'Seed' was established in 2023.",
+        "what_it_represents": "corroboration, cited there to Bloomberg"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "ByteDance",
+    "country": "China",
+    "notes": "No month precision found; both first-party and Wikipedia give only 2023. seed.bytedance.com pages are JavaScript-rendered and yielded no founding statement. Parent ByteDance founded 2012-03 per Wikipedia body text, with 2012-03-13 in the infobox only. Seed's organisational boundary has moved repeatedly: reports of a 2024 reorganisation splitting Seed and Flow, and Wu Yonghui taking over in 2025-02 with former ByteDance AI Lab teams folded in, were not independently fetched and are unverified. So 'founded 2023' names a team substantially reconstituted since."
+  },
+  {
+    "name": "Tencent",
+    "founded": "1998-11",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Tencent",
+      "quote": "Tencent was founded by Pony Ma, Zhang Zhidong, Xu Chenye, Charles Chen and Zeng Liqing in November 1998",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "1998",
+        "url": "https://www.tencent.com/en-us/about.html",
+        "quote": "Founded in 1998 with its headquarters in Shenzhen, China, Tencent's guiding principle is to use technology for good.",
+        "what_it_represents": "first-party About page, year only"
+      },
+      {
+        "date": "1998-11-07",
+        "url": "https://en.wikipedia.org/wiki/Tencent",
+        "quote": "Founded: 7 November 1998; 27 years ago (1998-11-07)",
+        "what_it_represents": "infobox value, unsourced in the fetched rendering; conflicts with the widely circulated 11 November 1998"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "China",
+    "notes": "Month precision deliberate. The day is contested: Wikipedia's infobox says 7 November, many aggregators say 11 November, and Tencent's own page gives only the year. Do not upgrade to day precision without an HKEX filing or annual report."
+  },
+  {
+    "name": "Tencent AI Lab",
+    "founded": "2016-04",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://syncedreview.com/2017/04/22/interview-with-tencent-ai-lab-four-core-research-fieldscomputer-vision-speech-recognition-natural-language-processing-and-machine-learning/",
+      "quote": "In April 2016, Tencent AI Lab was finally founded.",
+      "publisher": "Synced (SyncedReview)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2016",
+        "url": "https://www.caixinglobal.com/2026-03-21/tencent-folds-ai-lab-into-hunyuan-team-in-major-ai-overhaul-102425495.html",
+        "quote": "Tencent will disband the AI Lab established in 2016",
+        "what_it_represents": "year-only corroboration inside the 2026 disbandment story"
+      }
+    ],
+    "status": "merged",
+    "status_date": "2026-03-20",
+    "status_evidence": {
+      "url": "https://www.caixinglobal.com/2026-03-21/tencent-folds-ai-lab-into-hunyuan-team-in-major-ai-overhaul-102425495.html",
+      "quote": "Tencent will disband the AI Lab established in 2016"
+    },
+    "parent_org": "Tencent",
+    "country": "China",
+    "notes": "Separate record because its founding date differs from Tencent's. THIS UNIT NO LONGER EXISTS: Caixin Global, 2026-03-21, reports Tencent disbanding it and folding it into the Hunyuan large-model team, internal notice issued 2026-03-20, personnel moving under Chief AI Scientist Yao Shunyu. Reports that only the industry-academia collaboration centre was retained were not independently fetched. Zhang Tong became executive director in 2017-03, about a year after founding, and left in early 2019; do not confuse his arrival with the founding."
+  },
+  {
+    "name": "Huawei Noah's Ark Lab",
+    "founded": "2012",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://cse.hkust.edu.hk/ug/comp4900/S15/2015-02-04.html",
+      "quote": "The Noah's Ark Lab was founded in Hong Kong in 2012.",
+      "publisher": "HKUST Department of Computer Science and Engineering (seminar page)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2012",
+        "url": "https://baike.baidu.com/en/item/Noah's%20Ark%20Lab/928695",
+        "quote": "Noah's Ark Lab is an artificial intelligence research institution established by Huawei's 2012 Lab in 2012 at the Hong Kong Science Park.",
+        "what_it_represents": "corroboration adding the parent unit and the Hong Kong Science Park location"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Huawei",
+    "country": "Hong Kong SAR, China",
+    "notes": "No month precision found. No first-party Huawei statement obtained: noahlab.com.hk had no founding text and dev3.noahlab.com.hk failed TLS validation. The HKUST page is a 2015 departmental seminar page, contemporaneous and close to first-hand, but not Huawei-published. Founded in Hong Kong, later expanded to Beijing, Shenzhen, Shanghai, London, Paris and Edmonton. The parent 'Huawei 2012 Lab' name coincides with the founding year but derives from the film 2012, not the date."
+  },
+  {
+    "name": "Inspur",
+    "founded": null,
+    "founded_precision": null,
+    "founded_evidence": null,
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "1983",
+        "url": "https://en.wikipedia.org/wiki/Inspur",
+        "quote": "Founded: 1983; 43 years ago (1983)",
+        "what_it_represents": "infobox value with no cited source; the same article is filed under the category 'Companies established in 2000', an internal contradiction"
+      },
+      {
+        "date": "1989-02-03",
+        "url": "https://baike.baidu.com/en/item/Inspur/947896",
+        "quote": "It was founded on February 3, 1989, in Jinan City, Shandong Province.",
+        "what_it_represents": "Baidu Baike's date for the entity it titles simply 'Inspur'; the same page says the predecessor was the Shandong Electronic Equipment Factory, which developed China's first Inspur microcomputer in 1983"
+      },
+      {
+        "date": "1998",
+        "url": "https://www.investing.com/equities/inspur-electronic-info-industr-company-profile",
+        "quote": "Inspur Electronic Information Industry Co., Ltd. was founded in 1998",
+        "what_it_represents": "founding of the Shenzhen-listed subsidiary 000977.SZ, now IEIT Systems, a different legal entity from Inspur Group; formerly Langchao Electronic Information Industry Co., Ltd., renamed 2006-04"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "China",
+    "notes": "DELIBERATE NULL. 'Inspur' is not one organisation and founding is genuinely ill-defined: Inspur Group (unlisted parent, Jinan), Inspur Electronic Information Industry Co., Ltd. / IEIT Systems (000977.SZ), Inspur International and Inspur Cloud all carry the name. Four mutually inconsistent dates circulate (1945, 1983, 1989, 1998), plus 2000 for adoption of the Inspur name and 2006-04 for the listed arm's rename. The widely repeated 1945 claim could NOT be verified against any fetchable source; it appears only in commercial aggregators that were not fetched. Every first-party attempt failed to yield a date (en.inspur.com about page, inspur.com group page 404, en.ieisystem.com 404). Whoever consumes this record must first decide which Inspur entity is meant. Note also that Inspur's AI relevance is as a server and HPC vendor and developer of the Yuan LLM series, not as a research lab in the sense of the other entries."
+  },
+  {
+    "name": "Peng Cheng Laboratory",
+    "founded": "2018-03",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://baike.baidu.com/en/item/Peng%20Cheng%20Laboratory/935659",
+      "quote": "It was founded in March 2018 and primarily engages in strategic, forward-looking, and fundamental major scientific issues and key core technology research in this field.",
+      "publisher": "Baidu Baike (English edition)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2018",
+        "url": "https://merics.org/en/comment/peng-cheng-lab-pengchengshiyanshi-building-advanced-platforms-and-infrastructure-military",
+        "quote": "A 'new type of research and development institution' (xinxing yanfa jigou) set up by the Guangdong and Shenzhen governments in 2018",
+        "what_it_represents": "year-only corroboration from MERICS. The original parenthetical is in Chinese characters, transliterated to pinyin here."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "China",
+    "notes": "No day precision verifiable. March 2018 is stated by Baidu Baike and corroborated at year level by MERICS, but the sometimes-cited 2018-03-22 could NOT be confirmed and must not be adopted. First-party pages all failed: szpclab.com refused the connection, and pcl.ac.cn pages carried mission and facility text but no establishment date. PCL is a state-backed institution approved by the Central Committee of the CPC and funded by the Guangdong and Shenzhen governments, directed by Gao Wen, so there is no corporate incorporation record to appeal to; founding here means government establishment."
+  }
+]

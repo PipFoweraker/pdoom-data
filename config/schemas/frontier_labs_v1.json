@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pdoom.com/schemas/frontier_labs_v1.json",
+  "title": "Frontier AI Labs Schema",
+  "description": "Organisations that develop frontier AI systems, with founding dates carried alongside the evidence for them. Facts only: this collection asserts no game impacts, no rarity and no salience. Inclusion is itself an editorial judgement and is therefore recorded per row in inclusion_basis rather than left implicit.",
+  "version": "1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "founded",
+    "founded_precision",
+    "evidence_strength",
+    "status",
+    "lab_kind",
+    "inclusion_basis",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable slug. Never reused, never renamed; a rename creates a new id and sets the old row's status to renamed.",
+      "pattern": "^[a-z0-9_]+$",
+      "minLength": 2,
+      "maxLength": 64
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name, ASCII only. Source dumps in this repo carry encoding damage (for example 'UniversitA de MontrAal'), so names here are re-typed rather than copied.",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "aliases": {
+      "type": "array",
+      "description": "Other names the same organisation appears under, including names used in the Epoch AI dump.",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "founded": {
+      "type": ["string", "null"],
+      "description": "ISO 8601 date at the precision the evidence supports: YYYY, YYYY-MM or YYYY-MM-DD. NULL WHERE NO CITED DATE WAS FOUND. Null is ungated and honest; a fabricated date is indistinguishable from a real one later. Do not fill this from memory or by inference from a relative phrase such as 'founded two years ago'.",
+      "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$"
+    },
+    "founded_precision": {
+      "type": ["string", "null"],
+      "description": "Precision actually supported by founded_evidence. Must be null exactly when founded is null.",
+      "enum": ["day", "month", "year", null]
+    },
+    "founded_evidence": {
+      "type": ["object", "null"],
+      "description": "What was read, and the sentence that carried the date. Present even where founded is null, to record what was checked.",
+      "additionalProperties": false,
+      "required": ["url", "quote", "publisher"],
+      "properties": {
+        "url": { "type": "string", "description": "The page actually fetched" },
+        "quote": { "type": "string", "description": "Verbatim sentence from that page containing the date" },
+        "publisher": { "type": "string", "description": "Who publishes the page, and any record identifier such as a company number" }
+      }
+    },
+    "founded_contested": {
+      "type": "boolean",
+      "description": "True where credible sources disagree, or where founded / incorporated / announced / emerged-from-stealth are meaningfully different events.",
+      "default": false
+    },
+    "founded_alternatives": {
+      "type": "array",
+      "description": "Other defensible dates, each labelled with what it represents. A consumer wanting 'when did this lab become publicly visible' should read this rather than founded.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "what_it_represents"],
+        "properties": {
+          "date": { "type": ["string", "null"] },
+          "url": { "type": "string" },
+          "quote": { "type": "string" },
+          "what_it_represents": {
+            "type": "string",
+            "description": "For example: statutory incorporation, public announcement, emergence from stealth, internal project start"
+          }
+        }
+      },
+      "default": []
+    },
+    "evidence_strength": {
+      "type": "string",
+      "description": "How much weight founded can bear. Graded on source class, not on confidence. 'registry' = a statutory company register. 'first_party' = the organisation's own site. 'press' = journalism that states the date. 'secondary' = encyclopedia or trade-press boilerplate, or a citation chain that does not resolve. 'none' = no citable date found; founded must be null.",
+      "enum": ["registry", "first_party", "press", "secondary", "none"]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current disposition. Note that a reverse-acquihire, where staff and a licence move but no equity changes hands, is NOT 'acquired'; such organisations stay 'active' with the event recorded in notes.",
+      "enum": ["active", "acquired", "merged", "defunct", "renamed", "unknown"]
+    },
+    "status_date": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$"
+    },
+    "status_evidence": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["url", "quote"],
+      "properties": {
+        "url": { "type": "string" },
+        "quote": { "type": "string" }
+      }
+    },
+    "parent_org": {
+      "type": ["string", "null"],
+      "description": "id of the parent row where the parent is also in this collection, otherwise a plain name. Set only where an equity relationship is evidenced."
+    },
+    "country": {
+      "type": ["string", "null"],
+      "description": "Country of headquarters at founding. Null where genuinely unclear rather than guessed; some organisations are dual-sited from the start."
+    },
+    "lab_kind": {
+      "type": "string",
+      "description": "What kind of thing this row is. Provided so that a consumer counting 'how many frontier labs exist' picks its own filter instead of inheriting ours. A count of dedicated_ai_lab is a very different number from a count of every row.",
+      "enum": [
+        "dedicated_ai_lab",
+        "corporate_division",
+        "corporate_parent",
+        "research_institute",
+        "research_collective"
+      ]
+    },
+    "inclusion_basis": {
+      "type": "string",
+      "description": "Why this row is in the collection. 'epoch_frontier_model' is mechanical: credited on at least one model flagged Frontier model in the Epoch AI notable-models database with a publication date in range. 'editorial' is a judgement call, and inclusion_reason must then say why the mechanical rule missed it.",
+      "enum": ["epoch_frontier_model", "editorial"]
+    },
+    "inclusion_reason": {
+      "type": ["string", "null"],
+      "description": "Required where inclusion_basis is editorial. States what the mechanical rule missed and why the row belongs anyway."
+    },
+    "epoch_frontier_models": {
+      "type": ["integer", "null"],
+      "description": "Count of Epoch-flagged frontier models this organisation is credited on, in range. Null where the organisation does not appear in the Epoch dump at all, which is different from zero.",
+      "minimum": 0
+    },
+    "epoch_first_frontier_model": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$",
+      "description": "Publication date of the earliest Epoch-flagged frontier model credited to this organisation. A weak lower bound on when the organisation was doing frontier work, and NOT a founding date."
+    },
+    "epoch_last_frontier_model": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9]{4}(-[0-9]{2}(-[0-9]{2})?)?$"
+    },
+    "sources": {
+      "type": "array",
+      "description": "Every URL consulted for this row, including ones that did not yield a date.",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "What a careful reader should know. Decoy corporate records that were rejected belong here, so the next person does not re-find them and adopt them."
+    },
+    "extra": {
+      "type": "object",
+      "description": "Escape hatch for fields not yet standardised. Anything here is unversioned and may move into a named field in a later schema version. Reserved for: funding_total, headcount_band, notable_models, safety_team_presence, jurisdiction.",
+      "default": {}
+    }
+  },
+  "allOf": [
+    {
+      "description": "founded and founded_precision agree about being absent.",
+      "if": { "properties": { "founded": { "type": "null" } } },
+      "then": { "properties": { "founded_precision": { "type": "null" } } }
+    },
+    {
+      "description": "A null founded must be justified by evidence_strength none.",
+      "if": { "properties": { "founded": { "type": "null" } } },
+      "then": { "properties": { "evidence_strength": { "const": "none" } } }
+    },
+    {
+      "description": "An editorial inclusion must say why the mechanical rule missed it.",
+      "if": { "properties": { "inclusion_basis": { "const": "editorial" } } },
+      "then": { "required": ["inclusion_reason"], "properties": { "inclusion_reason": { "type": "string", "minLength": 10 } } }
+    }
+  ]
+}

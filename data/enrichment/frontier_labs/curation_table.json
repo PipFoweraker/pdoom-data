@@ -1,0 +1,227 @@
+{
+  "_about": "The editorial layer over data/enrichment/frontier_labs/research/*.json. The research files record what was read and are not edited; this file records the judgement calls, so the two can be reviewed separately. Keyed by the 'name' field as it appears in the research files.",
+  "_inclusion_rule_v1": {
+    "epoch_frontier_model": "Credited on at least one model flagged 'Frontier model' in the Epoch AI notable-models database with a publication date in 2000 or later. Mechanical: it is a query, not a judgement.",
+    "editorial": "Included despite the mechanical rule not selecting it. Requires inclusion_reason naming what the rule missed. Necessary because Epoch's flag is sparse -- 123 of 1,034 rows in the dump carry it -- so its absence is not evidence an organisation is not frontier.",
+    "lab_kind": "Provided so a consumer counting 'how many frontier labs exist' picks its own filter rather than inheriting ours. Counting dedicated_ai_lab gives a very different number from counting every row."
+  },
+  "labs": {
+    "Google": {
+      "id": "google",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Google"]
+    },
+    "Google Research": {
+      "id": "google_research",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Google Research"]
+    },
+    "Google Brain": {
+      "id": "google_brain",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Google Brain"]
+    },
+    "DeepMind": {
+      "id": "deepmind",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["DeepMind"]
+    },
+    "Google DeepMind": {
+      "id": "google_deepmind",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Google DeepMind"]
+    },
+    "Microsoft": {
+      "id": "microsoft",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Microsoft"]
+    },
+    "Microsoft Research": {
+      "id": "microsoft_research",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Microsoft Research"]
+    },
+    "NVIDIA": {
+      "id": "nvidia",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["NVIDIA"]
+    },
+    "Amazon": {
+      "id": "amazon",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Amazon"]
+    },
+    "IBM": {
+      "id": "ibm",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Epoch flags IBM on frontier models only BEFORE 2000, so the 2000+ window rule does not select it. Included because the collection's window is a scoping choice, not a claim that IBM stopped being a research organisation, and because a timeline running to the present benefits from an entity whose frontier work predates the window.",
+      "aliases": ["IBM"]
+    },
+    "Cambridge Research Laboratory": {
+      "id": "cambridge_research_laboratory",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Compaq CRL"]
+    },
+    "Mitsubishi Electric Research Laboratories": {
+      "id": "mitsubishi_electric_research_laboratories",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Mitsubishi Electric Research Labs", "MERL", "Mitsubishi Electric Information Technology Center America", "ITA"]
+    },
+    "Mistral AI": {
+      "id": "mistral_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "No Mistral model carries Epoch's frontier flag in the ingested dump, but Mistral trains and releases general-purpose models at or near the open-weight frontier and is routinely named as a frontier developer in European AI governance discussion. A clear case of the flag's sparsity rather than of Mistral not qualifying.",
+      "aliases": []
+    },
+    "Cohere": {
+      "id": "cohere",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a dedicated general-purpose model developer with its own pretrained frontier-class family, whose absence from the flag reflects Epoch's coverage rather than Cohere's activity.",
+      "aliases": []
+    },
+    "Stability AI": {
+      "id": "stability_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump, whose frontier flag tracks language-model compute far better than image generation. Included because Stable Diffusion was at the generative-image frontier on release. Note the founding date badly misrepresents this row: see notes.",
+      "aliases": []
+    },
+    "Safe Superintelligence Inc": {
+      "id": "safe_superintelligence",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Has released no model, so it cannot appear in a model database by construction. Included because a dataset of frontier labs that omits an explicitly frontier-targeting lab founded by Ilya Sutskever would mislead; a consumer wanting only shipping labs can filter on epoch_frontier_models being null.",
+      "aliases": []
+    },
+    "Allen Institute for AI": {
+      "id": "allen_institute_for_ai",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a non-profit institute releasing fully open pretrained models and training data, which makes it structurally important to the field even where its models are not compute-frontier.",
+      "aliases": ["AI2", "Ai2"]
+    },
+    "EleutherAI": {
+      "id": "eleutherai",
+      "lab_kind": "research_collective",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included because it was for a period the main source of openly available large language models, and because it is the collection's clearest example of an organisation with no incorporation date -- useful as a test of the schema's tolerance for ill-defined founding.",
+      "aliases": []
+    },
+    "Hugging Face": {
+      "id": "hugging_face",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch, and arguably infrastructure rather than a frontier lab. Included as a borderline case, deliberately, so that the boundary of the inclusion rule is visible in the data rather than hidden in a decision nobody recorded. A consumer disagreeing should filter it out; that is what lab_kind and inclusion_basis are for.",
+      "aliases": []
+    },
+    "Reka AI": {
+      "id": "reka_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a dedicated multimodal frontier-model developer founded by former DeepMind and Google Brain researchers.",
+      "aliases": []
+    },
+    "Character.AI": {
+      "id": "character_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch. Included because it trained its own large models in-house rather than building on someone else's, and because its 2024 reverse-acquihire is a useful worked example of an event that looks like an acquisition and is not.",
+      "aliases": []
+    },
+    "Adept AI": {
+      "id": "adept_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch. Included as an agent-focused frontier developer founded by transformer co-authors, and as the collection's clearest case of a founding date that could not be sourced at all.",
+      "aliases": []
+    },
+    "DeepSeek": {
+      "id": "deepseek",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "The most conspicuous gap in Epoch's frontier flag within the ingested dump: DeepSeek carries no flagged row, despite V3 and R1 being unambiguously frontier on release. This single row is the strongest evidence that a mechanical-only inclusion rule would have produced a wrong dataset.",
+      "aliases": []
+    },
+    "Alibaba DAMO Academy": {
+      "id": "alibaba_damo_academy",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch under this name. Included as Alibaba's research institute, with the important caveat recorded in notes that the Qwen team moved out of DAMO into Alibaba Cloud's Tongyi Lab in late 2022 -- so this row is NOT the right home for Qwen and a consumer should not treat it as such.",
+      "aliases": ["DAMO Academy", "Alibaba DAMO"]
+    },
+    "Moonshot AI": {
+      "id": "moonshot_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a dedicated Chinese frontier-model developer (Kimi series) widely tracked as frontier-adjacent.",
+      "aliases": ["Kimi"]
+    },
+    "Zhipu AI": {
+      "id": "zhipu_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Z.ai (Zhipu AI)", "Z.ai", "Beijing Zhipu Huazhang Technology Co., Ltd."]
+    },
+    "01.AI": {
+      "id": "zero_one_ai",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included for the Yi model family. Note the status change recorded in the row: 01.AI stopped pre-training its own models in 2025-03, so any count of currently-active frontier labs should exclude it after that date.",
+      "aliases": ["Yi", "Beijing Lingyi Wanwu Information Technology Co., Ltd."]
+    },
+    "ByteDance Seed": {
+      "id": "bytedance_seed",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch under this name. Included as ByteDance's frontier model team (Doubao / Seed series). The unit has been reconstituted at least once since its 2023 establishment, which the row records.",
+      "aliases": ["Seed", "ByteDance"]
+    },
+    "Tencent": {
+      "id": "tencent",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as the parent of the Hunyuan model family and, from 2026-03, of the absorbed AI Lab. Present mainly to give Tencent AI Lab a parent to point at.",
+      "aliases": []
+    },
+    "Tencent AI Lab": {
+      "id": "tencent_ai_lab",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch. Included as a separate row from Tencent because it has a distinct founding date (2016-04) and a distinct end: it was disbanded into the Hunyuan team on 2026-03-20. A collection that folded it into Tencent would lose both facts.",
+      "aliases": []
+    },
+    "Huawei Noah's Ark Lab": {
+      "id": "huawei_noahs_ark_lab",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as Huawei's principal AI research lab and the origin of the Pangu model family.",
+      "aliases": ["Noah's Ark Lab"]
+    },
+    "Inspur": {
+      "id": "inspur",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Inspur"]
+    },
+    "Peng Cheng Laboratory": {
+      "id": "peng_cheng_laboratory",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "epoch_frontier_model",
+      "aliases": ["Peng Cheng Laboratory"]
+    }
+  }
+}

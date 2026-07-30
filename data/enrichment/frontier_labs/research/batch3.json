@@ -1,0 +1,281 @@
+[
+  {
+    "name": "Mistral AI",
+    "founded": "2023-04-28",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://recherche-entreprises.api.gouv.fr/search?q=mistral%20ai",
+      "quote": "\"date_creation\": \"2023-04-28\"",
+      "publisher": "Annuaire des Entreprises / recherche-entreprises API, DINUM, French government; SIREN 952418325, nom_complet MISTRAL AI"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2023-04",
+        "url": "https://en.wikipedia.org/wiki/Mistral_AI",
+        "quote": "Mistral AI was established in April 2023 by three French AI researchers",
+        "what_it_represents": "month-precision founding in prose; consistent with the registry date"
+      },
+      {
+        "date": "2023-09-27",
+        "url": "https://mistral.ai/news/about-mistral-ai/",
+        "quote": "Bringing open AI models to the frontier",
+        "what_it_represents": "first-party public launch; earliest post on Mistral's news page, dated 2023-09-27. Company existed ~5 months before this."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "France",
+    "notes": "Strongest evidence in this batch: a government company register, not journalism. SIREN 952418325, legal form SAS, registered office Paris. A separate shell MISTRAL AI RESERVED (SIREN 992519694) exists and must not be confused with the operating company. A decoy SIREN 952481660 appears in some secondary write-ups and is wrong. Mistral's own site carries no founding-date statement."
+  },
+  {
+    "name": "Cohere",
+    "founded": "2019",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://cohere.com/about",
+      "quote": "Cohere was founded in 2019 in Toronto with a bold vision: to do whatever it takes to scale intelligence to serve humanity.",
+      "publisher": "Cohere Inc. (first-party)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "Canada",
+    "notes": "First-party but year precision only; no month or incorporation date published, no Canadian register record retrieved."
+  },
+  {
+    "name": "Stability AI",
+    "founded": "2019-11-04",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://find-and-update.company-information.service.gov.uk/company/12295325",
+      "quote": "Incorporated on 4 November 2019",
+      "publisher": "Companies House, GOV.UK; STABILITY AI LTD, company number 12295325"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2019",
+        "url": "https://en.wikipedia.org/wiki/Stability_AI",
+        "quote": "Stability AI was founded in 2019 by Emad Mostaque and Cyrus Hodes.",
+        "what_it_represents": "year-precision prose; agrees with the register"
+      },
+      {
+        "date": "2019-11-04",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/12295325/officers",
+        "quote": "MOSTAQUE, Mohammad Emad - Appointed 4 November 2019",
+        "what_it_represents": "corroborates entity identity: directorship starts on the incorporation date; he resigned 2024-03-22"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United Kingdom",
+    "notes": "The 2019 incorporation is real but misleading for cross-lab comparison: Stability had essentially no public AI-lab activity until 2021-2022 (Stable Diffusion released 2022-08), so a reader comparing founded dates will over-age Stability by ~3 years. Companies House lists no previous names for 12295325. Cyrus Hodes's co-founder status was later litigated. A separate US entity Stability AI Inc. exists; no registration date retrieved."
+  },
+  {
+    "name": "Safe Superintelligence Inc",
+    "founded": "2024-06-19",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Safe_Superintelligence_Inc.",
+      "quote": "On June 19, 2024, Sutskever posted on X that he was starting SSI Inc, with the goal to safely develop superintelligent AI",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2024-06-19",
+        "url": "https://time.com/6990076/safe-superintelligence-inc-announced/",
+        "quote": "he's launching a new venture dubbed Safe Superintelligence Inc.",
+        "what_it_represents": "public announcement; article dateline 2024-06-19"
+      },
+      {
+        "date": "2024",
+        "url": "https://ssi.inc/",
+        "quote": "Safe Superintelligence Inc. (c) 2024 - 2026",
+        "what_it_represents": "first-party copyright range, lower-bounding existence to 2024"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "This is the public ANNOUNCEMENT date, not a verified incorporation date. No Delaware or other registry record retrieved; actual incorporation may predate it by weeks or months. Offices in Palo Alto and Tel Aviv, so country is arguably dual. Reuters, AP, The Verge and NYT cited by Wikipedia for the same date were not fetchable."
+  },
+  {
+    "name": "Allen Institute for AI",
+    "founded": "2014",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://allenai.org/about",
+      "quote": "Philanthropist and Microsoft co-founder Paul Allen founded Ai2 in 2014 to find transformative ways to develop AI to address some of the world's biggest challenges.",
+      "publisher": "Allen Institute for AI (first-party)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2014",
+        "url": "https://en.wikipedia.org/wiki/Allen_Institute_for_AI",
+        "quote": "founded by late Microsoft co-founder and philanthropist Paul Allen in 2014",
+        "what_it_represents": "cites allenai.org/about as its source, so NOT independent corroboration"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Secondary aggregators claim 2014-01-01 and that Oren Etzioni was appointed 2013-09, but no citable page carrying that day-precision date was fetched (GeekWire returned 403), so it is deliberately NOT reported. 501(c)(3) non-profit, Seattle. Rebranded in presentation from AI2 to Ai2."
+  },
+  {
+    "name": "EleutherAI",
+    "founded": "2020-07",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://www.eleuther.ai/about",
+      "quote": "Founded in July 2020 by Connor Leahy, Sid Black, and Leo Gao, EleutherAI has grown from a Discord server for talking about GPT-3 to a leading non-profit research institute focused on large-scale artificial intelligence research.",
+      "publisher": "EleutherAI (first-party)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2023-03-02",
+        "url": "https://blog.eleuther.ai/year-two-preface/",
+        "quote": "we are thrilled to announce that we are forming a non-profit research institute, and we are excited to be able to say that over twenty of our regular contributors are now working full-time doing research.",
+        "what_it_represents": "formation of the EleutherAI Institute as a formal non-profit; post dated 2023-03-02. Says 'we are forming', so legal incorporation date is announced-adjacent, not stated."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": null,
+    "notes": "Founding genuinely ill-defined. 2020-07 is the creation of a Discord server by volunteers: no legal entity, no incorporation, no premises, no employees. A formal non-profit was announced 2023-03-02, ~32 months later; exact incorporation date and jurisdiction not found, so country is null rather than guessed. Source page writes GPT-3 with a non-breaking hyphen (U+2011); rendered ASCII."
+  },
+  {
+    "name": "Hugging Face",
+    "founded": "2016",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://en.wikipedia.org/wiki/Hugging_Face",
+      "quote": "The company was founded in 2016 by French entrepreneurs Clement Delangue, Julien Chaumond, and Thomas Wolf in New York City",
+      "publisher": "Wikipedia"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2016",
+        "url": "https://www.forbes.com/companies/hugging-face/",
+        "quote": "Founded 2016",
+        "what_it_represents": "Forbes company-profile data field, independent of Wikipedia"
+      },
+      {
+        "date": "2017-03-09",
+        "url": "https://techcrunch.com/2017/03/09/hugging-face-wants-to-become-your-artificial-bff/",
+        "quote": "have raised $1.2 million from Betaworks, SV Angel and NBA star Kevin Durant and others",
+        "what_it_represents": "Wikipedia's cited source for the founding claim. On fetching, it does NOT state a founding date; it only references a 2016-09 private beta, which upper-bounds founding at 2016."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Weakest citation chain among the independent companies here. No first-party page stating a founding year could be located. The 2016 figure rests on Wikipedia plus a Forbes data field, and following Wikipedia's own citation through does not confirm it. Clement is spelled with an acute accent in sources; rendered ASCII. Founded in New York City as a teen chatbot app; pivoted to ML infrastructure around 2018."
+  },
+  {
+    "name": "Reka AI",
+    "founded": "2022",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://siliconangle.com/2025/07/22/multimodal-ai-startup-reka-ai-raises-110m-1b-valuation/",
+      "quote": "Founded in 2022, Reka develops multimodal models focusing on ultra-efficient training and serving infrastructure for delivering inference at low cost.",
+      "publisher": "SiliconANGLE (trade press, 2025-07-22)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2023-06-27",
+        "url": "https://www.reka.ai/news/announcing-our-60m-funding-to-build-generative-models-and-advance-ai-research",
+        "quote": "Today, we emerge from stealth",
+        "what_it_represents": "first-party emergence from stealth, dated 2023-06-27; earliest item on Reka's news index"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "No first-party founding date exists on reka.ai: no about page, and the earliest news post does not say when the company started. The 2022 figure comes only from trade-press boilerplate. TRAP AVOIDED: UK Companies House lists REKA AI LTD. (number 14242489, incorporated 2022-07-19, Altrincham, one director, SIC 58290). The date is temptingly close but registered office, size and profile do not match the Sunnyvale/San Francisco lab; that record was NOT used and must not be merged in. Reported funding also disagrees: Reka's own post says $60M, press reported $58M."
+  },
+  {
+    "name": "Character.AI",
+    "founded": "2021-11",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://www.forbes.com/sites/kenrickcai/2023/10/11/character-ai-chatbots-group-chat/",
+      "quote": "The pair founded Character.AI in November 2021, a year before public appetite for AI swelled when OpenAI released ChatGPT.",
+      "publisher": "Forbes (Kenrick Cai, 2023-10-11); this is the source Wikipedia cites, followed through"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2021-11",
+        "url": "https://en.wikipedia.org/wiki/Character.ai",
+        "quote": "Character.ai was established in November 2021.",
+        "what_it_represents": "prose whose citation resolves to the Forbes article above"
+      }
+    ],
+    "status": "active",
+    "status_date": "2024-08-02",
+    "status_evidence": {
+      "url": "https://techcrunch.com/2024/08/02/character-ai-ceo-noam-shazeer-returns-to-google/",
+      "quote": "This agreement will provide increased funding for Character.AI to continue growing and to focus on building personalized AI products for users around the world"
+    },
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Legal name Character Technologies, Inc.; Menlo Park, California. The 2024 Google event is a reverse-acquihire, NOT an acquisition: Google hired co-founders Noam Shazeer and Daniel De Freitas plus some staff and took a non-exclusive technology licence, while the company continued independently with Dominic Perella as interim CEO. Status left active for that reason."
+  },
+  {
+    "name": "Adept AI",
+    "founded": null,
+    "founded_precision": null,
+    "founded_evidence": {
+      "url": "https://techcrunch.com/2024/06/28/amazon-hires-founders-away-from-ai-startup-adept/",
+      "quote": "Adept was founded two years ago with the goal of creating an AI model that can perform actions on any software tool using natural language.",
+      "publisher": "TechCrunch (2024-06-28)"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2022-04-26",
+        "url": "https://techcrunch.com/2022/04/26/2304039/",
+        "quote": "At a product lab called Adept that emerged from stealth today with $65 million in funding...",
+        "what_it_represents": "emergence from stealth / Series A, 2022-04-26. A launch date, NOT a founding date."
+      },
+      {
+        "date": "2022-04-27",
+        "url": "https://www.theregister.com/2022/04/27/adept_ai_google/",
+        "quote": "Adept AI, an artificial intelligence R&D lab founded by ex-Googlers who helped invent the popular transformer architecture, launched on Tuesday with the ambitious goal of teaching machines how to use 'every software tool and API in the world.'",
+        "what_it_represents": "same launch reported one day later; launched on Tuesday = 2022-04-26"
+      }
+    ],
+    "status": "active",
+    "status_date": "2024-06-28",
+    "status_evidence": {
+      "url": "https://techcrunch.com/2024/06/28/amazon-hires-founders-away-from-ai-startup-adept/",
+      "quote": "Adept, a startup developing AI-powered \"agents\" to complete various software-based tasks, has agreed to license its tech to Amazon, and the startup's co-founders and portions of its team have joined the e-commerce giant."
+    },
+    "parent_org": null,
+    "country": "United States",
+    "notes": "FOUNDED SET TO NULL BY THE CURATOR, overriding the researcher's '2022'. That value was an inference from 'founded two years ago' in an article datelined 2024-06-28, not a quoted date. No source literally states Adept's founding date; adept.ai returns 403 so the first-party Introducing Adept post could not be read. Secondary aggregators variously assert 2022-01-05, 2022-01 and 2021; none verifiable, none adopted. Public launch 2022-04-26 is well evidenced and is recorded in founded_alternatives; use that if a date is needed, labelled as a launch. On status: reverse-acquihire, not acquisition. Amazon hired co-founder/CEO David Luan and others and licensed models and datasets, but TechCrunch says 'Adept isn't closing up shop, however', with Zach Brock becoming CEO. Headcount reportedly fell from ~100 to ~20. parent_org null because no equity acquisition is evidenced."
+  }
+]

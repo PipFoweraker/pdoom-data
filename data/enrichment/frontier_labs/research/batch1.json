@@ -1,0 +1,335 @@
+[
+  {
+    "name": "Google",
+    "founded": "1998-09",
+    "founded_precision": "month",
+    "founded_evidence": {
+      "url": "https://pages.stern.nyu.edu/adamodar/pc/blog/Google10Q3for2015.pdf",
+      "quote": "We were incorporated in California in September 1998 and re-incorporated in the State of Delaware in August",
+      "publisher": "Google Inc., SEC Form 10-Q for the quarter ended 2015-09-30 (PDF copy on the NYU Stern site of Aswath Damodaran; sec.gov returns 403 to the fetcher used)"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "1998-09-04",
+        "url": "https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated",
+        "quote": "On this day in 1998, search engine firm Google, co-founded by Larry Page and Sergey Brin, who met at Stanford University, files for incorporation in California.",
+        "what_it_represents": "day the incorporation paperwork was filed with the California Secretary of State; secondary source only"
+      },
+      {
+        "date": "1998-08",
+        "url": "https://about.google/company-info/our-story/",
+        "quote": "In August 1998, Sun co-founder Andy Bechtolsheim wrote Larry and Sergey a check for $100,000, and Google Inc. was officially born.",
+        "what_it_represents": "Google's own narrative founding moment, one month EARLIER than its own SEC-filed incorporation month. First-party but inconsistent with the filing record."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Alphabet Inc.",
+    "country": "United States",
+    "notes": "Four candidate anchors exist and Google uses two of them: the 1996 Stanford BackRub project, 1998-08 (Bechtolsheim cheque, per about.google), 1998-09 (incorporation, per SEC filings), and a 27 September birthday with no legal meaning. The primary quote is verbatim but was truncated mid-sentence by the extraction tool at the word August, so the Delaware reincorporation year is not confirmed verbatim. Google Inc. later became Google LLC (2017) under Alphabet (formed 2015); neither date verified here."
+  },
+  {
+    "name": "Google Research",
+    "founded": null,
+    "founded_precision": null,
+    "founded_evidence": null,
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2000",
+        "url": "https://en.wikipedia.org/wiki/Google_Research",
+        "quote": "Founded: 2000 (2000)",
+        "what_it_represents": "infobox value, explicitly UNCITED in the article, no first-party corroboration found. Must not be treated as sourced."
+      },
+      {
+        "date": "2018-05-07",
+        "url": "https://research.google/blog/introducing-google-ai/",
+        "quote": "we're unifying our efforts under \"Google AI\", which encompasses all the state-of-the-art research happening across Google.",
+        "what_it_represents": "date the research division was rebranded Google AI; the Google Research name was later restored, with no dated first-party source for the restoration"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Google",
+    "country": "United States",
+    "notes": "DELIBERATE NULL. No citable founding date, first-party or otherwise. research.google, /philosophy and /blog were all checked; the closest first-party statements are 'Google itself began with a research paper, published in 1998' and 'Our ongoing research over the past 25 years', neither of which dates the organisation. Google Research is an organisational label that accreted rather than being founded on a date: renamed to Google AI in 2018-05 and back again, with the Brain team moving into and out of it."
+  },
+  {
+    "name": "Google Brain",
+    "founded": "2011",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://x.company/projects/brain/",
+      "quote": "When the Google Brain team began their work in 2011, AI and machine learning had been making steady but slow progress for many years.",
+      "publisher": "X, the moonshot factory (Alphabet) - first-party, since Brain began as an X project"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2012",
+        "url": "https://x.company/projects/brain/",
+        "quote": "the Brain team decided they were ready to apply their insights across a range of products at Google, so they graduated from X back to Google in late 2012 as part of Google AI.",
+        "what_it_represents": "graduation out of X into a Google organisation; the page header reads 'Graduated to Google/2012'"
+      }
+    ],
+    "status": "merged",
+    "status_date": "2023-04-20",
+    "status_evidence": {
+      "url": "https://deepmind.google/blog/announcing-google-deepmind/",
+      "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind."
+    },
+    "parent_org": "Google",
+    "country": "United States",
+    "notes": "No clean founding event, as suspected when the question was posed. Brain started in 2011 as a part-time research collaboration (Jeff Dean, Greg Corrado, Andrew Ng) inside Google X, much of it in 20-percent time, and became a distinct Google organisation only on graduating from X in late 2012. Even Wikipedia's 2011 infobox value cites a retrospective 2012-06-25 New York Times article. Year precision is the most the evidence supports; any month-precision date for Brain should be treated as fabricated."
+  },
+  {
+    "name": "DeepMind",
+    "founded": "2010-11-15",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://find-and-update.company-information.service.gov.uk/company/07386350",
+      "quote": "FRIARS 2022 LIMITED 23 Sep 2010 - 15 Nov 2010",
+      "publisher": "Companies House, UK government (statutory register), previous-company-names entry for company 07386350"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "2010-09-23",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/07386350",
+        "quote": "Incorporated on 23 September 2010",
+        "what_it_represents": "statutory incorporation of the legal entity, under the shelf-company name FRIARS 2022 LIMITED. 'A legal entity exists', not 'DeepMind exists'."
+      },
+      {
+        "date": "2010-11",
+        "url": "https://en.wikipedia.org/wiki/Google_DeepMind",
+        "quote": "The start-up was founded by Demis Hassabis, Shane Legg and Mustafa Suleyman in November 2010",
+        "what_it_represents": "the founders' public launch of the business under the DeepMind name"
+      },
+      {
+        "date": "2010",
+        "url": "https://deepmind.google/about/",
+        "quote": "DeepMind started in 2010, with an interdisciplinary approach to building general AI systems.",
+        "what_it_represents": "DeepMind's own statement, year precision only; DeepMind itself does not commit to a month"
+      }
+    ],
+    "status": "merged",
+    "status_date": "2023-04-20",
+    "status_evidence": {
+      "url": "https://deepmind.google/blog/announcing-google-deepmind/",
+      "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind."
+    },
+    "parent_org": "Alphabet Inc.",
+    "country": "United Kingdom",
+    "notes": "CORRECTS A COMMON FRAMING, INCLUDING THE ONE IN THE RESEARCH BRIEF. The September/November distinction runs the opposite way to the usual telling. UK incorporation was 2010-09-23; November is when the already-incorporated shell FRIARS 2022 LIMITED was RENAMED DeepMind Technologies Limited, on 2010-11-15, which is also when the founders publicly launched. FRIARS 2022 LIMITED is a shelf-company naming pattern, so 2010-09-23 may be the shelf company's registration rather than any act by the founders. Curator has therefore taken 2010-11-15 as founded and demoted 2010-09-23 to an alternative, on the ground that it is the first date on which the thing called DeepMind existed. The legal entity 07386350 is still listed Active at Companies House despite the 2023 merger. Google's acquisition was reported 2014-01-26/27; no first-party Google announcement of the date was located, so any day-level acquisition date is press-sourced only."
+  },
+  {
+    "name": "Google DeepMind",
+    "founded": "2023-04-20",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://deepmind.google/blog/announcing-google-deepmind/",
+      "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind.",
+      "publisher": "Google DeepMind (Demis Hassabis), post dated 2023-04-20"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "2023-04-20",
+        "url": "https://blog.google/technology/ai/april-ai-update/",
+        "quote": "This group, called Google DeepMind, will bring together two leading research groups in the AI field: the Brain team from Google Research, and DeepMind.",
+        "what_it_represents": "Sundar Pichai's parallel announcement on the Google company blog, same date, corroborating from the parent's side"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Alphabet Inc.",
+    "country": "United Kingdom",
+    "notes": "This is the public ANNOUNCEMENT of the merged unit, not a legal incorporation. Both announcements use future tense ('will be joining forces'), so the operational merge completed some time after 2023-04-20 and no completion date was found. Google DeepMind is an internal Alphabet business unit, not a separately incorporated company; the underlying UK entity DeepMind Technologies Limited (07386350) continues to exist. The country value reflects DeepMind's London base and was NOT separately cited; treat as low confidence."
+  },
+  {
+    "name": "Microsoft",
+    "founded": "1975-04-04",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://paulallen.com/Futurist/Microsoft.aspx",
+      "quote": "They started Microsoft together, on April 4, 1975 in Albuquerque, New Mexico.",
+      "publisher": "paulallen.com, official site of Microsoft co-founder Paul Allen"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "1975",
+        "url": "https://news.microsoft.com/facts-about-microsoft/",
+        "quote": "1975 - Microsoft founded",
+        "what_it_represents": "Microsoft's own corporate facts page, year precision only; Microsoft itself does not publish the day here"
+      },
+      {
+        "date": "1981-06-25",
+        "url": "https://news.microsoft.com/facts-about-microsoft/",
+        "quote": "June 25, 1981 - Microsoft incorporates",
+        "what_it_represents": "legal incorporation, six years after the partnership was founded. Anyone conflating founded with incorporated gets 1981."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Began as a Gates/Allen partnership in Albuquerque and did not incorporate until 1981-06-25, so founded and incorporated differ by six years, unlike most rows here. The 1975-04-04 date is co-founder-attested rather than a filing record; Allen's site and Microsoft's facts page agree on the year but only Allen's site gives the day."
+  },
+  {
+    "name": "Microsoft Research",
+    "founded": "1991",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://www.microsoft.com/en-us/research/about-microsoft-research/",
+      "quote": "since its founding in 1991, Microsoft Research has been committed to an academic research approach",
+      "publisher": "Microsoft Research (first-party About page)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Microsoft",
+    "country": "United States",
+    "notes": "Year precision only; the first-party page gives no month or day. Microsoft Research has been reorganised several times, including being folded into a combined AI and Research group, but no dated first-party source for any reorganisation was located, so no status change is asserted."
+  },
+  {
+    "name": "NVIDIA",
+    "founded": "1993-04-05",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://www.nvidia.com/en-us/about-nvidia/corporate-timeline/",
+      "quote": "Founded on April 5, 1993, by Jensen Huang, Chris Malachowsky, and Curtis Priem, with a vision to bring 3D graphics to the gaming and multimedia markets.",
+      "publisher": "NVIDIA Corporation (official corporate timeline)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "First-party, day precision, no conflicting dates encountered. The quoted text is a timeline entry rather than a full grammatical sentence, reproduced verbatim."
+  },
+  {
+    "name": "Amazon",
+    "founded": "1994",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://s2.q4cdn.com/299287126/files/doc_financials/annual/123197_10k.pdf",
+      "quote": "Amazon.com was incorporated in 1994 in the State of Washington and reincorporated in 1996 in Delaware.",
+      "publisher": "Amazon.com, Inc., SEC Form 10-K for FY1997, on Amazon's own investor-relations CDN"
+    },
+    "founded_contested": true,
+    "founded_alternatives": [
+      {
+        "date": "1994-07-05",
+        "url": "https://www.history.com/this-day-in-history/july-5/amazon-is-founded-by-jeff-bezos",
+        "quote": "On July 5, 1994, Princeton graduate and entrepreneur Jeff Bezos founds Cadabra-a twist on the magic word \"Abracadabra\"-which is initially just an online bookstore run out of his garage in Bellevue, Washington.",
+        "what_it_represents": "day of Washington State incorporation, under the original name Cadabra, Inc. Amazon was NOT named Amazon at this point. Secondary source only."
+      },
+      {
+        "date": "1995-07",
+        "url": "https://s2.q4cdn.com/299287126/files/doc_financials/annual/123197_10k.pdf",
+        "quote": "Since opening for business as \"Earth's Biggest Bookstore\" in July 1995, Amazon.com has become one of the most widely known, used and cited commerce sites on the World Wide Web.",
+        "what_it_represents": "commercial launch of the website, a year after incorporation; aboutamazon.com editorial pages tend to foreground this date instead"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "Amazon's own materials are internally inconsistent: SEC filings say incorporated 1994 in Washington, while aboutamazon.com leads with July 1995 site launch. The 1994-07-05 incorporation was under the name Cadabra, Inc. The 1997 10-K is the strongest first-party evidence found but supports only year precision."
+  },
+  {
+    "name": "IBM",
+    "founded": "1911-06-16",
+    "founded_precision": "day",
+    "founded_evidence": {
+      "url": "https://www.ibm.com/history/ctr-and-ibm",
+      "quote": "June 16, 1911, when C-T-R was officially incorporated as a holding company to control the three separate firms.",
+      "publisher": "IBM (official IBM History site), fetched via the pure.md text proxy because ibm.com returns 403 to the fetcher used"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "1924",
+        "url": "https://www.ibm.com/history/ctr-and-ibm",
+        "quote": "Watson renamed C-T-R with the more expansive moniker of International Business Machines in 1924.",
+        "what_it_represents": "date the company took the IBM name. Anyone dating 'IBM' rather than 'the company that became IBM' gets 1924."
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": null,
+    "country": "United States",
+    "notes": "The 1911 entity was the Computing-Tabulating-Recording Company, formed by Charles Flint as a holding company merging the International Time Recording Company, the Computing Scale Company and the Tabulating Machine Company. So IBM's founding is itself a merger of three older firms, each with an earlier founding date; Hollerith's Tabulating Machine Company is the oldest. IBM dates itself to 1911-06-16 and adopted the IBM name in 1924."
+  },
+  {
+    "name": "Cambridge Research Laboratory",
+    "founded": "1987",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://www.bitsavers.org/pdf/dec/tech_reports/CRL-99-6.pdf",
+      "quote": "The Cambridge Research Laboratory was founded in 1987 to advance the state of the art in both core computing and human-computer interaction, and to use the knowledge so gained to support the Company's corporate objectives.",
+      "publisher": "Compaq Computer Corporation, Cambridge Research Laboratory Technical Report CRL-99-6, 1999-09-17 (standing boilerplate in the CRL technical report series; PDF mirrored at bitsavers.org)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "1987",
+        "url": "https://www.hpcwire.com/2000/12/08/compaq-announces-cambridge-research-laboratory/",
+        "quote": "Founded in 1987, CRL has a team of more than 30 researchers, supported by advanced engineering and business development staff...",
+        "what_it_represents": "corroboration from a Compaq press announcement of 2000-12-08 for the grand opening of CRL's new facility at One Cambridge Center; confirms 1987 is Compaq's own figure, not a later reconstruction"
+      }
+    ],
+    "status": "defunct",
+    "status_date": null,
+    "status_evidence": {
+      "url": "https://en.wikipedia.org/wiki/HP_Labs",
+      "quote": "Cambridge, Massachusetts, United States (also known as CRL, a former DEC research lab)"
+    },
+    "parent_org": "Hewlett-Packard",
+    "country": "United States",
+    "notes": "CRITICAL: this lab was NOT founded by Compaq, despite appearing in the Epoch dump as 'Compaq CRL'. Digital Equipment Corporation founded it in 1987 as DEC's Cambridge Research Laboratory; the Computer History Museum's CRL collection covers 1987-1994 and describes it as DEC's. It became Compaq's when Compaq acquired DEC in 1998 and HP's when HP acquired Compaq. The DEC-to-Compaq closing date was NOT verified: a DEC Form 8-K of 1998-06-08 says only that the parties 'expect the transaction to close shortly after the special meeting' scheduled 1998-06-11, so the widely cited 1998-06-11 completion is unconfirmed. HP's own timeline confirms the HP-Compaq step on 2002-05-03. The CRL/DEC technical report series runs 1990-2002 and stops; Wikipedia lists Cambridge, Massachusetts among FORMER HP Labs sites. No citable closure date was found, so status_date is deliberately null. If a date is needed for 'ceased to be Compaq CRL', 2002-05-03 is the defensible one."
+  },
+  {
+    "name": "Mitsubishi Electric Research Laboratories",
+    "founded": "1991",
+    "founded_precision": "year",
+    "founded_evidence": {
+      "url": "https://www.merl.com/company/history",
+      "quote": "In 1991, Mitsubishi Electric's Corporate Research and Development organization (CR&D) opened MERL in Cambridge, Mass., under the leadership of Dr. Tohei Nitta and Dr. Laszlo (Les) Belady.",
+      "publisher": "Mitsubishi Electric Research Laboratories (official company history page)"
+    },
+    "founded_contested": false,
+    "founded_alternatives": [
+      {
+        "date": "1996",
+        "url": "https://www.merl.com/company/history",
+        "quote": "In 1995, CR&D decided to combine HRI and ATL together into a new organization called Mitsubishi Electric Information Technology Center America (ITA). The next year, MERL was merged into ITA as well.",
+        "what_it_represents": "MERL absorbed into ITA in 1996, so the MERL name did not exist as a standalone organisation between 1996 and 2000"
+      },
+      {
+        "date": "2000",
+        "url": "https://www.merl.com/company/history",
+        "quote": "In 2000, the staff in Waltham moved to Cambridge, and ITA returned to the name MERL.",
+        "what_it_represents": "restoration of the MERL name after the ITA period; a refounding of the brand, though MERL claims organisational continuity from 1991"
+      }
+    ],
+    "status": "active",
+    "status_date": null,
+    "status_evidence": null,
+    "parent_org": "Mitsubishi Electric Corporation",
+    "country": "United States",
+    "notes": "A US-based Cambridge, Massachusetts subsidiary lab of a Japanese parent, so country is the lab's location, not the parent's. The MERL name has a four-year gap (1996-2000) when the organisation was called ITA, which matters when matching on organisation name across a time series. Laszlo Belady's name carries an accent on the source page; transliterated to ASCII."
+  }
+]

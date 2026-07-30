@@ -1,0 +1,1447 @@
+{
+  "schema": "frontier_labs_v1",
+  "collection": "frontier_labs",
+  "description": "Organisations that develop frontier AI systems. Facts only: no game impacts, no rarity, no salience. Inclusion is an editorial judgement and is recorded per row in inclusion_basis.",
+  "count": 33,
+  "window_start": "2000",
+  "labs": [
+    {
+      "id": "adept_ai",
+      "name": "Adept AI",
+      "aliases": [],
+      "founded": null,
+      "founded_precision": null,
+      "founded_evidence": {
+        "url": "https://techcrunch.com/2024/06/28/amazon-hires-founders-away-from-ai-startup-adept/",
+        "quote": "Adept was founded two years ago with the goal of creating an AI model that can perform actions on any software tool using natural language.",
+        "publisher": "TechCrunch (2024-06-28)"
+      },
+      "founded_contested": true,
+      "founded_alternatives": [
+        {
+          "date": "2022-04-26",
+          "url": "https://techcrunch.com/2022/04/26/2304039/",
+          "quote": "At a product lab called Adept that emerged from stealth today with $65 million in funding...",
+          "what_it_represents": "emergence from stealth / Series A, 2022-04-26. A launch date, NOT a founding date."
+        },
+        {
+          "date": "2022-04-27",
+          "url": "https://www.theregister.com/2022/04/27/adept_ai_google/",
+          "quote": "Adept AI, an artificial intelligence R&D lab founded by ex-Googlers who helped invent the popular transformer architecture, launched on Tuesday with the ambitious goal of teaching machines how to use 'every software tool and API in the world.'",
+          "what_it_represents": "same launch reported one day later; launched on Tuesday = 2022-04-26"
+        }
+      ],
+      "evidence_strength": "none",
+      "status": "active",
+      "status_date": "2024-06-28",
+      "status_evidence": {
+        "url": "https://techcrunch.com/2024/06/28/amazon-hires-founders-away-from-ai-startup-adept/",
+        "quote": "Adept, a startup developing AI-powered \"agents\" to complete various software-based tasks, has agreed to license its tech to Amazon, and the startup's co-founders and portions of its team have joined the e-commerce giant."
+      },
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch. Included as an agent-focused frontier developer founded by transformer co-authors, and as the collection's clearest case of a founding date that could not be sourced at all.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://techcrunch.com/2024/06/28/amazon-hires-founders-away-from-ai-startup-adept/",
+        "https://techcrunch.com/2022/04/26/2304039/",
+        "https://www.theregister.com/2022/04/27/adept_ai_google/"
+      ],
+      "notes": "FOUNDED SET TO NULL BY THE CURATOR, overriding the researcher's '2022'. That value was an inference from 'founded two years ago' in an article datelined 2024-06-28, not a quoted date. No source literally states Adept's founding date; adept.ai returns 403 so the first-party Introducing Adept post could not be read. Secondary aggregators variously assert 2022-01-05, 2022-01 and 2021; none verifiable, none adopted. Public launch 2022-04-26 is well evidenced and is recorded in founded_alternatives; use that if a date is needed, labelled as a launch. On status: reverse-acquihire, not acquisition. Amazon hired co-founder/CEO David Luan and others and licensed models and datasets, but TechCrunch says 'Adept isn't closing up shop, however', with Zach Brock becoming CEO. Headcount reportedly fell from ~100 to ~20. parent_org null because no equity acquisition is evidenced.",
+      "extra": {}
+    },
+    {
+      "id": "alibaba_damo_academy",
+      "name": "Alibaba DAMO Academy",
+      "aliases": [
+        "DAMO Academy",
+        "Alibaba DAMO"
+      ],
+      "founded": "2017-10",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://baike.baidu.com/en/item/Damo%20Academy/653561",
+        "quote": "In October 2017, the Damo Academy was established, dedicated to exploring the unknown in science and technology and conducting research in basic science and innovative technologies.",
+        "publisher": "Baidu Baike (English edition)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2017-10-11",
+          "url": "https://en.people.cn/n3/2017/1012/c90000-9278941.html",
+          "quote": "The Alibaba Group announced Wednesday it will set up a new research institute and invest over 100 billion yuan (about 15 billion U.S. dollars) over the next three years in advanced technology development.",
+          "what_it_represents": "announcement at The Computing Conference 2017 in Hangzhou, Wednesday 2017-10-11"
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "Alibaba Group",
+      "country": "China",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch under this name. Included as Alibaba's research institute, with the important caveat recorded in notes that the Qwen team moved out of DAMO into Alibaba Cloud's Tongyi Lab in late 2022 -- so this row is NOT the right home for Qwen and a consumer should not treat it as such.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://baike.baidu.com/en/item/Damo%20Academy/653561",
+        "https://en.people.cn/n3/2017/1012/c90000-9278941.html"
+      ],
+      "notes": "Founding here means public establishment of an internal Alibaba unit at the Computing Conference on 2017-10-11; there is no incorporation date. First-party attempts all failed: damo.alibaba.com/about returned scaffolding only, alibabacloud.com press release empty, alizila.com 403. IMPORTANT FOR SCOPING: the Qwen team is NOT inside DAMO today. Caixin Global reports that in late 2022 Alibaba merged DAMO's language and vision AI teams into Alibaba Cloud and created Tongyi Lab, headed by Alibaba Cloud CTO Zhou Jingren. Qwen sits in Tongyi Lab, not DAMO. No day-precision date for Tongyi Lab was found.",
+      "extra": {}
+    },
+    {
+      "id": "allen_institute_for_ai",
+      "name": "Allen Institute for AI",
+      "aliases": [
+        "AI2",
+        "Ai2"
+      ],
+      "founded": "2014",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://allenai.org/about",
+        "quote": "Philanthropist and Microsoft co-founder Paul Allen founded Ai2 in 2014 to find transformative ways to develop AI to address some of the world's biggest challenges.",
+        "publisher": "Allen Institute for AI (first-party)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2014",
+          "url": "https://en.wikipedia.org/wiki/Allen_Institute_for_AI",
+          "quote": "founded by late Microsoft co-founder and philanthropist Paul Allen in 2014",
+          "what_it_represents": "cites allenai.org/about as its source, so NOT independent corroboration"
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a non-profit institute releasing fully open pretrained models and training data, which makes it structurally important to the field even where its models are not compute-frontier.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://allenai.org/about",
+        "https://en.wikipedia.org/wiki/Allen_Institute_for_AI"
+      ],
+      "notes": "Secondary aggregators claim 2014-01-01 and that Oren Etzioni was appointed 2013-09, but no citable page carrying that day-precision date was fetched (GeekWire returned 403), so it is deliberately NOT reported. 501(c)(3) non-profit, Seattle. Rebranded in presentation from AI2 to Ai2.",
+      "extra": {}
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "aliases": [
+        "Amazon"
+      ],
+      "founded": "1994",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://s2.q4cdn.com/299287126/files/doc_financials/annual/123197_10k.pdf",
+        "quote": "Amazon.com was incorporated in 1994 in the State of Washington and reincorporated in 1996 in Delaware.",
+        "publisher": "Amazon.com, Inc., SEC Form 10-K for FY1997, on Amazon's own investor-relations CDN"
+      },
+      "founded_contested": true,
+      "founded_alternatives": [
+        {
+          "date": "1994-07-05",
+          "url": "https://www.history.com/this-day-in-history/july-5/amazon-is-founded-by-jeff-bezos",
+          "quote": "On July 5, 1994, Princeton graduate and entrepreneur Jeff Bezos founds Cadabra-a twist on the magic word \"Abracadabra\"-which is initially just an online bookstore run out of his garage in Bellevue, Washington.",
+          "what_it_represents": "day of Washington State incorporation, under the original name Cadabra, Inc. Amazon was NOT named Amazon at this point. Secondary source only."
+        },
+        {
+          "date": "1995-07",
+          "url": "https://s2.q4cdn.com/299287126/files/doc_financials/annual/123197_10k.pdf",
+          "quote": "Since opening for business as \"Earth's Biggest Bookstore\" in July 1995, Amazon.com has become one of the most widely known, used and cited commerce sites on the World Wide Web.",
+          "what_it_represents": "commercial launch of the website, a year after incorporation; aboutamazon.com editorial pages tend to foreground this date instead"
+        }
+      ],
+      "evidence_strength": "registry",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 2,
+      "epoch_first_frontier_model": "2023-09-28",
+      "epoch_last_frontier_model": "2023-09-28",
+      "sources": [
+        "https://s2.q4cdn.com/299287126/files/doc_financials/annual/123197_10k.pdf",
+        "https://www.history.com/this-day-in-history/july-5/amazon-is-founded-by-jeff-bezos"
+      ],
+      "notes": "Amazon's own materials are internally inconsistent: SEC filings say incorporated 1994 in Washington, while aboutamazon.com leads with July 1995 site launch. The 1994-07-05 incorporation was under the name Cadabra, Inc. The 1997 10-K is the strongest first-party evidence found but supports only year precision.",
+      "extra": {}
+    },
+    {
+      "id": "bytedance_seed",
+      "name": "ByteDance Seed",
+      "aliases": [
+        "Seed",
+        "ByteDance"
+      ],
+      "founded": "2023",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://github.com/ByteDance-Seed",
+        "quote": "Established in 2023, the ByteDance Seed team is dedicated to discovering new approaches to general intelligence and pushing the boundaries of AI.",
+        "publisher": "ByteDance Seed (first-party GitHub organisation profile)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2023",
+          "url": "https://en.wikipedia.org/wiki/ByteDance",
+          "quote": "ByteDance's AI team known as 'Seed' was established in 2023.",
+          "what_it_represents": "corroboration, cited there to Bloomberg"
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "ByteDance",
+      "country": "China",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch under this name. Included as ByteDance's frontier model team (Doubao / Seed series). The unit has been reconstituted at least once since its 2023 establishment, which the row records.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://github.com/ByteDance-Seed",
+        "https://en.wikipedia.org/wiki/ByteDance"
+      ],
+      "notes": "No month precision found; both first-party and Wikipedia give only 2023. seed.bytedance.com pages are JavaScript-rendered and yielded no founding statement. Parent ByteDance founded 2012-03 per Wikipedia body text, with 2012-03-13 in the infobox only. Seed's organisational boundary has moved repeatedly: reports of a 2024 reorganisation splitting Seed and Flow, and Wu Yonghui taking over in 2025-02 with former ByteDance AI Lab teams folded in, were not independently fetched and are unverified. So 'founded 2023' names a team substantially reconstituted since.",
+      "extra": {}
+    },
+    {
+      "id": "cambridge_research_laboratory",
+      "name": "Cambridge Research Laboratory",
+      "aliases": [
+        "Compaq CRL"
+      ],
+      "founded": "1987",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://www.bitsavers.org/pdf/dec/tech_reports/CRL-99-6.pdf",
+        "quote": "The Cambridge Research Laboratory was founded in 1987 to advance the state of the art in both core computing and human-computer interaction, and to use the knowledge so gained to support the Company's corporate objectives.",
+        "publisher": "Compaq Computer Corporation, Cambridge Research Laboratory Technical Report CRL-99-6, 1999-09-17 (standing boilerplate in the CRL technical report series; PDF mirrored at bitsavers.org)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "1987",
+          "url": "https://www.hpcwire.com/2000/12/08/compaq-announces-cambridge-research-laboratory/",
+          "quote": "Founded in 1987, CRL has a team of more than 30 researchers, supported by advanced engineering and business development staff...",
+          "what_it_represents": "corroboration from a Compaq press announcement of 2000-12-08 for the grand opening of CRL's new facility at One Cambridge Center; confirms 1987 is Compaq's own figure, not a later reconstruction"
+        }
+      ],
+      "evidence_strength": "press",
+      "status": "defunct",
+      "status_date": null,
+      "status_evidence": {
+        "url": "https://en.wikipedia.org/wiki/HP_Labs",
+        "quote": "Cambridge, Massachusetts, United States (also known as CRL, a former DEC research lab)"
+      },
+      "parent_org": "Hewlett-Packard",
+      "country": "United States",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 1,
+      "epoch_first_frontier_model": "2001-12-08",
+      "epoch_last_frontier_model": "2001-12-08",
+      "sources": [
+        "https://www.bitsavers.org/pdf/dec/tech_reports/CRL-99-6.pdf",
+        "https://www.hpcwire.com/2000/12/08/compaq-announces-cambridge-research-laboratory/",
+        "https://en.wikipedia.org/wiki/HP_Labs"
+      ],
+      "notes": "CRITICAL: this lab was NOT founded by Compaq, despite appearing in the Epoch dump as 'Compaq CRL'. Digital Equipment Corporation founded it in 1987 as DEC's Cambridge Research Laboratory; the Computer History Museum's CRL collection covers 1987-1994 and describes it as DEC's. It became Compaq's when Compaq acquired DEC in 1998 and HP's when HP acquired Compaq. The DEC-to-Compaq closing date was NOT verified: a DEC Form 8-K of 1998-06-08 says only that the parties 'expect the transaction to close shortly after the special meeting' scheduled 1998-06-11, so the widely cited 1998-06-11 completion is unconfirmed. HP's own timeline confirms the HP-Compaq step on 2002-05-03. The CRL/DEC technical report series runs 1990-2002 and stops; Wikipedia lists Cambridge, Massachusetts among FORMER HP Labs sites. No citable closure date was found, so status_date is deliberately null. If a date is needed for 'ceased to be Compaq CRL', 2002-05-03 is the defensible one.",
+      "extra": {}
+    },
+    {
+      "id": "character_ai",
+      "name": "Character.AI",
+      "aliases": [],
+      "founded": "2021-11",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://www.forbes.com/sites/kenrickcai/2023/10/11/character-ai-chatbots-group-chat/",
+        "quote": "The pair founded Character.AI in November 2021, a year before public appetite for AI swelled when OpenAI released ChatGPT.",
+        "publisher": "Forbes (Kenrick Cai, 2023-10-11); this is the source Wikipedia cites, followed through"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2021-11",
+          "url": "https://en.wikipedia.org/wiki/Character.ai",
+          "quote": "Character.ai was established in November 2021.",
+          "what_it_represents": "prose whose citation resolves to the Forbes article above"
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": "2024-08-02",
+      "status_evidence": {
+        "url": "https://techcrunch.com/2024/08/02/character-ai-ceo-noam-shazeer-returns-to-google/",
+        "quote": "This agreement will provide increased funding for Character.AI to continue growing and to focus on building personalized AI products for users around the world"
+      },
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch. Included because it trained its own large models in-house rather than building on someone else's, and because its 2024 reverse-acquihire is a useful worked example of an event that looks like an acquisition and is not.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://www.forbes.com/sites/kenrickcai/2023/10/11/character-ai-chatbots-group-chat/",
+        "https://en.wikipedia.org/wiki/Character.ai",
+        "https://techcrunch.com/2024/08/02/character-ai-ceo-noam-shazeer-returns-to-google/"
+      ],
+      "notes": "Legal name Character Technologies, Inc.; Menlo Park, California. The 2024 Google event is a reverse-acquihire, NOT an acquisition: Google hired co-founders Noam Shazeer and Daniel De Freitas plus some staff and took a non-exclusive technology licence, while the company continued independently with Dominic Perella as interim CEO. Status left active for that reason.",
+      "extra": {}
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "aliases": [],
+      "founded": "2019",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://cohere.com/about",
+        "quote": "Cohere was founded in 2019 in Toronto with a bold vision: to do whatever it takes to scale intelligence to serve humanity.",
+        "publisher": "Cohere Inc. (first-party)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "Canada",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a dedicated general-purpose model developer with its own pretrained frontier-class family, whose absence from the flag reflects Epoch's coverage rather than Cohere's activity.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://cohere.com/about"
+      ],
+      "notes": "First-party but year precision only; no month or incorporation date published, no Canadian register record retrieved.",
+      "extra": {}
+    },
+    {
+      "id": "deepmind",
+      "name": "DeepMind",
+      "aliases": [
+        "DeepMind"
+      ],
+      "founded": "2010-11-15",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/07386350",
+        "quote": "FRIARS 2022 LIMITED 23 Sep 2010 - 15 Nov 2010",
+        "publisher": "Companies House, UK government (statutory register), previous-company-names entry for company 07386350"
+      },
+      "founded_contested": true,
+      "founded_alternatives": [
+        {
+          "date": "2010-09-23",
+          "url": "https://find-and-update.company-information.service.gov.uk/company/07386350",
+          "quote": "Incorporated on 23 September 2010",
+          "what_it_represents": "statutory incorporation of the legal entity, under the shelf-company name FRIARS 2022 LIMITED. 'A legal entity exists', not 'DeepMind exists'."
+        },
+        {
+          "date": "2010-11",
+          "url": "https://en.wikipedia.org/wiki/Google_DeepMind",
+          "quote": "The start-up was founded by Demis Hassabis, Shane Legg and Mustafa Suleyman in November 2010",
+          "what_it_represents": "the founders' public launch of the business under the DeepMind name"
+        },
+        {
+          "date": "2010",
+          "url": "https://deepmind.google/about/",
+          "quote": "DeepMind started in 2010, with an interdisciplinary approach to building general AI systems.",
+          "what_it_represents": "DeepMind's own statement, year precision only; DeepMind itself does not commit to a month"
+        }
+      ],
+      "evidence_strength": "registry",
+      "status": "merged",
+      "status_date": "2023-04-20",
+      "status_evidence": {
+        "url": "https://deepmind.google/blog/announcing-google-deepmind/",
+        "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind."
+      },
+      "parent_org": "Alphabet Inc.",
+      "country": "United Kingdom",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 10,
+      "epoch_first_frontier_model": "2015-10-01",
+      "epoch_last_frontier_model": "2021-12-08",
+      "sources": [
+        "https://find-and-update.company-information.service.gov.uk/company/07386350",
+        "https://en.wikipedia.org/wiki/Google_DeepMind",
+        "https://deepmind.google/about/",
+        "https://deepmind.google/blog/announcing-google-deepmind/"
+      ],
+      "notes": "CORRECTS A COMMON FRAMING, INCLUDING THE ONE IN THE RESEARCH BRIEF. The September/November distinction runs the opposite way to the usual telling. UK incorporation was 2010-09-23; November is when the already-incorporated shell FRIARS 2022 LIMITED was RENAMED DeepMind Technologies Limited, on 2010-11-15, which is also when the founders publicly launched. FRIARS 2022 LIMITED is a shelf-company naming pattern, so 2010-09-23 may be the shelf company's registration rather than any act by the founders. Curator has therefore taken 2010-11-15 as founded and demoted 2010-09-23 to an alternative, on the ground that it is the first date on which the thing called DeepMind existed. The legal entity 07386350 is still listed Active at Companies House despite the 2023 merger. Google's acquisition was reported 2014-01-26/27; no first-party Google announcement of the date was located, so any day-level acquisition date is press-sourced only.",
+      "extra": {}
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek",
+      "aliases": [],
+      "founded": "2023-07-17",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://baike.baidu.com/en/item/Hangzhou%20DeepSeek%20Artificial%20Intelligence%20Co.,%20Ltd/978595",
+        "quote": "Hangzhou DeepSeek Artificial Intelligence Co., Ltd. (commonly known as DeepSeek) was founded on July 17, 2023",
+        "publisher": "Baidu Baike (English edition)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2023-07-17",
+          "url": "https://en.wikipedia.org/wiki/DeepSeek",
+          "quote": "On 17 July 2023, that lab was spun off into an independent company.",
+          "what_it_represents": "spin-off of High-Flyer's internal AGI research lab into an independent company"
+        },
+        {
+          "date": "2023",
+          "url": "https://www.forbes.com/sites/tylerroush/2025/01/28/who-is-behind-deepseek-heres-what-to-know-about-founder-liang-wenfeng/",
+          "quote": "Liang founded DeepSeek in 2023, and the company relied on maximizing the output of processors available in China",
+          "what_it_represents": "year-only corroboration"
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "High-Flyer",
+      "country": "China",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "The most conspicuous gap in Epoch's frontier flag within the ingested dump: DeepSeek carries no flagged row, despite V3 and R1 being unambiguously frontier on release. This single row is the strongest evidence that a mechanical-only inclusion rule would have produced a wrong dataset.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://baike.baidu.com/en/item/Hangzhou%20DeepSeek%20Artificial%20Intelligence%20Co.,%20Ltd/978595",
+        "https://en.wikipedia.org/wiki/DeepSeek",
+        "https://www.forbes.com/sites/tylerroush/2025/01/28/who-is-behind-deepseek-heres-what-to-know-about-founder-liang-wenfeng/"
+      ],
+      "notes": "Owned and funded by the quantitative hedge fund High-Flyer; Liang Wenfeng is CEO of both. High-Flyer's own founding is contested because two legal entities exist: Zhejiang High-Flyer Asset Management Co., Ltd. (2015) and Ningbo High-Flyer Quant Investment Management Partnership LLP (2016), the latter now doing business as High-Flyer. The first-party page high-flyer.cn/en/about returned 404, so no first-party confirmation. The registered DeepSeek entity appears in sources as both 'Hangzhou DeepSeek Artificial Intelligence Co., Ltd.' and 'Hangzhou DeepSeek Artificial Intelligence Basic Technology Research Co., Ltd.'",
+      "extra": {}
+    },
+    {
+      "id": "eleutherai",
+      "name": "EleutherAI",
+      "aliases": [],
+      "founded": "2020-07",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://www.eleuther.ai/about",
+        "quote": "Founded in July 2020 by Connor Leahy, Sid Black, and Leo Gao, EleutherAI has grown from a Discord server for talking about GPT-3 to a leading non-profit research institute focused on large-scale artificial intelligence research.",
+        "publisher": "EleutherAI (first-party)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2023-03-02",
+          "url": "https://blog.eleuther.ai/year-two-preface/",
+          "quote": "we are thrilled to announce that we are forming a non-profit research institute, and we are excited to be able to say that over twenty of our regular contributors are now working full-time doing research.",
+          "what_it_represents": "formation of the EleutherAI Institute as a formal non-profit; post dated 2023-03-02. Says 'we are forming', so legal incorporation date is announced-adjacent, not stated."
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": null,
+      "lab_kind": "research_collective",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included because it was for a period the main source of openly available large language models, and because it is the collection's clearest example of an organisation with no incorporation date -- useful as a test of the schema's tolerance for ill-defined founding.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://www.eleuther.ai/about",
+        "https://blog.eleuther.ai/year-two-preface/"
+      ],
+      "notes": "Founding genuinely ill-defined. 2020-07 is the creation of a Discord server by volunteers: no legal entity, no incorporation, no premises, no employees. A formal non-profit was announced 2023-03-02, ~32 months later; exact incorporation date and jurisdiction not found, so country is null rather than guessed. Source page writes GPT-3 with a non-breaking hyphen (U+2011); rendered ASCII.",
+      "extra": {}
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "aliases": [
+        "Google"
+      ],
+      "founded": "1998-09",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://pages.stern.nyu.edu/adamodar/pc/blog/Google10Q3for2015.pdf",
+        "quote": "We were incorporated in California in September 1998 and re-incorporated in the State of Delaware in August",
+        "publisher": "Google Inc., SEC Form 10-Q for the quarter ended 2015-09-30 (PDF copy on the NYU Stern site of Aswath Damodaran; sec.gov returns 403 to the fetcher used)"
+      },
+      "founded_contested": true,
+      "founded_alternatives": [
+        {
+          "date": "1998-09-04",
+          "url": "https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated",
+          "quote": "On this day in 1998, search engine firm Google, co-founded by Larry Page and Sergey Brin, who met at Stanford University, files for incorporation in California.",
+          "what_it_represents": "day the incorporation paperwork was filed with the California Secretary of State; secondary source only"
+        },
+        {
+          "date": "1998-08",
+          "url": "https://about.google/company-info/our-story/",
+          "quote": "In August 1998, Sun co-founder Andy Bechtolsheim wrote Larry and Sergey a check for $100,000, and Google Inc. was officially born.",
+          "what_it_represents": "Google's own narrative founding moment, one month EARLIER than its own SEC-filed incorporation month. First-party but inconsistent with the filing record."
+        }
+      ],
+      "evidence_strength": "registry",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "Alphabet Inc.",
+      "country": "United States",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 40,
+      "epoch_first_frontier_model": "2007-06-22",
+      "epoch_last_frontier_model": "2023-05-10",
+      "sources": [
+        "https://pages.stern.nyu.edu/adamodar/pc/blog/Google10Q3for2015.pdf",
+        "https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated",
+        "https://about.google/company-info/our-story/"
+      ],
+      "notes": "Four candidate anchors exist and Google uses two of them: the 1996 Stanford BackRub project, 1998-08 (Bechtolsheim cheque, per about.google), 1998-09 (incorporation, per SEC filings), and a 27 September birthday with no legal meaning. The primary quote is verbatim but was truncated mid-sentence by the extraction tool at the word August, so the Delaware reincorporation year is not confirmed verbatim. Google Inc. later became Google LLC (2017) under Alphabet (formed 2015); neither date verified here.",
+      "extra": {}
+    },
+    {
+      "id": "google_brain",
+      "name": "Google Brain",
+      "aliases": [
+        "Google Brain"
+      ],
+      "founded": "2011",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://x.company/projects/brain/",
+        "quote": "When the Google Brain team began their work in 2011, AI and machine learning had been making steady but slow progress for many years.",
+        "publisher": "X, the moonshot factory (Alphabet) - first-party, since Brain began as an X project"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2012",
+          "url": "https://x.company/projects/brain/",
+          "quote": "the Brain team decided they were ready to apply their insights across a range of products at Google, so they graduated from X back to Google in late 2012 as part of Google AI.",
+          "what_it_represents": "graduation out of X into a Google organisation; the page header reads 'Graduated to Google/2012'"
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "merged",
+      "status_date": "2023-04-20",
+      "status_evidence": {
+        "url": "https://deepmind.google/blog/announcing-google-deepmind/",
+        "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind."
+      },
+      "parent_org": "Google",
+      "country": "United States",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 6,
+      "epoch_first_frontier_model": "2016-11-05",
+      "epoch_last_frontier_model": "2020-01-28",
+      "sources": [
+        "https://x.company/projects/brain/",
+        "https://deepmind.google/blog/announcing-google-deepmind/"
+      ],
+      "notes": "No clean founding event, as suspected when the question was posed. Brain started in 2011 as a part-time research collaboration (Jeff Dean, Greg Corrado, Andrew Ng) inside Google X, much of it in 20-percent time, and became a distinct Google organisation only on graduating from X in late 2012. Even Wikipedia's 2011 infobox value cites a retrospective 2012-06-25 New York Times article. Year precision is the most the evidence supports; any month-precision date for Brain should be treated as fabricated.",
+      "extra": {}
+    },
+    {
+      "id": "google_deepmind",
+      "name": "Google DeepMind",
+      "aliases": [
+        "Google DeepMind"
+      ],
+      "founded": "2023-04-20",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://deepmind.google/blog/announcing-google-deepmind/",
+        "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind.",
+        "publisher": "Google DeepMind (Demis Hassabis), post dated 2023-04-20"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2023-04-20",
+          "url": "https://blog.google/technology/ai/april-ai-update/",
+          "quote": "This group, called Google DeepMind, will bring together two leading research groups in the AI field: the Brain team from Google Research, and DeepMind.",
+          "what_it_represents": "Sundar Pichai's parallel announcement on the Google company blog, same date, corroborating from the parent's side"
+        }
+      ],
+      "evidence_strength": "press",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "Alphabet Inc.",
+      "country": "United Kingdom",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 4,
+      "epoch_first_frontier_model": "2023-12-06",
+      "epoch_last_frontier_model": "2024-02-15",
+      "sources": [
+        "https://deepmind.google/blog/announcing-google-deepmind/",
+        "https://blog.google/technology/ai/april-ai-update/"
+      ],
+      "notes": "This is the public ANNOUNCEMENT of the merged unit, not a legal incorporation. Both announcements use future tense ('will be joining forces'), so the operational merge completed some time after 2023-04-20 and no completion date was found. Google DeepMind is an internal Alphabet business unit, not a separately incorporated company; the underlying UK entity DeepMind Technologies Limited (07386350) continues to exist. The country value reflects DeepMind's London base and was NOT separately cited; treat as low confidence.",
+      "extra": {}
+    },
+    {
+      "id": "google_research",
+      "name": "Google Research",
+      "aliases": [
+        "Google Research"
+      ],
+      "founded": null,
+      "founded_precision": null,
+      "founded_evidence": null,
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2000",
+          "url": "https://en.wikipedia.org/wiki/Google_Research",
+          "quote": "Founded: 2000 (2000)",
+          "what_it_represents": "infobox value, explicitly UNCITED in the article, no first-party corroboration found. Must not be treated as sourced."
+        },
+        {
+          "date": "2018-05-07",
+          "url": "https://research.google/blog/introducing-google-ai/",
+          "quote": "we're unifying our efforts under \"Google AI\", which encompasses all the state-of-the-art research happening across Google.",
+          "what_it_represents": "date the research division was rebranded Google AI; the Google Research name was later restored, with no dated first-party source for the restoration"
+        }
+      ],
+      "evidence_strength": "none",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "Google",
+      "country": "United States",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 8,
+      "epoch_first_frontier_model": "2017-07-10",
+      "epoch_last_frontier_model": "2022-04-04",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Google_Research",
+        "https://research.google/blog/introducing-google-ai/"
+      ],
+      "notes": "DELIBERATE NULL. No citable founding date, first-party or otherwise. research.google, /philosophy and /blog were all checked; the closest first-party statements are 'Google itself began with a research paper, published in 1998' and 'Our ongoing research over the past 25 years', neither of which dates the organisation. Google Research is an organisational label that accreted rather than being founded on a date: renamed to Google AI in 2018-05 and back again, with the Brain team moving into and out of it.",
+      "extra": {}
+    },
+    {
+      "id": "huawei_noahs_ark_lab",
+      "name": "Huawei Noah's Ark Lab",
+      "aliases": [
+        "Noah's Ark Lab"
+      ],
+      "founded": "2012",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://cse.hkust.edu.hk/ug/comp4900/S15/2015-02-04.html",
+        "quote": "The Noah's Ark Lab was founded in Hong Kong in 2012.",
+        "publisher": "HKUST Department of Computer Science and Engineering (seminar page)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2012",
+          "url": "https://baike.baidu.com/en/item/Noah's%20Ark%20Lab/928695",
+          "quote": "Noah's Ark Lab is an artificial intelligence research institution established by Huawei's 2012 Lab in 2012 at the Hong Kong Science Park.",
+          "what_it_represents": "corroboration adding the parent unit and the Hong Kong Science Park location"
+        }
+      ],
+      "evidence_strength": "press",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "Huawei",
+      "country": "Hong Kong SAR, China",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as Huawei's principal AI research lab and the origin of the Pangu model family.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://cse.hkust.edu.hk/ug/comp4900/S15/2015-02-04.html",
+        "https://baike.baidu.com/en/item/Noah's%20Ark%20Lab/928695"
+      ],
+      "notes": "No month precision found. No first-party Huawei statement obtained: noahlab.com.hk had no founding text and dev3.noahlab.com.hk failed TLS validation. The HKUST page is a 2015 departmental seminar page, contemporaneous and close to first-hand, but not Huawei-published. Founded in Hong Kong, later expanded to Beijing, Shenzhen, Shanghai, London, Paris and Edmonton. The parent 'Huawei 2012 Lab' name coincides with the founding year but derives from the film 2012, not the date.",
+      "extra": {}
+    },
+    {
+      "id": "hugging_face",
+      "name": "Hugging Face",
+      "aliases": [],
+      "founded": "2016",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://en.wikipedia.org/wiki/Hugging_Face",
+        "quote": "The company was founded in 2016 by French entrepreneurs Clement Delangue, Julien Chaumond, and Thomas Wolf in New York City",
+        "publisher": "Wikipedia"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2016",
+          "url": "https://www.forbes.com/companies/hugging-face/",
+          "quote": "Founded 2016",
+          "what_it_represents": "Forbes company-profile data field, independent of Wikipedia"
+        },
+        {
+          "date": "2017-03-09",
+          "url": "https://techcrunch.com/2017/03/09/hugging-face-wants-to-become-your-artificial-bff/",
+          "quote": "have raised $1.2 million from Betaworks, SV Angel and NBA star Kevin Durant and others",
+          "what_it_represents": "Wikipedia's cited source for the founding claim. On fetching, it does NOT state a founding date; it only references a 2016-09 private beta, which upper-bounds founding at 2016."
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch, and arguably infrastructure rather than a frontier lab. Included as a borderline case, deliberately, so that the boundary of the inclusion rule is visible in the data rather than hidden in a decision nobody recorded. A consumer disagreeing should filter it out; that is what lab_kind and inclusion_basis are for.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Hugging_Face",
+        "https://www.forbes.com/companies/hugging-face/",
+        "https://techcrunch.com/2017/03/09/hugging-face-wants-to-become-your-artificial-bff/"
+      ],
+      "notes": "Weakest citation chain among the independent companies here. No first-party page stating a founding year could be located. The 2016 figure rests on Wikipedia plus a Forbes data field, and following Wikipedia's own citation through does not confirm it. Clement is spelled with an acute accent in sources; rendered ASCII. Founded in New York City as a teen chatbot app; pivoted to ML infrastructure around 2018.",
+      "extra": {}
+    },
+    {
+      "id": "ibm",
+      "name": "IBM",
+      "aliases": [
+        "IBM"
+      ],
+      "founded": "1911-06-16",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://www.ibm.com/history/ctr-and-ibm",
+        "quote": "June 16, 1911, when C-T-R was officially incorporated as a holding company to control the three separate firms.",
+        "publisher": "IBM (official IBM History site), fetched via the pure.md text proxy because ibm.com returns 403 to the fetcher used"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "1924",
+          "url": "https://www.ibm.com/history/ctr-and-ibm",
+          "quote": "Watson renamed C-T-R with the more expansive moniker of International Business Machines in 1924.",
+          "what_it_represents": "date the company took the IBM name. Anyone dating 'IBM' rather than 'the company that became IBM' gets 1924."
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Epoch flags IBM on frontier models only BEFORE 2000, so the 2000+ window rule does not select it. Included because the collection's window is a scoping choice, not a claim that IBM stopped being a research organisation, and because a timeline running to the present benefits from an entity whose frontier work predates the window.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://www.ibm.com/history/ctr-and-ibm"
+      ],
+      "notes": "The 1911 entity was the Computing-Tabulating-Recording Company, formed by Charles Flint as a holding company merging the International Time Recording Company, the Computing Scale Company and the Tabulating Machine Company. So IBM's founding is itself a merger of three older firms, each with an earlier founding date; Hollerith's Tabulating Machine Company is the oldest. IBM dates itself to 1911-06-16 and adopted the IBM name in 1924.",
+      "extra": {}
+    },
+    {
+      "id": "inspur",
+      "name": "Inspur",
+      "aliases": [
+        "Inspur"
+      ],
+      "founded": null,
+      "founded_precision": null,
+      "founded_evidence": null,
+      "founded_contested": true,
+      "founded_alternatives": [
+        {
+          "date": "1983",
+          "url": "https://en.wikipedia.org/wiki/Inspur",
+          "quote": "Founded: 1983; 43 years ago (1983)",
+          "what_it_represents": "infobox value with no cited source; the same article is filed under the category 'Companies established in 2000', an internal contradiction"
+        },
+        {
+          "date": "1989-02-03",
+          "url": "https://baike.baidu.com/en/item/Inspur/947896",
+          "quote": "It was founded on February 3, 1989, in Jinan City, Shandong Province.",
+          "what_it_represents": "Baidu Baike's date for the entity it titles simply 'Inspur'; the same page says the predecessor was the Shandong Electronic Equipment Factory, which developed China's first Inspur microcomputer in 1983"
+        },
+        {
+          "date": "1998",
+          "url": "https://www.investing.com/equities/inspur-electronic-info-industr-company-profile",
+          "quote": "Inspur Electronic Information Industry Co., Ltd. was founded in 1998",
+          "what_it_represents": "founding of the Shenzhen-listed subsidiary 000977.SZ, now IEIT Systems, a different legal entity from Inspur Group; formerly Langchao Electronic Information Industry Co., Ltd., renamed 2006-04"
+        }
+      ],
+      "evidence_strength": "none",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "China",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 2,
+      "epoch_first_frontier_model": "2021-10-12",
+      "epoch_last_frontier_model": "2021-10-12",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Inspur",
+        "https://baike.baidu.com/en/item/Inspur/947896",
+        "https://www.investing.com/equities/inspur-electronic-info-industr-company-profile"
+      ],
+      "notes": "DELIBERATE NULL. 'Inspur' is not one organisation and founding is genuinely ill-defined: Inspur Group (unlisted parent, Jinan), Inspur Electronic Information Industry Co., Ltd. / IEIT Systems (000977.SZ), Inspur International and Inspur Cloud all carry the name. Four mutually inconsistent dates circulate (1945, 1983, 1989, 1998), plus 2000 for adoption of the Inspur name and 2006-04 for the listed arm's rename. The widely repeated 1945 claim could NOT be verified against any fetchable source; it appears only in commercial aggregators that were not fetched. Every first-party attempt failed to yield a date (en.inspur.com about page, inspur.com group page 404, en.ieisystem.com 404). Whoever consumes this record must first decide which Inspur entity is meant. Note also that Inspur's AI relevance is as a server and HPC vendor and developer of the Yuan LLM series, not as a research lab in the sense of the other entries.",
+      "extra": {}
+    },
+    {
+      "id": "microsoft",
+      "name": "Microsoft",
+      "aliases": [
+        "Microsoft"
+      ],
+      "founded": "1975-04-04",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://paulallen.com/Futurist/Microsoft.aspx",
+        "quote": "They started Microsoft together, on April 4, 1975 in Albuquerque, New Mexico.",
+        "publisher": "paulallen.com, official site of Microsoft co-founder Paul Allen"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "1975",
+          "url": "https://news.microsoft.com/facts-about-microsoft/",
+          "quote": "1975 - Microsoft founded",
+          "what_it_represents": "Microsoft's own corporate facts page, year precision only; Microsoft itself does not publish the day here"
+        },
+        {
+          "date": "1981-06-25",
+          "url": "https://news.microsoft.com/facts-about-microsoft/",
+          "quote": "June 25, 1981 - Microsoft incorporates",
+          "what_it_represents": "legal incorporation, six years after the partnership was founded. Anyone conflating founded with incorporated gets 1981."
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 4,
+      "epoch_first_frontier_model": "2014-06-18",
+      "epoch_last_frontier_model": "2021-10-11",
+      "sources": [
+        "https://paulallen.com/Futurist/Microsoft.aspx",
+        "https://news.microsoft.com/facts-about-microsoft/"
+      ],
+      "notes": "Began as a Gates/Allen partnership in Albuquerque and did not incorporate until 1981-06-25, so founded and incorporated differ by six years, unlike most rows here. The 1975-04-04 date is co-founder-attested rather than a filing record; Allen's site and Microsoft's facts page agree on the year but only Allen's site gives the day.",
+      "extra": {}
+    },
+    {
+      "id": "microsoft_research",
+      "name": "Microsoft Research",
+      "aliases": [
+        "Microsoft Research"
+      ],
+      "founded": "1991",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://www.microsoft.com/en-us/research/about-microsoft-research/",
+        "quote": "since its founding in 1991, Microsoft Research has been committed to an academic research approach",
+        "publisher": "Microsoft Research (first-party About page)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "Microsoft",
+      "country": "United States",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 2,
+      "epoch_first_frontier_model": "2015-02-06",
+      "epoch_last_frontier_model": "2015-02-06",
+      "sources": [
+        "https://www.microsoft.com/en-us/research/about-microsoft-research/"
+      ],
+      "notes": "Year precision only; the first-party page gives no month or day. Microsoft Research has been reorganised several times, including being folded into a combined AI and Research group, but no dated first-party source for any reorganisation was located, so no status change is asserted.",
+      "extra": {}
+    },
+    {
+      "id": "mistral_ai",
+      "name": "Mistral AI",
+      "aliases": [],
+      "founded": "2023-04-28",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://recherche-entreprises.api.gouv.fr/search?q=mistral%20ai",
+        "quote": "\"date_creation\": \"2023-04-28\"",
+        "publisher": "Annuaire des Entreprises / recherche-entreprises API, DINUM, French government; SIREN 952418325, nom_complet MISTRAL AI"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2023-04",
+          "url": "https://en.wikipedia.org/wiki/Mistral_AI",
+          "quote": "Mistral AI was established in April 2023 by three French AI researchers",
+          "what_it_represents": "month-precision founding in prose; consistent with the registry date"
+        },
+        {
+          "date": "2023-09-27",
+          "url": "https://mistral.ai/news/about-mistral-ai/",
+          "quote": "Bringing open AI models to the frontier",
+          "what_it_represents": "first-party public launch; earliest post on Mistral's news page, dated 2023-09-27. Company existed ~5 months before this."
+        }
+      ],
+      "evidence_strength": "registry",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "France",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "No Mistral model carries Epoch's frontier flag in the ingested dump, but Mistral trains and releases general-purpose models at or near the open-weight frontier and is routinely named as a frontier developer in European AI governance discussion. A clear case of the flag's sparsity rather than of Mistral not qualifying.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://recherche-entreprises.api.gouv.fr/search?q=mistral%20ai",
+        "https://en.wikipedia.org/wiki/Mistral_AI",
+        "https://mistral.ai/news/about-mistral-ai/"
+      ],
+      "notes": "Strongest evidence in this batch: a government company register, not journalism. SIREN 952418325, legal form SAS, registered office Paris. A separate shell MISTRAL AI RESERVED (SIREN 992519694) exists and must not be confused with the operating company. A decoy SIREN 952481660 appears in some secondary write-ups and is wrong. Mistral's own site carries no founding-date statement.",
+      "extra": {}
+    },
+    {
+      "id": "mitsubishi_electric_research_laboratories",
+      "name": "Mitsubishi Electric Research Laboratories",
+      "aliases": [
+        "Mitsubishi Electric Research Labs",
+        "MERL",
+        "Mitsubishi Electric Information Technology Center America",
+        "ITA"
+      ],
+      "founded": "1991",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://www.merl.com/company/history",
+        "quote": "In 1991, Mitsubishi Electric's Corporate Research and Development organization (CR&D) opened MERL in Cambridge, Mass., under the leadership of Dr. Tohei Nitta and Dr. Laszlo (Les) Belady.",
+        "publisher": "Mitsubishi Electric Research Laboratories (official company history page)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "1996",
+          "url": "https://www.merl.com/company/history",
+          "quote": "In 1995, CR&D decided to combine HRI and ATL together into a new organization called Mitsubishi Electric Information Technology Center America (ITA). The next year, MERL was merged into ITA as well.",
+          "what_it_represents": "MERL absorbed into ITA in 1996, so the MERL name did not exist as a standalone organisation between 1996 and 2000"
+        },
+        {
+          "date": "2000",
+          "url": "https://www.merl.com/company/history",
+          "quote": "In 2000, the staff in Waltham moved to Cambridge, and ITA returned to the name MERL.",
+          "what_it_represents": "restoration of the MERL name after the ITA period; a refounding of the brand, though MERL claims organisational continuity from 1991"
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": "Mitsubishi Electric Corporation",
+      "country": "United States",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 1,
+      "epoch_first_frontier_model": "2001-12-08",
+      "epoch_last_frontier_model": "2001-12-08",
+      "sources": [
+        "https://www.merl.com/company/history"
+      ],
+      "notes": "A US-based Cambridge, Massachusetts subsidiary lab of a Japanese parent, so country is the lab's location, not the parent's. The MERL name has a four-year gap (1996-2000) when the organisation was called ITA, which matters when matching on organisation name across a time series. Laszlo Belady's name carries an accent on the source page; transliterated to ASCII.",
+      "extra": {}
+    },
+    {
+      "id": "moonshot_ai",
+      "name": "Moonshot AI",
+      "aliases": [
+        "Kimi"
+      ],
+      "founded": "2023-03",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://en.wikipedia.org/wiki/Moonshot_AI",
+        "quote": "Moonshot was founded in March 2023 by Yang Zhilin, Zhou Xinyu and Wu Yuxin who were schoolfriends at Tsinghua University.",
+        "publisher": "Wikipedia"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2023",
+          "url": "https://www.moonshot.ai/about",
+          "quote": "Moonshot AI was founded in early 2023, with a core technical team that brings together the inventors of multiple key AI technologies including Transformer-XL, RoPE, Group Normalization, ShuffleNet, MuonClip, Mooncake, and others, dedicated to finding the optimal solution for converting energy into intelligence.",
+          "what_it_represents": "first-party but vaguer than Wikipedia: 'early 2023' only, consistent with March"
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "China",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a dedicated Chinese frontier-model developer (Kimi series) widely tracked as frontier-adjacent.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Moonshot_AI",
+        "https://www.moonshot.ai/about"
+      ],
+      "notes": "First-party site says only 'early 2023'; the month comes from Wikipedia, whose cited reference was not resolvable from the fetched rendering. Chinese legal entity appears in the site footer as Beijing Moonshot AI Technology Co., Ltd. Researcher's stated confidence: month ~0.8, year high.",
+      "extra": {}
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA",
+      "aliases": [
+        "NVIDIA"
+      ],
+      "founded": "1993-04-05",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://www.nvidia.com/en-us/about-nvidia/corporate-timeline/",
+        "quote": "Founded on April 5, 1993, by Jensen Huang, Chris Malachowsky, and Curtis Priem, with a vision to bring 3D graphics to the gaming and multimedia markets.",
+        "publisher": "NVIDIA Corporation (official corporate timeline)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 8,
+      "epoch_first_frontier_model": "2019-09-17",
+      "epoch_last_frontier_model": "2024-06-14",
+      "sources": [
+        "https://www.nvidia.com/en-us/about-nvidia/corporate-timeline/"
+      ],
+      "notes": "First-party, day precision, no conflicting dates encountered. The quoted text is a timeline entry rather than a full grammatical sentence, reproduced verbatim.",
+      "extra": {}
+    },
+    {
+      "id": "peng_cheng_laboratory",
+      "name": "Peng Cheng Laboratory",
+      "aliases": [
+        "Peng Cheng Laboratory"
+      ],
+      "founded": "2018-03",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://baike.baidu.com/en/item/Peng%20Cheng%20Laboratory/935659",
+        "quote": "It was founded in March 2018 and primarily engages in strategic, forward-looking, and fundamental major scientific issues and key core technology research in this field.",
+        "publisher": "Baidu Baike (English edition)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2018",
+          "url": "https://merics.org/en/comment/peng-cheng-lab-pengchengshiyanshi-building-advanced-platforms-and-infrastructure-military",
+          "quote": "A 'new type of research and development institution' (xinxing yanfa jigou) set up by the Guangdong and Shenzhen governments in 2018",
+          "what_it_represents": "year-only corroboration from MERICS. The original parenthetical is in Chinese characters, transliterated to pinyin here."
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "China",
+      "lab_kind": "research_institute",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 2,
+      "epoch_first_frontier_model": "2021-12-23",
+      "epoch_last_frontier_model": "2021-12-23",
+      "sources": [
+        "https://baike.baidu.com/en/item/Peng%20Cheng%20Laboratory/935659",
+        "https://merics.org/en/comment/peng-cheng-lab-pengchengshiyanshi-building-advanced-platforms-and-infrastructure-military"
+      ],
+      "notes": "No day precision verifiable. March 2018 is stated by Baidu Baike and corroborated at year level by MERICS, but the sometimes-cited 2018-03-22 could NOT be confirmed and must not be adopted. First-party pages all failed: szpclab.com refused the connection, and pcl.ac.cn pages carried mission and facility text but no establishment date. PCL is a state-backed institution approved by the Central Committee of the CPC and funded by the Guangdong and Shenzhen governments, directed by Gao Wen, so there is no corporate incorporation record to appeal to; founding here means government establishment.",
+      "extra": {}
+    },
+    {
+      "id": "reka_ai",
+      "name": "Reka AI",
+      "aliases": [],
+      "founded": "2022",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://siliconangle.com/2025/07/22/multimodal-ai-startup-reka-ai-raises-110m-1b-valuation/",
+        "quote": "Founded in 2022, Reka develops multimodal models focusing on ultra-efficient training and serving infrastructure for delivering inference at low cost.",
+        "publisher": "SiliconANGLE (trade press, 2025-07-22)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2023-06-27",
+          "url": "https://www.reka.ai/news/announcing-our-60m-funding-to-build-generative-models-and-advance-ai-research",
+          "quote": "Today, we emerge from stealth",
+          "what_it_represents": "first-party emergence from stealth, dated 2023-06-27; earliest item on Reka's news index"
+        }
+      ],
+      "evidence_strength": "press",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as a dedicated multimodal frontier-model developer founded by former DeepMind and Google Brain researchers.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://siliconangle.com/2025/07/22/multimodal-ai-startup-reka-ai-raises-110m-1b-valuation/",
+        "https://www.reka.ai/news/announcing-our-60m-funding-to-build-generative-models-and-advance-ai-research"
+      ],
+      "notes": "No first-party founding date exists on reka.ai: no about page, and the earliest news post does not say when the company started. The 2022 figure comes only from trade-press boilerplate. TRAP AVOIDED: UK Companies House lists REKA AI LTD. (number 14242489, incorporated 2022-07-19, Altrincham, one director, SIC 58290). The date is temptingly close but registered office, size and profile do not match the Sunnyvale/San Francisco lab; that record was NOT used and must not be merged in. Reported funding also disagrees: Reka's own post says $60M, press reported $58M.",
+      "extra": {}
+    },
+    {
+      "id": "safe_superintelligence",
+      "name": "Safe Superintelligence Inc",
+      "aliases": [],
+      "founded": "2024-06-19",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://en.wikipedia.org/wiki/Safe_Superintelligence_Inc.",
+        "quote": "On June 19, 2024, Sutskever posted on X that he was starting SSI Inc, with the goal to safely develop superintelligent AI",
+        "publisher": "Wikipedia"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2024-06-19",
+          "url": "https://time.com/6990076/safe-superintelligence-inc-announced/",
+          "quote": "he's launching a new venture dubbed Safe Superintelligence Inc.",
+          "what_it_represents": "public announcement; article dateline 2024-06-19"
+        },
+        {
+          "date": "2024",
+          "url": "https://ssi.inc/",
+          "quote": "Safe Superintelligence Inc. (c) 2024 - 2026",
+          "what_it_represents": "first-party copyright range, lower-bounding existence to 2024"
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United States",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Has released no model, so it cannot appear in a model database by construction. Included because a dataset of frontier labs that omits an explicitly frontier-targeting lab founded by Ilya Sutskever would mislead; a consumer wanting only shipping labs can filter on epoch_frontier_models being null.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Safe_Superintelligence_Inc.",
+        "https://time.com/6990076/safe-superintelligence-inc-announced/",
+        "https://ssi.inc/"
+      ],
+      "notes": "This is the public ANNOUNCEMENT date, not a verified incorporation date. No Delaware or other registry record retrieved; actual incorporation may predate it by weeks or months. Offices in Palo Alto and Tel Aviv, so country is arguably dual. Reuters, AP, The Verge and NYT cited by Wikipedia for the same date were not fetchable.",
+      "extra": {}
+    },
+    {
+      "id": "stability_ai",
+      "name": "Stability AI",
+      "aliases": [],
+      "founded": "2019-11-04",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://find-and-update.company-information.service.gov.uk/company/12295325",
+        "quote": "Incorporated on 4 November 2019",
+        "publisher": "Companies House, GOV.UK; STABILITY AI LTD, company number 12295325"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2019",
+          "url": "https://en.wikipedia.org/wiki/Stability_AI",
+          "quote": "Stability AI was founded in 2019 by Emad Mostaque and Cyrus Hodes.",
+          "what_it_represents": "year-precision prose; agrees with the register"
+        },
+        {
+          "date": "2019-11-04",
+          "url": "https://find-and-update.company-information.service.gov.uk/company/12295325/officers",
+          "quote": "MOSTAQUE, Mohammad Emad - Appointed 4 November 2019",
+          "what_it_represents": "corroborates entity identity: directorship starts on the incorporation date; he resigned 2024-03-22"
+        }
+      ],
+      "evidence_strength": "registry",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "United Kingdom",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump, whose frontier flag tracks language-model compute far better than image generation. Included because Stable Diffusion was at the generative-image frontier on release. Note the founding date badly misrepresents this row: see notes.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://find-and-update.company-information.service.gov.uk/company/12295325",
+        "https://en.wikipedia.org/wiki/Stability_AI",
+        "https://find-and-update.company-information.service.gov.uk/company/12295325/officers"
+      ],
+      "notes": "The 2019 incorporation is real but misleading for cross-lab comparison: Stability had essentially no public AI-lab activity until 2021-2022 (Stable Diffusion released 2022-08), so a reader comparing founded dates will over-age Stability by ~3 years. Companies House lists no previous names for 12295325. Cyrus Hodes's co-founder status was later litigated. A separate US entity Stability AI Inc. exists; no registration date retrieved.",
+      "extra": {}
+    },
+    {
+      "id": "tencent",
+      "name": "Tencent",
+      "aliases": [],
+      "founded": "1998-11",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://en.wikipedia.org/wiki/Tencent",
+        "quote": "Tencent was founded by Pony Ma, Zhang Zhidong, Xu Chenye, Charles Chen and Zeng Liqing in November 1998",
+        "publisher": "Wikipedia"
+      },
+      "founded_contested": true,
+      "founded_alternatives": [
+        {
+          "date": "1998",
+          "url": "https://www.tencent.com/en-us/about.html",
+          "quote": "Founded in 1998 with its headquarters in Shenzhen, China, Tencent's guiding principle is to use technology for good.",
+          "what_it_represents": "first-party About page, year only"
+        },
+        {
+          "date": "1998-11-07",
+          "url": "https://en.wikipedia.org/wiki/Tencent",
+          "quote": "Founded: 7 November 1998; 27 years ago (1998-11-07)",
+          "what_it_represents": "infobox value, unsourced in the fetched rendering; conflicts with the widely circulated 11 November 1998"
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "China",
+      "lab_kind": "corporate_parent",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included as the parent of the Hunyuan model family and, from 2026-03, of the absorbed AI Lab. Present mainly to give Tencent AI Lab a parent to point at.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://en.wikipedia.org/wiki/Tencent",
+        "https://www.tencent.com/en-us/about.html"
+      ],
+      "notes": "Month precision deliberate. The day is contested: Wikipedia's infobox says 7 November, many aggregators say 11 November, and Tencent's own page gives only the year. Do not upgrade to day precision without an HKEX filing or annual report.",
+      "extra": {}
+    },
+    {
+      "id": "tencent_ai_lab",
+      "name": "Tencent AI Lab",
+      "aliases": [],
+      "founded": "2016-04",
+      "founded_precision": "month",
+      "founded_evidence": {
+        "url": "https://syncedreview.com/2017/04/22/interview-with-tencent-ai-lab-four-core-research-fieldscomputer-vision-speech-recognition-natural-language-processing-and-machine-learning/",
+        "quote": "In April 2016, Tencent AI Lab was finally founded.",
+        "publisher": "Synced (SyncedReview)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2016",
+          "url": "https://www.caixinglobal.com/2026-03-21/tencent-folds-ai-lab-into-hunyuan-team-in-major-ai-overhaul-102425495.html",
+          "quote": "Tencent will disband the AI Lab established in 2016",
+          "what_it_represents": "year-only corroboration inside the 2026 disbandment story"
+        }
+      ],
+      "evidence_strength": "press",
+      "status": "merged",
+      "status_date": "2026-03-20",
+      "status_evidence": {
+        "url": "https://www.caixinglobal.com/2026-03-21/tencent-folds-ai-lab-into-hunyuan-team-in-major-ai-overhaul-102425495.html",
+        "quote": "Tencent will disband the AI Lab established in 2016"
+      },
+      "parent_org": "Tencent",
+      "country": "China",
+      "lab_kind": "corporate_division",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch. Included as a separate row from Tencent because it has a distinct founding date (2016-04) and a distinct end: it was disbanded into the Hunyuan team on 2026-03-20. A collection that folded it into Tencent would lose both facts.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://syncedreview.com/2017/04/22/interview-with-tencent-ai-lab-four-core-research-fieldscomputer-vision-speech-recognition-natural-language-processing-and-machine-learning/",
+        "https://www.caixinglobal.com/2026-03-21/tencent-folds-ai-lab-into-hunyuan-team-in-major-ai-overhaul-102425495.html"
+      ],
+      "notes": "Separate record because its founding date differs from Tencent's. THIS UNIT NO LONGER EXISTS: Caixin Global, 2026-03-21, reports Tencent disbanding it and folding it into the Hunyuan large-model team, internal notice issued 2026-03-20, personnel moving under Chief AI Scientist Yao Shunyu. Reports that only the industry-academia collaboration centre was retained were not independently fetched. Zhang Tong became executive director in 2017-03, about a year after founding, and left in early 2019; do not confuse his arrival with the founding.",
+      "extra": {}
+    },
+    {
+      "id": "zero_one_ai",
+      "name": "01.AI",
+      "aliases": [
+        "Yi",
+        "Beijing Lingyi Wanwu Information Technology Co., Ltd."
+      ],
+      "founded": "2023",
+      "founded_precision": "year",
+      "founded_evidence": {
+        "url": "https://www.01.ai/about.html",
+        "quote": "01.AI was founded in Beijing in May 2023 under the leadership of Dr. Kai-Fu Lee and became a unicorn within six months.",
+        "publisher": "01.AI (first-party)"
+      },
+      "founded_contested": true,
+      "founded_alternatives": [
+        {
+          "date": "2023-05",
+          "url": "https://www.01.ai/about.html",
+          "quote": "01.AI was founded in Beijing in May 2023 under the leadership of Dr. Kai-Fu Lee and became a unicorn within six months.",
+          "what_it_represents": "first-party statement"
+        },
+        {
+          "date": "2023-03",
+          "url": "https://en.wikipedia.org/wiki/01.AI",
+          "quote": "01.AI was founded in March 2023 by former Microsoft and Google executive and Sinovation Ventures co-founder Kai-Fu Lee.",
+          "what_it_represents": "widely repeated secondary consensus, citing Bloomberg 2023-11-05; consistent with TechNode's 2023-03-20 report of Kai-Fu Lee founding the startup"
+        }
+      ],
+      "evidence_strength": "first_party",
+      "status": "active",
+      "status_date": "2025-03",
+      "status_evidence": {
+        "url": "https://en.wikipedia.org/wiki/01.AI",
+        "quote": "In March 2025, 01.AI stopped 'pre-training' large language models to focus on selling tailored AI business solutions using DeepSeek's models."
+      },
+      "parent_org": null,
+      "country": "China",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "editorial",
+      "inclusion_reason": "Not flagged by Epoch in the ingested dump. Included for the Yi model family. Note the status change recorded in the row: 01.AI stopped pre-training its own models in 2025-03, so any count of currently-active frontier labs should exclude it after that date.",
+      "epoch_frontier_models": null,
+      "epoch_first_frontier_model": null,
+      "epoch_last_frontier_model": null,
+      "sources": [
+        "https://www.01.ai/about.html",
+        "https://en.wikipedia.org/wiki/01.AI"
+      ],
+      "notes": "Reported at YEAR precision deliberately: the month is genuinely contested and the first-party source (May 2023) disagrees with the secondary consensus (March 2023). Plausible but UNVERIFIED reconciliation: March = public announcement / incubation inside Sinovation Ventures, May = incorporation of Beijing Lingyi Wanwu Information Technology Co., Ltd. Do not collapse without a registry record. MATERIAL FOR ANY FRONTIER-LAB COUNT: 01.AI remains an operating company but stopped pre-training its own frontier models in 2025-03 (Financial Times, 2025-03-22), so counting it as a frontier lab after that date is misleading.",
+      "extra": {}
+    },
+    {
+      "id": "zhipu_ai",
+      "name": "Zhipu AI",
+      "aliases": [
+        "Z.ai (Zhipu AI)",
+        "Z.ai",
+        "Beijing Zhipu Huazhang Technology Co., Ltd."
+      ],
+      "founded": "2019-06-11",
+      "founded_precision": "day",
+      "founded_evidence": {
+        "url": "https://baike.baidu.com/en/item/Beijing%20Zhipu%20Huazhang%20Technology%20Co.,%20Ltd./949212",
+        "quote": "Beijing Zhipu Huazhang Technology Co., Ltd., with the stock abbreviation Z.AI and stock code 02513, is a company limited by shares primarily engaged in the science and technology promotion and application services industry...It was founded on June 11, 2019.",
+        "publisher": "Baidu Baike (English edition)"
+      },
+      "founded_contested": false,
+      "founded_alternatives": [
+        {
+          "date": "2019-06",
+          "url": "https://baike.baidu.com/en/item/Beijing%20Zhipu%20Huazhang%20Technology%20Co.,%20Ltd./949212",
+          "quote": "In June 2019, Z.AI was formally established, originating from the technological achievements transfer of the Tsinghua University Computer Science Department Knowledge Engineering Laboratory (KEG).",
+          "what_it_represents": "month-precision restatement tying the company to the Tsinghua KEG spin-out"
+        }
+      ],
+      "evidence_strength": "secondary",
+      "status": "active",
+      "status_date": null,
+      "status_evidence": null,
+      "parent_org": null,
+      "country": "China",
+      "lab_kind": "dedicated_ai_lab",
+      "inclusion_basis": "epoch_frontier_model",
+      "inclusion_reason": null,
+      "epoch_frontier_models": 1,
+      "epoch_first_frontier_model": "2024-08-29",
+      "epoch_last_frontier_model": "2024-08-29",
+      "sources": [
+        "https://baike.baidu.com/en/item/Beijing%20Zhipu%20Huazhang%20Technology%20Co.,%20Ltd./949212"
+      ],
+      "notes": "Rebrand, not a legal rename: the company rebranded internationally as Z.ai in July 2025 alongside GLM-4.5, but the registered entity remains Beijing Zhipu Huazhang Technology Co., Ltd. Z.AI is the international brand and HKEX stock abbreviation, code 02513. Listed on HKEX 2026-01-08; that IPO prospectus would be the strongest source for the incorporation date but was not fetched. z.ai/about returned 404, so the day rests on Baidu Baike alone. Researcher's stated confidence: day ~0.75, month/year high.",
+      "extra": {}
+    }
+  ]
+}
