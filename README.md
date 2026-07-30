@@ -1,408 +1,143 @@
-# pdoom-data: AI Safety Data Lake
+# pdoom-data
 
-**Production-grade data infrastructure for AI safety research, timeline events, and funding information.**
+The data hub for the P(Doom) game ecosystem: historical AI-safety events, the
+pipelines that shape them, and the schemas other projects depend on.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Data Quality](https://img.shields.io/badge/Data%20Quality-100%25%20Validated-brightgreen)]()
-[![Events](https://img.shields.io/badge/Events-1%2C194-blue)]()
-[![Weekly Updates](https://img.shields.io/badge/Updates-Weekly-orange)]()
-
----
-
-## Quick Start
-
-**For Developers**: [5-Minute Integration Guide](docs/QUICK_START_INTEGRATION.md)
-
-**For Data Engineers**: [Complete Integration Guide](docs/INTEGRATION_GUIDE.md)
-
-**For Navigation**: [Documentation Index](docs/DOCUMENTATION_INDEX.md)
+If you are an AI assistant working in this repository, read `CLAUDE.md` first --
+it is written for you, and this file is not.
 
 ---
 
-## Overview
+## What you can actually fetch today
 
-pdoom-data provides a curated, validated, and production-ready data lake for AI safety information. Data flows through a three-zone architecture (raw → transformed → serveable) with automated pipelines, comprehensive validation, and full provenance tracking.
+Everything below lives in `data/serveable/`, which is a **build output**. Never
+edit it by hand. Every collection can be regenerated, and each has a `--check`
+that proves the committed copy matches a fresh build.
 
-### What's Inside
+| Collection | Records | What it is |
+|---|---|---|
+| `api/timeline_events/all_events.json` | 1,194 | the original event corpus -- read the caveat below |
+| `api/candidates/all_candidates.jsonl` | 3,434 | 2023-2026 forward-fill from Epoch AI, LessWrong and the EA Forum; mostly unreviewed |
+| `api/reviewed/all_reviewed.jsonl` | 140 | candidates a named human accepted |
+| `api/frontier_labs/all_labs.json` | 46 | AI labs with founding dates and the evidence for each date |
 
-**1,194 Timeline Events** (28 curated + 1,166 A-tier alignment research)
-- Hand-curated AI safety events (2016-2025)
-- A-tier enriched alignment research (2016-2023, arxiv + distill)
-- Schema-validated with complete source attribution
-- Organized by year, category, and rarity
+**The caveat on the 1,194.** That number decomposes into **28 hand-authored
+events and 1,166 bulk arXiv/Distill imports**. The imported records carry
+descriptions that are unparsed PDF text, complete with broken ligatures, and
+1,129 of them share a single impact vector. It is 28 curated events plus a paper
+dump wearing an event costume. Do not plan around 1,194 usable events.
 
-**Alignment Research Dataset** (1,000+ records)
-- Research papers, blog posts, forum discussions
-- 30+ sources (ArXiv, Alignment Forum, LessWrong, EA Forum)
-- Automated weekly extraction with delta detection
-- Enriched with metrics and derived fields
+**The caveat on the 140.** "Accepted" means one named reviewer said accept. It
+is an attributed opinion, not a verification, and these are candidate records --
+**not** the `event_v1` shape, so a game engine cannot ingest them without a
+mapping layer.
 
-**Funding Data** (In Progress)
-- Survival and Flourishing Fund (SFF) grants
-- Grant amounts, recipients, project descriptions
-- Historical funding patterns
+## The rule that shapes everything here
 
----
+**Facts live here. Opinions are attributed. Game balance lives in pdoom1.**
 
-## Data Collections
+The test applied to every field:
 
-### Timeline Events (`data/serveable/api/timeline_events/`)
+> If another consumer disagreed with this value, would they have to fork the
+> data, or could they just ignore a field?
 
-**Status**: Production Ready | **Events**: 1,194 | **Schema**: event_v1.json
+Fork means the field is on the wrong side of the line. In practice you will find
+`salience_by_profile.default_v1` rather than a bare `salience`, reviews that name
+their reviewer rather than anonymous verdicts, and no `game_facing` flag anywhere
+-- deciding what reaches players is your call, not ours.
 
-Two datasets available:
+It also means opinions ship **on purpose**, clearly labelled. A cheap human
+judgement is often worth inheriting, and hiding it destroys that option for
+everyone downstream.
 
-1. **Manual Curated Events** (28 events, 2016-2025)
-   - Organizational crises, technical breakthroughs, funding events
-   - Full source attribution and metadata
-   - Files: `all_events.json`, `by_year/`, `by_category/`
+## Dates, and why some are missing
 
-2. **Alignment Research Events** (1,166 events, 2016-2023)
-   - Generated from StampyAI Alignment Research Dataset
-   - Research papers, forum posts, blog articles
-   - Files: `alignment_research/alignment_research_events.json`, `by_year/`
+Several records have a null date and that is deliberate. A null is honest and can
+be filtered; a plausible-looking date invented to fill a gap is indistinguishable
+from a real one six months later.
 
-**Use Cases**:
-- Game timeline system with event impacts
-- Research dashboard and visualization
-- Historical analysis of AI safety field
-- Training data for AI safety models
+Where a date exists it carries its evidence: the URL that was read and the
+verbatim sentence containing the date. Where sources disagree -- founded versus
+incorporated versus publicly announced -- every candidate is recorded and
+labelled rather than silently collapsed into one.
 
-### Alignment Research (`data/raw/alignment_research/`)
+## Quick start
 
-**Status**: Weekly Updates | **Records**: 1,000+ | **Sources**: 30+
+    git clone https://github.com/PipFoweraker/pdoom-data.git
+    cd pdoom-data
 
-- Automated extraction from Hugging Face dataset
-- Schema validation and quality checks
-- Cleaning pipeline (deduplication, ASCII conversion)
-- Enrichment pipeline (metrics, topics, safety relevance)
+    # Nothing to install for the integrity checks; they are stdlib only.
+    python scripts/validation/check_invariants.py
+    python scripts/build/project_candidates.py --check
 
-### Funding Data (`data/raw/funding/`)
+Reading a collection is just reading a file:
 
-**Status**: In Development | **Sources**: SFF, Open Philanthropy
+    import json
 
-- Grant amounts and recipients
-- Project descriptions and outcomes
-- Funding patterns over time
+    with open("data/serveable/api/frontier_labs/all_labs.json") as f:
+        labs = json.load(f)["labs"]
 
----
+    # Count only dedicated labs. Counting every row double-counts Google,
+    # which appears five times with five different founding dates.
+    dedicated = [l for l in labs if l["lab_kind"] == "dedicated_ai_lab"]
 
-## Architecture
+## Layout
 
-### Three-Zone Data Lake
+    data/raw/           immutable source dumps; re-running an adapter makes a new one
+    data/transformed/   machine-derived, reproducible by re-running code
+    data/enrichment/    machine-derived enrichment (taxonomy tags, research imports)
+    data/curated/       human judgement: review verdicts, hand-researched records
+    data/serveable/     build output; what consumers fetch
+    config/schemas/     JSON Schema for each collection
+    scripts/adapters/   how external sources get in
+    scripts/build/      projections into the serveable zone
+    scripts/validation/ the assertions that keep all of the above honest
+    tools/              event browser and review queue; open the HTML directly
+    docs/               full documentation, starting at DOCUMENTATION_INDEX.md
+    legacy/             moved out of the root in 2026-07; read its README first
 
-```
-RAW ZONE                TRANSFORMED ZONE              SERVEABLE ZONE
-(Immutable)             (Validated/Cleaned/Enriched)  (Production-Ready)
+`data/curated/` is the one unlike the others: it holds decisions a person made,
+it cannot be regenerated, and losing it means someone has to decide again.
 
-data/raw/               data/transformed/             data/serveable/
-├── events/             ├── validated/                ├── api/
-├── alignment_research/ ├── cleaned/                  │   └── timeline_events/
-└── funding/            └── enriched/                 └── analytics/
-```
+## Adding a data source
 
-**Pipeline Stages**:
-1. **Raw**: Immutable source data with checksums
-2. **Validated**: Schema-validated against JSON schemas
-3. **Cleaned**: Deduplicated, normalized, ASCII-compliant
-4. **Enriched**: Derived fields, metrics, categorization
-5. **Serveable**: Optimized for consumption (indexed, formatted)
+Read `docs/ADAPTER_SPEC.md` and `scripts/adapters/README.md`. Two things catch
+people out:
 
-**Automation**: GitHub Actions runs pipeline on data changes
-
-See [DATA_ZONES.md](docs/DATA_ZONES.md) for architecture details.
-
----
-
-## Integration
-
-### Quick Integration (5 Minutes)
-
-**pdoom1-website** (PostgreSQL + FastAPI):
-```bash
-git submodule add https://github.com/PipFoweraker/pdoom-data.git data/pdoom-data
-python scripts/import_events.py  # Import 1,194 events to PostgreSQL
-# API endpoint: GET /api/events?year=2024&category=technical_research_breakthrough
-```
-
-**pdoom (Godot Game)**:
-```bash
-cp pdoom-data/data/serveable/api/timeline_events/*.json res://data/events/
-# Load events with EventLoader.gd, apply impacts to game variables
-```
-
-**pdoom-dashboard** (React/TypeScript):
-```typescript
-const { events } = useEvents({ year: 2024, category: 'technical_research_breakthrough' });
-// Display interactive timeline with filtering
-```
-
-See [QUICK_START_INTEGRATION.md](docs/QUICK_START_INTEGRATION.md) for complete setup guides.
-
----
-
-## Data Quality
-
-### Standards
-
-- Rigorous sourcing with complete attribution
-- JSON Schema validation on all datasets
-- ASCII-only encoding for universal compatibility
-- Comprehensive extraction and transformation logs
-- Idempotent pipelines (safe to re-run)
-- Full version control and lineage tracking
-
-### Quality Metrics (Current)
-
-| Metric | Value |
-|--------|-------|
-| Total Events | 1,194 |
-| Schema Validation Pass Rate | 100% |
-| ASCII Compliance | 100% |
-| Source Attribution Complete | 100% |
-| Duplicate Records | 0 |
-
----
-
-## Automation
-
-### GitHub Actions Workflows
-
-**1. Weekly Data Refresh** ([weekly-data-refresh.yml](.github/workflows/weekly-data-refresh.yml))
-- Extracts new alignment research every Monday at 2am UTC
-- Validates extracted data
-- Commits to repository
-
-**2. Automated Pipeline** ([data-pipeline-automation.yml](.github/workflows/data-pipeline-automation.yml))
-- Triggers on raw data changes
-- Runs full pipeline: validate -> clean -> enrich -> transform -> manifest
-- Auto-commits processed data
-
-**3. Documentation CI** ([documentation-ci.yml](.github/workflows/documentation-ci.yml))
-- Validates documentation quality
-- Checks ASCII compliance
-- Tests JSON validity
-
----
-
-## Tools
-
-### Event Browser
-
-**Interactive browser for reviewing and annotating events**
-
-Open `tools/event_browser.html` in your browser to:
-- Browse and filter 1,000+ timeline events
-- Add custom metadata for game integration
-- Tag events by impact level and game relevance
-- Export metadata for use in pdoom1 and pdoom1-website
-
-See [EVENT_BROWSER_GUIDE.md](docs/EVENT_BROWSER_GUIDE.md) for complete documentation.
-
----
-
-## Documentation
-
-### Essential Guides
-
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| [QUICK_START_INTEGRATION.md](docs/QUICK_START_INTEGRATION.md) | 5-minute integration | Developers |
-| [INTEGRATION_GUIDE.md](docs/INTEGRATION_GUIDE.md) | Complete integration docs | Developers |
-| [EVENT_SCHEMA.md](docs/EVENT_SCHEMA.md) | Timeline event schema | Developers |
-| [EVENT_BROWSER_GUIDE.md](docs/EVENT_BROWSER_GUIDE.md) | Interactive event browser | Curators, Game Designers |
-| [DATA_ZONES.md](docs/DATA_ZONES.md) | Architecture overview | Engineers |
-| [RUNBOOK.md](docs/RUNBOOK.md) | Operations guide | Operators |
-| [DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md) | All documentation | All |
-
-### For Integrators
-
-See [CROSS_REPO_INTEGRATION_ISSUES.md](docs/CROSS_REPO_INTEGRATION_ISSUES.md) for ready-to-use GitHub issues to create in consuming repositories.
-
----
-
-## Repository Structure
-
-```
-pdoom-data/
-├── data/
-│   ├── raw/                      # Immutable source data
-│   │   ├── events/               # Manual curated events
-│   │   ├── alignment_research/   # Research dataset
-│   │   └── funding/              # Funding data
-│   ├── transformed/              # Processed data
-│   │   ├── validated/            # Schema-validated
-│   │   ├── cleaned/              # Normalized, deduplicated
-│   │   └── enriched/             # With derived fields
-│   └── serveable/                # Production-ready
-│       ├── MANIFEST.json         # Complete data catalog
-│       └── api/
-│           └── timeline_events/  # 1,194 events ready for use
-├── tools/
-│   └── event_browser.html        # Interactive event browser (open in browser)
-├── config/
-│   └── schemas/                  # JSON schemas
-│       └── event_v1.json         # Timeline event schema
-├── scripts/
-│   ├── analysis/                 # Event analysis tools
-│   ├── transformation/           # Data pipeline scripts
-│   ├── validation/               # Schema validation
-│   ├── publishing/               # Manifest generation
-│   └── logging/                  # (Future) Log consolidation
-├── docs/                         # Comprehensive documentation
-└── .github/workflows/            # Automation
-```
-
----
-
-## Usage Examples
-
-### Load All Events (Python)
-
-```python
-import json
-from pathlib import Path
-
-# Load manual events
-with open('data/serveable/api/timeline_events/all_events.json') as f:
-    manual_events = list(json.load(f).values())
-
-# Load alignment research events
-with open('data/serveable/api/timeline_events/alignment_research/alignment_research_events.json') as f:
-    research_events = json.load(f)
-
-all_events = manual_events + research_events
-print(f"Loaded {len(all_events)} events")
-
-# Filter by year
-events_2024 = [e for e in all_events if e['year'] == 2024]
-print(f"  {len(events_2024)} events in 2024")
-```
-
-### Query by Category (SQL)
-
-```sql
--- After importing to PostgreSQL
-SELECT id, title, year, rarity
-FROM events
-WHERE category = 'technical_research_breakthrough'
-  AND year >= 2020
-ORDER BY year DESC, rarity DESC
-LIMIT 10;
-```
-
-### Load in Godot (GDScript)
-
-```gdscript
-# EventLoader.gd
-var events = []
-
-func _ready():
-    var file = File.new()
-    file.open("res://data/events/all_events.json", File.READ)
-    var json = file.get_as_text()
-    file.close()
-
-    var result = JSON.parse(json)
-    if result.error == OK:
-        for event_id in result.result:
-            events.append(result.result[event_id])
-
-    print("Loaded ", events.size(), " events")
-```
-
----
-
-## Roadmap
-
-### Completed
-
-- Three-zone data lake architecture
-- Timeline event schema and validation
-- Alignment research integration (1,000 events)
-- Automated weekly data extraction
-- Complete transformation pipeline
-- Serveable zone with manifest
-- Integration documentation
-- GitHub Actions automation
-
-### In Progress
-
-- Public communication strategy implementation
-- Logs consolidation and public blog
-- Additional funding data sources
-- Data quality dashboard
-
-### Planned
-
-- Public data portal (web UI)
-- API documentation auto-generation
-- Community contribution guide
-- Data visualization toolkit
-- Machine learning training datasets
-
-See [GitHub Issues](https://github.com/PipFoweraker/pdoom-data/issues) for detailed tracking.
-
----
-
-## License
-
-MIT License - Free for educational, research, and commercial use.
-
----
-
-## Data Sources & Attribution
-
-### Alignment Research
-- **Source**: [StampyAI Alignment Research Dataset](https://huggingface.co/datasets/StampyAI/alignment-research-dataset)
-- **License**: Various (see individual records)
-- **Attribution**: Full source URLs included in each record
-
-### Manual Events
-- **Curated by**: pdoom-data team
-- **Sources**: Public announcements, news articles, organizational updates
-- **Attribution**: Complete source lists in each event
-
-### Funding Data
-- **Sources**: Survival and Flourishing Fund, Open Philanthropy (planned)
-- **Attribution**: Links to original grant databases
-
----
-
-## Repository Visibility
-
-This repository is currently **private** during active development. A publishing workflow is configured to sync the serveable zone to a future public repository once data transformation pipelines are complete.
-
-See [docs/DATA_PUBLISHING_STRATEGY.md](docs/DATA_PUBLISHING_STRATEGY.md) for details on the planned public data release strategy.
-
----
+- **ShareAlike licences are refused mechanically**, not by anyone remembering.
+  `validate_candidate()` rejects any dump whose SPDX contains `-SA`. The
+  workaround is link-and-summarise rather than ingest.
+- **Two clocks, not one.** `published_at` says when a fact became knowable;
+  `source_available_at` says when the *dataset* became usable as an instrument.
+  Merging them hides every pre-2024 model release from any consumer modelling a
+  pre-2024 world, because Epoch's database postdates AlphaGo by eight years.
 
 ## Contributing
 
-This repository is currently in active development. For questions or suggestions:
+Community feedback is never auto-merged; it goes through human review. All text
+must be ASCII. Data in `data/raw/` is immutable -- if a source changes, run the
+adapter again and produce a new dump.
 
-1. Check [DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md)
-2. Review existing [GitHub Issues](https://github.com/PipFoweraker/pdoom-data/issues)
-3. Open a new issue with your question or proposal
+Before opening a PR, run the checks under Quick start. CI runs the same ones.
 
-This repository maintains strict ASCII-only content for agent compatibility. See [ASCII_CODING_STANDARDS.md](ASCII_CODING_STANDARDS.md) and [DEVELOPMENT_WORKFLOW.md](DEVELOPMENT_WORKFLOW.md).
+## Ecosystem
 
----
+- **pdoom1** -- the game. Consumes events and applies its own balance overrides.
+- **pdoom1-website** -- public site and game stats.
+- **pdoom-dashboard** -- analytics. Dormant since 2025-11.
 
-## Support
+## State of the build
 
-**Documentation**: [docs/DOCUMENTATION_INDEX.md](docs/DOCUMENTATION_INDEX.md)
+`Data Integrity` is the workflow that matters, and it is green. It runs the
+invariant checks, the rebuild assertions and the tests, and it has no write
+access.
 
-**Quick Start**: [docs/QUICK_START_INTEGRATION.md](docs/QUICK_START_INTEGRATION.md)
+Two other workflows can commit to this repository and are **deliberately
+restricted to manual dispatch**. `scripts/validation/check_workflow_disarm.py`
+fails the build if that ever changes without a deliberate decision.
+`Development Documentation CI/CD` is red against a known ASCII backlog; see
+`CLAUDE.md` for why clearing it carelessly is worse than leaving it red.
 
-**Issues**: [GitHub Issues](https://github.com/PipFoweraker/pdoom-data/issues)
+## Licence
 
-**Integration Help**: See issue templates in [CROSS_REPO_INTEGRATION_ISSUES.md](docs/CROSS_REPO_INTEGRATION_ISSUES.md)
-
----
-
-**Last Updated**: 2025-11-24
-
-**Maintained by**: pdoom-data team
-
-**Version**: 0.2.0 (In Development)
+MIT.

@@ -86,7 +86,7 @@
 | Document | Purpose | Audience |
 |----------|---------|----------|
 | [FUNDING_DUMP_SPACES.md](FUNDING_DUMP_SPACES.md) | Funding data sources | Analysts |
-| [SESSION_2025-11-06_ALIGNMENT_RESEARCH_INTEGRATION.md](SESSION_2025-11-06_ALIGNMENT_RESEARCH_INTEGRATION.md) | Session notes | Reference |
+| [sessions/SESSION_2025-11-06_ALIGNMENT_RESEARCH_INTEGRATION.md](sessions/SESSION_2025-11-06_ALIGNMENT_RESEARCH_INTEGRATION.md) | Session notes | Reference |
 | [REPO_NAVIGATION.md](../REPO_NAVIGATION.md) | Repository navigation | New users |
 | [INTEGRATION_SUMMARY.md](../INTEGRATION_SUMMARY.md) | Integration summary | Reference |
 | [AGENT_CHARACTER_RESTRICTIONS.md](../AGENT_CHARACTER_RESTRICTIONS.md) | AI agent guidelines | Maintainers |
