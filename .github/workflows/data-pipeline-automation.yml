@@ -15,14 +15,34 @@ name: Automated Data Pipeline
 # - Can also be called by other workflows
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'data/raw/**'
-      - 'scripts/transformation/**'
-      - 'scripts/validation/**'
-      - 'config/schemas/**'
+  # DE-ARMED 2026-07-30. Do not restore the push trigger without first settling
+  # which producer is canonical for the serveable zone.
+  #
+  # Stage 2A of this workflow runs scripts/transformation/clean_events.py, whose
+  # output is 28 records where data/serveable/api/timeline_events/all_events.json
+  # holds 1,194. Armed on push to data/raw/**, this workflow would rewrite the
+  # serveable zone and auto-commit the result. Until 2026-07-30 the only thing
+  # preventing that was a YAML syntax error further down this file; repairing the
+  # syntax without removing this trigger would have armed a data-clobbering bot.
+  # Hence the repair and this de-arm landed in the same commit.
+  #
+  # Two independent guards now stand behind this: clean_events.py refuses to run
+  # without --write (exit 2), and data/serveable/ is asserted to be a build output
+  # by scripts/build/project_candidates.py --check.
+  #
+  # Re-arming checklist, all three required:
+  #   1. Single canonical producer for data/serveable/ agreed and documented.
+  #   2. This workflow verified against that producer on a branch, not on main.
+  #   3. scripts/validation/check_invariants.py green in the same run.
+  #
+  # push:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - 'data/raw/**'
+  #     - 'scripts/transformation/**'
+  #     - 'scripts/validation/**'
+  #     - 'config/schemas/**'
 
   workflow_dispatch:
     inputs:
@@ -374,26 +394,26 @@ jobs:
           fi
 
           cat > commit_message.txt << EOF
-chore: automated data pipeline run
+          chore: automated data pipeline run
 
-Automated transformation pipeline completed
+          Automated transformation pipeline completed
 
-- Timestamp: ${TIMESTAMP}
-- Total events: ${EVENT_COUNT}
-- Workflow run: ${{ github.run_number }}
-- Triggered by: ${{ github.event_name }}
+          - Timestamp: ${TIMESTAMP}
+          - Total events: ${EVENT_COUNT}
+          - Workflow run: ${{ github.run_number }}
+          - Triggered by: ${{ github.event_name }}
 
-Pipeline stages:
-1. Validation of raw data
-2. Cleaning (deduplication, ASCII conversion)
-3. Enrichment (derived fields, metrics)
-4. Transformation to timeline events
-5. Manifest generation
+          Pipeline stages:
+          1. Validation of raw data
+          2. Cleaning (deduplication, ASCII conversion)
+          3. Enrichment (derived fields, metrics)
+          4. Transformation to timeline events
+          5. Manifest generation
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+          Generated with Claude Code (https://claude.com/claude-code)
 
-Co-Authored-By: GitHub Actions <actions@github.com>
-EOF
+          Co-Authored-By: GitHub Actions <actions@github.com>
+          EOF
 
           git commit -F commit_message.txt
           git push
@@ -412,13 +432,13 @@ EOF
           if [ -f "data/serveable/MANIFEST.json" ]; then
             echo "Dataset summary:"
             python -c "
-import json
-with open('data/serveable/MANIFEST.json') as f:
-    manifest = json.load(f)
-    print(f\"  Total datasets: {manifest['summary']['total_datasets']}\")
-    print(f\"  Total events: {manifest['summary']['total_events']}\")
-    print(f\"  Formats: {', '.join(manifest['summary']['formats'])}\")
-"
+          import json
+          with open('data/serveable/MANIFEST.json') as f:
+              manifest = json.load(f)
+              print(f\"  Total datasets: {manifest['summary']['total_datasets']}\")
+              print(f\"  Total events: {manifest['summary']['total_events']}\")
+              print(f\"  Formats: {', '.join(manifest['summary']['formats'])}\")
+          "
           fi
 
           echo ""

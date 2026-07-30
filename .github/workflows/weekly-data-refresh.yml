@@ -16,10 +16,23 @@ name: Weekly Data Refresh
 # - Write permissions for repository
 
 on:
-  schedule:
-    # Run every Monday at 2:00 AM UTC
-    # Cron format: minute hour day-of-month month day-of-week
-    - cron: '0 2 * * 1'
+  # DE-ARMED 2026-07-30, alongside the YAML repair further down this file.
+  #
+  # This workflow extracts from Hugging Face and auto-commits to data/raw/. Until
+  # 2026-07-30 it was inert only because of a YAML syntax error. Restoring the
+  # syntax while leaving the cron armed would have started weekly unattended
+  # writes into the raw zone, which the repo treats as immutable, and would also
+  # have re-triggered data-pipeline-automation.yml via its data/raw/** path
+  # filter. The two workflows form a loop; both triggers came off together.
+  #
+  # Re-arming requires deciding how an automated extractor writes to a zone whose
+  # contract says dumps are immutable and re-runs produce NEW dumps. Manual
+  # dispatch is retained and is the supported path meanwhile.
+  #
+  # schedule:
+  #   # Run every Monday at 2:00 AM UTC
+  #   # Cron format: minute hour day-of-month month day-of-week
+  #   - cron: '0 2 * * 1'
 
   workflow_dispatch:
     # Allow manual triggering from GitHub UI
@@ -69,7 +82,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install datasets huggingface_hub jsonschema jsonlines
-          echo "✓ Dependencies installed"
+          echo "[ok] Dependencies installed"
 
       - name: Display environment info
         run: |
@@ -121,9 +134,9 @@ jobs:
           echo ""
           echo "=================================================="
           if [ $EXIT_CODE -eq 0 ]; then
-            echo "✓ Extraction completed successfully"
+            echo "[ok] Extraction completed successfully"
           else
-            echo "✗ Extraction failed with exit code ${EXIT_CODE}"
+            echo "[FAIL] Extraction failed with exit code ${EXIT_CODE}"
           fi
           echo "=================================================="
 
@@ -143,7 +156,7 @@ jobs:
           LATEST_DUMP=$(ls -td data/raw/alignment_research/dumps/*/ 2>/dev/null | head -n 1)
 
           if [[ -z "$LATEST_DUMP" ]]; then
-            echo "✗ No dump directory found"
+            echo "[FAIL] No dump directory found"
             exit 1
           fi
 
@@ -160,9 +173,9 @@ jobs:
           echo ""
           echo "=================================================="
           if [ $EXIT_CODE -eq 0 ]; then
-            echo "✓ Validation passed"
+            echo "[ok] Validation passed"
           else
-            echo "✗ Validation failed"
+            echo "[FAIL] Validation failed"
           fi
           echo "=================================================="
 
@@ -190,24 +203,24 @@ jobs:
             if [[ -f "${LATEST_DUMP}_metadata.json" ]]; then
               echo "Metadata:"
               python -c "
-import json
-import sys
-with open('${LATEST_DUMP}_metadata.json') as f:
-    meta = json.load(f)
-    print(f\"  Source: {meta.get('source_name')}\" )
-    print(f\"  Extraction date: {meta.get('extraction_date')}\")
-    print(f\"  Extraction type: {meta.get('extraction_type')}\")
-    print(f\"  Record count: {meta.get('record_count')}\")
-    print(f\"  Status: {meta.get('extraction_status')}\")
+          import json
+          import sys
+          with open('${LATEST_DUMP}_metadata.json') as f:
+              meta = json.load(f)
+              print(f\"  Source: {meta.get('source_name')}\" )
+              print(f\"  Extraction date: {meta.get('extraction_date')}\")
+              print(f\"  Extraction type: {meta.get('extraction_type')}\")
+              print(f\"  Record count: {meta.get('record_count')}\")
+              print(f\"  Status: {meta.get('extraction_status')}\")
 
-    stats = meta.get('extraction_statistics', {})
-    if stats:
-        print(f\"  Records fetched: {stats.get('records_fetched')}\")
-        print(f\"  Records filtered: {stats.get('records_filtered')}\")
-        print(f\"  Records written: {stats.get('records_written')}\")
-        print(f\"  Errors: {stats.get('errors_encountered')}\")
-        print(f\"  Duration: {stats.get('duration_seconds', 0):.1f}s\")
-"
+              stats = meta.get('extraction_statistics', {})
+              if stats:
+                  print(f\"  Records fetched: {stats.get('records_fetched')}\")
+                  print(f\"  Records filtered: {stats.get('records_filtered')}\")
+                  print(f\"  Records written: {stats.get('records_written')}\")
+                  print(f\"  Errors: {stats.get('errors_encountered')}\")
+                  print(f\"  Duration: {stats.get('duration_seconds', 0):.1f}s\")
+          "
             fi
 
             echo ""
@@ -279,19 +292,19 @@ with open('${LATEST_DUMP}_metadata.json') as f:
 
           # Create detailed commit message
           cat > commit_message.txt << EOF
-data: weekly alignment research refresh
+          data: weekly alignment research refresh
 
-Automated data refresh from StampyAI Alignment Research Dataset
+          Automated data refresh from StampyAI Alignment Research Dataset
 
-- Timestamp: ${TIMESTAMP}
-- Records: ${RECORD_COUNT}
-- Workflow run: ${{ github.run_number }}
-- Triggered by: ${{ github.event_name }}
+          - Timestamp: ${TIMESTAMP}
+          - Records: ${RECORD_COUNT}
+          - Workflow run: ${{ github.run_number }}
+          - Triggered by: ${{ github.event_name }}
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+          Generated with Claude Code (https://claude.com/claude-code)
 
-Co-Authored-By: GitHub Actions <actions@github.com>
-EOF
+          Co-Authored-By: GitHub Actions <actions@github.com>
+          EOF
 
           # Commit with detailed message
           git commit -F commit_message.txt
@@ -299,12 +312,12 @@ EOF
           # Push changes
           git push
 
-          echo "✓ Changes committed and pushed successfully"
+          echo "[ok] Changes committed and pushed successfully"
 
       - name: No changes to commit
         if: steps.check_changes.outputs.has_changes == 'false'
         run: |
-          echo "ℹ No new data extracted - repository is up to date"
+          echo "[info] No new data extracted - repository is up to date"
           echo "This is expected for delta mode when there are no new records"
 
       # ============================================================
@@ -315,7 +328,7 @@ EOF
         if: failure()
         run: |
           echo "=================================================="
-          echo "⚠️  WORKFLOW FAILED"
+          echo "[WARN]  WORKFLOW FAILED"
           echo "=================================================="
           echo ""
           echo "Please check:"
