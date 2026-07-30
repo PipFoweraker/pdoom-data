@@ -1,19 +1,29 @@
-"""Promote human-accepted candidates into their own served collection.
+"""Project human-reviewed candidates into their own served collection.
 
     python scripts/build/project_reviewed.py           # build
     python scripts/build/project_reviewed.py --check   # assert committed
 
 Why this exists
 ---------------
-206 candidates were reviewed by a named human on 2026-07-26 and 140 were
-accepted. Those verdicts were merged into the candidate feed and were
-technically available -- but only to a consumer willing to stream 3,434 records
-and filter on a nested field. In practice that meant the review work was doing
-nothing for anyone downstream.
+206 candidates were reviewed by a named human on 2026-07-26. Those verdicts
+were merged into the candidate feed and were technically available -- but only
+to a consumer willing to stream 3,434 records and filter on a nested field. In
+practice the review work was doing nothing for anyone downstream.
 
-This is the promotion step: the accepted records become their own collection,
-so a consumer can pull human-filtered material without knowing how the review
-layer is shaped.
+Every verdict, not just the accepts
+-----------------------------------
+The first version of this collection shipped only the 140 accepts. That was a
+mistake of the same kind this repo exists to avoid: it silently encoded the
+BUILDER's judgement that accept was the interesting subset, in a collection
+whose whole point is that judgements should be visible and attributable.
+
+It also hid the denominator. "140 accepted" reads very differently once you
+know the same sitting produced 64 unsures and zero rejects -- because with no
+rejects, 'accept' is distinguishing itself from 'unsure', not from 'no'. A
+consumer cannot calibrate on a number whose base rate has been filtered away.
+
+So the collection carries every reviewed record with whatever verdict it got,
+and the consumer filters. The 140 are still one predicate away.
 
 A second-order projection
 -------------------------
@@ -91,9 +101,9 @@ def build():
         counts["scanned"] += 1
 
         reviews = r.get("reviews") or []
-        accepts = [rv for rv in reviews if rv.get("verdict") == ACCEPT]
-        if not accepts:
+        if not reviews:
             continue
+        accepts = [rv for rv in reviews if rv.get("verdict") == ACCEPT]
 
         # Defence in depth. A record can carry an accept AND a later privacy
         # flag; the screen wins. Privacy failures are the kind that cannot be
@@ -113,10 +123,13 @@ def build():
                 "id would silently lose a record" % rid)
         seen_ids.add(rid)
 
-        for rv in accepts:
-            reviewers[rv.get("reviewer") or "unknown"] += 1
+        for rv in reviews:
+            reviewers["%s / %s" % (rv.get("reviewer") or "unknown",
+                                   rv.get("verdict") or "unknown")] += 1
+        counts["verdict_" + (accepts and ACCEPT or
+                             (reviews[0].get("verdict") or "unknown"))] += 1
 
-        counts["promoted"] += 1
+        counts["included"] += 1
         out.append(r)
 
     out.sort(key=lambda r: (r.get("published_at") or "", r.get("id") or ""))
@@ -157,13 +170,32 @@ def main():
             "Run project_candidates.py first."
         ),
         "selection": (
-            "records carrying at least one attributed review with verdict "
-            "'accept', minus anything flagged for privacy review"
+            "every record a named human has looked at, carrying whatever "
+            "verdict they gave, minus anything flagged for privacy review. "
+            "Accepts are NOT pre-filtered for you: filter on "
+            "reviews[].verdict == 'accept' if that is what you want."
         ),
         "meaning": (
-            "ATTRIBUTED OPINION, not fact. One named reviewer said accept. "
-            "Not verified, not endorsed, not game-ready. Promotion into a game "
+            "ATTRIBUTED OPINION, not fact. A verdict records what one named "
+            "person thought during one sitting. Not verified, not endorsed, "
+            "not game-ready, and not a consensus. Promotion into a game "
             "remains the consumer's call."
+        ),
+        "why_not_only_accepts": (
+            "An earlier version of this collection shipped only the accepts, "
+            "which silently encoded the builder's judgement that accept was "
+            "the interesting subset. It also hid the denominator: 140 accepts "
+            "reads differently once you know there were 64 unsures and zero "
+            "rejects. Shipping every verdict lets a consumer weigh the pass "
+            "instead of inheriting a filter."
+        ),
+        "how_to_weigh_this": (
+            "Read review_layers below before relying on a verdict. The "
+            "2026-07-26 pass was one reviewer, ~20 minutes, ~600 decisions per "
+            "hour, ordered by salience_by_profile.default_v1 rather than "
+            "chronologically. Zero rejects were recorded, so 'accept' here "
+            "distinguishes itself mainly from 'unsure' and should be read as "
+            "'plausible, worth keeping' rather than as a quality gate passed."
         ),
         "review_layers": load_reviewer_meta(),
         "counts": dict(sorted(counts.items())),
@@ -174,7 +206,7 @@ def main():
     lineage_path = os.path.join(OUT_DIR, "LINEAGE.json")
 
     print("scanned          : %d" % counts["scanned"])
-    print("promoted         : %d" % counts["promoted"])
+    print("included         : %d" % counts["included"])
     print("withheld privacy : %d" % counts["withheld_privacy"])
     for who, n in reviewers.items():
         print("  accepts by %-20s %d" % (who, n))
