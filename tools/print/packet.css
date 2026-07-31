@@ -1,0 +1,363 @@
+/* pdoom-data print packet stylesheet
+ *
+ * For documents that are PRINTED and read away from a screen, annotated by
+ * hand, and dictated against. Screen rendering is the secondary case.
+ *
+ * Usage: inline this whole file into a <style> block. Artifacts are published
+ * under a CSP that blocks external stylesheets and font CDNs, so a <link> to
+ * this file will silently fail. Copy it in.
+ *
+ * See docs/PRINT_STYLE_GUIDE.md for the reasoning behind each decision.
+ */
+
+:root {
+  /* Neutrals carry a faint green-slate bias so they read as chosen rather
+     than as an unconsidered mid-grey. */
+  --paper: #FCFCFB;
+  --ink: #16201E;
+  --ink-soft: #4A5652;
+  --rule: #C9CFCC;
+  --rule-faint: #E4E8E6;
+
+  /* One accent, one flag. Marine for structure, ochre ONLY for items that
+     need a human decision. If everything is flagged, nothing is. */
+  --marine: #1E4F52;
+  --flag: #9A6A18;
+  --band: #F1F4F2;
+
+  /* No webfonts: the CSP blocks font CDNs, and a silent fallback on a printed
+     document is worse than a considered system stack. Serif for body because
+     this is read at arm's length, outdoors, on paper. */
+  --serif: Charter, "Bitstream Charter", Cambria, Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+
+  --measure: 68ch;
+  --gutter: 4.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #12100F;
+    --ink: #E8E4DD;
+    --ink-soft: #A7A29A;
+    --rule: #3A3733;
+    --rule-faint: #262421;
+    --marine: #6FB3B0;
+    --flag: #D6A254;
+    --band: #1C1A18;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #12100F;
+  --ink: #E8E4DD;
+  --ink-soft: #A7A29A;
+  --rule: #3A3733;
+  --rule-faint: #262421;
+  --marine: #6FB3B0;
+  --flag: #D6A254;
+  --band: #1C1A18;
+}
+:root[data-theme="light"] {
+  --paper: #FCFCFB;
+  --ink: #16201E;
+  --ink-soft: #4A5652;
+  --rule: #C9CFCC;
+  --rule-faint: #E4E8E6;
+  --marine: #1E4F52;
+  --flag: #9A6A18;
+  --band: #F1F4F2;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.52;
+  margin: 0;
+  padding: 2.5rem 1.5rem 6rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sheet {
+  max-width: calc(var(--measure) + var(--gutter));
+  margin: 0 auto;
+}
+
+/* ---- masthead ---- */
+
+.masthead {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 0.9rem;
+  margin-bottom: 2rem;
+}
+.masthead h1 {
+  font-size: 1.75rem;
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--marine);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+.standfirst {
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+/* Clipboard header: who reviewed it, when, which sheet. Fill by hand. */
+.clipboard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  margin-top: 1.1rem;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+}
+.clipboard span { display: inline-flex; align-items: baseline; gap: 0.45rem; }
+.fill {
+  display: inline-block;
+  min-width: 8rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ---- sections ---- */
+
+section { margin: 2.6rem 0 0; }
+
+h2 {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 0.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+.section-note {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  margin: 0.5rem 0 1.1rem;
+  max-width: var(--measure);
+}
+
+/* ---- items ----
+ * Two columns: a reference code in the gutter, content beside it. The code is
+ * the load-bearing part. Someone dictating against a printed sheet needs a
+ * short stable token to say aloud -- "Q3, my answer is" -- and paragraph
+ * position is not that.
+ */
+
+.item {
+  display: grid;
+  grid-template-columns: var(--gutter) 1fr;
+  gap: 0 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule-faint);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.item:last-child { border-bottom: none; }
+
+.ref {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--marine);
+  padding-top: 0.22rem;
+}
+.ref.flagged { color: var(--flag); }
+
+.body-col { min-width: 0; }
+.body-col > *:first-child { margin-top: 0; }
+.body-col > *:last-child { margin-bottom: 0; }
+.body-col p { margin: 0.4rem 0; max-width: var(--measure); }
+
+.item h3 {
+  font-size: 1.02rem;
+  margin: 0;
+  line-height: 1.32;
+  text-wrap: balance;
+}
+
+.meta {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  margin-top: 0.35rem;
+}
+
+/* ---- checkbox: a real box, not a glyph, so it survives printing ---- */
+
+.tick {
+  display: inline-block;
+  width: 0.82em;
+  height: 0.82em;
+  border: 1.4px solid var(--ink-soft);
+  margin-right: 0.5em;
+  vertical-align: -0.04em;
+  flex: none;
+}
+.done .tick { background: var(--ink-soft); }
+.done h3 { color: var(--ink-soft); }
+
+/* ---- ruled space for pen or as a dictation prompt ---- */
+
+.ruled {
+  margin-top: 0.7rem;
+  border-top: 1px solid var(--rule-faint);
+}
+.ruled div {
+  height: 1.55rem;
+  border-bottom: 1px solid var(--rule-faint);
+}
+
+/* ---- callout ---- */
+
+.callout {
+  background: var(--band);
+  border-left: 3px solid var(--marine);
+  padding: 0.75rem 0.95rem;
+  margin: 0.6rem 0;
+  font-size: 0.92rem;
+}
+.callout.warn { border-left-color: var(--flag); }
+.callout p { margin: 0.3rem 0; }
+.callout p:first-child { margin-top: 0; }
+.callout p:last-child { margin-bottom: 0; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--band);
+  padding: 0.08em 0.32em;
+  border-radius: 2px;
+}
+
+.tablewrap { overflow-x: auto; margin: 0.7rem 0; }
+table {
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+th, td {
+  text-align: left;
+  padding: 0.34rem 0.7rem 0.34rem 0;
+  border-bottom: 1px solid var(--rule-faint);
+  vertical-align: top;
+}
+th {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+td.num { text-align: right; padding-right: 1.2rem; }
+
+.colophon {
+  margin-top: 3.2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+/* ---- print control, screen only ---- */
+
+.printbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 0.5rem 0 0.9rem;
+  background: linear-gradient(var(--paper) 70%, transparent);
+}
+.printbtn {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--paper);
+  background: var(--marine);
+  border: 1px solid var(--marine);
+  border-radius: 3px;
+  padding: 0.42rem 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.printbtn:hover { filter: brightness(1.12); }
+.printbtn:focus-visible {
+  outline: 2px solid var(--flag);
+  outline-offset: 2px;
+}
+.printhint {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  align-self: center;
+}
+
+/* ---- print ----
+ * Tokens are overridden wholesale so components never need print-specific
+ * rules. Pure black on pure white: no ink spent on background fills, maximum
+ * contrast in sunlight, and no surprise when a printer renders a tint badly.
+ */
+
+@page {
+  margin: 17mm 15mm 18mm;
+}
+
+@media print {
+  :root {
+    --paper: #FFFFFF;
+    --ink: #000000;
+    --ink-soft: #444444;
+    --rule: #999999;
+    --rule-faint: #CCCCCC;
+    --marine: #000000;
+    --flag: #000000;
+    --band: #FFFFFF;
+  }
+  body {
+    padding: 0;
+    font-size: 10.5pt;
+    line-height: 1.42;
+  }
+  .sheet { max-width: none; }
+  section { break-inside: auto; }
+  h2 { break-after: avoid; page-break-after: avoid; }
+  .item { break-inside: avoid; page-break-inside: avoid; }
+  .callout {
+    border: 1px solid #999999;
+    border-left-width: 3px;
+    background: none;
+  }
+  code { background: none; border: 1px solid #CCCCCC; }
+  .page-break { break-before: page; page-break-before: always; }
+  .printbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

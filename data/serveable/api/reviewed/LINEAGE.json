@@ -3,8 +3,10 @@
   "built_by": "scripts/build/project_reviewed.py",
   "projected_from": "data/serveable/api/candidates/all_candidates.jsonl",
   "note": "A second-order projection: the input is itself a build output. Run project_candidates.py first.",
-  "selection": "records carrying at least one attributed review with verdict 'accept', minus anything flagged for privacy review",
-  "meaning": "ATTRIBUTED OPINION, not fact. One named reviewer said accept. Not verified, not endorsed, not game-ready. Promotion into a game remains the consumer's call.",
+  "selection": "every record a named human has looked at, carrying whatever verdict they gave, minus anything flagged for privacy review. Accepts are NOT pre-filtered for you: filter on reviews[].verdict == 'accept' if that is what you want.",
+  "meaning": "ATTRIBUTED OPINION, not fact. A verdict records what one named person thought during one sitting. Not verified, not endorsed, not game-ready, and not a consensus. Promotion into a game remains the consumer's call.",
+  "why_not_only_accepts": "An earlier version of this collection shipped only the accepts, which silently encoded the builder's judgement that accept was the interesting subset. It also hid the denominator: 140 accepts reads differently once you know there were 64 unsures and zero rejects. Shipping every verdict lets a consumer weigh the pass instead of inheriting a filter.",
+  "how_to_weigh_this": "Read review_layers below before relying on a verdict. The 2026-07-26 pass was one reviewer, ~20 minutes, ~600 decisions per hour, ordered by salience_by_profile.default_v1 rather than chronologically. Zero rejects were recorded, so 'accept' here distinguishes itself mainly from 'unsure' and should be read as 'plausible, worth keeping' rather than as a quality gate passed.",
   "review_layers": [
     {
       "file": "data/curated/human_review/human_review_2026-07-26.json",
@@ -17,10 +19,14 @@
     }
   ],
   "counts": {
-    "promoted": 140,
-    "scanned": 3434
+    "included": 204,
+    "scanned": 3434,
+    "verdict_accept": 140,
+    "verdict_unsure": 64,
+    "withheld_privacy": 2
   },
   "accepts_by_reviewer": {
-    "Pip Foweraker": 140
+    "Pip Foweraker / accept": 140,
+    "Pip Foweraker / unsure": 64
   }
 }

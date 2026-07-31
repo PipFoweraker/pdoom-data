@@ -219,3 +219,30 @@ Reserved for future decisions:
 
 **Last Updated**: 2024-12-24
 **Maintainer**: pdoom-data team
+
+---
+
+## ADR-007: Anti-corruption layer (2026-07-31)
+
+Full text: [docs/adr/ADR-007-anti-corruption-layer.md](adr/ADR-007-anti-corruption-layer.md)
+
+pdoom-data never encodes a consumer's internal vocabulary. Directional hints are
+expressed against an externally maintained taxonomy (currently MIT AIRR); the
+mapping onto a consumer's own variables lives with that consumer. Partially
+supersedes ADR-001's position that events carry pdoom1-shaped impacts, which
+pdoom1 itself deprecated in its own ADR-0015.
+
+## ADR-008: Provenance and annotation model (2026-07-31)
+
+Full text: [docs/adr/ADR-008-provenance-and-annotation-model.md](adr/ADR-008-provenance-and-annotation-model.md)
+
+Three record types joined by id -- fact, annotation, reception -- with the rule
+that opinions and reactions reference a fact and are never fields on it. Copy
+the W3C PROV-O and W3C Web Annotation vocabularies verbatim without adopting
+RDF. Every provenance hop names an agent. Reception is pseudonymous per-person
+microdata; attribution is opt-in with a persisted contributor preference.
+
+**Note on layout and numbering:** ADRs 007 onward live as individual files in
+docs/adr/, matching pdoom1's convention. ADRs 001-003 remain inline above.
+Numbers 004, 005 and 006 were already reserved by the Future ADRs list and were
+deliberately not taken.
