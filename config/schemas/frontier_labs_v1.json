@@ -55,7 +55,11 @@
       "properties": {
         "url": { "type": "string", "description": "The page actually fetched" },
         "quote": { "type": "string", "description": "Verbatim sentence from that page containing the date" },
-        "publisher": { "type": "string", "description": "Who publishes the page, and any record identifier such as a company number" }
+        "publisher": { "type": "string", "description": "Who publishes the page, and any record identifier such as a company number" },
+        "date_in_quote": {
+          "type": "boolean",
+          "description": "Defaults to true. Set false where the date comes from the page's dateline, masthead or timestamp rather than from the quoted sentence itself -- typically a press release whose prose says 'today'. Such a date is real but weaker than one a sentence asserts, and scripts/validation/check_evidence.py requires the weakness to be declared rather than left implicit."
+        }
       }
     },
     "founded_contested": {
@@ -102,7 +106,11 @@
       "required": ["url", "quote"],
       "properties": {
         "url": { "type": "string" },
-        "quote": { "type": "string" }
+        "quote": { "type": "string" },
+        "date_in_quote": {
+          "type": "boolean",
+          "description": "As founded_evidence.date_in_quote. Defaults to true."
+        }
       }
     },
     "parent_org": {

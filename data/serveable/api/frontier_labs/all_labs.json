@@ -327,7 +327,8 @@
       "founded_evidence": {
         "url": "https://www.prnewswire.com/news-releases/baidu-opens-silicon-valley-lab-appoints-andrew-ng-as-head-of-baidu-research-259539471.html",
         "quote": "Baidu, Inc. (NASDAQ: BIDU), the leading Chinese language Internet search provider, today announced the appointment of pioneering Artificial Intelligence (AI) researcher Andrew Ng as Chief Scientist of Baidu. Mr. Ng will lead Baidu Research, with labs in Beijing and Silicon Valley.",
-        "publisher": "PR Newswire, release issued by Baidu, Inc. (first-party), dateline 2014-05-16"
+        "publisher": "PR Newswire, release issued by Baidu, Inc. (first-party), dateline 2014-05-16",
+        "date_in_quote": false
       },
       "founded_contested": true,
       "founded_alternatives": [
@@ -761,7 +762,8 @@
       "founded_evidence": {
         "url": "https://deepmind.google/blog/announcing-google-deepmind/",
         "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind.",
-        "publisher": "Google DeepMind (Demis Hassabis), post dated 2023-04-20"
+        "publisher": "Google DeepMind (Demis Hassabis), post dated 2023-04-20",
+        "date_in_quote": false
       },
       "founded_contested": false,
       "founded_alternatives": [

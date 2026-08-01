@@ -132,7 +132,8 @@
     "founded_evidence": {
       "url": "https://deepmind.google/blog/announcing-google-deepmind/",
       "quote": "DeepMind and the Brain team from Google Research will be joining forces as a single, focused unit called Google DeepMind.",
-      "publisher": "Google DeepMind (Demis Hassabis), post dated 2023-04-20"
+      "publisher": "Google DeepMind (Demis Hassabis), post dated 2023-04-20",
+      "date_in_quote": false
     },
     "founded_contested": false,
     "founded_alternatives": [
