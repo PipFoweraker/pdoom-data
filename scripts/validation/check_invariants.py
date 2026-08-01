@@ -241,6 +241,95 @@ def check_landmine_guarded():
           "serveable zone on any invocation")
 
 
+# Count disagreements that are KNOWN, ACCEPTED and TRACKED.
+#
+# Same shape as the tombstone exception to raw-zone immutability: a divergence
+# is tolerated only when someone has written down what it is and where it is
+# being fixed. Anything not listed here fails.
+#
+# These are not "wontfix". Each is a real defect with an open issue; the entry
+# exists so the check can be turned on TODAY, catching any NEW drift, without
+# a pre-existing problem blocking every build until it is fixed. Delete an
+# entry when its issue closes -- and the check will then start enforcing it.
+KNOWN_COUNT_DIVERGENCES = {
+    "data/serveable/api/timeline_events/manifest.json": (
+        "reports 28 events, generated 2025-11-09, while all_events.json holds "
+        "1194. Stale by 1166 records. Tracked in #52."),
+    "data/serveable/api/timeline_events/stats.json": (
+        "reports total_events 28 with a by_rarity breakdown of the original "
+        "hand-authored set. Stale by 1166 records. Tracked in #52."),
+    "data/serveable/api/timeline_events/event_index.json": (
+        "indexes 28 of 1194 records. Tracked in #52."),
+}
+
+
+def check_timeline_event_counts():
+    """Do the timeline_events catalogue files agree with the data?
+
+    This zone had NO invariant coverage until 2026-08-01, which is how a
+    three-way disagreement -- manifest.json saying 28, MANIFEST.json saying
+    1194, all_events.json holding 1194 -- survived in a collection that backs
+    2,194 published pages.
+
+    The check is deliberately about internal agreement rather than about any
+    particular number being right. A catalogue that disagrees with the thing it
+    catalogues is wrong whichever side is stale, and that is cheap to detect.
+    """
+    base = os.path.join(REPO_ROOT, "data", "serveable", "api", "timeline_events")
+    main_path = os.path.join(base, "all_events.json")
+    if not os.path.isfile(main_path):
+        failures.append("timeline_events/all_events.json is missing")
+        return
+
+    try:
+        with open(main_path, encoding="utf-8") as handle:
+            events = json.load(handle)
+    except ValueError as exc:
+        failures.append("timeline_events/all_events.json does not parse: %s" % exc)
+        return
+
+    actual = len(events) if isinstance(events, (dict, list)) else 0
+    notes.append("timeline_events records: %d" % actual)
+
+    # Every catalogue file that claims a count must match, or be registered.
+    for name, keys in (("manifest.json", ("total_events", "count")),
+                       ("stats.json", ("total_events", "count")),
+                       ("event_index.json", None)):
+        path = os.path.join(base, name)
+        if not os.path.isfile(path):
+            continue
+        rel = os.path.relpath(path, REPO_ROOT).replace("\\", "/")
+        try:
+            with open(path, encoding="utf-8") as handle:
+                doc = json.load(handle)
+        except ValueError:
+            failures.append("%s does not parse" % rel)
+            continue
+
+        claimed = None
+        if keys:
+            for key in keys:
+                if isinstance(doc, dict) and key in doc:
+                    claimed = doc[key]
+                    break
+        elif isinstance(doc, (dict, list)):
+            claimed = len(doc)
+
+        if claimed is None or claimed == actual:
+            continue
+
+        if rel in KNOWN_COUNT_DIVERGENCES:
+            notes.append("KNOWN divergence, %s: claims %s vs %d actual -- %s"
+                         % (rel, claimed, actual, KNOWN_COUNT_DIVERGENCES[rel]))
+        else:
+            failures.append(
+                "%s claims %s records but all_events.json holds %d. A "
+                "catalogue that disagrees with what it catalogues is wrong "
+                "whichever side is stale. If this divergence is known and "
+                "tracked, register it in KNOWN_COUNT_DIVERGENCES with its "
+                "issue number." % (rel, claimed, actual))
+
+
 def main():
     records = load_feed()
     if records:
@@ -252,6 +341,7 @@ def main():
         check_clocks(records)
         check_tombstones_honoured(records)
     check_manifests()
+    check_timeline_event_counts()
     check_ascii()
     check_registry_evidence()
     check_landmine_guarded()
