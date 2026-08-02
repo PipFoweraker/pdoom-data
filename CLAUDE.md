@@ -151,18 +151,61 @@ canonical file and it is maintained by the coordination seat.
 
 This is not advice. On 2026-07-31 three repositories independently built print
 and dictation tooling on the same day, and two independently debugged the same
-printer bug hours apart. **pdoom-data was one of the three.** The tooling in
-`tools/print/` and `docs/PRINT_STYLE_GUIDE.md` is that duplication; it is
-pending deletion (coordination#2, ask A1) in favour of
-`coordination/tools/walkpack/build_walkpack.py`.
+printer bug hours apart. **pdoom-data was one of the three.** Its renderer was
+deleted on 2026-08-02 (`pdoom-data#55` A4, `coordination#2` A1).
+
+The cause was a missing registry, not a missed document -- the reference did
+not exist until 2026-08-01, after the duplication happened. `coordination` is
+that registry, and checking it first is the whole mechanism.
+
+### Working conventions Pip has ruled on
+
+**Sabbath is real and binding.** Sunday, sunrise to sunset, no work
+notifications at all. Weekend quiet hours run Friday ~17:00 to Monday 06:00,
+less strictly. Never design anything that depends on a response inside those
+windows.
+
+**Nothing prints before 06:00.** Paper should be in the tray before he is up.
+
+**Density up; ministerial shape.** Denser prose, more paragraphs, fewer bullets
+and splitting mechanisms. One front page carrying summary, key facts and the
+exact asks -- one line each, answerable yes or no -- with reasoning behind it.
+His words: *"treat me as a literate minister"*, and *"if the asks are at the
+front and I have the context, I can answer them and move on."*
+
+**Runsheet blocks carry duration, order AND wall-clock time.** All three. Wall
+clock right-aligned or offset; duration and order left-aligned, so the two
+kinds of information are distinguishable at a glance.
+
+**For any finding, ask: document or mechanism?** Where the fix is a document,
+ask what the mechanism version would cost, then take the trade-off
+deliberately. Writing a lesson down does not install it. This repo has a clean
+counter-example on file: `pdoom1-website/docs/TECH_DEBT.md` already documented
+the orphaned-collection problem as E-0, with numbers matching a later
+independent measurement exactly. Found, written down, not acted on. The failure
+was never detection.
+
+**A check must take at least one output from inside the system it is
+checking.** Endorsed by Pip. The related rule from `pdoom1-website#229`:
+monitoring by polling is not merely incomplete but incapable -- state has to be
+pushed.
 
 Facts from that reference worth having before you touch a printer from here:
 
 - The Brother HL-L2460DW is a **host-based raster printer**. It accepts
   `image/urf` and `image/pwg-raster` only -- **no PDF, no PostScript, no PCL**.
   Sending a PDF to port 9100 prints a ream of ASCII garbage.
-- **Use SumatraPDF** with `-print-to ... -silent -exit-when-done`. It is not
-  installed on this seat.
+- **Use SumatraPDF** with `-print-to ... -silent -exit-when-done`. It is **not
+  installed on this seat** and `winget install SumatraPDF.SumatraPDF` failed
+  here with exit 43 on 2026-08-02, so there is currently no PDF path at all
+  from this workstation. Plain text via `Out-Printer` is the only verified
+  route and gives no control over duplex or paper size.
+- **The queue name is machine-specific, not canonical.** Resolve it at runtime;
+  hardcoding the documented string fails silently. On this seat `Get-Printer`
+  reports the queue as `Brother HL-L2460DW` while the reference's value is the
+  *driver* name. Use:
+  `Get-Printer | Where-Object DriverName -like "Brother HL-L2460*" | Select-Object -First 1 -ExpandProperty Name`
+  (raised from another seat as `coordination#3`).
 - **`Start-Process -Verb Print` fails on this seat**: `.pdf` has no registered
   handler at all. Documented; do not rediscover it.
 - **Verify on the spooler, not on the exit code**, and poll fast -- jobs drain
