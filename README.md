@@ -18,7 +18,7 @@ that proves the committed copy matches a fresh build.
 |---|---|---|
 | `api/timeline_events/all_events.json` | 1,194 | the original event corpus -- read the caveat below |
 | `api/candidates/all_candidates.jsonl` | 3,434 | 2023-2026 forward-fill from Epoch AI, LessWrong and the EA Forum; mostly unreviewed |
-| `api/reviewed/all_reviewed.jsonl` | 140 | candidates a named human accepted |
+| `api/reviewed/all_reviewed.jsonl` | 204 | every candidate a named human has looked at, with the verdict they gave |
 | `api/frontier_labs/all_labs.json` | 46 | AI labs with founding dates and the evidence for each date |
 
 **The caveat on the 1,194.** That number decomposes into **28 hand-authored

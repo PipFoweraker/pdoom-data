@@ -118,11 +118,47 @@ def check_tombstones_honoured(records):
     check(not leaked, "TOMBSTONED RECORDS PRESENT IN FEED: %r" % leaked[:5])
 
 
+def load_tombstoned_hashes():
+    """path -> (tombstone_id, sha256_after_redaction).
+
+    A privacy tombstone is the ONLY sanctioned exception to raw-zone
+    immutability. It records the post-redaction digest of every file it
+    touched, which is what lets a manifest mismatch be accepted without
+    weakening the control:
+
+      - the MANIFEST entry keeps the ORIGINAL hash, as proof of what the file
+        was before anyone touched it
+      - the tombstone records what it became, and why, and on whose authority
+      - a file whose hash matches neither is still a hard failure
+
+    So raw remains effectively immutable. Editing it without writing an
+    attributable tombstone still fails a build; writing one is a deliberate,
+    reviewable act rather than a silent hash bump.
+    """
+    mapping = {}
+    tomb_dir = os.path.join(REPO_ROOT, "data", "privacy", "tombstones")
+    for tomb_path in sorted(glob.glob(os.path.join(tomb_dir, "*.json"))):
+        try:
+            with open(tomb_path, encoding="utf-8") as f:
+                tomb = json.load(f)
+        except (ValueError, OSError):
+            failures.append("unreadable tombstone: %s" % tomb_path)
+            continue
+        tid = tomb.get("tombstone_id", os.path.basename(tomb_path))
+        for entry in tomb.get("affected", []):
+            digest = entry.get("sha256_after_redaction")
+            rel = entry.get("file")
+            if digest and rel:
+                mapping[os.path.normpath(os.path.join(REPO_ROOT, rel))] = (tid, digest)
+    return mapping
+
+
 def check_manifests():
     """Hashes are computed over LF. With core.autocrlf=true and no
     .gitattributes rule, a fresh clone would check these out as CRLF and every
     verification would fail on a machine other than the one that wrote them."""
-    ok = bad = 0
+    tombstoned = load_tombstoned_hashes()
+    ok = bad = redacted = 0
     for manifest in glob.glob(os.path.join(REPO_ROOT, "data", "raw", "*",
                                            "dumps", "*", "MANIFEST.sha256")):
         base = os.path.dirname(manifest)
@@ -136,12 +172,25 @@ def check_manifests():
             with open(path, "rb") as handle:
                 for chunk in iter(lambda: handle.read(65536), b""):
                     h.update(chunk)
-            if h.hexdigest() == digest:
+            actual = h.hexdigest()
+            if actual == digest:
                 ok += 1
+                continue
+            claim = tombstoned.get(os.path.normpath(path))
+            if claim and claim[1] == actual:
+                redacted += 1
+                continue
+            bad += 1
+            if claim:
+                failures.append(
+                    "hash mismatch AND tombstone disagrees: %s\n"
+                    "      tombstone %s records a different post-redaction "
+                    "digest. The file has been modified since it was "
+                    "tombstoned." % (path, claim[0]))
             else:
-                bad += 1
                 failures.append("hash mismatch: %s" % path)
-    notes.append("manifest entries verified: %d ok, %d bad" % (ok, bad))
+    notes.append("manifest entries verified: %d ok, %d bad, %d redacted "
+                 "under tombstone" % (ok, bad, redacted))
 
 
 def check_ascii():
