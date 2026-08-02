@@ -143,6 +143,44 @@ Python with `io.open(..., encoding="utf-8", newline="\n")`.
 - **Licence enforcement is mechanical, not remembered.** `validate_candidate()`
   refuses any dump whose SPDX contains `-SA`.
 
+## Cross-repo conventions are NOT owned here
+
+**Before inventing any printing, dictation, memo or routing convention, read
+`PipFoweraker/coordination` -> `PRINT_AND_PROCESS_REFERENCE.md`.** It is the
+canonical file and it is maintained by the coordination seat.
+
+This is not advice. On 2026-07-31 three repositories independently built print
+and dictation tooling on the same day, and two independently debugged the same
+printer bug hours apart. **pdoom-data was one of the three.** The tooling in
+`tools/print/` and `docs/PRINT_STYLE_GUIDE.md` is that duplication; it is
+pending deletion (coordination#2, ask A1) in favour of
+`coordination/tools/walkpack/build_walkpack.py`.
+
+Facts from that reference worth having before you touch a printer from here:
+
+- The Brother HL-L2460DW is a **host-based raster printer**. It accepts
+  `image/urf` and `image/pwg-raster` only -- **no PDF, no PostScript, no PCL**.
+  Sending a PDF to port 9100 prints a ream of ASCII garbage.
+- **Use SumatraPDF** with `-print-to ... -silent -exit-when-done`. It is not
+  installed on this seat.
+- **`Start-Process -Verb Print` fails on this seat**: `.pdf` has no registered
+  handler at all. Documented; do not rediscover it.
+- **Verify on the spooler, not on the exit code**, and poll fast -- jobs drain
+  in under five seconds and `JobCountSinceLastReset` reads 0 regardless. A
+  single late poll looks identical to a failed print, and reporting "cannot
+  print" on that basis has already cost Pip a walk to the machine.
+- **Checklists and runsheets print simplex.** A back face hides half the
+  checklist when the sheet is clipped.
+- Every printed artifact carries a boxed `PRINTED <day> <date> <time> <tz>`, a
+  staleness line, `supersedes:`, and hand-typed `PAGE n OF m` -- Chromium
+  cannot generate page numbers, so they must be written into the source.
+- **Qualify every issue reference with its repo** (`pdoom1#630`, not `#630`).
+  A bare number costs Pip a context switch.
+
+Routing: data contracts and standards live here. Game, release and league go to
+`pdoom1`; site and publishing to `pdoom1-website`; cross-repo daily ops,
+printing and capture to `coordination`.
+
 ## Where to look
 
     docs/DOCUMENTATION_INDEX.md   navigation hub, start here

@@ -1,5 +1,28 @@
 # Print packet style guide
 
+> **SUPERSEDED, pending deletion. Do not build on this.**
+>
+> The canonical reference is `PipFoweraker/coordination` ->
+> `PRINT_AND_PROCESS_REFERENCE.md`, with tooling at
+> `coordination/tools/walkpack/build_walkpack.py`. This file was written on
+> 2026-07-31 in ignorance of it, and is one of three print systems three
+> repositories built independently that day.
+>
+> Deletion is pending only on coordination#2 ask A1. Until then it is kept so
+> the reference-code convention below can be compared against theirs rather
+> than lost silently.
+>
+> **What this file got wrong**, measured against the canonical reference:
+> it advertises "A4 or Letter" where the queue default is Letter and AU work
+> must pass `paper=A4` per job; it has no boxed `PRINTED` timestamp, so a
+> reprint cannot be distinguished from an original -- a failure that cost Pip
+> re-answered questions on 2026-07-31; no staleness line; no `supersedes:`;
+> and no hand-typed `PAGE n OF m`, which the canonical reference calls
+> load-bearing because Chromium cannot generate page numbers and a clipped
+> stack must reveal a missing page. It also treats sides as a preference when
+> the reference makes it a correctness rule: checklists and runsheets print
+> **simplex**, because a back face hides half the checklist on a clipboard.
+
 For documents that get **printed, carried, annotated and dictated against**.
 Pip reads these on walks, away from screens, on a clipboard. Screen rendering is
 the secondary case, and the design is optimised accordingly.
