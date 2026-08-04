@@ -1,7 +1,7 @@
 METRICS Documentation Sync Summary
 Repository: pdoom-data
-Source commit: a84ec294e6ad57cfb82779bf75cdc8b5b8b304b0
-Sync timestamp: 2026-06-27T03:17:43+00:00
+Source commit: 6cb6472ebaedf71f5d303e7d8c672d4aa440903e
+Sync timestamp: 2026-08-04T12:04:53+00:00
 
 MEMO Files changed:
    M docs/CROSS_REPOSITORY_DOCUMENTATION_STRATEGY.md

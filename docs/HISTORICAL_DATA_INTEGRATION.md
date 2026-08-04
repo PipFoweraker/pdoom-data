@@ -1,11 +1,42 @@
 <!--
 This file is automatically synced from pdoom1/docs/data/HISTORICAL_DATA_INTEGRATION.md
-Last synced: 2026-06-27T03:17:43.910635
-Source commit: a84ec294e6ad57cfb82779bf75cdc8b5b8b304b0
+Last synced: 2026-08-04T12:04:53.330303
+Source commit: 6cb6472ebaedf71f5d303e7d8c672d4aa440903e
 DO NOT EDIT DIRECTLY - Changes will be overwritten by sync
 -->
 
 # Historical Data Integration Guide
+
+> # [!] RETIRED -- THIS PIPELINE WAS NEVER BUILT. DO NOT IMPLEMENT FROM THIS DOC.
+>
+> **Marked dead 2026-08-04. See issue #1115 for the capability that IS still wanted.**
+>
+> Everything below describes a per-year timeline sync that does not exist and,
+> on the evidence, never ran once. Kept (not deleted) so the same dead end is not
+> rediscovered and re-specced a third time.
+>
+> What is actually false in this document:
+>
+> | This doc says | Reality on disk (2026-08-04) |
+> |---|---|
+> | `shared/data/historical_timeline/`, `shared/data/researchers/`, `shared/data/organizations/` | None exist. `shared/` contains only `schemas/`. |
+> | `src/data/historical_timeline_loader.py` | `src/` was the old Python game; deleted. Only an `archive/legacy-python-src/` copy remains. |
+> | `godot/scripts/data/timeline_loader.gd` | DELETED 2026-08-04 -- zero callers in game or tests. |
+> | `godot/data/researchers/`, `godot/data/organizations/` | Never existed. |
+> | `scripts/sync_from_pdoom_data.sh` | DELETED 2026-08-04 -- read `transformed/timeline_events` and `cleaned/organizations`, neither of which exists in pdoom-data. |
+> | "Real events trigger on their actual dates" | Not true. `rarity_curves.json` says 52 turns/year, `clock.gd` says ~260, `event_service.gd:951` falls back to 12. See `docs/decision-cards/2026-08-02_pdoom-data-contract.md` section 5. |
+> | Automated sync pipeline | There is none. |
+>
+> **What is actually live:** ONE snapshot, `godot/data/historical_events.json`
+> (1,194 records), imported once at commit 88a71959 (2025-12-25, PR #503) and
+> never re-synced, loaded by `godot/autoload/event_service.gd`.
+> `godot/data/historical_timeline/2017.json` survives as the ADR-0016 monthly-pack
+> template, NOT as sync output.
+>
+> Authoritative replacement reading:
+> `docs/decision-cards/2026-08-02_pdoom-data-contract.md`.
+
+---
 
 **Purpose**: Document how historical AI safety/capabilities data flows into P(Doom)
 
@@ -37,9 +68,9 @@ P(Doom) uses real historical events from the AI safety and capabilities landscap
 | - Organization founding dates                           |
 | - Funding rounds, governance events                     |
 `-----------------------------------------------------------`
-                            v 
+                            v
               [Automated Sync Pipeline]
-                            v 
+                            v
 +-----------------------------------------------------------+
 | pdoom1 Game Repository                                  |
 |                                                          |
@@ -49,9 +80,9 @@ P(Doom) uses real historical events from the AI safety and capabilities landscap
 | Python Loader: src/data/historical_timeline_loader.py  |
 | Godot Loader: godot/scripts/data/timeline_loader.gd    |
 `-----------------------------------------------------------`
-                            v 
+                            v
               [Game Loads Events at Runtime]
-                            v 
+                            v
 +-----------------------------------------------------------+
 | Gameplay                                                |
 |                                                          |
