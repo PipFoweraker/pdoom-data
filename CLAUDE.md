@@ -185,10 +185,34 @@ the orphaned-collection problem as E-0, with numbers matching a later
 independent measurement exactly. Found, written down, not acted on. The failure
 was never detection.
 
-**A check must take at least one output from inside the system it is
-checking.** Endorsed by Pip. The related rule from `pdoom1-website#229`:
-monitoring by polling is not merely incomplete but incapable -- state has to be
-pushed.
+**A check must take at least one INPUT FROM OUTSIDE the system it is
+checking.** Endorsed by Pip; canonical wording is `pdoom1#1075`, restored by
+`coordination#5`. **Cite the source, do not paraphrase** -- this seat wrote it
+here backwards as "output from inside" on 2026-08-02 and propagated the
+inverted form into three repos and two printed sheets before it was caught.
+The inversion is not cosmetic: the inverted form passes the exact failure the
+rule was written to catch.
+
+Two clauses, and a single-clause version passes one instance and fails the
+other:
+
+1. **Observe the system's actual state**, not a proxy for it. An `ssh` cleanup
+   trusted on its exit code returns 0 on an SFTP-only host having executed
+   nothing.
+2. **Do not derive what to look for from that same system.** A board probe that
+   built its candidate list from seeds the site had already seen could not see
+   a newly drawn seed, by construction. Fix per `pdoom1-website#229`: read the
+   expectation from an artifact a different repo produced.
+
+Worked example from this repo, and note it cuts against the obvious fix: the
+redaction tool's verifier used a silently broken pattern and reported clean
+while ten records still carried addresses. Making detection and verification
+share one function satisfies clause 1 and **violates clause 2** -- a defect in
+the shared function is then invisible to both. What actually caught it was a
+separately written scanner giving a different answer.
+
+Related, same issue: monitoring by polling is not merely incomplete but
+incapable. State has to be pushed.
 
 Facts from that reference worth having before you touch a printer from here:
 
