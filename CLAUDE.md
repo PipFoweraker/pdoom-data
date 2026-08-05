@@ -190,30 +190,53 @@ checking.** Endorsed by Pip. The related rule from `pdoom1-website#229`:
 monitoring by polling is not merely incomplete but incapable -- state has to be
 pushed.
 
-Facts from that reference worth having before you touch a printer from here:
+### Do NOT copy printer facts into this file
 
-- The Brother HL-L2460DW is a **host-based raster printer**. It accepts
-  `image/urf` and `image/pwg-raster` only -- **no PDF, no PostScript, no PCL**.
-  Sending a PDF to port 9100 prints a ream of ASCII garbage.
-- **Use SumatraPDF** with `-print-to ... -silent -exit-when-done`. It is **not
-  installed on this seat** and `winget install SumatraPDF.SumatraPDF` failed
-  here with exit 43 on 2026-08-02, so there is currently no PDF path at all
-  from this workstation. Plain text via `Out-Printer` is the only verified
-  route and gives no control over duplex or paper size.
-- **The queue name is machine-specific, not canonical.** Resolve it at runtime;
-  hardcoding the documented string fails silently. On this seat `Get-Printer`
-  reports the queue as `Brother HL-L2460DW` while the reference's value is the
-  *driver* name. Use:
-  `Get-Printer | Where-Object DriverName -like "Brother HL-L2460*" | Select-Object -First 1 -ExpandProperty Name`
-  (raised from another seat as `coordination#3`).
-- **`Start-Process -Verb Print` fails on this seat**: `.pdf` has no registered
-  handler at all. Documented; do not rediscover it.
-- **Verify on the spooler, not on the exit code**, and poll fast -- jobs drain
-  in under five seconds and `JobCountSinceLastReset` reads 0 regardless. A
-  single late poll looks identical to a failed print, and reporting "cannot
-  print" on that basis has already cost Pip a walk to the machine.
-- **Checklists and runsheets print simplex.** A back face hides half the
-  checklist when the sheet is clipped.
+This section used to hold a copy of the reference's printer facts. **That copy
+went stale and was wrong for two days**, in the specific way `coordination#15`
+predicts: a copy becomes a variant the moment either side changes.
+
+What it claimed: *"SumatraPDF is not installed on this seat, winget failed with
+exit 43, so there is currently no PDF path at all from this workstation."*
+
+What was true: **SumatraPDF has been installed here since 2026-07-31 11:01.**
+The winget exit 43 was almost certainly *already installed*, read as absence.
+Another seat measured it and corrected the canonical file on 2026-08-04, while
+this copy went on asserting the opposite.
+
+The cost was not abstract. Believing it, this seat printed four days of memos as
+plain text through `Out-Printer` -- **simplex Letter, no page numbers, no print
+stamp** -- when a duplex-A4 stamped path was available the whole time. Pip's
+complaint that *"this memo formatting is weird, consistently pdoom-data and
+pdoom-data alone"* traces directly to this paragraph.
+
+**Read the printer facts from `coordination/PRINT_AND_PROCESS_REFERENCE.md`
+section 1 and its per-seat table. Do not restate them here.** If your machine
+disagrees with that file, your machine is the evidence and the file is the
+claim -- fix it there.
+
+### How to print from this seat
+
+Use coordination's renderer rather than writing one. It already handles the
+stamps, page numbers, duplex and paper size, and it **refuses to print rather
+than emitting an unstamped sheet**, which is the behaviour that caught this:
+
+    python coordination/tools/walkpack/build_walkpack.py \
+      --title "..." --decision "..." --sides duplex --paper A4 \
+      --print "$queue" doc1.md doc2.md
+
+Needs `markdown`, `pypdf` and `reportlab`. Resolve `$queue` at runtime by name
+**or** driver -- see the reference; matching on driver alone returns nothing on
+the other seat.
+
+Two rules that are ours to remember rather than theirs to state:
+
+- **Verify on the spooler, not the exit code**, and poll every ~400ms. Jobs
+  drain in under five seconds, so a single late poll looks identical to a print
+  that never happened -- which is how this seat once told Pip it could not
+  print a job that had succeeded.
+- **Checklists and runsheets print simplex**, reading documents duplex. A back
+  face hides half a checklist clipped to a board.
 - Every printed artifact carries a boxed `PRINTED <day> <date> <time> <tz>`, a
   staleness line, `supersedes:`, and hand-typed `PAGE n OF m` -- Chromium
   cannot generate page numbers, so they must be written into the source.
