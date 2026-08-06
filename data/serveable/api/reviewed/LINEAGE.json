@@ -16,17 +16,46 @@
       "tool": "tools/review_queue.html",
       "tool_version": "0.2.0",
       "record_count": 206
+    },
+    {
+      "file": "data/curated/human_review/human_review_2026-08-06.json",
+      "reviewer": "Pip Foweraker",
+      "layer": "human_review",
+      "nature": "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+      "tool": "dictated to the pdoom-data seat; transcribed and read back",
+      "tool_version": "n/a",
+      "record_count": 17
+    },
+    {
+      "file": "data/curated/human_review/human_review_2026-08-06_scan.json",
+      "reviewer": "Pip Foweraker",
+      "layer": "human_review",
+      "nature": "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+      "tool": "tools/scan_view.html",
+      "tool_version": "1.0.0",
+      "record_count": 176
+    },
+    {
+      "file": "data/curated/human_review/human_review_2026-08-06_scan2.json",
+      "reviewer": "Pip Foweraker",
+      "layer": "human_review",
+      "nature": "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+      "tool": "tools/scan_view.html",
+      "tool_version": "1.0.0",
+      "record_count": 129
     }
   ],
   "counts": {
-    "included": 204,
+    "included": 518,
     "scanned": 3434,
-    "verdict_accept": 140,
-    "verdict_unsure": 64,
+    "verdict_accept": 332,
+    "verdict_reject": 22,
+    "verdict_unsure": 164,
     "withheld_privacy": 2
   },
   "accepts_by_reviewer": {
-    "Pip Foweraker / accept": 140,
-    "Pip Foweraker / unsure": 64
+    "Pip Foweraker / accept": 337,
+    "Pip Foweraker / reject": 23,
+    "Pip Foweraker / unsure": 166
   }
 }

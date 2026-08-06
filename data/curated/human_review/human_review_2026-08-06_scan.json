@@ -1,0 +1,1250 @@
+{
+  "_metadata": {
+    "layer": "human_review",
+    "reviewer": "Pip Foweraker",
+    "precedence": "highest",
+    "nature": "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+    "tool": "tools/scan_view.html",
+    "tool_version": "1.0.0",
+    "exported_at": "2026-08-06T00:01:48.297Z",
+    "record_count": 176,
+    "tombstone_count": 0,
+    "pass_type": "rough scan for obvious accepts and rejects; later passes may revise",
+    "selection": "scripts/review/select_window_candidates.py"
+  },
+  "records": {
+    "forum_eaforum:bBefhAXpCFNswNr9m": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:NjtHt55nFbw3gehzY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:fzrsa6syCM3yWW7HA": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:P9phn7uhjiCvaCPDZ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:omzGEWqQJv6uP7D6k": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:zuqpqqFoue5LyutTv": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:dtHZqi4fSQKor6TYY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:SbC7duHNDHkd3PkgG": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:kyDsgQGHoLkXz6vKL": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:gGadLX9Dc7XPqLhZc": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:SnaAYrqkb7fzpZn86": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:F47vckGK5kHZirtGS": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:7Dp9phDw28h3dbAns": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:DKH9Z4DyusEdJmXKB": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:C89mZ5T5MTYBu8ZFR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:z4jtxKw8xSHRqQbqw": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:7RrjXQhGgAJiDLWYR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:jwe6jpubuMiuSRqff": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:LtT24cCAazQp4NYc5": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:JtFnkoSmJ7b6Tj3TK": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:fMcpbGRWBtq3QBEyA": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:vkvtu6xbvfkHPhJkC": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:p5vrSuLdLLCCZGzvg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:Gxn99EjiFTCFL4xAm": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:4F66WZTj75TDDCHjN": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:XtgDaunRKtCPzyCWg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:AnMtdJfDym8bGjPB2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:WMdEJjLAHmdwyA5Wm": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:naAeSkQur8ueCAAfY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "reject",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:bwtpBFQXKaGxuic6Q": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:LvwihGYgFEzjGDhBt": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:FxZdQJXs45fTFnMEe": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:2sLwt2cSAag74nsdN": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:XFBGu9sGfbYAsb8Gb": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:5aKRshJzhojqfbRyo": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:sGpBPAPq2QttY4M2H": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:TbsdA7wG9TvMQYMZj": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "reject",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:adZEA4SEkab4SZhTx": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:jCwuozHHjeoLPLemB": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:8qCwuE8GjrYPSqbri": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:jpyMhAPSmZER9ASi6": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:78A2NHL3zBS3ESurp": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:x8JrwokZTNzgCgYts": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:yjiaNbjDWrPAFaNZs": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:JSWF2ZLt6YahyAauE": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:xtuk9wkuSP6H7CcE2": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:irhgjSgvocfrwnzRz": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "reject",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:h5sJepiwGZLbK476N": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:b83Zkz4amoaQC5Hpd": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:6untaSPpsocmkS7Z3": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:qyN8M6zh6pnh8fmjR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:pniDWyjc9vY5sjGre": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:cbQih72wbKkrSX7yx": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:PE22QJSww8mpwh7bt": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:NWHb4nsnXRxDDFGLy": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:2yLyT6kB7BQvTfEuZ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:8ojWtREJjKmyvWdDb": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:QkE35oTsasMn37o7R": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:q3bJYTB3dGRf5fbD9": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:7M2iHPLaNzPNXHuMv": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:dxgEaDrEBkkE96CXr": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:b2xTk6BLJqJHd3ExE": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:n5GJEP3tMrzdfYPGG": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:hvz9qjWyv8cLX9JJR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:mEkRrDweNSdNdrmvx": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:MnYnCFgT3hF6LJPwn": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:cojSyfxfqfm4kpCbk": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:nnTQaLpBfy2znG5vm": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:9iDw6ugMPk7pmXuyW": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:bjqDQB92iBCahXTAj": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:PLZh4dcZxXmaNnkYE": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:5dW9p5EahtfhdiSKF": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:K7hPmcaf2xEZ6F4kR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:AcPw55oF3reBiW4FX": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:SBsGCwkoAemPawfJz": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:mzzPMrBjGpra2JSDw": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:eHFo7nwLYDzpuamRM": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:ztXsmnSdrejpfmvn7": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:qAdDzcBuDBLexb4fC": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:aeky2EWd32bjjPJqf": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:6h9p6NZ5RRFvAqWq5": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:cKW4db8u2uFEAHewg": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:2vNHiaTb4rcA8PgXQ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:2G8XfzKyd78JqZpjQ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:xiDKb3XvJxKiwNevJ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:rRBaP7YbXfZibSn3C": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:vqzarZEczxiFdLE39": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:s9dyyge6uLG5ScwEp": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:CTBta9i8sav7tjC2r": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:tu3CH22nFLLKouMKw": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:a9vfDqofuZwbzpKvw": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:ms3x8ngwTfep7jBue": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:3a6QWDhxYTz5dEMag": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:PAco5oG579k2qzrh9": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:PAG3DJtoZeGtz488f": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:rNpGFodLTFvhqLmK6": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:GoWNiPbrEb6NHD3MF": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:StBjwzACS7qtWGkoN": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:bStYDEy8PQPt2c3Za": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:vHsjEgL44d6awb5v3": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:bc8Ssx5ys6zqu3eq9": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:YScdhSQBhkxpfcF3t": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:d5Lqf8nSxm6RpmmnA": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:EAH6Y6y3CDi3uxMou": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:s4f83vkkSDL6my44j": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:qARKFgYhCqmKB2YpF": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:CzoiqGzpShprcv2Jd": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:Qoecey2umNjcqEGHP": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:CmAexqqvnRLcBojpB": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:EAA5YeR6s6Ye2cZjD": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:wSKPuBfgkkqfTpmWJ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:FnszH6ZGBi9hd8rtv": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:Lvd2DFaHKfuveaCyQ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:EEMpNRJK5qqCw6zqH": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:ASzyQrpGQsj7Moijk": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:sLYSa7MyuDKxreN5h": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:tmhCnrMKn8Diqjrgk": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:9PiyWjoe9tajReF7v": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:ALsuxpdqeTXwgEJeZ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:EkKYqeAy3ArupKuYn": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:h5Syjytgbg7fL6CJ5": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:eJNH2CikC4scTsqYs": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:AWKkDLDnShemNCSzZ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:fRLt59FNXxmCaAkYF": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:m9sTFoAsE8dSnzoBt": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:uBSwt2vEGm4RisLjf": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:3TLTrJS2DZJ5mcrkc": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:KXycun5WuzKDv6vGL": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:neTbrpBziAsTH5Bn7": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:72cKFaXd2B7Bis2kv": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:BTcEzXYoDrWzkLLrQ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:EcBjr4Q2AtoTLcKXp": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:YnL6prYQbaLz22mxe": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:25EgRNWcY6PM3fWZh": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:yHJL3qK9RRhr82xtr": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:XdhwXppfqrpPL2YDX": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:9uZHnEkhXZjWzia7F": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:ZPB87ayzzwAoxycvN": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:snto3JZs6HrgvsoJG": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:w8jE7FRQzFGJZdaao": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:YYNH5uvmmaEKi4h2m": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:RdbDH4T8bxWwZpc9h": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:umicYzuRsm6okFRKA": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:7CKF6r8MegtcCWDbT": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:oHYunY34gvdic9opt": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:vvg6DmJSprDLNhW3v": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:6kBMqrK9bREuGsrnd": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:e95HCwqNp7RiF94ad": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:RmZWjTLNTg4hby7pz": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:CSKob9hGmWM7f7yv8": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:SG38cPw5C7wLXAeFn": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "reject",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:DGZNAGL2FNJfftwgE": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:sGEJi9wFT3Gdqg2nM": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:FtCrA2x4zwwuAR27o": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:TyCdgpCfX7sfiobsH": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:4RMxQko3YrdWvnNci": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "reject",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:fbTE2cBtnxCqemWNp": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "reject",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:j9nsXEeSxxPbrpwMu": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:CCDQ7PdYHXsJAE5bi": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:d56vd7yhFGxBQnoEk": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:E7pkeDruknpSa7j3i": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:rQgeBvPyBgqrej6zc": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:avSArL7CuA2fEKfFD": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:HFkrGGGjbM7gFcQGD": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:3nfJA932hGN9amPhs": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:PhTBDHu9PKJFmvb4p": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:KfkpgXdgRheSRWDy8": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:nQWavk9mnwcv6ScMR": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:Tw9vGNKjQzF9YGFa4": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:PN4FEGt3fjHv8diGo": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:nKDFKYJQBJ2xXhxvx": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:FwybRtbHyym7e3Xus": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:Wowc8jfvyrsp4a6uk": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:AwLZx5rfAvcRjt3FS": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:D4mdW9hQs32mo2xkQ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:B6d8Wzk4gNzHsXvdi": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    }
+  },
+  "proposed_tombstones": []
+}

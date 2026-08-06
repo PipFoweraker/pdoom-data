@@ -54,3 +54,9 @@ venv/
 # artefact that was tracked despite matching a gitignore pattern, so every
 # local run produced a spurious diff.
 dev_metrics.db
+
+# Generated review surface. Rebuild with:
+#   python scripts/review/build_scan_view.py --limit N
+# Embeds the current unreviewed pile, so it is stale the moment a verdict
+# lands. Regenerable in a second; 600KB of derived HTML is not history.
+tools/scan_view.html

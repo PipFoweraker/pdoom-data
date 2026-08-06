@@ -1,0 +1,137 @@
+{
+  "_metadata": {
+    "layer": "human_review",
+    "reviewer": "Pip Foweraker",
+    "precedence": "highest",
+    "nature": "ATTRIBUTED OPINION, not fact. Consumers may inherit this reviewer's judgement, filter to reviewers they trust, or ignore reviews entirely.",
+    "tool": "dictated to the pdoom-data seat; transcribed and read back",
+    "tool_version": "n/a",
+    "exported_at": "2026-08-06",
+    "record_count": 17,
+    "tombstone_count": 0,
+    "selection": "Shortlisted by scripts/review/select_window_candidates.py, which surfaces forum posts whose titles suggest funding_catastrophe, organizational_crisis or institutional_decay -- the only three categories that open a decision window in pdoom1. 357 of 3434 records qualified; this pass covers the top 20 by term-match strength then karma.",
+    "note": "Two rows in the shortlist carry no verdict and are deliberately absent rather than defaulted: row 11 (forum_eaforum:bHvamKxyBeWPFoJgn) and row 19 (forum_lesswrong:SbC7duHNDHkd3PkgG). Row 18 (forum_lesswrong:eKGdCNdKjvTBG9i6y) received two conflicting verdicts in one dictation and is held out pending clarification. An absent verdict is not a reject."
+  },
+  "records": {
+    "forum_eaforum:bBefhAXpCFNswNr9m": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:mhiF2BJRqN7u5udKP": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:NjtHt55nFbw3gehzY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:fzrsa6syCM3yWW7HA": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:9JCkkjKMNL4Hmg4qP": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:P9phn7uhjiCvaCPDZ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": "Dictated as \"strong y\". Recorded as accept because the schema has no strength dimension; the emphasis is preserved here rather than discarded or invented as a new verdict value.",
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:pQKrGnKzSQrqz5esZ": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:EFF6wSRm9h7Xc6RMt": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:9WinzeTqDeTBygQwK": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:omzGEWqQJv6uP7D6k": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:sHF2yjAnNNhxZ56jf": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:zuqpqqFoue5LyutTv": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:5n2ZQcbc7r4R8mvqc": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:emBSDADvCnSwtL2kS": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:btTeBHKGkmRyD5sFK": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "accept",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_eaforum:dtHZqi4fSQKor6TYY": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "unsure",
+      "tier_override": null,
+      "note": null,
+      "at": "2026-08-06"
+    },
+    "forum_lesswrong:kyDsgQGHoLkXz6vKL": {
+      "reviewer": "Pip Foweraker",
+      "verdict": "reject",
+      "tier_override": null,
+      "note": "First reject recorded by any reviewer. The 2026-07-26 pass produced 140 accepts, 64 unsures and zero rejects, which left open whether 'unsure' was absorbing what 'reject' was for. It was not.",
+      "at": "2026-08-06"
+    }
+  },
+  "proposed_tombstones": []
+}
