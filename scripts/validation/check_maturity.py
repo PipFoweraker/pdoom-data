@@ -25,7 +25,7 @@ This is a REPORT, not a gate. A dataset legitimately sits at wood while it is
 being built, and gating would only teach people to route around the ladder.
 
 Unknown is not a pass. Where a predicate cannot be evaluated, it fails and says
-why -- consistent with the §5c rule that you cannot report ok over something you
+why -- consistent with the section 5c rule that you cannot report ok over something you
 failed to measure.
 """
 import argparse
