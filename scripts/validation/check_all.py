@@ -1,0 +1,140 @@
+"""Run every check in this repository and report one verdict.
+
+    python scripts/validation/check_all.py
+    python scripts/validation/check_all.py --quick    # skip the rebuild checks
+
+The single entry point. If you have just cloned this repository and want to
+know whether it is in good order, run this and nothing else.
+
+Two classes of check, and the distinction is deliberate:
+
+  GATING     a failure means something is wrong right now. Exits non-zero.
+  REPORTING  information about where the repo stands. Never fails the run.
+
+The maturity ladder is REPORTING by ruling (pdoom-data#62, L4): a collection
+legitimately sits at wood while it is being built, and gating on it would only
+teach people to route around the ladder.
+
+Dependencies are checked first and named individually, because "ImportError:
+No module named yaml" three checks deep is a worse experience than being told
+up front which one command fixes it.
+"""
+import argparse
+import os
+import subprocess
+import sys
+import time
+
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# (label, argv, gating?)
+GATING = [
+    ("repository invariants", ["scripts/validation/check_invariants.py"], True),
+    ("write-capable workflows de-armed", ["scripts/validation/check_workflow_disarm.py"], True),
+    ("evidence supports its claims", ["scripts/validation/check_evidence.py"], True),
+    ("dump-space tests", ["tests/test_dump_spaces.py"], True),
+    ("migration tests", ["tests/test_migration.py"], True),
+]
+
+REBUILD = [
+    ("candidates rebuild is byte-identical", ["scripts/build/project_candidates.py", "--check"], True),
+    ("frontier_labs rebuild is byte-identical", ["scripts/build/project_frontier_labs.py", "--check"], True),
+    ("reviewed rebuild is byte-identical", ["scripts/build/project_reviewed.py", "--check"], True),
+]
+
+REPORTING = [
+    ("maturity ladder", ["scripts/validation/check_maturity.py"], False),
+]
+
+# module -> what installs it, and what stops working without it.
+DEPS = [
+    ("yaml", "PyYAML", "the workflow de-arm guard cannot parse workflows"),
+    ("jsonschema", "jsonschema", "schema validation is skipped, so bad records pass"),
+]
+
+
+def check_deps():
+    missing = []
+    for mod, pkg, consequence in DEPS:
+        try:
+            __import__(mod)
+        except ImportError:
+            missing.append((pkg, consequence))
+    if not missing:
+        return True
+    print("MISSING DEPENDENCIES")
+    for pkg, consequence in missing:
+        print("  %-14s without it, %s" % (pkg, consequence))
+    print()
+    print("  pip install -r requirements-checks.txt")
+    print()
+    print("Refusing to run: a check that silently skips is worse than one that")
+    print("does not run, because the first reports success.")
+    return False
+
+
+def run(label, argv, gating):
+    started = time.time()
+    try:
+        r = subprocess.run([sys.executable] + [os.path.join(REPO_ROOT, argv[0])] + argv[1:],
+                           capture_output=True, text=True, cwd=REPO_ROOT, timeout=300)
+        ok = r.returncode == 0
+        tail = (r.stdout or r.stderr).strip().split("\n")
+        detail = tail[-1][:88] if tail and tail[-1] else ""
+    except (OSError, subprocess.SubprocessError) as e:
+        ok, detail = False, "could not run: %s" % str(e)[:70]
+    took = time.time() - started
+    mark = "PASS" if ok else ("FAIL" if gating else "----")
+    print("  [%s] %-42s %5.1fs  %s" % (mark, label, took, detail))
+    return ok
+
+
+def main():
+    ap = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--quick", action="store_true",
+                    help="skip the rebuild checks, which are the slow ones")
+    args = ap.parse_args()
+
+    if not check_deps():
+        return 2
+
+    failures = []
+
+    print("GATING -- a failure here means something is wrong now")
+    for label, argv, gating in GATING:
+        if not run(label, argv, gating):
+            failures.append(label)
+
+    if args.quick:
+        print()
+        print("  (rebuild checks skipped by --quick)")
+    else:
+        print()
+        print("REBUILD -- committed output must match a fresh build")
+        for label, argv, gating in REBUILD:
+            if not run(label, argv, gating):
+                failures.append(label)
+
+    print()
+    print("REPORTING -- never fails the run")
+    for label, argv, gating in REPORTING:
+        run(label, argv, gating)
+
+    print()
+    if failures:
+        print("FAILED: %d gating check(s) -- %s" % (len(failures), ", ".join(failures)))
+        return 1
+    print("All gating checks pass.")
+    print()
+    print("Note: 'Development Documentation CI/CD' is red in GitHub Actions and is")
+    print("expected to be. It fails an ASCII gate on about 19 documentation files,")
+    print("and that failure is currently the only thing preventing a job that")
+    print("appends to DEVBLOG.md on every push to main. See CLAUDE.md before")
+    print("clearing it.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

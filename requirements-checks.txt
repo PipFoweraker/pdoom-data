@@ -1,0 +1,22 @@
+# Everything needed to VERIFY this repository. Nothing else.
+#
+#   pip install -r requirements-checks.txt
+#   python scripts/validation/check_all.py
+#
+# Deliberately separate from requirements.txt, which carries the ingestion
+# stack -- datasets, huggingface_hub and their transitive dependencies. Those
+# are needed to FETCH new source data and are irrelevant to checking what is
+# already here. Installing them costs several minutes and a large download for
+# someone who only wants to confirm the repo is in good order, which is the
+# common case for a fresh clone or a workshop.
+#
+# If a check ever needs a third package, add it here AND name it in
+# scripts/validation/check_all.py's DEPS list, which states what stops working
+# without it. A dependency that is not named there produces an ImportError
+# three checks deep instead of a sentence saying what to install.
+
+jsonschema>=4.19.0    # schema validation. Without it, validation is SKIPPED,
+                      # which means malformed records pass quietly.
+PyYAML>=6.0           # parses .github/workflows for the de-arm guard. Without
+                      # it, the guard cannot tell whether a workflow that can
+                      # commit to this repo is armed.
