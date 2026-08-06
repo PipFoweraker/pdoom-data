@@ -24,6 +24,24 @@ name: Data Integrity
 #                              because two producers wrote to one zone and
 #                              nothing compared them.
 #
+#   check_evidence.py          evidence actually supports the date attached to
+#                              it. Shipped 2026-08-06 with "offline, gates CI" in
+#                              its own docstring and was not wired in until
+#                              2026-08-06 evening -- a check nothing runs is a
+#                              check that will be true until the day it is not.
+#                              Offline layer only; --online fetches URLs and must
+#                              never gate, because a remote server being down is
+#                              not a defect in this repository.
+#
+#   check_references.py        the references in this repo's prose resolve to
+#                              something. Written after a cross-repo memo cited a
+#                              commit that existed on no ref, and three readers
+#                              passed over the line without dereferencing it.
+#                              Gates on dangling paths in live documents; warns
+#                              on historical ones, on unqualified issue numbers,
+#                              and on anything listed in config/reference_drift.json
+#                              with a reason.
+#
 #   tests/test_*.py            run directly. pytest is in requirements.txt but
 #                              these are standalone runners and both pass without
 #                              it; invoking python directly keeps this job free of
@@ -64,6 +82,12 @@ jobs:
 
       - name: Repository invariants hold
         run: python scripts/validation/check_invariants.py
+
+      - name: Evidence supports the dates attached to it
+        run: python scripts/validation/check_evidence.py
+
+      - name: References in prose resolve to something
+        run: python scripts/validation/check_references.py
 
       - name: Serveable zone matches a fresh build (candidates)
         run: python scripts/build/project_candidates.py --check

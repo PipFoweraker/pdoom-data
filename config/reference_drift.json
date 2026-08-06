@@ -1,0 +1,123 @@
+{
+  "_comment": [
+    "Dangling references that are accepted, each with a reason someone had to type.",
+    "Read by scripts/validation/check_references.py. Same shape and same purpose as",
+    "the DISARMED list in check_workflow_disarm.py: accepting a broken reference is a",
+    "deliberate act with a name on it, not a linter quietly getting weaker.",
+    "",
+    "Adding an entry is cheap and that is the danger. Before you add one, ask which of",
+    "these it is:",
+    "  PLANNED   the document is a proposal and the path is its deliverable. Legitimate,",
+    "            but it should carry the issue that tracks building it.",
+    "  REMOVED   the document deliberately names something that was deleted, and saying",
+    "            so is the point of the sentence.",
+    "  RUNTIME   the path is produced by running something and is absent in a clean tree.",
+    "  FOREIGN   the path belongs to a sibling repo but the qualification is on a",
+    "            different line, so the same-line rule cannot see it.",
+    "If it is none of those, it is rot. Fix the document instead of adding a line here."
+  ],
+  "accepted": [
+    {
+      "path": "data/curated/frontier_labs/README.md",
+      "reference": "scripts/calculate-game-stats.py",
+      "reason": "FOREIGN. pdoom1-website's script; the sentence names that repo on the previous line, so the same-line qualification rule cannot see it. Tracked by pdoom-data#37.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/ADAPTER_SPEC.md",
+      "reference": "scripts/archive/mirror.py",
+      "reason": "PLANNED. The offline blob mirror described in step 4 of the archival flow has never been built. The spec describes the intended pipeline, not the current one.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/CROSS_REPO_INTEGRATION_ISSUES.md",
+      "reference": "scripts/import_events.py",
+      "reason": "PLANNED. This document is a problem statement about integration that was never built; the paths are what it proposes, not what exists.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/CROSS_REPO_INTEGRATION_ISSUES.md",
+      "reference": ".github/workflows/sync-pdoom-data.yml",
+      "reason": "PLANNED. Same document, same status. Note the near-collision with the two real write-capable workflows that ARE de-armed -- do not create this filename without reading check_workflow_disarm.py first.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/CROSS_REPO_INTEGRATION_ISSUES.md",
+      "reference": "scripts/sync_events.sh",
+      "reason": "PLANNED. Same document, same status.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/DATA_PUBLISHING_STRATEGY.md",
+      "reference": ".github/workflows/publish-serveable.yml",
+      "reason": "PLANNED. A publishing workflow this strategy proposes. It does not exist, and building it would create a third write-capable workflow, so it must land with a check_workflow_disarm.py entry in the same commit.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PRINT_STYLE_GUIDE.md",
+      "reference": "tools/print/packet.css",
+      "reason": "REMOVED, deliberately. The sentence exists to record that this file was deleted on 2026-08-02 (pdoom-data#55 A4, coordination#2 A1). Repairing the reference would delete the record of the deletion.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PRINT_STYLE_GUIDE.md",
+      "reference": "tools/print/TEMPLATE.html",
+      "reason": "REMOVED, deliberately. Deleted in the same commit and named for the same reason as packet.css above.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": "docs/PUBLIC_DEVBLOG.md",
+      "reason": "PLANNED. Tracked by pdoom-data#21, open since 2025-11-09. Note the coupling recorded in CLAUDE.md: the documentation-publish job appends to DEVBLOG.md without bound and is held back only by the ASCII gate. Read that before building any of this.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": "scripts/logging/consolidate_logs.py",
+      "reason": "PLANNED. Tracked by pdoom-data#21.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": "scripts/logging/update_devblog.py",
+      "reason": "PLANNED. Tracked by pdoom-data#21.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": "scripts/logging/generate_weekly_summary.py",
+      "reason": "PLANNED. Tracked by pdoom-data#21.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": "scripts/publishing/generate_release_announcement.py",
+      "reason": "PLANNED. Tracked by pdoom-data#21.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": ".github/workflows/consolidate-logs.yml",
+      "reason": "PLANNED and write-capable. Tracked by pdoom-data#21. If it is ever built it must be de-armed in the same commit, per check_workflow_disarm.py.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": ".github/workflows/announce-dataset-release.yml",
+      "reason": "PLANNED and write-capable. Same condition as consolidate-logs.yml above.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "docs/PUBLIC_COMMUNICATION_STRATEGY.md",
+      "reference": ".github/workflows/weekly-public-summary.yml",
+      "reason": "PLANNED and write-capable. Same condition as consolidate-logs.yml above.",
+      "accepted_on": "2026-08-06"
+    },
+    {
+      "path": "scripts/migration/README.md",
+      "reference": "logs/migration/migration.json",
+      "reason": "RUNTIME. Written by the migration script when it runs; absent in a clean checkout, which is correct.",
+      "accepted_on": "2026-08-06"
+    }
+  ]
+}
