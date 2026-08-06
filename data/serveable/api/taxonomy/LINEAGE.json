@@ -1,0 +1,19 @@
+{
+  "build_version": "0.1.0",
+  "source": "config/taxonomy/taxonomy_v0.json",
+  "taxonomy_version": "0.1.0",
+  "counts": {
+    "minted_here": 13,
+    "minted_elsewhere": 6,
+    "minted_here_by_status": {
+      "proposed": 1,
+      "ruled": 12
+    }
+  },
+  "policy": {
+    "authority": "pdoom-data is the authority on taxonomy for real-time events and owns the structure of the editorial layer, ruled by Pip 2026-08-06 (coordination#31 Phase 2).",
+    "boundary": "Taxonomy authority is not shaping authority. This repo defines what a term means; it does not define what a consumer does with it.",
+    "status_meaning": "'proposed' terms have not been ruled by anyone. Do not build a contract on a proposed term without saying so.",
+    "ownership": "minted_elsewhere entries are pointers, not definitions. The owning repo's definition governs; this file records only that the term is not ours to change."
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "build_version": "0.1.0",
+  "producer": "scripts/build/project_timeline_events.py",
+  "counts": {
+    "records": 1194,
+    "hand_authored": 28,
+    "bulk_research": 1166,
+    "by_source_file": {
+      "enriched_alignment_research": 1166,
+      "funding_catastrophe_events.json": 7,
+      "institutional_decay_events.json": 7,
+      "organizational_crisis_events.json": 6,
+      "technical_research_breakthrough_events.json": 8
+    }
+  },
+  "composition": "data/raw/events/*.json UNION data/serveable/api/timeline_events/enriched_alignment_research/. Verified by set equality against the committed file, not assumed.",
+  "normalisation": "tags and sources are sorted; all other fields pass through. Established by differencing against the committed file.",
+  "known_defect": "1,166 of these 1,194 records fail event_v1, the schema this collection is published under. Tracked as pdoom-data#65. This producer does not rule on it -- all three seats voted for two projections and the contents question is open.",
+  "repairs_applied": "uk_ai_safety_to_security_2025 and us_aisi_to_caisi_2025 carried a UTF-8-decoded-as-CP1252 arrow in the served file and a '?' fallback in historical_events.json. Both are replaced with '->' via an explicit substitution map that errors on unmapped characters.",
+  "policy": {
+    "identity": "pdoom1 made a source commit, record count and generated-at stamp a CONDITION of its vote, so a consumer can state which corpus it read. The record count is here. The commit and timestamp are NOT YET EMITTED, because a wall-clock stamp would make --check non-deterministic and the release-time stamping step does not exist yet. This is an unmet condition, stated rather than quietly dropped.",
+    "zone": "data/serveable/ is a build output. Never hand-edit it."
+  }
+}
