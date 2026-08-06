@@ -66,9 +66,25 @@ labelled rather than silently collapsed into one.
     git clone https://github.com/PipFoweraker/pdoom-data.git
     cd pdoom-data
 
-    # Nothing to install for the integrity checks; they are stdlib only.
-    python scripts/validation/check_invariants.py
-    python scripts/build/project_candidates.py --check
+    pip install -r requirements-checks.txt
+    python scripts/validation/check_all.py
+
+That is the whole of it. `check_all.py` runs every check and prints one
+verdict, separating **gating** checks -- a failure means something is wrong
+now -- from **reporting** ones like the maturity ladder, which never fail the
+run because a collection legitimately sits at wood while it is being built.
+
+`requirements-checks.txt` is two packages. It is deliberately separate from
+`requirements.txt`, which carries the ingestion stack -- `datasets`,
+`huggingface_hub` and their transitive dependencies -- needed only to FETCH new
+source data. You do not need those to verify what is already here, and
+installing them costs several minutes and a large download.
+
+An earlier version of this section claimed the checks were "stdlib only". That
+was wrong: the workflow de-arm guard needs PyYAML, and without `jsonschema`
+schema validation is silently **skipped**, which means malformed records pass.
+`check_all.py` therefore refuses to start on a missing dependency and names
+what stops working, rather than running a check that cannot fail.
 
 Reading a collection is just reading a file:
 
