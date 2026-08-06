@@ -19,7 +19,7 @@
     }
   ],
   "build_version": "0.2.0",
-  "built_at": "2026-07-26T11:14:23.136291+00:00",
+  "built_at": "2026-08-06T00:43:14.277979+00:00",
   "counts": {
     "by_year": {
       "1950": 1,
@@ -113,13 +113,28 @@
         }
       }
     },
-    "with_human_reviews": 206
+    "with_human_reviews": 520
   },
   "dropped_records": [],
   "human_review_layers": [
     {
       "file": "human_review_2026-07-26.json",
       "records": 206,
+      "reviewer": "Pip Foweraker"
+    },
+    {
+      "file": "human_review_2026-08-06.json",
+      "records": 17,
+      "reviewer": "Pip Foweraker"
+    },
+    {
+      "file": "human_review_2026-08-06_scan.json",
+      "records": 176,
+      "reviewer": "Pip Foweraker"
+    },
+    {
+      "file": "human_review_2026-08-06_scan2.json",
+      "records": 129,
       "reviewer": "Pip Foweraker"
     }
   ],
