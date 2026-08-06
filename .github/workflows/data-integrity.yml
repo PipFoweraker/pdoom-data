@@ -98,6 +98,9 @@ jobs:
       - name: Serveable zone matches a fresh build (promoted reviews)
         run: python scripts/build/project_reviewed.py --check
 
+      - name: Serveable zone matches a fresh build (timeline events)
+        run: python scripts/build/project_timeline_events.py --check
+
       - name: Serveable zone matches a fresh build (taxonomy)
         run: python scripts/build/project_taxonomy.py --check
 
