@@ -114,6 +114,12 @@
       "accepted_on": "2026-08-06"
     },
     {
+      "path": "docs/ALIGNMENT_RESEARCH_INTEGRATION.md",
+      "reference": "logs/alignment_validation/alignment_validation.json",
+      "reason": "RUNTIME. Written by the alignment validator when it runs. This is the entry that exposed the checker's first real bug: it exists on a machine that has run the validator and not in a clean checkout, so the check passed locally and failed in CI. Path resolution now goes through git ls-files rather than the filesystem.",
+      "accepted_on": "2026-08-06"
+    },
+    {
       "path": "scripts/migration/README.md",
       "reference": "logs/migration/migration.json",
       "reason": "RUNTIME. Written by the migration script when it runs; absent in a clean checkout, which is correct.",

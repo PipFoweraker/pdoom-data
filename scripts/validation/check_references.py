@@ -182,17 +182,13 @@ def read_text(path):
 
 
 def markdown_files():
-    """Every tracked-looking .md file, repo-relative, sorted for stable output."""
-    found = []
-    for dirpath, dirnames, filenames in os.walk(REPO_ROOT):
-        dirnames[:] = [d for d in dirnames if d not in (".git", "__pycache__", "node_modules")]
-        for name in filenames:
-            if not name.endswith(".md"):
-                continue
-            absolute = os.path.join(dirpath, name)
-            relative = os.path.relpath(absolute, REPO_ROOT).replace(os.sep, "/")
-            found.append(relative)
-    return sorted(found)
+    """Every TRACKED .md file, repo-relative, sorted for stable output.
+
+    Tracked rather than on-disk, for the same reason path resolution is: an
+    untracked scratch file on one machine would be scanned there and nowhere
+    else, so the check's result would depend on who ran it last.
+    """
+    return sorted(p for p in tracked_paths() if p.endswith(".md"))
 
 
 def is_historical(relative_path):
@@ -221,10 +217,53 @@ def belongs_to_sibling(reference):
     return head in SIBLING_REPOS
 
 
+_TRACKED = None
+
+
+def tracked_paths():
+    """Every path git tracks, as forward-slash strings, plus their directories.
+
+    Resolving against the WORKING DIRECTORY was this check's first real bug and
+    it is worth keeping the reason. Locally it passed; in CI it failed on
+    `logs/alignment_validation/alignment_validation.json`, because that file
+    exists on the machine that ran the validator once and does not exist in a
+    clean checkout. A check that consults untracked local state gives a
+    different answer per machine, which makes it useless as a gate and actively
+    misleading as a green tick.
+
+    The repository is the system under test. `git ls-files` is its actual state;
+    the working directory is that state plus whatever the last person happened
+    to run.
+    """
+    global _TRACKED
+    if _TRACKED is not None:
+        return _TRACKED
+    try:
+        raw = subprocess.check_output(["git", "ls-files", "-z"], cwd=REPO_ROOT)
+    except (subprocess.CalledProcessError, OSError):
+        # No git available. Say so rather than silently falling back to the
+        # filesystem and reporting a per-machine answer as if it were the truth.
+        raise SystemExit(
+            "check_references.py needs git to resolve paths against the tracked "
+            "tree. Falling back to the filesystem would give a different answer "
+            "on every machine.")
+    files = set()
+    for entry in raw.decode("utf-8", "replace").split("\0"):
+        if not entry:
+            continue
+        files.add(entry)
+        parts = entry.split("/")
+        for i in range(1, len(parts)):
+            files.add("/".join(parts[:i]))
+    _TRACKED = files
+    return _TRACKED
+
+
 def path_exists_somewhere(reference):
+    known = tracked_paths()
     for root in ALTERNATE_ROOTS:
-        candidate = os.path.join(REPO_ROOT, root, reference.replace("/", os.sep))
-        if os.path.exists(candidate):
+        candidate = reference if not root else root.replace(os.sep, "/") + "/" + reference
+        if candidate in known:
             return True
     return False
 
