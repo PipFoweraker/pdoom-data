@@ -98,6 +98,12 @@ jobs:
       - name: Serveable zone matches a fresh build (promoted reviews)
         run: python scripts/build/project_reviewed.py --check
 
+      - name: Serveable zone matches a fresh build (taxonomy)
+        run: python scripts/build/project_taxonomy.py --check
+
+      - name: Taxonomy gate can still fail
+        run: python tests/test_taxonomy_gate.py
+
       - name: Dump-space tests
         run: python tests/test_dump_spaces.py
 

@@ -1,0 +1,143 @@
+{
+  "taxonomy_version": "0.1.0",
+  "status": "PROPOSED. The artifact is the deliverable; the term list is this seat's draft and has not been ruled.",
+  "boundaries": [
+    "Taxonomy authority is NOT shaping authority. This seat may define what an editorial",
+    "category MEANS; it may not define what a consumer DOES with it. ADR-001's line does",
+    "not move because the vocabulary was handed over.",
+    "",
+    "Falsifier, stated so this is testable: if a term is ever added whose only consumer is",
+    "one pdoom1 mechanic, the authority has been misused and the term should be refused.",
+    "Check this by asking, per term, which repo changes behaviour when the definition",
+    "changes. If the answer is only pdoom1, it is pdoom1's term."
+  ],
+  "how_to_read_status": {
+    "ruled": "A named authority decided it. The citation is in 'authority' and is checkable.",
+    "proposed": "This seat's draft. Nobody has ruled it. Do not build a contract on it.",
+    "contested": "Live disagreement or an open decision. Named in 'authority'."
+  },
+  "minted_here": [
+    {
+      "term": "candidate",
+      "definition": "A record admitted from a source that no named reviewer has ruled on. Unreviewed is the default state and is never implied to mean rejected.",
+      "status": "ruled",
+      "authority": "docs/DATA_ZONES.md and the candidates projection; 3,434 records carry it"
+    },
+    {
+      "term": "dump",
+      "definition": "One immutable adapter output. Re-running an adapter makes a NEW dump; it never edits an existing one.",
+      "status": "ruled",
+      "authority": "docs/DATA_ZONES.md, docs/ADAPTER_SPEC.md"
+    },
+    {
+      "term": "editorial layer",
+      "definition": "The attributed-opinion half of what crosses the boundary: reviews, salience profiles and tiers. Distinct from the facts half, which is titles, clocks, actors, sources and licences.",
+      "status": "ruled",
+      "authority": "coordination#31 Phase 2 -- Pip made this seat the authority on taxonomy for real-time events and gave it ownership of the editorial layer's structure"
+    },
+    {
+      "term": "evidence",
+      "definition": "A verbatim quote or a source URL naming what was actually read to support a claim. Attached to the claim, not to the record as a whole.",
+      "status": "ruled",
+      "authority": "config/sources.json, data/curated/frontier_labs/, and scripts/validation/check_evidence.py which asserts the evidence supports the date rather than merely accompanying it"
+    },
+    {
+      "term": "maturity tier",
+      "definition": "wood, bronze, silver, gold, iridium. A reported property of a collection, not a gate. Unknown fails and says why, rather than passing quietly.",
+      "status": "ruled",
+      "authority": "pdoom-data#62 L-series, ruled by Pip 2026-08-06; mechanism in pdoom-data#66"
+    },
+    {
+      "term": "profile",
+      "definition": "A named, versioned weighting configuration. 'default_v1' is provisional and says so in its own LINEAGE entry.",
+      "status": "ruled",
+      "authority": "ADR-001"
+    },
+    {
+      "term": "review",
+      "definition": "A named person's ruling on one candidate. Carries the reviewer's name, a verdict, and optionally a note. There are no anonymous verdicts.",
+      "status": "ruled",
+      "authority": "docs/ARCHITECTURE_DECISION_RECORDS.md ADR-001"
+    },
+    {
+      "term": "reviewer",
+      "definition": "The named human whose judgement a review records. A consumer may inherit a reviewer's judgement, filter to reviewers it trusts, or ignore reviews entirely.",
+      "status": "ruled",
+      "authority": "ADR-001"
+    },
+    {
+      "term": "salience_by_profile",
+      "definition": "A weighting opinion, namespaced by the profile that produced it. There is deliberately no bare 'salience' field, because a weighting is a choice and a consumer that disagrees must be able to ignore it rather than fork.",
+      "status": "ruled",
+      "authority": "ADR-001, the operative fork test"
+    },
+    {
+      "term": "salience_tier",
+      "definition": "A coarse A/B/C/D banding derived from a profile's salience. Proposed as the replacement for rarity on the public surface, since it is attributed and computed upstream.",
+      "status": "proposed",
+      "authority": "coordination#31 Phase 3. pdoom1 made adoption CONDITIONAL on correlating it against flavour-gate survival first; if it correlates as poorly as rarity did, it must be refused. Correlation not yet run -- blocked on pdoom1 for the gate predicate."
+    },
+    {
+      "term": "tombstone",
+      "definition": "A record that something was removed from an immutable zone, naming the id, the date and the reason category, never the content. The only legal way to change a raw dump.",
+      "status": "ruled",
+      "authority": "data/privacy/tombstones/, and the candidates LINEAGE privacy policy block"
+    },
+    {
+      "term": "verdict",
+      "definition": "One of accept, reject, unsure. 'accept' means a named reviewer judged the record worth carrying forward; it does NOT mean approved for publication or promoted into any product.",
+      "status": "ruled",
+      "authority": "ADR-001; the reviewed projection ships every verdict, not only the accepts"
+    },
+    {
+      "term": "zone",
+      "definition": "One of raw, transformed, enrichment, curated, serveable. The distinction that matters is reproducibility: curated is human judgement and cannot be regenerated; serveable is a build output and must be byte-identical to a fresh projection.",
+      "status": "ruled",
+      "authority": "docs/DATA_ZONES.md"
+    }
+  ],
+  "minted_elsewhere": [
+    {
+      "term": "epoch",
+      "minted_by": "pdoom1",
+      "note": "Release and seed vocabulary. Listed so nobody mints a second meaning here.",
+      "status": "ruled",
+      "authority": "pdoom1 release nomenclature"
+    },
+    {
+      "term": "impacts",
+      "minted_by": "pdoom1",
+      "note": "Known breach of ADR-001, tracked for a move to an export profile. Do not add more fields of this kind meanwhile.",
+      "status": "contested",
+      "authority": "pdoom-data#34"
+    },
+    {
+      "term": "origin",
+      "minted_by": "pdoom1",
+      "note": "An asset's provenance. Ruled by Pip as a capability, not an obligation: the estate must be ABLE to say which, not say it on every surface. Currently unmet -- pdoom1 records it nowhere.",
+      "status": "contested",
+      "authority": "coordination#32, coordination#31 Phase 2"
+    },
+    {
+      "term": "promotable",
+      "minted_by": "pdoom1",
+      "note": "Gates entry to the game's asset pack. Not a data-side concept and must not be conflated with a verdict of accept.",
+      "status": "ruled",
+      "authority": "pdoom1#1107"
+    },
+    {
+      "term": "publishable",
+      "minted_by": "pdoom1-website",
+      "note": "Gates entry to the indexed web. Ruled distinct from promotable by Pip on 2026-08-06; the asymmetry is that a wrong publishable is cached and indexed and is not retracted by deleting a file.",
+      "status": "ruled",
+      "authority": "coordination#31 Phase 2"
+    },
+    {
+      "term": "rarity",
+      "minted_by": "pdoom1",
+      "note": "Currently published from here, which is a known breach. Measured as a text_length threshold on a field that was later discarded. All three seats voted SPLIT on 2026-08-06; this seat's condition is that it lands AFTER the all_events producer exists, because ~1,000 orphan pages carry the badge and no generator will ever touch them again.",
+      "status": "contested",
+      "authority": "pdoom-data#51, pdoom-data#34, coordination#31 Phase 3"
+    }
+  ]
+}
