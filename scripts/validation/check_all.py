@@ -32,8 +32,10 @@ GATING = [
     ("repository invariants", ["scripts/validation/check_invariants.py"], True),
     ("write-capable workflows de-armed", ["scripts/validation/check_workflow_disarm.py"], True),
     ("evidence supports its claims", ["scripts/validation/check_evidence.py"], True),
+    ("no transcoding corruption in derived zones", ["scripts/validation/check_transcoding.py"], True),
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),
+    ("transcoding detector fires", ["tests/test_transcoding_detector.py"], True),
 ]
 
 REBUILD = [
