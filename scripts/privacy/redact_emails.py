@@ -83,6 +83,7 @@ import io
 import json
 import os
 import re
+import subprocess
 import sys
 from collections import Counter
 
@@ -306,6 +307,73 @@ def sha256_of(path):
     return h.hexdigest()
 
 
+def tracked(paths):
+    """Filter to files git actually tracks.
+
+    The distinction is the whole scope of the gate and it is not cosmetic. The
+    196MB alignment_research dump is gitignored, so its contents were never
+    published and a machine that happens to hold it must not fail the build for
+    everyone else. Same treatment data/raw/ gets in check_transcoding.py:
+    reported, not gated.
+
+    git is the authority here rather than a hardcoded list, which also makes
+    this an input from outside the thing being checked -- a file added to a
+    tracked zone tomorrow is covered without anyone remembering to add it.
+    """
+    if not paths:
+        return []
+    rels = [os.path.relpath(p, REPO_ROOT).replace("\\", "/") for p in paths]
+    try:
+        out = subprocess.check_output(
+            ["git", "ls-files", "-z", "--"] + rels,
+            cwd=REPO_ROOT).decode("utf-8")
+    except (OSError, subprocess.CalledProcessError):
+        # No git, or git failed. Gate everything rather than silently
+        # narrowing: a check that quietly shrinks its own scope on error is
+        # the failure this repository keeps finding.
+        sys.stderr.write("git ls-files unavailable; gating ALL targets.\n")
+        return paths
+    known = set(n for n in out.split("\0") if n)
+    return [p for p, rel in zip(paths, rels) if rel in known]
+
+
+def ci_gate():
+    """Assert no TRACKED file carries an address-shaped fragment. Never writes.
+
+    Asserts on residue_scan, the independently written scanner, NOT on EMAIL.
+    Gating on EMAIL would make the redactor its own examiner, which is exactly
+    how ten records stayed published for eight months: the pattern that failed
+    to match them was also the pattern asked whether anything had been missed.
+    """
+    gated = tracked(targets())
+    skipped = len(targets()) - len(gated)
+    bad = 0
+    for path in gated:
+        rel = os.path.relpath(path, REPO_ROOT).replace("\\", "/")
+        text = io.open(path, encoding="utf-8").read()
+        kind, parsed = load_doc(path, text)
+        if kind is None:
+            print("UNPARSEABLE %s" % rel)
+            bad += 1
+            continue
+        left = residue_scan(parsed)
+        if left:
+            # Count and file only. A privacy alarm that prints the addresses
+            # it found publishes them into the CI log, which is public.
+            print("FAIL %-64s %d address-shaped fragment(s)" % (rel, len(left)))
+            bad += 1
+    print()
+    print("tracked files scanned : %d" % len(gated))
+    print("untracked, reported not gated: %d" % skipped)
+    if bad:
+        print()
+        print("%d file(s) carry address-shaped text. Run:" % bad)
+        print("    python scripts/privacy/redact_emails.py --write --date YYYY-MM-DD")
+        return 1
+    print("No address-shaped text in any tracked zone.")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__,
@@ -316,11 +384,20 @@ def main():
                     help="ISO date for the tombstone. Required with --write; "
                          "never guessed, because a fabricated clock is "
                          "indistinguishable from a real one later.")
+    ap.add_argument("--ci", action="store_true",
+                    help="gate. Exit 1 if any TRACKED file still carries an "
+                         "address-shaped fragment. Never writes.")
     args = ap.parse_args()
 
     if args.write and not args.date:
         sys.stderr.write("--write requires --date YYYY-MM-DD.\n")
         return 2
+    if args.ci and args.write:
+        sys.stderr.write("--ci never writes; do not combine it with --write.\n")
+        return 2
+
+    if args.ci:
+        return ci_gate()
 
     report = []
     failed = []
