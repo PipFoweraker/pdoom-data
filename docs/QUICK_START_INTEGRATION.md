@@ -432,9 +432,9 @@ All repositories automatically stay in sync with pdoom-data:
 
 ### After Integration
 
-- **pdoom1-website**: PostgreSQL `events` table → API at `GET /api/events`
-- **pdoom game**: `res://data/events/` → Loaded via `EventLoader.gd`
-- **pdoom-dashboard**: Fetches from API → Displays in React components
+- **pdoom1-website**: PostgreSQL `events` table -> API at `GET /api/events`
+- **pdoom game**: `res://data/events/` -> Loaded via `EventLoader.gd`
+- **pdoom-dashboard**: Fetches from API -> Displays in React components
 
 ---
 

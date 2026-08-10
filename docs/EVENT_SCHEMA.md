@@ -14,12 +14,12 @@ This document describes the schema for game timeline events in the pdoom data ec
 
 ```
 data/raw/events/              (Landing Zone - Source of Truth)
-        ↓
+        v
 [Validation & Cleaning Pipeline]
-        ↓
+        v
 data/serveable/api/timeline_events/  (Serving Zone - Production Ready)
-        ↓
-pdoom1-website PostgreSQL → pdoom game → pdoom dashboard
+        v
+pdoom1-website PostgreSQL -> pdoom game -> pdoom dashboard
 ```
 
 ## Schema Definition
@@ -172,10 +172,10 @@ Each impact object has:
 
 Choose the most appropriate category:
 
-- Events primarily about research findings → `technical_research_breakthrough`
-- Events about funding problems → `funding_catastrophe`
-- Events about institutional failures → `institutional_decay`
-- Events about internal org crises → `organizational_crisis`
+- Events primarily about research findings -> `technical_research_breakthrough`
+- Events about funding problems -> `funding_catastrophe`
+- Events about institutional failures -> `institutional_decay`
+- Events about internal org crises -> `organizational_crisis`
 
 ### Rarity Guidelines
 
@@ -254,7 +254,7 @@ The cleaning pipeline generates multiple output formats in `data/serveable/api/t
 ### 4. Event Index
 - **File**: `event_index.json`
 - **Use**: Lightweight lookup, autocomplete
-- **Format**: Event ID → {title, year, category, rarity}
+- **Format**: Event ID -> {title, year, category, rarity}
 
 ### 5. Manifest
 - **File**: `manifest.json`

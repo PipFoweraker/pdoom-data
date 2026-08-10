@@ -8,7 +8,7 @@ This is part of the P(Doom) project ecosystem consisting of three repositories:
 ### [DATA] [pdoom-data](https://github.com/PipFoweraker/pdoom-data)
 **AI Safety Data Lake & Timeline Events**
 - 1,194 timeline events (28 curated + 1,166 A-tier alignment research)
-- Three-zone data architecture (raw → transformed → serveable)
+- Three-zone data architecture (raw -> transformed -> serveable)
 - Automated data pipeline with validation
 - Interactive event browser tool
 - JSON exports for integration

@@ -3,7 +3,7 @@
 Generalized data cleaning pipeline for the transformed zone.
 
 This script implements the cleaning layer of the data lake:
-    data/raw/* → data/transformed/validated/* → data/transformed/cleaned/*
+    data/raw/* -> data/transformed/validated/* -> data/transformed/cleaned/*
 
 Operations:
 - Deduplication (by ID, by content similarity)
@@ -164,9 +164,9 @@ class DataCleaner:
         """
         Convert non-ASCII characters to ASCII equivalents.
 
-        Smart quotes → straight quotes
-        Em/en dashes → hyphens
-        Accented characters → base characters
+        Smart quotes -> straight quotes
+        Em/en dashes -> hyphens
+        Accented characters -> base characters
 
         Args:
             text: Text potentially containing non-ASCII
@@ -195,7 +195,7 @@ class DataCleaner:
         for old, new in replacements.items():
             text = text.replace(old, new)
 
-        # Decompose accented characters (é → e)
+        # Decompose accented characters (e-acute -> e)
         # NFKD = Compatibility Decomposition
         text = unicodedata.normalize('NFKD', text)
 
