@@ -1,6 +1,6 @@
 # Alignment Research Dataset Integration Guide
 
-**Status**: ✅ Operational (as of 2025-11-06)
+**Status**: [OK] Operational (as of 2025-11-06)
 **Maintainer**: pdoom-data team
 **Data Source**: [StampyAI/alignment-research-dataset](https://huggingface.co/datasets/StampyAI/alignment-research-dataset)
 **License**: MIT
@@ -53,53 +53,53 @@ The Alignment Research Dataset integration provides automated, incremental inges
 ### Data Flow
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  HuggingFace Dataset (StampyAI/alignment-research-dataset)  │
-│  - 12+ JSONL files (one per source)                         │
-│  - 10K-100K total records                                   │
-│  - Updated irregularly by community                         │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       │ HTTP Download
-                       │ (with caching)
-                       ▼
-┌─────────────────────────────────────────────────────────────┐
-│  Extraction Script (extraction_script.py)                   │
-│  - Streams JSONL files                                      │
-│  - Applies filters (date, source, keywords)                 │
-│  - Transforms to pdoom-data schema                          │
-│  - Adds provenance metadata                                 │
-│  - Detects deltas via timestamp comparison                  │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       │ Write JSONL + Metadata
-                       ▼
-┌─────────────────────────────────────────────────────────────┐
-│  RAW ZONE                                                   │
-│  data/raw/alignment_research/dumps/[timestamp]/             │
-│  ├── data.jsonl              (extracted records)            │
-│  └── _metadata.json          (extraction metadata)          │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       │ Schema Validation
-                       │ (validate_alignment_research.py)
-                       ▼
-┌─────────────────────────────────────────────────────────────┐
-│  TRANSFORMED ZONE (validated/)                              │
-│  data/transformed/validated/                                │
-│  - Schema-compliant records                                 │
-│  - Checksum verified                                        │
-│  - Ready for cleaning/enrichment                            │
-└──────────────────────┬──────────────────────────────────────┘
-                       │
-                       │ Future: Cleaning & Enrichment
-                       ▼
-┌─────────────────────────────────────────────────────────────┐
-│  SERVEABLE ZONE (analytics/, api/)                          │
-│  data/serveable/                                            │
-│  - Production-ready formats                                 │
-│  - Optimized for consumption                                │
-└─────────────────────────────────────────────────────────────┘
++-------------------------------------------------------------+
+|  HuggingFace Dataset (StampyAI/alignment-research-dataset)  |
+|  - 12+ JSONL files (one per source)                         |
+|  - 10K-100K total records                                   |
+|  - Updated irregularly by community                         |
++----------------------+--------------------------------------+
+                       |
+                       | HTTP Download
+                       | (with caching)
+                       v
++-------------------------------------------------------------+
+|  Extraction Script (extraction_script.py)                   |
+|  - Streams JSONL files                                      |
+|  - Applies filters (date, source, keywords)                 |
+|  - Transforms to pdoom-data schema                          |
+|  - Adds provenance metadata                                 |
+|  - Detects deltas via timestamp comparison                  |
++----------------------+--------------------------------------+
+                       |
+                       | Write JSONL + Metadata
+                       v
++-------------------------------------------------------------+
+|  RAW ZONE                                                   |
+|  data/raw/alignment_research/dumps/[timestamp]/             |
+|  +-- data.jsonl              (extracted records)            |
+|  +-- _metadata.json          (extraction metadata)          |
++----------------------+--------------------------------------+
+                       |
+                       | Schema Validation
+                       | (validate_alignment_research.py)
+                       v
++-------------------------------------------------------------+
+|  TRANSFORMED ZONE (validated/)                              |
+|  data/transformed/validated/                                |
+|  - Schema-compliant records                                 |
+|  - Checksum verified                                        |
+|  - Ready for cleaning/enrichment                            |
++----------------------+--------------------------------------+
+                       |
+                       | Future: Cleaning & Enrichment
+                       v
++-------------------------------------------------------------+
+|  SERVEABLE ZONE (analytics/, api/)                          |
+|  data/serveable/                                            |
+|  - Production-ready formats                                 |
+|  - Optimized for consumption                                |
++-------------------------------------------------------------+
 ```
 
 ### Component Architecture
@@ -127,7 +127,7 @@ The Alignment Research Dataset integration provides automated, incremental inges
 4. **GitHub Actions Workflow** (`.github/workflows/weekly-data-refresh.yml`)
    - Responsibility: Automated weekly data refresh
    - Trigger: Cron schedule (Monday 2am UTC) + manual dispatch
-   - Steps: Extract → Validate → Commit → Push
+   - Steps: Extract -> Validate -> Commit -> Push
    - Monitoring: Logs uploaded as artifacts (30-day retention)
 
 #### Supporting Infrastructure
@@ -168,18 +168,18 @@ The Alignment Research Dataset integration provides automated, incremental inges
 
 ```
 StampyAI/alignment-research-dataset/
-├── agentmodels.jsonl
-├── agisf.jsonl
-├── aisafety.info.jsonl
-├── alignmentforum.jsonl
-├── arbital.jsonl
-├── arxiv.jsonl
-├── blogs.jsonl
-├── distill.jsonl
-├── eaforum.jsonl
-├── lesswrong.jsonl
-├── special_docs.jsonl
-└── stampy.jsonl
++-- agentmodels.jsonl
++-- agisf.jsonl
++-- aisafety.info.jsonl
++-- alignmentforum.jsonl
++-- arbital.jsonl
++-- arxiv.jsonl
++-- blogs.jsonl
++-- distill.jsonl
++-- eaforum.jsonl
++-- lesswrong.jsonl
++-- special_docs.jsonl
++-- stampy.jsonl
 ```
 
 Each JSONL file contains records from a specific source, with consistent schema across all files.
@@ -315,7 +315,7 @@ python extraction_script.py --mode delta
 
 **Getting a Token**:
 1. Create account at https://huggingface.co
-2. Navigate to Settings → Access Tokens
+2. Navigate to Settings -> Access Tokens
 3. Create new token with "read" permissions
 4. Store as `HF_TOKEN` environment variable or GitHub secret
 
@@ -325,8 +325,8 @@ Each extraction creates a timestamped directory:
 
 ```
 data/raw/alignment_research/dumps/2025-11-06_104039/
-├── data.jsonl         # Extracted records (one per line)
-└── _metadata.json     # Extraction metadata
++-- data.jsonl         # Extracted records (one per line)
++-- _metadata.json     # Extraction metadata
 ```
 
 #### data.jsonl Format
@@ -659,7 +659,7 @@ pip install -r requirements.txt
 export HF_TOKEN="hf_your_token_here"
 
 # For GitHub Actions
-# Add as repository secret: Settings → Secrets → Actions → New secret
+# Add as repository secret: Settings -> Secrets -> Actions -> New secret
 # Name: HF_TOKEN
 # Value: your_token_here
 ```
@@ -971,4 +971,4 @@ rm -rf ~/.cache/huggingface/hub/datasets--StampyAI--alignment-research-dataset
 
 **Last Updated**: 2025-11-06
 **Document Version**: 1.0.0
-**Integration Status**: ✅ Production-ready
+**Integration Status**: [OK] Production-ready
