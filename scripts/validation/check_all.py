@@ -32,6 +32,12 @@ GATING = [
     ("repository invariants", ["scripts/validation/check_invariants.py"], True),
     ("write-capable workflows de-armed", ["scripts/validation/check_workflow_disarm.py"], True),
     ("evidence supports its claims", ["scripts/validation/check_evidence.py"], True),
+    # Ran in data-integrity.yml and NOT here, which is how main went red on
+    # 2026-08-10 with a local check_all passing minutes earlier: the corpus
+    # proposal landed on main and its accepted-drift entry landed on an
+    # unmerged branch. Second instance in one day of "run this and nothing
+    # else" being false. The entry point is now the thing CI runs.
+    ("references in prose resolve", ["scripts/validation/check_references.py"], True),
     ("no transcoding corruption in derived zones", ["scripts/validation/check_transcoding.py"], True),
     ("no email addresses in tracked zones", ["scripts/privacy/redact_emails.py", "--ci"], True),
     ("privacy gate can still fail", ["tests/test_privacy_gate.py"], True),
