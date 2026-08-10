@@ -42,6 +42,17 @@ name: Data Integrity
 #                              and on anything listed in config/reference_drift.json
 #                              with a reason.
 #
+#   check_transcoding.py       no derived zone carries a UTF-8-read-as-CP1252
+#                              corruption. Two served event titles were mojibake
+#                              from 2025-12-24 until 2026-08-06 and every gate
+#                              here passed on them, because the species injects
+#                              PLAUSIBLE PRINTABLE characters -- the ASCII gate
+#                              saw \uXXXX escapes, the control scan saw
+#                              codepoints above 32, the count invariants saw the
+#                              right number of records. data/raw/ is reported and
+#                              not gated: it is immutable, so the repair belongs
+#                              in the producer, not in the dump.
+#
 #   tests/test_*.py            run directly. pytest is in requirements.txt but
 #                              these are standalone runners and both pass without
 #                              it; invoking python directly keeps this job free of
@@ -88,6 +99,12 @@ jobs:
 
       - name: References in prose resolve to something
         run: python scripts/validation/check_references.py
+
+      - name: No transcoding corruption in any derived zone
+        run: python scripts/validation/check_transcoding.py
+
+      - name: The transcoding detector still fires
+        run: python tests/test_transcoding_detector.py
 
       - name: Serveable zone matches a fresh build (candidates)
         run: python scripts/build/project_candidates.py --check
