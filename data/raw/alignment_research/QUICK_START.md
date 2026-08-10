@@ -45,7 +45,7 @@ head -n 1 "${LATEST}data.jsonl" | python -m json.tool
 
 GitHub Actions runs automatically every Monday at 2am UTC.
 
-**Manual trigger**: Go to Actions tab → Weekly Data Refresh → Run workflow
+**Manual trigger**: Go to Actions tab -> Weekly Data Refresh -> Run workflow
 
 ## Files
 

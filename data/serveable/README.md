@@ -15,10 +15,10 @@
 
 This directory contains the final layer of the data lake architecture. Data here has been:
 
-1. ✅ Validated against schemas
-2. ✅ Cleaned and normalized
-3. ✅ Enriched with derived fields (where applicable)
-4. ✅ Optimized for consumption (indexed, formatted, compressed)
+1. [OK] Validated against schemas
+2. [OK] Cleaned and normalized
+3. [OK] Enriched with derived fields (where applicable)
+4. [OK] Optimized for consumption (indexed, formatted, compressed)
 
 **Current Status**: 1,194 timeline events ready for game integration
 
@@ -26,17 +26,17 @@ This directory contains the final layer of the data lake architecture. Data here
 
 ```
 serveable/
-├── MANIFEST.json           # Complete catalog of all serveable data
-├── api/                    # API-ready formats (JSON, REST-friendly)
-│   └── timeline_events/    # Game timeline events (1,194 events)
-│       ├── all_events.json           # Manual curated events (28)
-│       ├── by_year/                  # Manual events by year
-│       ├── by_category/              # Manual events by category
-│       ├── enriched_alignment_research/  # A-tier research events (1,166)
-│       │   ├── alignment_research_events.json
-│       │   └── by_year/              # Research events by year
-│       └── manifest.json             # Timeline events metadata
-└── analytics/              # Analytics-ready formats (future)
++-- MANIFEST.json           # Complete catalog of all serveable data
++-- api/                    # API-ready formats (JSON, REST-friendly)
+|   +-- timeline_events/    # Game timeline events (1,194 events)
+|       +-- all_events.json           # Manual curated events (28)
+|       +-- by_year/                  # Manual events by year
+|       +-- by_category/              # Manual events by category
+|       +-- enriched_alignment_research/  # A-tier research events (1,166)
+|       |   +-- alignment_research_events.json
+|       |   +-- by_year/              # Research events by year
+|       +-- manifest.json             # Timeline events metadata
++-- analytics/              # Analytics-ready formats (future)
 ```
 
 ## Data Sources
@@ -46,7 +46,7 @@ serveable/
 **Two datasets available:**
 
 #### 1. Manual Curated Events (28 events)
-**Source**: `data/raw/events/` → `scripts/transformation/clean_events.py`
+**Source**: `data/raw/events/` -> `scripts/transformation/clean_events.py`
 
 **Files**:
 - `all_events.json` - All 28 manual events
@@ -57,7 +57,7 @@ serveable/
 - `stats.json` - Statistics
 
 #### 2. Alignment Research Events (1,000 events)
-**Source**: `data/raw/alignment_research/` → cleaning → enrichment → transformation
+**Source**: `data/raw/alignment_research/` -> cleaning -> enrichment -> transformation
 
 **Files**:
 - `alignment_research/alignment_research_events.json` - All 1,000 events
@@ -86,11 +86,11 @@ with open('data/serveable/api/timeline_events/by_year/2024.json') as f:
 
 All data in the serveable zone:
 
-- ✅ Passes schema validation
-- ✅ Has complete attribution (sources, citations)
-- ✅ Is ASCII-compliant
-- ✅ Has proper metadata (version, timestamp)
-- ✅ Is idempotent (safe to regenerate)
+- [OK] Passes schema validation
+- [OK] Has complete attribution (sources, citations)
+- [OK] Is ASCII-compliant
+- [OK] Has proper metadata (version, timestamp)
+- [OK] Is idempotent (safe to regenerate)
 
 ### Freshness
 
@@ -152,13 +152,13 @@ print(f"  {len(events_2024)} events in 2024")
 ## Operations
 
 **Allowed**:
-- ✅ Read data
-- ✅ Regenerate from raw/transformed zones
-- ✅ Update via transformation pipelines
+- [OK] Read data
+- [OK] Regenerate from raw/transformed zones
+- [OK] Update via transformation pipelines
 
 **Not Allowed**:
-- ❌ Manual edits (always use pipelines)
-- ❌ Direct writes without validation
+- [NO] Manual edits (always use pipelines)
+- [NO] Direct writes without validation
 
 ## Related Documentation
 

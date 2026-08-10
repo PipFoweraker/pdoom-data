@@ -23,20 +23,20 @@ This document outlines the strategy for managing data visibility and public acce
 
 ```
 pdoom-data (private)
-├── data/raw/              [NEVER PUBLIC]
-│   ├── Source credentials, API tokens
-│   ├── Unvalidated data dumps
-│   └── Potentially sensitive metadata
-│
-├── data/transformed/      [NEVER PUBLIC]
-│   ├── Intermediate processing artifacts
-│   ├── Data quality logs
-│   └── Work-in-progress transformations
-│
-└── data/serveable/        [PUBLISHABLE]
-    ├── Fully validated datasets
-    ├── Complete attribution
-    └── Production-ready formats
++-- data/raw/              [NEVER PUBLIC]
+|   +-- Source credentials, API tokens
+|   +-- Unvalidated data dumps
+|   +-- Potentially sensitive metadata
+|
++-- data/transformed/      [NEVER PUBLIC]
+|   +-- Intermediate processing artifacts
+|   +-- Data quality logs
+|   +-- Work-in-progress transformations
+|
++-- data/serveable/        [PUBLISHABLE]
+    +-- Fully validated datasets
+    +-- Complete attribution
+    +-- Production-ready formats
 ```
 
 ### Publishing Strategy: GitHub Actions Automation (Recommended)
@@ -84,10 +84,10 @@ Never publish raw data repository
 ## Implementation Phases
 
 ### Phase 1: Current (No Publishing)
-- ✅ Establish three-zone architecture
-- ✅ Build extraction pipelines
-- ✅ Implement validation infrastructure
-- 🔄 Develop transformation scripts (Issues #13-16)
+- [OK] Establish three-zone architecture
+- [OK] Build extraction pipelines
+- [OK] Implement validation infrastructure
+- [SYNC] Develop transformation scripts (Issues #13-16)
 
 ### Phase 2: Serveable Zone Population (Future)
 - Transform raw data to serveable formats

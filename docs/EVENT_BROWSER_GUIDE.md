@@ -248,17 +248,17 @@ You can add any custom metadata via the Custom Field JSON:
 
 ```
 Raw Events
-    ↓
+    v
 Cleaned Events (clean.py)
-    ↓
+    v
 Enriched Events (enrich.py)
-    ↓
+    v
 Timeline Events (transform_to_timeline_events.py)
-    ↓
+    v
 Serveable Zone
-    ↓
-[EVENT BROWSER] ← You are here
-    ↓
+    v
+[EVENT BROWSER] <- You are here
+    v
 Game Integration / Website Display
 ```
 
@@ -330,16 +330,16 @@ Integrate the Event Browser into the pdoom1-website to allow players to:
 
 ```
 Website Event Page
-    ↓
+    v
 [Event Browser Component] (embedded)
-    ↓
+    v
 Player Feedback Form
-    ↓
+    v
 Feedback API Endpoint (quarantined)
-    ↓
+    v
 Moderation Queue
-    ↓
-Approved Feedback → Metadata Updates
+    v
+Approved Feedback -> Metadata Updates
 ```
 
 ### Implementation Strategy
@@ -405,15 +405,15 @@ All player feedback is quarantined until review:
 
 ```
 data/
-└── feedback/
-    ├── pending/
-    │   └── feedback_12345.json
-    ├── approved/
-    │   └── feedback_12346.json
-    ├── rejected/
-    │   └── feedback_12347.json
-    └── metadata_updates/
-        └── events_metadata_community.json
++-- feedback/
+    +-- pending/
+    |   +-- feedback_12345.json
+    +-- approved/
+    |   +-- feedback_12346.json
+    +-- rejected/
+    |   +-- feedback_12347.json
+    +-- metadata_updates/
+        +-- events_metadata_community.json
 ```
 
 ### Moderation Interface
@@ -460,7 +460,7 @@ This layer can be:
 ### Keyboard Shortcuts
 
 - `Enter` in search box: Apply filters
-- `←/→` arrow keys: Navigate pages (future enhancement)
+- `<-/->` arrow keys: Navigate pages (future enhancement)
 - `Esc`: Clear selection (future enhancement)
 
 ### Bulk Operations

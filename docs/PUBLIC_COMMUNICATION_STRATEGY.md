@@ -81,21 +81,21 @@ This document outlines the strategy for:
 
 ```
 logs/
-├── consolidated/               # NEW: Human-readable summaries
-│   └── YYYY-MM-DD_summary.md  # Daily summary of all operations
-├── pipeline/                   # Pipeline execution logs
-│   └── YYYY-MM-DD_HH-MM-SS/
-│       ├── validation.log
-│       ├── cleaning.log
-│       ├── enrichment.log
-│       ├── transformation.log
-│       └── manifest.log
-├── extraction/                 # Source data extraction
-│   └── alignment_research/
-│       └── YYYY-MM-DD.log
-└── validation/                 # Schema validation
-    └── alignment_research/
-        └── YYYY-MM-DD.log
++-- consolidated/               # NEW: Human-readable summaries
+|   +-- YYYY-MM-DD_summary.md  # Daily summary of all operations
++-- pipeline/                   # Pipeline execution logs
+|   +-- YYYY-MM-DD_HH-MM-SS/
+|       +-- validation.log
+|       +-- cleaning.log
+|       +-- enrichment.log
+|       +-- transformation.log
+|       +-- manifest.log
++-- extraction/                 # Source data extraction
+|   +-- alignment_research/
+|       +-- YYYY-MM-DD.log
++-- validation/                 # Schema validation
+    +-- alignment_research/
+        +-- YYYY-MM-DD.log
 ```
 
 **Consolidation Script**: `scripts/logging/consolidate_logs.py`
@@ -433,19 +433,19 @@ jobs:
 ## Privacy & Security Considerations
 
 ### What to Share Publicly
-✅ Data quality metrics
-✅ Record counts and statistics
-✅ Schema versions
-✅ Pipeline execution times
-✅ Error rates (aggregate)
-✅ Dataset descriptions
+[OK] Data quality metrics
+[OK] Record counts and statistics
+[OK] Schema versions
+[OK] Pipeline execution times
+[OK] Error rates (aggregate)
+[OK] Dataset descriptions
 
 ### What to Keep Private
-❌ API keys and credentials
-❌ Internal infrastructure details
-❌ Specific error messages with paths
-❌ Performance bottlenecks (until fixed)
-❌ Unreleased features in development
+[NO] API keys and credentials
+[NO] Internal infrastructure details
+[NO] Specific error messages with paths
+[NO] Performance bottlenecks (until fixed)
+[NO] Unreleased features in development
 
 ---
 
@@ -533,4 +533,4 @@ jobs:
 
 ---
 
-**Status**: ✅ Strategy documented, 🔄 Implementation in progress
+**Status**: [OK] Strategy documented, [SYNC] Implementation in progress

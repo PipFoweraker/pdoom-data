@@ -131,12 +131,6 @@ def main():
         print("FAILED: %d gating check(s) -- %s" % (len(failures), ", ".join(failures)))
         return 1
     print("All gating checks pass.")
-    print()
-    print("Note: 'Development Documentation CI/CD' is red in GitHub Actions and is")
-    print("expected to be. It fails an ASCII gate on about 19 documentation files,")
-    print("and that failure is currently the only thing preventing a job that")
-    print("appends to DEVBLOG.md on every push to main. See CLAUDE.md before")
-    print("clearing it.")
     return 0
 
 

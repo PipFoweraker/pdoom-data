@@ -67,7 +67,7 @@ def normalise(text):
     content.
     """
     t = text.lower()
-    t = t.replace("–", "-").replace("—", "-")
+    t = t.replace(u"\u2013", "-").replace(u"\u2014", "-")  # en dash, em dash
     t = re.sub(r"[,;:()\[\]{}\"'`]", " ", t)
     t = re.sub(r"\s+", " ", t)
     return t
