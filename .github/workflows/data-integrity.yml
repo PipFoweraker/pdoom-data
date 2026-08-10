@@ -53,6 +53,17 @@ name: Data Integrity
 #                              not gated: it is immutable, so the repair belongs
 #                              in the producer, not in the dump.
 #
+#   redact_emails.py --ci      no TRACKED file carries an address-shaped
+#                              fragment. Ten records sat in the public zone for
+#                              eight months after a redaction pass reported
+#                              clean, because the pattern that failed to match
+#                              them was also the pattern asked whether anything
+#                              had been missed. This gates on residue_scan, the
+#                              independently written one, and on tracked files
+#                              only: the 196MB local dump is gitignored, was
+#                              never published, and must not fail a build for
+#                              everyone else.
+#
 #   tests/test_*.py            run directly. pytest is in requirements.txt but
 #                              these are standalone runners and both pass without
 #                              it; invoking python directly keeps this job free of
@@ -102,6 +113,12 @@ jobs:
 
       - name: No transcoding corruption in any derived zone
         run: python scripts/validation/check_transcoding.py
+
+      - name: No email addresses in any tracked zone
+        run: python scripts/privacy/redact_emails.py --ci
+
+      - name: The privacy gate can still fail
+        run: python tests/test_privacy_gate.py
 
       - name: The transcoding detector still fires
         run: python tests/test_transcoding_detector.py
