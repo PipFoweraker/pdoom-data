@@ -3,7 +3,7 @@
 Generalized data enrichment pipeline for the transformed zone.
 
 This script implements the enrichment layer of the data lake:
-    data/transformed/cleaned/* → data/transformed/enriched/*
+    data/transformed/cleaned/* -> data/transformed/enriched/*
 
 Operations:
 - Extract temporal fields (year, quarter, month, decade)

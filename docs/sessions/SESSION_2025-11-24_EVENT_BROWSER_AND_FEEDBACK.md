@@ -114,17 +114,17 @@ Built an interactive browser-based event management tool and designed a comprehe
 **Architecture**:
 ```
 Website Event Page
-    ↓
+    v
 [Embedded Event Browser]
-    ↓
+    v
 Player Feedback Form
-    ↓
+    v
 POST /api/events/feedback (Quarantined)
-    ↓
+    v
 Admin Moderation Panel
-    ↓
+    v
 Community Metadata Layer
-    ↓
+    v
 Display on Website + Export to pdoom-data
 ```
 

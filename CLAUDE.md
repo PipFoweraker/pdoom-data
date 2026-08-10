@@ -103,14 +103,30 @@ have destroyed data. The repair and the de-arm landed together, and
 regains an unattended trigger. Re-arming is a deliberate act: remove the entry
 from `DISARMED` in the same commit that arms it.
 
-**Do not clear the ASCII backlog to make CI green.** About 20 files in `docs/`
-fail the gate on box-drawing and arrows. That failure is the only thing keeping
-the `documentation-publish` job from running, and that job appends to
-`DEVBLOG.md` with `echo >>` on every push to main, so the file grows without
-bound. Both are de-armed now, but the coupling is real. Also: never run
-`legacy/2025-09_prototype/fix_ascii.py`, whose `?` fallback would shred every
-tree diagram. Use an explicit substitution map that errors on unmapped
-characters.
+**The ASCII backlog is CLEARED, 2026-08-10, and the reason it was safe is the
+part worth keeping.** Nineteen files failed the gate on box-drawing, arrows and
+emoji. This paragraph used to say clearing them would arm `documentation-publish`,
+a job that appends to `DEVBLOG.md` with `echo >>` on every push to main so the
+file grows without bound.
+
+**That coupling was already dead when this warning was written and the warning
+outlived it.** The job was de-armed on 2026-07-30 by being **commented out** --
+`.github/workflows/documentation-ci.yml` lines 195-242, which is prose, not YAML.
+A commented job cannot run whether the gate above it is red or green, so the red
+was protecting nothing. **This is the stale-copy failure this file warns about
+two sections below, committed by this file, about itself.** Check the workflow
+before trusting a claim about the workflow.
+
+Still true and still load-bearing: **never run
+`legacy/2025-09_prototype/fix_ascii.py`**, whose `?` fallback would shred every
+tree diagram. The 2026-08-10 clearance used an explicit substitution map that
+**errors on unmapped characters**, keeps box-drawing at one ASCII character per
+box character so tree alignment survives, and hand-corrected the three Python
+files rather than substituting in them -- `check_evidence.py` carried en and em
+dashes **inside the string literals that normalise en and em dashes**, so a
+textual pass would have produced `replace("-", "-")` and silently disabled the
+check while turning the file green. That is the whole argument for an explicit
+map in one example.
 
 **Never open an existing file with `encoding="ascii"` for writing.** Python
 truncates on open, then raises on the first non-ASCII byte, destroying the file
