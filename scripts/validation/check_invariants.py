@@ -251,16 +251,26 @@ def check_landmine_guarded():
 # exists so the check can be turned on TODAY, catching any NEW drift, without
 # a pre-existing problem blocking every build until it is fixed. Delete an
 # entry when its issue closes -- and the check will then start enforcing it.
-KNOWN_COUNT_DIVERGENCES = {
-    "data/serveable/api/timeline_events/manifest.json": (
-        "reports 28 events, generated 2025-11-09, while all_events.json holds "
-        "1194. Stale by 1166 records. Tracked in #52."),
-    "data/serveable/api/timeline_events/stats.json": (
-        "reports total_events 28 with a by_rarity breakdown of the original "
-        "hand-authored set. Stale by 1166 records. Tracked in #52."),
-    "data/serveable/api/timeline_events/event_index.json": (
-        "indexes 28 of 1194 records. Tracked in #52."),
-}
+# EMPTIED 2026-08-10, and kept as an empty dict rather than deleted, because the
+# mechanism is still the right one and the next divergence should have to be
+# declared here in a commit rather than discovered in production.
+#
+# It held three entries for nine months: manifest.json, stats.json and
+# event_index.json each claiming 28 records against all_events.json's 1,194.
+# Every one was true, documented, printed on every run, and passing.
+#
+# That is the shape Workshop 2 named as its own class 5, the KNOWING ALLOWLIST:
+# a check that sees the defect perfectly and is configured to permit it. It
+# defeats every remedy the estate proposed that week -- arming it does nothing
+# because it is armed, re-aiming does nothing because it is aimed correctly, a
+# freshness window does nothing because it is current. The check was never
+# fooled. The reader was, by its exit code.
+#
+# The three files now have a producer (project_timeline_events.py builds them
+# from the feed, and --check asserts byte-identity), so the entries are removed
+# rather than updated. An entry added here should carry a return date, or it
+# becomes what these were.
+KNOWN_COUNT_DIVERGENCES = {}
 
 
 def check_timeline_event_counts():

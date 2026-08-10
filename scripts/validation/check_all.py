@@ -44,6 +44,14 @@ REBUILD = [
     ("candidates rebuild is byte-identical", ["scripts/build/project_candidates.py", "--check"], True),
     ("frontier_labs rebuild is byte-identical", ["scripts/build/project_frontier_labs.py", "--check"], True),
     ("reviewed rebuild is byte-identical", ["scripts/build/project_reviewed.py", "--check"], True),
+    # Both of these ran in data-integrity.yml and NOT here, so "run check_all.py
+    # and nothing else" was false for two of the five projections -- including
+    # the one that guards the timeline_events sidecars. Found 2026-08-10 while
+    # giving those sidecars a producer. A single entry point that covers most of
+    # the checks is the same defect class as a catalogue that describes most of
+    # its collection.
+    ("timeline_events rebuild is byte-identical", ["scripts/build/project_timeline_events.py", "--check"], True),
+    ("taxonomy rebuild is byte-identical", ["scripts/build/project_taxonomy.py", "--check"], True),
 ]
 
 REPORTING = [

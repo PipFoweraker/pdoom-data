@@ -1,11 +1,14 @@
 {
   "version": "1.0.0",
   "schema_version": "1.0.0",
-  "generated_at": "2025-11-09T02:12:35.672991Z",
-  "total_events": 28,
+  "generated_at": null,
+  "total_events": 1194,
   "years": [
     2016,
+    2017,
     2018,
+    2019,
+    2020,
     2021,
     2022,
     2023,
@@ -22,6 +25,7 @@
     "all_events": "all_events.json",
     "by_year": "by_year/{year}.json",
     "by_category": "by_category/{category}.json",
-    "index": "event_index.json"
+    "event_index": "event_index.json",
+    "stats": "stats.json"
   }
 }
