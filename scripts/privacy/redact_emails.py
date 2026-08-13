@@ -70,6 +70,35 @@ Coverage was the other half of the failure. The 2026-08-01 run cleaned the raw
 dumps and the serveable zone and never listed data/transformed/, which is
 tracked, therefore public, and sits between them.
 
+The sixth bug, 2026-08-13: mode (d), which the scanner could not see
+--------------------------------------------------------------------
+The three modes above are all things the PDF extractor does to an address. The
+fourth is something THIS REPOSITORY does to one. Both importers cap a
+description at 1,000 characters --
+
+    scripts/enrichment/transform_enriched.py:204
+    scripts/transformation/transform_to_timeline_events.py:228
+        description = description[:997] + '...'
+
+-- and when that cut lands inside a contact line it severs the address, leaving
+the local part, the '@', and however much of the domain fitted:
+
+    "...St.Gallen, Switzerland  \\nleimeister@un..."
+
+RESIDUE ends in "\\.\\s?[A-Za-z]{2,24}", so it requires a TLD. A severed address
+has no TLD, so the verifier could not match this at any setting. It was not
+misconfigured and the regex was not buggy: the scanner was blind to the mode by
+construction, which is why eight months of green runs said nothing about it.
+Three files carried it at HEAD, all in the public serveable zone, and it was
+live on raw.githubusercontent.com and on pdoom1.com.
+
+Mode (d) is looser than (a)-(c) by nature -- take away the TLD and "pass@k"
+and "leimeister@un" differ only in shape -- so it is bounded by measurement
+rather than by taste. Measured over data/ entire, tracked and untracked,
+2026-08-13: 808,633 decoded strings, 3,046 of them ending at a truncation
+marker, 3 with an address-shaped token immediately before that marker, and all
+3 were the same real address. The bounds below drop nothing that was real.
+
 What this does NOT fix
 ----------------------
 Redaction applies to HEAD. Addresses remain in git history, in existing clones
@@ -122,6 +151,80 @@ _DOMAIN = r"%s(?:\s?[.\-]\s?%s)*\s?\.\s?[A-Za-z]{2,24}" % (_LABEL, _LABEL)
 # a closing brace immediately before the '@', so it cannot run away.
 _LOCAL = r"(?:\{[^{}@]{1,200}\}|[A-Za-z0-9][A-Za-z0-9._%+\-]{0,63})"
 EMAIL = re.compile(_LOCAL + r"\s*@\s*" + _DOMAIN)
+
+# MODE (d), ADDED 2026-08-13. The domain is not damaged, it is ABSENT, because
+# the importer's 1,000-character cap cut the string in the middle of it. See
+# "The sixth bug" above for how this stayed invisible.
+#
+# Everything here is anchored to the truncation marker the importers actually
+# write -- '...', from `description[:997] + '...'`, plus the U+2026 form that
+# clean.py normalises INTO that, so a file caught before normalisation is still
+# covered. The marker is what makes the rule safe: a severed address exists
+# only where a cut happened, and the cut leaves a mark.
+#
+# Three bounds, and each one is load-bearing against a measured false-positive
+# family rather than against an imagined one:
+#
+#   * The address must be the last thing before the marker, at the END of the
+#     string. Measured: every marker-adjacent '@' in the corpus is end-of-
+#     string, so the anchor costs nothing and it excludes the whole of prose.
+#   * The local part must be attached to the '@' with NO whitespace. That is
+#     the difference between "leimeister@un..." and "8 CPU cores @ 2.2...",
+#     and it also excludes "@realDonaldTrump" and BibTeX "@article{", which
+#     have no local part at all. Mode (c) tolerates a space before the '@';
+#     mode (d) cannot afford to, and that gap is stated, not hidden.
+#   * The local part must look like a local part rather than an inline token:
+#     a brace group, or four-plus characters containing a separator, or -- if
+#     it begins its own line, as a contact line in extracted PDF text does --
+#     five-plus characters. Short bare tokens are what metric and LaTeX
+#     notation is made of: pass(4), Acc(3), lx(2), math(4), ACDC(4).
+#
+# The residual risk, stated: a severed address with a short bare local part
+# starting its own line ("\nbob@un...") is invisible to this. That is the
+# price of not eating "pass@k", and pass@k appears in this corpus 21 times per
+# dump while bob@un appears zero.
+_MARKER = r"(?:\.\.\.|\u2026)"
+SEVERED = re.compile(
+    r"(?P<addr>" + _LOCAL + r"@(?:[A-Za-z0-9][A-Za-z0-9.\-]{0,23})?)"
+    r"(?P<tail>" + _MARKER + r"[ \t]*)$")
+
+
+def _severed_local_ok(local, line_start):
+    """Does this local part look like a person, or like inline notation?"""
+    if local.startswith("{"):
+        # A brace group is several data subjects in one token and is not a
+        # shape any notation family produces to the LEFT of an '@'.
+        return True
+    if not re.search(r"[A-Za-z]", local):
+        return False
+    if len(local) >= 4 and re.search(r"[._%+\-]", local):
+        return True
+    return line_start and len(local) >= 5
+
+
+def _starts_its_line(text, index):
+    """True only for a REAL preceding newline, never for the start of a string.
+
+    Deliberate. "lx@par..." as an entire string looks line-initial and is a
+    LaTeX internal cut at the boundary; "...Switzerland  \\nleimeister@un..."
+    is a contact line. Requiring the newline separates them, and no description
+    in this corpus opens with an address.
+    """
+    i = index - 1
+    while i >= 0 and text[i] in " \t":
+        i -= 1
+    return i >= 0 and text[i] == "\n"
+
+
+def severed_match(s):
+    """The mode-(d) match in s, or None. Detection side; see severed_residue."""
+    m = SEVERED.search(s)
+    if not m or REDACTION in m.group("addr"):
+        return None
+    local = m.group("addr").split("@", 1)[0]
+    if not _severed_local_ok(local, _starts_its_line(s, m.start("addr"))):
+        return None
+    return m
 
 # INDEPENDENTLY WRITTEN, and that is the whole point of it.
 #
@@ -220,7 +323,65 @@ def find_addresses(parsed):
     hits = []
     for s in strings:
         hits.extend(EMAIL.findall(s))
+        m = severed_match(s)
+        if m:
+            hits.append(m.group("addr"))
     return hits
+
+
+def severed_residue(s):
+    """Mode (d) for the VERIFIER, and deliberately not severed_match().
+
+    Same reason residue_scan() is not EMAIL: a defect shared by detection and
+    verification is invisible to both. So this decomposes the string -- strip
+    the marker, take the last line, take its last token, split on '@' -- where
+    severed_match() applies a regex, and it drops the line-position condition
+    entirely rather than reproducing it. That makes it strictly BROADER, which
+    is the safe direction: where the two disagree the run refuses to write and
+    a human widens EMAIL, which is exactly the workflow that caught mode (d).
+
+    Honest about the limit of that independence: mode (d) has thin signal, so
+    both sides end up agreeing that a bare four-character local part is
+    notation rather than a person. They reach it by different code, not by a
+    different principle, and if that judgement is wrong both are wrong.
+    """
+    text = s.rstrip(" \t")
+    for marker in ("...", "\u2026"):
+        if text.endswith(marker):
+            text = text[:-len(marker)]
+            break
+    else:
+        return None
+    line = text.split("\n")[-1]
+    if REDACTION in line:
+        return None
+    tokens = line.split()
+    if not tokens:
+        return None
+    token = tokens[-1]
+    if token.count("@") != 1:
+        return None
+    local, frag = token.split("@")
+    if local.endswith("}"):
+        # A brace group carries spaces and newlines, so the last whitespace
+        # token is only its tail. Widen back to the opening brace, which is
+        # what bounds it.
+        head = text.rsplit("@", 1)[0]
+        start = head.rfind("{")
+        if start < 0 or "@" in head[start:]:
+            return None
+        local = head[start:].strip()
+        token = local + "@" + frag
+    elif not re.match(r"^[A-Za-z0-9][A-Za-z0-9._%+\-]*$", local):
+        return None
+    if frag and not re.match(r"^[A-Za-z0-9][A-Za-z0-9.\-]*$", frag):
+        return None
+    if re.search(r"\.[A-Za-z]{2,24}$", frag):
+        # It kept a TLD, so it is not severed and modes (a)-(c) own it.
+        return None
+    if not _severed_local_ok(local, True):
+        return None
+    return token
 
 
 def residue_scan(parsed):
@@ -262,6 +423,13 @@ def residue_scan(parsed):
             if sum(1 for c in domain if c.isspace()) > 1 or len(domain) > 40:
                 continue
             hits.append(frag.strip())
+        # Mode (d). RESIDUE cannot reach these: it ends in a TLD and a severed
+        # address has none, so this is a second pass rather than a looser
+        # RESIDUE. Loosening RESIDUE to make the TLD optional would have made
+        # every '@' in 800,000 strings a hit.
+        severed = severed_residue(s)
+        if severed:
+            hits.append(severed)
     return hits
 
 
@@ -269,6 +437,16 @@ def scrub(node, counter):
     if isinstance(node, str):
         new, n = EMAIL.subn(REDACTION, node)
         counter[0] += n
+        # Mode (d), after EMAIL rather than before it: an address that kept its
+        # TLD is EMAIL's, and once EMAIL has replaced it there is no '@' left
+        # for this to find. The truncation marker is KEPT. It is the importer's
+        # mark that prose was cut, not part of the address, and removing it
+        # would quietly turn a truncated description into an apparently
+        # complete one.
+        m = severed_match(new)
+        if m:
+            new = new[:m.start("addr")] + REDACTION + m.group("tail")
+            counter[0] += 1
         return new
     if isinstance(node, list):
         return [scrub(v, counter) for v in node]

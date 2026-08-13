@@ -1,0 +1,50 @@
+{
+  "tombstone_id": "email-redaction-2026-08-13",
+  "date": "2026-08-13",
+  "reason_category": "personal_data_minimisation",
+  "reason": "Contact email addresses printed on academic papers were carried into descriptions by an unparsed-PDF-text import and reached the serveable zone, which is public. The data subjects did not consent to inclusion in a game dataset.",
+  "action": "email addresses replaced with '[email address redacted]' inside decoded string values; documents re-serialised",
+  "content_recorded": false,
+  "note_on_content": "No redacted content is recorded here, not even hashed or partial. Counts and domains only. A tombstone that preserves what it erased defeats its purpose.",
+  "limits": "Applies to HEAD only. Addresses remain in git history, in existing clones and in forks. Removing those requires a history rewrite, which is a separate and irreversible decision.",
+  "raw_zone_exception": "data/raw/ is immutable by contract. CLAUDE.md permits exactly one exception, a privacy tombstone. The MANIFEST.sha256 entries are deliberately NOT updated: the original hash stays as proof of what the file was, and sha256_after_redaction below records what it became. check_invariants accepts a mismatch only when the current hash matches this record, so editing raw without an attributable tombstone still fails a build.",
+  "serveable_zone_anomaly": "data/serveable/ is normally a build output that is never hand-edited. The timeline_events collections have no current producer, so they were edited in place. That is a pipeline defect, recorded rather than hidden. See issue #45.",
+  "affected": [
+    {
+      "file": "data/serveable/api/timeline_events/all_events.json",
+      "occurrences": 1,
+      "unique": 1,
+      "domains": {
+        "un": 1
+      },
+      "replacements": 1,
+      "sha256_after_redaction": "d0b5ccbd37a489ae2e785359ac8d232291dcc9a2f203a7c6de5a64f1b096093f"
+    },
+    {
+      "file": "data/serveable/api/timeline_events/enriched_alignment_research/by_year/2021.json",
+      "occurrences": 1,
+      "unique": 1,
+      "domains": {
+        "un": 1
+      },
+      "replacements": 1,
+      "sha256_after_redaction": "00f8f7e3992fd96ea079d90fa972a7570cbd4646074a061b8756a049214cbd4a"
+    },
+    {
+      "file": "data/serveable/api/timeline_events/enriched_alignment_research/enriched_alignment_research_events.json",
+      "occurrences": 1,
+      "unique": 1,
+      "domains": {
+        "un": 1
+      },
+      "replacements": 1,
+      "sha256_after_redaction": "89d139228b62ae61fe48d3e9c98ea97a097ce455a6f8c11bae580a16c05e1162"
+    }
+  ],
+  "refused": [],
+  "totals": {
+    "files": 3,
+    "unique_addresses": 1,
+    "occurrences": 3
+  }
+}
