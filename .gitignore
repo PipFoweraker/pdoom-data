@@ -62,3 +62,6 @@ dev_metrics.db
 tools/scan_view.html
 .venv-checks/
 .venv-print/
+.venv-checks/
+.venv-print/
+data/curated/watchlist/triage_log.jsonl
