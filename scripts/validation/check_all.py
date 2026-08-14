@@ -54,6 +54,11 @@ GATING = [
 ]
 
 REBUILD = [
+    # The watch list is where judgement lives, so its rebuild has an extra
+    # duty: it must carry human fields forward untouched. --check compares
+    # only the derived half, which is what lets a rated atom still pass.
+    ("watch-list rebuild is byte-identical",
+     ["scripts/build/project_watchlist.py", "--check"], True),
     ("candidates rebuild is byte-identical", ["scripts/build/project_candidates.py", "--check"], True),
     ("frontier_labs rebuild is byte-identical", ["scripts/build/project_frontier_labs.py", "--check"], True),
     ("reviewed rebuild is byte-identical", ["scripts/build/project_reviewed.py", "--check"], True),
