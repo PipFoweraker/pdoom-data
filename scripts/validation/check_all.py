@@ -40,6 +40,13 @@ GATING = [
     ("references in prose resolve", ["scripts/validation/check_references.py"], True),
     ("no transcoding corruption in derived zones", ["scripts/validation/check_transcoding.py"], True),
     ("no email addresses in tracked zones", ["scripts/privacy/redact_emails.py", "--ci"], True),
+    # LLM scan payloads are the one source with no upstream schema and a
+    # scanner capable of writing a fluent record for an event that did not
+    # happen. This gate does not check that they are TRUE -- it checks they do
+    # not overstate what is known: no date without a source, no unsourced
+    # record without an UNVERIFIED flag.
+    ("scan payloads hold their claim tracking",
+     ["scripts/validation/check_scan_claims.py"], True),
     ("privacy gate can still fail", ["tests/test_privacy_gate.py"], True),
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),

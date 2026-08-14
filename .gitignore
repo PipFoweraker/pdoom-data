@@ -60,3 +60,5 @@ dev_metrics.db
 # Embeds the current unreviewed pile, so it is stale the moment a verdict
 # lands. Regenerable in a second; 600KB of derived HTML is not history.
 tools/scan_view.html
+.venv-checks/
+.venv-print/
