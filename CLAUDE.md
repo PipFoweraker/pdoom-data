@@ -318,10 +318,17 @@ inferring either. Installing means dropping the release tarball into
 the Windows seat -- so this is a seat note, not a correction.
 
 Verifying the repo needs two packages that are deliberately not in
-`requirements.txt`:
+`requirements.txt`. **There is already a virtualenv holding them**, untracked
+and, until 2026-08-15, undocumented:
 
-    pip install -r requirements-checks.txt
-    python scripts/validation/check_all.py
+    .venv-checks/bin/python scripts/validation/check_all.py
 
-Without them `check_all.py` refuses to run rather than skipping checks, which
-is why a fresh clone reports missing dependencies instead of a green tick.
+Use that interpreter. Bare `python` on the Linux seat is a Codium-scoped
+interpreter that does NOT see them, so `check_all.py` refuses to run and
+reports missing dependencies -- which is correct behaviour and reads exactly
+like a broken repo. It is not. It is the wrong interpreter. A fresh clone with
+no venv wants `pip install -r requirements-checks.txt` instead.
+
+This cost an hour on 2026-08-15: the missing-dependency message was read as
+"the de-arm guard cannot run on this seat", and the fix looked like installing
+the packages globally. The guard had been runnable the whole time.
