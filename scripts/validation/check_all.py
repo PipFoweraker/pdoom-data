@@ -48,6 +48,10 @@ GATING = [
     ("scan payloads hold their claim tracking",
      ["scripts/validation/check_scan_claims.py"], True),
     ("privacy gate can still fail", ["tests/test_privacy_gate.py"], True),
+    # Same reasoning as the privacy gate. The cross-reference half of
+    # check_scan_claims.py currently reports every citation resolving, and a
+    # detector that never fires is indistinguishable from one that cannot.
+    ("scan cross-reference check fires", ["tests/test_scan_cross_references.py"], True),
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),
     ("transcoding detector fires", ["tests/test_transcoding_detector.py"], True),

@@ -77,12 +77,15 @@ read-only and therefore safe to have armed.
 
 ## Served collections
 
+Paths below are relative to `data/serveable/`. There is no top-level `api/`;
+this table said there was until 2026-08-15. Counts re-measured 2026-08-15.
+
 | Path | What it is |
 |---|---|
-| `api/timeline_events/all_events.json` | 1,194 events. 28 hand-authored, 1,166 bulk arXiv import whose descriptions are unparsed PDF text. |
+| `api/timeline_events/all_events.json` | 1,194 events, keyed by slug. 28 hand-authored narrative records; 1,166 bulk, which is **1,129 arXiv plus 37 Distill**, not arXiv alone. Bulk descriptions are unparsed PDF text. |
 | `api/candidates/all_candidates.jsonl` | 3,434 candidates, 2023-2026 forward-fill. Unreviewed unless `review_status` says otherwise. |
-| `api/reviewed/all_reviewed.jsonl` | 140 human-accepted candidates, attributed. Not `event_v1` shape; not engine-ingestible without a mapping layer. |
-| `api/frontier_labs/all_labs.json` | 46 organisations with founding dates and per-date evidence. |
+| `api/reviewed/all_reviewed.jsonl` | 518 reviewed candidates carrying 526 attributed reviews: 337 accept, 166 unsure, 23 reject, all by Pip Foweraker; 8 records hold two reviews. **Reviewed, not accepted** -- do not read this file as an accept list. Not `event_v1` shape; not engine-ingestible without a mapping layer. |
+| `api/frontier_labs/all_labs.json` | 46 organisations with founding dates and per-date evidence. 4 founded-null, 16 contested. |
 
 ## Landmines
 
@@ -305,4 +308,20 @@ printing and capture to `coordination`.
     python scripts/**/*.py
     python -m json.tool
     git add / commit / push / pull / fetch
-    gh issue list / view
+    gh issue list / view       NOT INSTALLED on the Linux seat -- see below
+
+`gh` is pre-approved but absent on the Linux seat, which has no `apt`, no
+`sudo` and no `gh` binary on `PATH` (checked 2026-08-15). An assistant working
+here is blind to CI status and the issue queue, and should say so rather than
+inferring either. Installing means dropping the release tarball into
+`~/.local/bin` by hand. The permission is not wrong -- it is presumably live on
+the Windows seat -- so this is a seat note, not a correction.
+
+Verifying the repo needs two packages that are deliberately not in
+`requirements.txt`:
+
+    pip install -r requirements-checks.txt
+    python scripts/validation/check_all.py
+
+Without them `check_all.py` refuses to run rather than skipping checks, which
+is why a fresh clone reports missing dependencies instead of a green tick.

@@ -27,11 +27,44 @@ properties that make them pretty:
     no explanation is an unexploded assumption.
   * Every scan REQUIRES retrieval accounting, so "how much of this was
     actually read" survives into the data rather than living in a chat log.
+  * Every slug a flag CITES must resolve, either to another scan record or to
+    the served corpus. See below.
   * ASCII only, per the repo standard.
 
 It deliberately does NOT check whether the events are true. It cannot. It
 checks that the payload does not overstate what is known about them, which is
 the part a machine can enforce.
+
+The cross-reference rule, and why it is the only part with an outside input
+-------------------------------------------------------------------------
+Records cite each other by slug inside their flags -- "Same matter as
+us_export_controls_claude_fable_5_2026 in the labs payload", "the concrete
+endpoint of the trend ai_summit_pivot_2023_2025 describes". Those are claims
+about artifacts OTHER than the record making them, and that is what makes them
+checkable: the claim lives here, the evidence lives somewhere this scan did not
+produce.
+
+`project_watchlist.py` already reads these same cross-references to seed
+`possible_duplicate_of`, but it resolves them with `if slug in known_slugs`,
+which SILENTLY DISCARDS any slug that does not resolve. A flag citing a record
+that does not exist is therefore invisible there -- it degrades to no link at
+all rather than to an error. This gate exists to make that case loud.
+
+Two slugs currently resolve only against the served corpus rather than against
+another payload (`eu_ai_act_watering_down_2024`, `ai_summit_pivot_2023_2025`).
+That is correct and must stay legal: a scan record pointing at an event already
+served is exactly the boundary judgement a curator needs. It also happens to be
+the one genuinely EXTERNAL input available to this gate -- `all_events.json` is
+built by a different pipeline from a different source, so a scan cannot make its
+own citation resolve by construction.
+
+What this gate still cannot do is validate DUPLICATE DETECTION. Comparing
+similarity-detected pairs against `possible_duplicate_of` would compare one
+computation over the payloads against another computation over the same
+payloads, and a defect shared by both would be invisible to both -- the exact
+shape of the redaction-verifier failure in CLAUDE.md. Whether two records are
+the same event is decided by a human reading sources, and no check here claims
+otherwise.
 
 Exit codes: 0 all payloads sound, 1 at least one problem, 2 nothing to check.
 """
@@ -43,6 +76,14 @@ import sys
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 PAYLOAD_DIR = os.path.join(REPO_ROOT, "data", "raw", "llm_event_scan", "payloads")
+SERVED_EVENTS = os.path.join(REPO_ROOT, "data", "serveable", "api",
+                             "timeline_events", "all_events.json")
+
+# A slug-shaped token: three or more lowercase_underscore segments. Matches
+# project_watchlist.py's pattern deliberately, so the two agree on what counts
+# as a citation and differ only in what they do with one that fails to resolve.
+CITATION_RE = re.compile(r"[a-z0-9]+(?:_[a-z0-9]+){2,}")
+PAYLOAD_REF_RE = re.compile(r"\d{4}-\d{2}-\d{2}_[a-z0-9_]+\.json")
 
 VALID_CONFIDENCE = {"high", "medium", "low"}
 VALID_DATE_KIND = {
@@ -193,6 +234,89 @@ def check_payload(path):
     return problems
 
 
+def load_served_slugs():
+    """Slugs of the served corpus, or None if it could not be read.
+
+    None is NOT treated as "no cross-corpus references exist". A missing corpus
+    disables the only external half of this check, so the caller fails loudly
+    rather than passing a weaker check silently.
+    """
+    try:
+        with open(SERVED_EVENTS, encoding="utf-8") as handle:
+            return set(json.load(handle))
+    except (OSError, ValueError):
+        return None
+
+
+def check_cross_references(payloads, served):
+    """Every slug and payload name a claim cites must resolve somewhere real.
+
+    `payloads` maps filename -> the whole payload dict. `served` is the
+    served-corpus slug set or None. Resolution order is payload records first,
+    then the served corpus; a citation that resolves to neither is a claim
+    about a record that does not exist, which is the failure this catches.
+
+    Both record-level flags and payload-level prose (`known_overlap`,
+    `scanner_limits`) are checked, because both make claims about artifacts
+    outside the record or payload asserting them.
+    """
+    problems = []
+
+    if served is None:
+        problems.append(
+            "could not read %s -- the served corpus is the only external input "
+            "this gate has, so its absence is a failure, not a skip"
+            % os.path.relpath(SERVED_EVENTS, REPO_ROOT))
+        served = set()
+
+    payload_slugs = {r.get("slug")
+                     for payload in payloads.values()
+                     for r in payload.get("records") or []}
+    payload_names = set(payloads)
+    external = 0
+
+    def scan(blob, where, own_slug=None):
+        found_external = 0
+        for slug in CITATION_RE.findall(blob):
+            if slug == own_slug or slug in payload_slugs:
+                continue
+            if slug in served:
+                found_external += 1
+                continue
+            problems.append(
+                "%s: cites %r, which is not a scan record and not in the "
+                "served corpus" % (where, slug))
+        for ref in PAYLOAD_REF_RE.findall(blob):
+            if ref not in payload_names:
+                problems.append(
+                    "%s: names payload %r, which does not exist" % (where, ref))
+        return found_external
+
+    for name in sorted(payloads):
+        payload = payloads[name]
+
+        for key in ("known_overlap", "instruction_summary", "scan_scope"):
+            value = payload.get(key)
+            if isinstance(value, str):
+                external += scan(value, "%s %s" % (name, key))
+
+        limits = payload.get("scanner_limits")
+        if isinstance(limits, list):
+            external += scan(" ".join(str(x) for x in limits),
+                             "%s scanner_limits" % name)
+
+        for index, record in enumerate(payload.get("records") or []):
+            flags = record.get("flags")
+            if not isinstance(flags, list):
+                continue
+            external += scan(
+                " ".join(str(f) for f in flags),
+                "%s record %d (%s)" % (name, index, record.get("slug", "?")),
+                own_slug=record.get("slug"))
+
+    return problems, external
+
+
 def main():
     if not os.path.isdir(PAYLOAD_DIR):
         sys.stderr.write("no payload directory at %s\n" % PAYLOAD_DIR)
@@ -208,12 +332,15 @@ def main():
     failed = 0
     total_records = 0
     total_unsourced = 0
+    loaded = {}
     for path in paths:
         name = os.path.basename(path)
         problems = check_payload(path)
         try:
             with open(path, encoding="utf-8") as handle:
-                records = json.load(handle).get("records", [])
+                payload = json.load(handle)
+            loaded[name] = payload
+            records = payload.get("records", [])
             total_records += len(records)
             total_unsourced += sum(1 for r in records if not r.get("sources"))
         except Exception:                              # noqa: BLE001
@@ -226,16 +353,27 @@ def main():
         else:
             print("ok   %s" % name)
 
+    cross_problems, external = check_cross_references(loaded,
+                                                      load_served_slugs())
+    if cross_problems:
+        failed += 1
+        print("FAIL cross-references between payloads and the served corpus")
+        for problem in cross_problems:
+            print("       %s" % problem)
+    else:
+        print("ok   cross-references resolve (%d to the served corpus)"
+              % external)
+
     print()
     print("  %d payload(s), %d record(s), %d carrying no source"
           % (len(paths), total_records, total_unsourced))
     if failed:
-        print("\n%d payload(s) failed." % failed)
+        print("\n%d check(s) failed." % failed)
         return 1
     print("\nAll scan payloads hold their claim tracking.")
     print("NOTE: this gate checks that claims are not OVERSTATED. It cannot "
-          "check whether the events are true -- only a human reading the "
-          "sources can do that.")
+          "check whether the events are true, and it cannot validate duplicate "
+          "detection -- only a human reading the sources can do either.")
     return 0
 
 
