@@ -64,6 +64,19 @@ name: Data Integrity
 #                              never published, and must not fail a build for
 #                              everyone else.
 #
+#   scan_postal.py --ci        no TRACKED file carries DWELLING-shaped postal,
+#                              geographic or telephone text. Separate from
+#                              redact_emails.py because that tool matches an
+#                              at-sign or its wreckage, so no setting of it
+#                              could ever see a street. It reports paths and
+#                              line numbers and never the matched text, because
+#                              these logs are public. The discriminator against
+#                              the ten institutional addresses already in the
+#                              corpus is an INSTITUTION token in the surrounding
+#                              window, not a narrower street list: an alarm that
+#                              fired on every university affiliation block would
+#                              be muted within a week.
+#
 #   tests/test_*.py            run directly. pytest is in requirements.txt but
 #                              these are standalone runners and both pass without
 #                              it; invoking python directly keeps this job free of
@@ -119,6 +132,12 @@ jobs:
 
       - name: The privacy gate can still fail
         run: python tests/test_privacy_gate.py
+
+      - name: No dwelling addresses in any tracked zone
+        run: python scripts/privacy/scan_postal.py --ci
+
+      - name: The postal gate can still fail
+        run: python tests/test_postal_gate.py
 
       - name: The transcoding detector still fires
         run: python tests/test_transcoding_detector.py
