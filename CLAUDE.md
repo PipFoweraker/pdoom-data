@@ -310,12 +310,21 @@ printing and capture to `coordination`.
     git add / commit / push / pull / fetch
     gh issue list / view       NOT INSTALLED on the Linux seat -- see below
 
-`gh` is pre-approved but absent on the Linux seat, which has no `apt`, no
-`sudo` and no `gh` binary on `PATH` (checked 2026-08-15). An assistant working
-here is blind to CI status and the issue queue, and should say so rather than
-inferring either. Installing means dropping the release tarball into
-`~/.local/bin` by hand. The permission is not wrong -- it is presumably live on
-the Windows seat -- so this is a seat note, not a correction.
+`gh` is INSTALLED on the Linux seat as of 2026-08-16: version 2.97.0 at
+`~/.local/bin/gh`, from the release tarball, since there is no `apt` and no
+`sudo` here. CI status and the issue queue are readable again.
+
+**Installing the binary was not sufficient and this is the part worth keeping.**
+`git` still could not authenticate afterwards, because
+`credential.https://github.com.helper` had been configured on 2026-08-10 to run
+**`/usr/bin/gh`, a path that has never existed on this machine**. Two defects
+wearing one symptom: the earlier note here said only "gh is absent", which was
+true and would have led the next person to install it, watch `git` keep failing,
+and conclude the token was revoked. Both helpers -- github and gist -- now point
+at `~/.local/bin/gh`. Verify with a real fetch, not with `gh auth status`:
+
+    git config --global --get-regexp 'credential.*helper'
+    git fetch
 
 Verifying the repo needs two packages that are deliberately not in
 `requirements.txt`. **There is already a virtualenv holding them**, untracked
