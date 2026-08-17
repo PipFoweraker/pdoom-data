@@ -63,6 +63,13 @@ REBUILD = [
     # only the derived half, which is what lets a rated atom still pass.
     ("watch-list rebuild is byte-identical",
      ["scripts/build/project_watchlist.py", "--check"], True),
+    # The dataset-quality counts are quoted in public funding copy, where a
+    # reader can check them against the served JSON in thirty seconds. A draft
+    # carried "801 descriptions begin Introduction" when the real figure is 35;
+    # 801 was 81 percent with the decimal lost. Computed now, so it regenerates
+    # rather than rotting.
+    ("dataset quality counts match the corpus",
+     ["scripts/analysis/dataset_quality.py", "--check"], True),
     ("candidates rebuild is byte-identical", ["scripts/build/project_candidates.py", "--check"], True),
     ("frontier_labs rebuild is byte-identical", ["scripts/build/project_frontier_labs.py", "--check"], True),
     ("reviewed rebuild is byte-identical", ["scripts/build/project_reviewed.py", "--check"], True),
