@@ -35,10 +35,13 @@ Smoothing these out would produce a cleaner file that is worth less.
 **Null dates.** Where two sources disagreed irreconcilably, the date is
 `null` and `date_kind` is `contested`. Per the repo's standing rule a null
 clock is ungated and honest; a fabricated one cannot be told from a real one
-later. **19 records carry a null date**, and each says why: 3 `contested`,
-4 `unverified`, and 12 `reported` where only a month, a year or a period was
+later. **24 records carry a null date**, and each says why: 3 `contested`,
+4 `unverified`, and 17 `reported` where only a month, a year or a period was
 retrieved. This paragraph said "four" until 2026-08-15, which was the count
-across the first three payloads before the incidents-and-funding scan landed.
+across the first three payloads before the incidents-and-funding scan landed,
+and "19" until 2026-08-19, before the remainder scan landed. **These numbers
+go stale on every scan and nothing mechanical checks them**, which is the same
+defect the erratum below records; recount before citing.
 
 **The distinction between when a thing happened and when it was reported.**
 `date_kind: "action"` means the date the thing occurred; `"reported"` means
@@ -51,10 +54,12 @@ found them independently. This is NOT deduplicated here. Two independent scans
 converging on the same event is corroborating evidence, and merging at the
 bronze layer destroys it. Deduplication is a curation decision, and
 `data/curated/watchlist/` is where it is made -- `possible_duplicate_of`
-carries **7 pairs** across the four payloads.
+carries **14 pairs** across the five payloads, 7 of them added by the
+remainder scan, which cites earlier records deliberately so the link is made
+at the payload level rather than left to title similarity.
 
-**Convergence means the same EVENT, not necessarily the same date.** Of the 7
-pairs, `openai_models_breach_hugging_face_2026` (labs, 2026-07-09) and
+**Convergence means the same EVENT, not necessarily the same date.** Of the
+first 7 pairs, `openai_models_breach_hugging_face_2026` (labs, 2026-07-09) and
 `openai_models_escaped_sandbox_hacked_hugging_face_2026` (2026 scan,
 2026-07-21) are the same incident anchored to different acts -- the intrusion
 and OpenAI's disclosure -- and they also differ on the containment date, 13
@@ -87,8 +92,17 @@ same way it already checks slug citations.
 
 **Retrieval accounting.** Each payload records how many records rest on a
 page body actually fetched and read, how many on search-result summaries, and
-how many on model memory. For the 2026 scan that is 23 / 3 / 0. Without this
-number a later reader cannot tell a read corpus from a recalled one.
+how many on model memory. For the 2026 scan that is 23 / 3 / 0; for the
+remainder scan, 17 / 0 / 0. Without this number a later reader cannot tell a
+read corpus from a recalled one.
+
+The remainder scan adds a caveat the earlier four should be read as carrying
+too: **every fetch in that batch returned a small model's rendering of the
+page, not the raw bytes**, so each figure inherits one summarisation step
+between source and payload. It caught the step visibly damaging one date -- a
+California bill history whose chaptered line came back a month before its own
+approval line -- and flagged it in place rather than silently picking the
+plausible reading. Assume the same step sits behind the other four payloads.
 
 ## The gate
 
@@ -130,10 +144,39 @@ on an unsourced record, or stripping an `UNVERIFIED` marker, both fail it.
 | `2026-08-14_incidents_funding.json` | Incidents, harms, lawsuits, whistleblowers, safety funding | 20 | 0 |
 | `2026-08-14_labs.json` | Frontier lab behaviour and model incidents, 2024-08 to 2026-08 | 20 | 0 |
 | `2026-08-14_recent2026.json` | Everything, 2026-01 to 2026-08, weighted recent | 27 | 3 |
+| `2026-08-19_remainder.json` | The seams the first four named as unreached | 17 | 0 |
 
-All four scanned 2026-08-14, 93 records in total. The incidents-and-funding
-scan was interrupted and restarted, and landed on 2026-08-15; this section
-described it as "not yet here" until then.
+The first four scanned 2026-08-14, 93 records. The incidents-and-funding scan
+was interrupted and restarted, and landed on 2026-08-15; this section
+described it as "not yet here" until then. With the remainder scan the total
+is **110 records, 3 carrying no source**.
+
+## The remainder scan, 2026-08-19
+
+Scoped to exactly what the first four listed as unreached, with an explicit
+instruction not to re-scan covered ground. It ran with **no web search at
+all** -- the 200-call session budget was already spent when it started -- so
+every URL was constructed by hand or found through Wikipedia's own full-text
+search endpoint used as a search substitute. That biases its coverage toward
+hosts with guessable URLs, and eight hosts refused outright: `congress.gov`,
+`govtrack.us`, `legiscan.com`, `ilga.gov`, `oecd.org`, `iso.org`, `ftc.gov`
+and `texasattorneygeneral.gov`.
+
+Two of its results are worth pulling out of the payload, because both are
+things a reader would otherwise assume it simply missed:
+
+- **It records a NEGATIVE finding on EU AI Act enforcement.** Two sources read
+  end to end describe the penalty framework as established and unused. No
+  completed action, investigation or fine is visible. That is different from
+  not having looked, and the payload says which it is.
+- **It declined three seams rather than fill them.** The Chip Security Act,
+  the GAIN AI Act, the AI whistleblower bill and the Texas AG settlement with
+  Pieces Technologies produced no openable page, so they carry no record. The
+  Windsurf sequence is half-reached and says so. A figure supplied in the
+  scan's own instructions -- 130 billion dollars of delayed Q1 2026
+  data-centre projects -- was **not corroborated and is not asserted**; the
+  source that was read gives a different number over a different window, and
+  the payload keeps both apart instead of reconciling them.
 
 ## Known limits of the 2026-08-14 batch
 
