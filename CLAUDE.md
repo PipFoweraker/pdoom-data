@@ -86,6 +86,18 @@ this table said there was until 2026-08-15. Counts re-measured 2026-08-15.
 | `api/candidates/all_candidates.jsonl` | 3,434 candidates, 2023-2026 forward-fill. Unreviewed unless `review_status` says otherwise. |
 | `api/reviewed/all_reviewed.jsonl` | 518 reviewed candidates carrying 526 attributed reviews: 337 accept, 166 unsure, 23 reject, all by Pip Foweraker; 8 records hold two reviews. **Reviewed, not accepted** -- do not read this file as an accept list. Not `event_v1` shape; not engine-ingestible without a mapping layer. |
 | `api/frontier_labs/all_labs.json` | 46 organisations with founding dates and per-date evidence. 4 founded-null, 16 contested. |
+| `api/watch/accepted.jsonl` | The Watch mechanic's output: atoms a named human accepted, in a **neutral** shape. Currently 0 records because nothing is triaged. Deliberately NOT `event_v1` -- see below. |
+| `api/meta/dataset_quality.json` | Measured counts about the corpus, regenerated and gated. Quote figures from here rather than retyping them. |
+
+**`api/watch/accepted.jsonl` does not go through `all_events.json`, and that is
+a decision rather than an omission.** `event_v1` *requires* `impacts`, `rarity`,
+`pdoom_impact`, `safety_researcher_reaction` and `media_reaction`, with
+`additionalProperties: false`, so a record cannot be partly conformant.
+Promoting an atom through it means inventing a cash delta and a rarity tier for
+a real-world event. That is the `#34` breach, and 93 promotions would have
+multiplied it. `all_events.json` also has exactly one producer, which was hard
+won. Three gates apply to promotion -- a date, a source, and a named decider --
+and a blocked atom is reported with its reason rather than dropped.
 
 ## Landmines
 
