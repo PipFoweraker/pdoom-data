@@ -70,6 +70,12 @@ REBUILD = [
     # rather than rotting.
     ("dataset quality counts match the corpus",
      ["scripts/analysis/dataset_quality.py", "--check"], True),
+    # The Watch mechanic's output. Accepted atoms reach a consumer through here
+    # and NOT through all_events.json: event_v1 requires impacts, rarity and
+    # pdoom_impact, which ADR-001 puts on the wrong side of the boundary
+    # (pdoom-data#34), and that file already has exactly one producer.
+    ("accepted watch atoms project cleanly",
+     ["scripts/build/project_watch_accepted.py", "--check"], True),
     ("candidates rebuild is byte-identical", ["scripts/build/project_candidates.py", "--check"], True),
     ("frontier_labs rebuild is byte-identical", ["scripts/build/project_frontier_labs.py", "--check"], True),
     ("reviewed rebuild is byte-identical", ["scripts/build/project_reviewed.py", "--check"], True),
