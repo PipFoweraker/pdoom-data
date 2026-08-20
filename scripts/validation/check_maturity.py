@@ -53,13 +53,20 @@ COLLECTIONS = {
     },
     "candidates": {
         "path": os.path.join(SERVE, "candidates", "all_candidates.jsonl"),
-        "schema": None,
+        "schema": os.path.join(REPO_ROOT, "config", "schemas", "candidate_v1.json"),
         "producer": "scripts/build/project_candidates.py",
         "records": None,
     },
     "reviewed": {
         "path": os.path.join(SERVE, "reviewed", "all_reviewed.jsonl"),
-        "schema": None,
+        # Deliberately the SAME schema as candidates: reviewed is a projection
+        # of the candidate feed, so a second file would be a copy, and a copy
+        # becomes a variant the moment either side changes. What reviewed
+        # guarantees BEYOND candidate_v1 -- every record carrying at least one
+        # attributed review -- is asserted in tests/test_reviewed_contract.py
+        # instead, because it is a property of the collection rather than of a
+        # record read in isolation.
+        "schema": os.path.join(REPO_ROOT, "config", "schemas", "candidate_v1.json"),
         "producer": "scripts/build/project_reviewed.py",
         "records": None,
     },
@@ -210,46 +217,131 @@ def p_schema_version(name, doc, recs, err):
     return True, "schema version %s" % schema["version"]
 
 
+DATED_FIELDS = ("occurred_at", "published_at", "source_available_at")
+
+
 def p_evidence(name, doc, recs, err):
-    """Dated claims carry the URL read and the sentence containing the date."""
-    dated = [r for r in recs if r.get("founded") or r.get("occurred_at")]
-    if not dated:
-        return False, "no dated claims found to check"
+    """Dated claims carry the evidence for the date, in the collection's own form.
+
+    Rewritten 2026-08-21 because the first version passed VACUOUSLY on three of
+    the four collections. It selected records having `founded` OR `occurred_at`,
+    then only ever inspected `founded` -- a frontier_labs field. Any collection
+    using `occurred_at` therefore entered the loop with a non-empty list and
+    left it with a count of zero, and reported ok having measured nothing.
+
+    Found when `reviewed` reported GOLD on first wiring. A predicate that cannot
+    fail is the exact thing L2 was written to forbid, and it had been sitting in
+    the file that enforces L2.
+
+    Two forms are recognised, and a collection using neither FAILS rather than
+    passing, per the module docstring: unknown is not a pass.
+    """
+    founded = [r for r in recs if r.get("founded")]
+    if founded:
+        without = [r for r in founded
+                   if not ((r.get("founded_evidence") or r.get("evidence") or {})
+                           .get("quote"))]
+        if without:
+            return False, "%d of %d founding dates carry no evidence quote" % (
+                len(without), len(founded))
+        return True, "%d founding dates carry an evidence quote" % len(founded)
+
+    present = [f for f in DATED_FIELDS if any(f in r for r in recs)]
+    if not present:
+        return False, ("no dated claims in a form this predicate can check "
+                       "(neither `founded` nor %s)" % ", ".join(DATED_FIELDS))
     without = 0
-    for r in dated:
-        ev = r.get("founded_evidence") or r.get("evidence")
-        if r.get("founded") and not (ev and ev.get("quote")):
-            without += 1
+    for r in recs:
+        prov = r.get("_provenance") or {}
+        for f in present:
+            if f in r and f not in prov:
+                without += 1
+                break
     if without:
-        return False, "%d dated claims carry no evidence quote" % without
-    return True, "%d dated claims carry evidence" % len(dated)
+        return False, "%d of %d records carry a date with no _provenance entry" % (
+            without, len(recs))
+    return True, "%d records: every one of %s carries a _provenance entry" % (
+        len(recs), "/".join(present))
 
 
 def p_no_bare_opinion(name, doc, recs, err):
+    """Every record, not the first 500.
+
+    The `recs[:500]` slice this replaces left 2,934 of 3,434 candidates and 694
+    of 1,194 events unexamined -- 85% and 58%. A bare `salience` added by a
+    later adapter, or appearing only on the tail of a forward-fill, was invisible
+    to a predicate that reported "no bare opinion fields" in full confidence.
+    Scanning all of them costs milliseconds; the slice bought nothing.
+    """
     found = set()
-    for r in recs[:500]:
+    for r in recs:
         for k in r:
             if k in BARE_OPINION:
                 found.add(k)
     if found:
         return False, "bare opinion field(s): %s" % ", ".join(sorted(found))
-    return True, "no bare opinion fields"
+    return True, "no bare opinion fields in any of %d records" % len(recs)
 
 
 def p_contract_test(name, doc, recs, err):
-    """A test that fails when the shape a consumer depends on changes."""
-    hits = []
-    for p in glob.glob(os.path.join(REPO_ROOT, "tests", "*.py")) + \
-            glob.glob(os.path.join(REPO_ROOT, "scripts", "validation", "*.py")):
+    """A test that fails when the shape a consumer depends on changes.
+
+    Rewritten 2026-08-21. The first version searched every file under tests/ AND
+    scripts/validation/ for the words "contract" and the collection name -- and
+    scripts/validation/ contains THIS FILE. Writing a comment here that
+    mentioned `tests/test_reviewed_contract.py`, a file that did not exist, was
+    enough to award `reviewed` the gold rung. The ladder read its own source and
+    called it evidence.
+
+    That is the failure the check rule names in as many words: a check must take
+    at least one input from OUTSIDE the system it is checking, and must not
+    derive what to look for from that same system. Two changes follow from it:
+
+      1. Only `tests/test_*.py` counts, never this directory, and never this
+         file. The searched set no longer contains the searcher.
+      2. The test is RUN, and must exit 0. A file whose name contains the right
+         words is a claim; a file that executes and passes is a measurement. A
+         contract test that has been red for a month should not hold up a rung.
+    """
+    if os.environ.get("PDOOM_MATURITY_RUNNING"):
+        # Reached from inside a test this predicate itself launched. Running
+        # again would recurse: the first attempt at this spawned Python
+        # processes until the run was killed by hand, because the regression
+        # test written to catch the self-match contains the words "contract"
+        # and "maturity" and so matched itself. Two independent guards, since
+        # either alone would have stopped it and neither is obvious later.
+        return False, "not evaluated: already running inside a contract test"
+
+    candidates = []
+    for p in sorted(glob.glob(os.path.join(REPO_ROOT, "tests", "test_*.py"))):
+        if os.path.abspath(p) == os.path.abspath(__file__):
+            continue
         try:
             t = io.open(p, encoding="utf-8").read()
         except OSError:
             continue
+        if "check_maturity" in t:
+            # A test that exercises the ladder is not a contract test for a
+            # collection, whatever words it contains. This is the searcher
+            # excluding itself and everything that reads it -- the whole point
+            # being that a check must not derive what to look for from the
+            # system it is checking.
+            continue
         if "contract" in t.lower() and name in t:
-            hits.append(os.path.basename(p))
-    if not hits:
-        return False, "no consumer-contract test names this collection"
-    return True, ", ".join(hits)
+            candidates.append(p)
+    if not candidates:
+        return False, "no test under tests/ names this collection as a contract"
+    env = dict(os.environ)
+    env["PDOOM_MATURITY_RUNNING"] = "1"
+    for p in candidates:
+        try:
+            r = subprocess.run([sys.executable, p], capture_output=True,
+                               text=True, timeout=180, cwd=REPO_ROOT, env=env)
+        except (OSError, subprocess.SubprocessError) as e:
+            return False, "%s could not run: %s" % (os.path.basename(p), e)
+        if r.returncode != 0:
+            return False, "%s exists but FAILS" % os.path.basename(p)
+    return True, ", ".join(os.path.basename(p) for p in candidates) + " (run, passing)"
 
 
 def p_cadence(name, doc, recs, err):
@@ -264,13 +356,29 @@ def p_drift(name, doc, recs, err):
 
 
 def p_privacy_ci(name, doc, recs, err):
+    """CI runs a privacy script that exists on disk.
+
+    The first version searched the workflow for the substring "privacy" or
+    "redact", which a comment, a job name or a step title satisfies just as
+    well as a step that runs something. Same defect class as p_contract_test:
+    a word standing in for a behaviour. This resolves the referenced script
+    paths and requires at least one to exist, so a renamed or deleted script
+    turns the predicate red instead of leaving a green name behind.
+    """
     wf = os.path.join(REPO_ROOT, ".github", "workflows", "data-integrity.yml")
     if not os.path.isfile(wf):
         return False, "no data-integrity workflow"
     t = io.open(wf, encoding="utf-8").read()
-    if "privacy" in t or "redact" in t:
-        return True, "privacy check wired into CI"
-    return False, "no privacy check in CI"
+    refs = re.findall(r"(scripts/[A-Za-z0-9_/]*(?:privacy|redact|address)"
+                      r"[A-Za-z0-9_/]*\.py)", t)
+    live = [p for p in dict.fromkeys(refs)
+            if os.path.isfile(os.path.join(REPO_ROOT, p))]
+    if not live:
+        if refs:
+            return False, ("CI names %s but no such file exists"
+                           % ", ".join(sorted(set(refs))))
+        return False, "no privacy script is run by data-integrity.yml"
+    return True, "CI runs %s" % ", ".join(live)
 
 
 def p_self_report(name, doc, recs, err):

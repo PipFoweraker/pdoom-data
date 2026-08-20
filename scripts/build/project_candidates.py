@@ -231,6 +231,51 @@ def apply_source_registry(record, registry):
     }
 
 
+URL_TRAILING = ",;"
+
+
+def split_url_cell(value):
+    """Recover the URLs from one upstream cell that may hold several.
+
+    Epoch AI's `Link` column is free text. 65 of 3,434 served records carried
+    two or three URLs joined into a SINGLE list element -- by a comma, a
+    semicolon, or a newline -- so `source_urls[0]` was a string that no
+    consumer could fetch. Found 2026-08-21 by candidate_v1.json, which is the
+    first thing in this repo that ever asserted the element was a URL.
+
+    This is a parse, not a judgement: the cell says two URLs and the served
+    record now says two URLs. Any prose in the cell -- "(was withdrawn)",
+    "training code:" -- is dropped here and remains in the raw dump, which is
+    immutable and is where the unparsed original belongs.
+
+    Deliberately conservative. Only whitespace splits, and only a trailing
+    comma or semicolon is stripped. A trailing full stop is NOT stripped,
+    because a URL may legitimately end in one and sentence punctuation in this
+    column is rarer than the URLs it would corrupt.
+    """
+    out = []
+    for token in str(value).split():
+        token = token.rstrip(URL_TRAILING)
+        if token.startswith("http://") or token.startswith("https://"):
+            if token not in out:
+                out.append(token)
+    return out
+
+
+def normalise_urls(record):
+    """Rewrite source_urls and archive_urls in place. Returns True if changed."""
+    changed = False
+    for field in ("source_urls", "archive_urls"):
+        original = record.get(field) or []
+        rebuilt = []
+        for element in original:
+            rebuilt.extend(split_url_cell(element))
+        if rebuilt != original:
+            record[field] = rebuilt
+            changed = True
+    return changed
+
+
 def topical_relevance(record, profile):
     rel = profile.get("relevance", {})
     if record.get("kind") in (rel.get("kinds_always_relevant") or []):
@@ -399,6 +444,7 @@ def project(records, tombstones, registry, profiles, reviews, airr_layers):
 
     for record in kept:
         apply_source_registry(record, registry)
+        normalise_urls(record)
 
     cuts_by_profile = {}
     for profile in profiles:
