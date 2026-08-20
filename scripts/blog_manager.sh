@@ -170,22 +170,43 @@ validate_blog_post() {
     
     echo "Validating blog post: $blog_file"
     
-    # Check required sections
+    # Check required sections.
+    #
+    # These are fixed strings anchored to the start of a line, and they were
+    # interpolated straight into a basic regular expression until 2026-08-19.
+    # "**Date**:" is not a pattern that matches "**Date**:" -- a leading run of
+    # asterisks is literal-then-quantifier, so the expression reduces to
+    # roughly ^\**Dat e*: and matched no real blog post ever written. Every
+    # invocation of this function died on the second section, which is why the
+    # ASCII bug below sat undiscovered underneath it: the code path was
+    # unreachable. -F takes the strings as strings, -x is wrong here because
+    # the line continues past the marker, so the anchor comes from grepping
+    # the front of each line instead.
     required_sections=("# " "**Date**:" "**Version**:" "**Category**:" "## Summary" "## Technical Details")
-    
+
     for section in "${required_sections[@]}"; do
-        if ! grep -q "^$section" "$blog_file"; then
+        if ! cut -c "1-${#section}" "$blog_file" | grep -qxF -- "$section"; then
             echo "ERROR: Missing required section: $section"
             exit 1
         fi
     done
-    
-    # Check ASCII compliance
-    if ! python "$REPO_ROOT/validate_ascii.py" "$blog_file" 2>/dev/null; then
-        echo "ERROR: Blog post contains non-ASCII characters"
+
+    # Check ASCII compliance.
+    #
+    # This passed "$blog_file" to a validate_ascii.py whose main() took no
+    # argv and globbed Path(".") instead, so the filename was discarded, the
+    # sweep ran over whatever directory the caller happened to be standing in,
+    # 2>/dev/null hid any complaint, and the function announced "Blog post
+    # validation passed!" on the strength of a result about other files
+    # entirely. The validator now honours named paths and fails rather than
+    # skips when it cannot read one; stderr stays on the terminal so that a
+    # future mismatch between what we ask for and what it does is visible
+    # instead of swallowed.
+    if ! python "$REPO_ROOT/validate_ascii.py" "$blog_file"; then
+        echo "ERROR: Blog post failed ASCII validation: $blog_file"
         exit 1
     fi
-    
+
     echo "Blog post validation passed!"
 }
 
