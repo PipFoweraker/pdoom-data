@@ -62,6 +62,17 @@ GATING = [
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),
     ("transcoding detector fires", ["tests/test_transcoding_detector.py"], True),
+    # The bronze rung is awarded for "has a schema" and "validates", and both
+    # are passed by a schema of {"type": "object"}. These four keep the rung
+    # meaning something: candidate_v1 provably rejects bad records; the URL
+    # normaliser provably never drops a source; the ladder's own predicates can
+    # provably return False, which three of them could not; and the aggregator
+    # fallback provably fills only what is empty, since a manufactured source
+    # is worse than a missing one.
+    ("schema gate can still fail", ["tests/test_schema_gates.py"], True),
+    ("url normalisation loses no source", ["tests/test_url_normalisation.py"], True),
+    ("maturity predicates can fail", ["tests/test_maturity_predicates.py"], True),
+    ("source fallback fills only what is empty", ["tests/test_source_fallback.py"], True),
 ]
 
 REBUILD = [

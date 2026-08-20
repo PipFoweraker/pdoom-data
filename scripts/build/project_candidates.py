@@ -231,6 +231,64 @@ def apply_source_registry(record, registry):
     }
 
 
+def normalise_urls(record):
+    """Rewrite source_urls and archive_urls in place. Returns True if changed.
+
+    The parse itself is _base.split_url_cell, shared with the adapter so the
+    two cannot drift. This function is only the in-place application of it.
+    """
+    changed = False
+    for field in ("source_urls", "archive_urls"):
+        original = record.get(field) or []
+        rebuilt = []
+        for element in original:
+            rebuilt.extend(_base.split_url_cell(element))
+        if rebuilt != original:
+            record[field] = rebuilt
+            changed = True
+    return changed
+
+
+def apply_source_fallback(record, registry):
+    """Give a sourceless record the dataset URL it actually came from.
+
+    Six of 3,434 candidates carried no source at all, for three different
+    reasons: four are blank in Epoch AI's own CSV, one lost a schemeless URL to
+    the adapter, and one has an author list where the URL should be. A consumer
+    could not check any of them against anything.
+
+    The fallback is NOT invented. `config/sources.json` records the dataset the
+    record was ingested from, and `license.citation` on every one of these
+    records already names that same page in words -- "Epoch AI. Data on Notable
+    AI Models. Retrieved from https://epoch.ai/data/notable-ai-models". This
+    puts the URL where a consumer can follow it.
+
+    It is a WEAKER source than the others and must not be mistaken for them:
+    the other 3,428 records point at a primary paper or announcement, and this
+    points at an aggregator. That is why a `_provenance` entry is written for
+    `source_urls` naming the method. Presence of that entry is the signal --
+    no other record carries one, so a consumer can tell the two apart today
+    without waiting for a `source_kind` field to be designed.
+
+    Applied AFTER normalise_urls, so a record whose only URL-shaped value turns
+    out to be prose falls back rather than being left empty.
+    """
+    if record.get("source_urls"):
+        return False
+    source_id = str(record.get("id", "")).split(":", 1)[0]
+    entry = registry.get(source_id) or {}
+    url = entry.get("url")
+    if not url:
+        return False
+    record["source_urls"] = [url]
+    record["_provenance"]["source_urls"] = {
+        "layer": "registry",
+        "method": "aggregator_fallback",
+        "confidence": "low",
+    }
+    return True
+
+
 def topical_relevance(record, profile):
     rel = profile.get("relevance", {})
     if record.get("kind") in (rel.get("kinds_always_relevant") or []):
@@ -399,6 +457,8 @@ def project(records, tombstones, registry, profiles, reviews, airr_layers):
 
     for record in kept:
         apply_source_registry(record, registry)
+        normalise_urls(record)
+        apply_source_fallback(record, registry)
 
     cuts_by_profile = {}
     for profile in profiles:

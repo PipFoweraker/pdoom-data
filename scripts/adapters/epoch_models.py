@@ -127,11 +127,18 @@ def normalise(row, ingested_at):
     org = (row.get("Organization") or "").strip()
     actors = [a.strip() for a in re.split(r"[,;]", _base.to_ascii(org)) if a.strip()]
 
+    # Both columns are free text and both are unreliable in the same dump:
+    # `Link` holds two or three URLs joined by a comma, a semicolon or a
+    # newline on 65 rows, holds an author list on the EXAONE 4.5 row, and holds
+    # a schemeless `arxiv.org/abs/2501.14818` on the Eagle 2 row. The previous
+    # `value.startswith("http")` test kept the joined strings whole -- serving a
+    # value no consumer could fetch -- and dropped the schemeless one entirely,
+    # which is why epoch_ai:eagle_2 has no source at all.
     urls = []
     for key in ("Link", "Reference"):
-        value = (row.get(key) or "").strip()
-        if value.startswith("http") and value not in urls:
-            urls.append(value)
+        for url in _base.split_url_cell((row.get(key) or "").strip()):
+            if url not in urls:
+                urls.append(url)
 
     signals = {}
     citations = parse_number(row.get("Citations"))
