@@ -29,7 +29,10 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, "scripts", "build"))
 
+sys.path.insert(0, os.path.join(REPO, "scripts", "adapters"))
+
 import project_candidates as pc  # noqa: E402
+import _base  # noqa: E402
 
 FEED = os.path.join(REPO, "data", "serveable", "api", "candidates",
                     "all_candidates.jsonl")
@@ -63,10 +66,14 @@ CASES = [
     ("one clean URL is returned unchanged", A, [A]),
     ("the same URL twice collapses to one", A + " " + A, [A]),
 
-    ("a schemeless URL is NOT rescued here: epoch_models.py drops it at ingest, "
-     "so rescuing it in the projection would invent a scheme the source never "
-     "stated and would still not fix epoch_ai:eagle_2",
-     "arxiv.org/abs/2501.14818", []),
+    ("a schemeless URL with a path is rescued to https, which is the value "
+     "epoch_models.py dropped and the reason epoch_ai:eagle_2 has no source",
+     "arxiv.org/abs/2501.14818", ["https://arxiv.org/abs/2501.14818"]),
+    ("a schemeless token with NO path separator is not rescued: 'vs.something' "
+     "in prose would otherwise become a URL",
+     "vs.something", []),
+    ("a bare hostname is not rescued either, for the same reason",
+     "www.example.com", []),
     ("prose alone yields nothing, as EXAONE 4.5's author-list Link cell would",
      "Eunbi Choi, Kibong Choi, Sehyun Chun", []),
     ("an ftp URL is not a web source and is not accepted",
@@ -83,7 +90,7 @@ CASES = [
 def check_cases():
     failures = []
     for name, cell, expected in CASES:
-        got = pc.split_url_cell(cell)
+        got = _base.split_url_cell(cell)
         if got != expected:
             failures.append("  %s\n      cell     %r\n      expected %r\n"
                             "      got      %r" % (name, cell, expected, got))

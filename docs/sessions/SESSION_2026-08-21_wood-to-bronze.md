@@ -84,3 +84,51 @@ requirement rather than a substring, so it has to be written.
 cannot be fixed by loosening `minItems` without making the field meaningless,
 and cannot be fixed by tagging 1,166 records, which `540556c` explicitly ruled
 against. This one is a design decision, not a task.
+
+## Second pass, after Pip ruled option B
+
+| time | entry |
+|---|---|
+| 07:49 | Pip: "sounds good". Read as approving the PR and **option B** for the six sourceless records. `timeline_events` deliberately NOT read as ruled -- no recommendation had been offered, so it stays a decision. |
+| 07:50 | The fallback URL is read from `config/sources.json` (`epoch_ai.url`), not typed into the producer. `license.citation` on all six records already names that same page in words, so the URL is where the claim came from rather than an invention. |
+| 07:51 | Moved `split_url_cell` into `scripts/adapters/_base.py`, which `project_candidates.py` already imports. One implementation, two callers: the adapter needs it so the next dump is clean, the projection needs it because the current dump is immutable. A second copy would become a variant. |
+| 07:51 | Fixed `epoch_models.py`: `value.startswith("http")` kept joined strings whole and dropped schemeless URLs entirely. Now uses the shared parse. **This does not reach the current feed** -- raw dumps are immutable, so it lands at the next re-ingest. |
+| 07:52 | Schemeless rescue is conditional on a path separator. `arxiv.org/abs/2501.14818` is rescued; `vs.something` and a bare `www.example.com` are not, because without that condition prose becomes a URL. |
+| 07:53 | `tests/test_source_fallback.py`. **Ran it BEFORE the rebuild and it failed**, naming all six records -- so it is measuring the feed rather than agreeing with the producer. |
+| 07:53 | Rebuilt. `candidates` **WOOD -> SILVER**. |
+| 07:54 | Full `check_all.py`: **26 gating checks pass**, 8 rebuild checks byte-identical. |
+
+## Ladder at 07:54
+
+| collection | session start | now |
+|---|---|---|
+| `timeline_events` | WOOD | WOOD |
+| `candidates` | WOOD | **SILVER** |
+| `reviewed` | WOOD | **SILVER** |
+| `frontier_labs` | GOLD (falsely) | **SILVER** |
+
+**Three of four collections are now blocked at gold on the same single
+predicate: `consumer-contract test exists`.** One artefact type unblocks three
+collections, which makes it the highest-leverage next task in the repo.
+
+**It is also not this repo's to write alone.** A consumer-contract test asserts
+the shape a CONSUMER depends on. What pdoom1 depends on is `pdoom1#1102`, "what
+does pdoom1 actually want from pdoom-data", open since 2026-08-06 and unanswered.
+Writing the test without that answer means inventing the contract here and
+calling the invention a measurement -- which is the same move as the predicate
+that read its own source. Gold for three collections is blocked on a cross-repo
+question, not on effort.
+
+## The aggregator fallback, and the honest caveat
+
+Six records now cite `https://epoch.ai/data/notable-ai-models`. Every one
+carries `_provenance.source_urls` with `method: aggregator_fallback` and
+`confidence: low`, and **no other record carries that key at all**, so the two
+kinds of source are distinguishable today rather than after a `source_kind`
+field is designed. `tests/test_source_fallback.py` pins WHICH six records fall
+back, not merely how many, so a change of population is as visible as a change
+of count.
+
+The caveat stands and is Pip's to revisit: the other 3,428 records point at a
+primary paper or announcement, and these six point at an aggregator. A
+consumer reading `source_urls` without reading `_provenance` cannot tell.
