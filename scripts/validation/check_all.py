@@ -52,6 +52,13 @@ GATING = [
     # check_scan_claims.py currently reports every citation resolving, and a
     # detector that never fires is indistinguishable from one that cannot.
     ("scan cross-reference check fires", ["tests/test_scan_cross_references.py"], True),
+    # The email gate above cannot see a postal address: RESIDUE needs an
+    # at-sign or its wreckage, and a street has none. The label on that line
+    # says "email" but the tool prints "address-shaped", and the word doing
+    # double duty is how the postal half stayed uncovered. Split in two so
+    # each name is true.
+    ("no dwelling addresses in tracked zones", ["scripts/privacy/scan_postal.py", "--ci"], True),
+    ("postal gate can still fail", ["tests/test_postal_gate.py"], True),
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),
     ("transcoding detector fires", ["tests/test_transcoding_detector.py"], True),
