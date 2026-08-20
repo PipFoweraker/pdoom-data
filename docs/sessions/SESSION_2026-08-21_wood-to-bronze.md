@@ -132,3 +132,10 @@ of count.
 The caveat stands and is Pip's to revisit: the other 3,428 records point at a
 primary paper or announcement, and these six point at an aggregator. A
 consumer reading `source_urls` without reading `_provenance` cannot tell.
+
+## PR
+
+| time | entry |
+|---|---|
+| 08:43 | `feat/schema-bronze` pushed; **pdoom-data#83** opened against `main`. |
+| 08:45 | CI green: invariants pass (1m26s), documentation QA pass, self-merge class eligibility pass, version-increment skipped. `MERGEABLE / CLEAN`. **Not merged** -- the ruling covered pushing and opening, not merging. |
