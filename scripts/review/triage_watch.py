@@ -68,9 +68,39 @@ def read_key(prompt):
 
     Falls back to line input rather than failing: a pipe or a dumb terminal
     should still be able to drive this, and the fallback is announced once.
+
+    WINDOWS. `termios` does not exist on Windows, so this fell straight through
+    to the line-input fallback on Pip's own seat -- the only seat that runs it.
+    Every atom needed a key AND Enter, which is two keystrokes and a hand move
+    per atom against a design target of 2.9 seconds. The tool was silently in
+    its slow lane on the machine it was written for, and nothing said so,
+    because the fallback is the same code path as a pipe. `msvcrt` is present
+    and gives a true single keypress. Measured 2026-08-21: termios NO,
+    msvcrt YES.
+
+    Guarded on isatty because `msvcrt.getwch` reads the CONSOLE, not stdin, so
+    under a pipe it would ignore the piped input and wait for a human.
     """
     sys.stdout.write(prompt)
     sys.stdout.flush()
+    if sys.stdin.isatty():
+        try:
+            import msvcrt
+        except ImportError:
+            msvcrt = None
+        if msvcrt is not None:
+            char = msvcrt.getwch()
+            if char in ("\x00", "\xe0"):
+                msvcrt.getwch()   # arrow/function key: swallow the second half
+                char = "s"
+            if char == "\x03":
+                # Ctrl-C does not raise under getwch. Treat it as "stop and
+                # save", which is what it already meant: the atom file is
+                # rewritten after every keystroke, so nothing is in flight.
+                char = "q"
+            sys.stdout.write(char + "\n")
+            sys.stdout.flush()
+            return char.lower()
     try:
         import termios
         import tty
