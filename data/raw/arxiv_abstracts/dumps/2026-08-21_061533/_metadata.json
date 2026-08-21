@@ -1,0 +1,62 @@
+{
+  "source_id": "arxiv_abstracts",
+  "dump_stamp": "2026-08-21_061533",
+  "fetched_at": "2026-08-21T06:15:33.862012+00:00",
+  "api": "http://export.arxiv.org/api/query",
+  "requested": 50,
+  "retrieved": 50,
+  "not_returned": [],
+  "license": {
+    "spdx": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "arXiv.org. Abstracts are authored text, offered by arXiv as descriptive metadata. Attributed here as a courtesy that CC0 does not require.",
+    "citation": "arXiv API (export.arxiv.org/api/query), Atom summary field",
+    "source_terms_url": "https://info.arxiv.org/help/api/tou.html",
+    "verified_at": "2026-08-21",
+    "verified_by": "Fetched and read https://info.arxiv.org/help/api/tou.html on 2026-08-21. It states: 'You are free to use descriptive metadata about arXiv e-prints under the terms of the Creative Commons Universal (CC0 1.0) Public Domain Declaration.' Its footnote 1 defines the term: 'Descriptive metadata includes information for discovery and identification purposes, and includes fields such as title, abstract, authors, identifiers, and classification terms.' The abstract is therefore metadata, not e-print content. The same page's prohibition -- 'Store and serve arXiv e-prints (PDFs, source files, or other content) from your servers' -- was read and does not reach abstracts; no PDF or source file is fetched or stored."
+  },
+  "note": "Abstracts for records in enriched_alignment_research_events.json, which has no raw provenance in this repo. See pdoom-data#88.",
+  "license_correction": {
+    "corrected_at": "2026-08-21",
+    "before": {
+      "spdx": "NOASSERTION",
+      "reuse_basis": "facts_and_link_only"
+    },
+    "why": "The first version of this block asserted 'arXiv API Terms of Use read 2026-08-21' when they had NOT been read, and carried reuse_basis 'facts_and_link_only' copied from the forum adapters, which is false here because this tool stores abstract text verbatim. A fabricated verification claim is the exact failure this repository exists to prevent. Corrected before first commit, so no history is rewritten; recorded rather than silently replaced."
+  },
+  "transformations": [
+    {
+      "step": "whitespace_collapse",
+      "what": "runs of whitespace and newlines collapsed to single spaces",
+      "why": "arXiv wraps the abstract for display; the wrapping is not content",
+      "lossy": false
+    },
+    {
+      "step": "ascii_coerce",
+      "what": "_base.to_ascii, NFKD decomposition with no '?' fallback",
+      "why": "the repository is ASCII-only and enforces it in CI",
+      "lossy": true,
+      "note": "an accented letter survives as its base letter; a character with no ASCII decomposition is DELETED, which is why chars_dropped is recorded per record and shown to the reviewer before the choice"
+    },
+    {
+      "step": "sentence_trim",
+      "what": "cut at the last sentence boundary at or before 600 characters",
+      "why": "event_v1 allows 1000; 600 is an editorial choice, not a schema requirement, so it is named here as a choice",
+      "lossy": true,
+      "note": "applied only when the abstract exceeds the limit; is_excerpt records it"
+    }
+  ],
+  "audit_chain": [
+    "served description",
+    "<- data/curated/event_descriptions/decisions.jsonl (named reviewer, exact approved string, timestamp)",
+    "<- this dump's data.jsonl, field 'abstract' (verbatim, unmodified) and 'abstract_ascii'",
+    "<- source_url, the arXiv abstract page",
+    "<- the paper itself"
+  ],
+  "audit_chain_gap": {
+    "gap": "this dump does NOT record the versioned Atom entry the text was read from",
+    "consequence": "an abstract can differ between v1 and v3, so the chain reaches the paper but not the exact words retrieved",
+    "fixed_from": "the next dump onward; entry_id and arxiv_version are now recorded",
+    "found": "by checking the audit_chain claim against the file rather than against the intention, immediately after writing it"
+  }
+}
