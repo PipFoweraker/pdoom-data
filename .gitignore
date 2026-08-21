@@ -65,3 +65,12 @@ tools/scan_view.html
 .venv-checks/
 .venv-print/
 data/curated/watchlist/triage_log.jsonl
+
+# Render artifacts from coordination's walkpack printer. Printing any doc in
+# this repo drops four of these in the root: walkpack.html, walkpack.pdf, and
+# two numbered PDFs. They are build output of a tool that lives in another
+# repo, so nothing here regenerates them and nothing here should carry them.
+# Ignored rather than deleted by hand -- remembering to delete is a document,
+# and this is the mechanism version.
+walkpack.html
+walkpack*.pdf
