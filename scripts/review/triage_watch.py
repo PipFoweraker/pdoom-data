@@ -4,6 +4,22 @@
     python scripts/review/triage_watch.py --by "Pip Foweraker"
     python scripts/review/triage_watch.py --by "..." --needs-attention
     python scripts/review/triage_watch.py --by "..." --redo   # include decided
+    python scripts/review/triage_watch.py --by "..." --decide  # MONTH END
+
+Two passes, not one
+-------------------
+The mechanic in Pip's words: a thing happens, it goes on Watch for the month,
+and at month end it is decided and the decision is published with reasons.
+
+  TRIAGE  (default)  110 atoms, four keys, no free text. Puts things ON Watch.
+  DECIDE  (--decide)  only atoms already `watching`. Accept or reject, and the
+                      reason is required, because it is the thing published.
+
+Until 2026-08-21 only the first existed. `project_watch_accepted.py` was
+written, tested and wired into CI to serve accepted atoms, and NOTHING in the
+repository could set `watch_status` to `accepted` -- which is why
+`api/watch/accepted.jsonl` has held zero records since it was created. A
+mechanic with a front half and no back half looks complete from either end.
 
 Why this exists
 ---------------
@@ -161,10 +177,145 @@ def render(row, position, total):
               % (row.get("rating") or "-", row.get("watch_status") or "-"))
 
 
+# key -> (watch_status, label) for the MONTH-END pass. A separate mapping, and
+# separate letters from the triage keys on purpose: `a` and `b` mean "put this
+# on Watch" and must not be muscle-memory for "accept it into the corpus".
+DECIDE_KEYS = {
+    "y": ("accepted", "accept into the curated set"),
+    "x": ("rejected", "reject, with the reason recorded"),
+    "k": ("watching", "keep watching -- rolls into next month"),
+}
+
+
+def gate_reasons(atom, decider):
+    """What would stop this atom being served if accepted right now.
+
+    Imported from the producer rather than restated here. A second copy of the
+    promotion rules would become a variant the moment either side changed, and
+    this seat has already paid for that twice this month.
+    """
+    sys.path.insert(0, os.path.join(REPO, "scripts", "build"))
+    import project_watch_accepted            # noqa: E402
+    probe = dict(atom)
+    probe["decided_by"] = decider
+    return project_watch_accepted.gate(probe)
+
+
+def ask_reason(prompt):
+    """A decision published without a reason is a verdict nobody can argue with.
+
+    Blocking on free text is exactly what Pip's own art-review measurement says
+    does not survive a fast lane -- a tag designed that morning was used zero
+    times that afternoon. The difference here is deliberate: this is the SLOW
+    lane. It runs once a month over the atoms already marked `watching`, not
+    over 110, and the mechanic in his words is that at month end the decision
+    "is published with reasons". A reason that is optional is a reason that is
+    absent, and `decision_note` has been null on every atom since the field
+    was created.
+
+    Typing `-` abandons this atom rather than recording an empty reason. If
+    this proves too slow in practice, the fix is to shorten the pass, not to
+    make the reason optional.
+    """
+    while True:
+        text = input(prompt).strip()
+        if text == "-":
+            return None
+        if text:
+            return text
+        print("  a reason is required -- or type - to leave this atom alone")
+
+
+def decide_loop(args, rows, queue):
+    """The month-end pass: decide what has been on Watch, with reasons."""
+    today = date.today().isoformat()
+    print("MONTH-END DECISION pass: %d atom(s) on Watch, decider %s"
+          % (len(queue), args.by))
+    print()
+    for key, (status, label) in DECIDE_KEYS.items():
+        print("  %s  %s" % (key, label))
+    print("  s  skip, change nothing")
+    print("  q  stop and save")
+    print("\nAccept and reject both require a reason. It is published.")
+
+    decided = 0
+    for position, row in enumerate(queue, start=1):
+        render(row, position, len(queue))
+        key = read_key("\n  [y/x/k/s/q] > ")
+
+        if key == "q":
+            break
+        if key == "s" or key not in DECIDE_KEYS:
+            if key != "s":
+                print("  (unrecognised key, nothing changed)")
+            continue
+
+        status, _label = DECIDE_KEYS[key]
+
+        if status == "accepted":
+            blocked = gate_reasons(row, args.by)
+            if blocked:
+                # Better to say so now than to let the build report it later
+                # against a decision already made and logged.
+                print("\n  ACCEPTING THIS WILL NOT SERVE IT:")
+                for reason in blocked:
+                    print("    - %s" % reason)
+                confirm = read_key("  record the acceptance anyway? [y/N] > ")
+                if confirm != "y":
+                    print("  (left alone)")
+                    continue
+
+        note = None
+        if status in ("accepted", "rejected"):
+            note = ask_reason("  reason> ")
+            if note is None:
+                print("  (left alone)")
+                continue
+
+        prior = {"watch_status": row.get("watch_status"),
+                 "decision_note": row.get("decision_note")}
+        append_log({
+            "id": row["id"],
+            "pass": "decide",
+            "prev": prior,
+            "next": {"watch_status": status, "decision_note": note},
+            "by": args.by,
+            "at": datetime.now(timezone.utc).isoformat(),
+        })
+
+        row["watch_status"] = status
+        if status == "watching":
+            row["decided_on"] = None
+            row["decided_by"] = None
+        else:
+            row["decided_on"] = today
+            row["decided_by"] = args.by
+            row["decision_note"] = note
+
+        save(rows)
+        decided += 1
+
+    print("\n%d decision(s) recorded by %s." % (decided, args.by))
+    counts = {}
+    for row in rows:
+        state = row.get("watch_status") or "undecided"
+        counts[state] = counts.get(state, 0) + 1
+    print("watch list now: %s"
+          % ", ".join("%s %d" % kv for kv in sorted(counts.items())))
+    print("\nrun scripts/build/project_watch_accepted.py to serve the accepts,")
+    print("and scripts/build/project_watchlist.py --check to confirm the")
+    print("derived half is untouched.")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--by", required=True,
                         help="reviewer name. Required -- no anonymous verdicts")
+    parser.add_argument("--decide", action="store_true",
+                        help="MONTH-END pass over atoms already on Watch: "
+                             "accept or reject, with a reason. Different keys "
+                             "from the triage pass, deliberately.")
     parser.add_argument("--needs-attention", action="store_true",
                         help="only atoms with no source, no date, or a duplicate flag")
     parser.add_argument("--scan", help="only atoms from this scan id")
@@ -179,6 +330,27 @@ def main():
 
     rows = load()
     by_id = {r["id"]: r for r in rows}
+
+    if args.decide:
+        # Only what is already on Watch. An atom never triaged has not been
+        # watched for a month and there is nothing to decide about it yet;
+        # sweeping it in here would turn a month-end decision into a first
+        # look, which is the triage pass wearing the wrong keys.
+        queue = [r for r in rows if r.get("watch_status") == "watching"]
+        if args.redo:
+            queue = [r for r in rows
+                     if r.get("watch_status") in ("watching", "accepted",
+                                                  "rejected")]
+        if args.scan:
+            queue = [r for r in queue if args.scan in r.get("scans", [])]
+        queue.sort(key=lambda r: (r.get("date") or "9999", r["id"]))
+        if args.limit:
+            queue = queue[:args.limit]
+        if not queue:
+            print("Nothing on Watch to decide. Run the triage pass first:")
+            print("  python scripts/review/triage_watch.py --by \"%s\"" % args.by)
+            return 0
+        return decide_loop(args, rows, queue)
 
     queue = list(rows)
     if not args.redo:
