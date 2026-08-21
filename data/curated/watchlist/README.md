@@ -1,6 +1,6 @@
 # Watch list
 
-93 candidate events, one atom each, and the place where judgement about them
+110 candidate events, one atom each, and the place where judgement about them
 lives.
 
     data/raw/llm_event_scan/payloads/   what four machine scans SAID  (bronze, immutable)
@@ -63,7 +63,7 @@ selects nothing until someone rules, by design.
 
 ## Duplicates are flagged, never merged
 
-Seven pairs are flagged in `possible_duplicate_of`. They are **not** merged,
+Fourteen pairs are flagged in `possible_duplicate_of`. They are **not** merged,
 because identity is a judgement: `kimi_k3` appears twice and those are two
 genuinely different events, a model release and a sandbox escape.
 
@@ -84,8 +84,9 @@ re-deriving it.
 
     scripts/review/select_watch.py --needs-attention
 
-1. **7 duplicate pairs** to merge or separate.
-2. **19 atoms with a null date.** Most are month-only; none were guessed.
+1. **14 duplicate pairs** to merge or separate, of which seven are adjudicated
+   in `HYGIENE_2026-08-15.md` and seven are not.
+2. **24 atoms with a null date.** Most are month-only; none were guessed.
 3. **3 atoms with no source at all**, each flagged `UNVERIFIED` in its own
    payload. Two are reported White House actions, one is a GPT-5.6 file-deletion
    report.
@@ -101,3 +102,14 @@ re-deriving it.
 No `impacts`, no `rarity`, no `salience`, no `game_facing`. Nothing here shapes
 an event for a consumer. If pdoom1 wants a weighting it belongs in an export
 profile, per ADR-001 and `pdoom-data#34`.
+
+---
+
+**Counts corrected 2026-08-21.** This file said 93 atoms, 19 null dates and
+seven duplicate pairs. The 2026-08-19 remainder scan added 17 atoms and the
+duplicate detector has since flagged more pairs; the numbers above are
+re-measured from `candidates.jsonl` on that date. `HYGIENE_2026-08-15.md`
+still describes 93 atoms and seven pairs, correctly -- it is a dated pass over
+the corpus as it stood, not a live count, and adjusting it would falsify a
+record. The seven pairs it adjudicates are still adjudicated; the other seven
+are not.
