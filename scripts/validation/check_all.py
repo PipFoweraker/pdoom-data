@@ -73,6 +73,11 @@ GATING = [
     ("url normalisation loses no source", ["tests/test_url_normalisation.py"], True),
     ("maturity predicates can fail", ["tests/test_maturity_predicates.py"], True),
     ("source fallback fills only what is empty", ["tests/test_source_fallback.py"], True),
+    # The decide pass is where a named human's judgement becomes a published
+    # fact. Its cases cover the three rules that make that safe: no anonymous
+    # verdict, no unexplained decision, and no decision recorded that the
+    # promotion gate would silently refuse to serve.
+    ("watch decisions are named and explained", ["tests/test_decide_watch.py"], True),
 ]
 
 REBUILD = [
