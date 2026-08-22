@@ -28,6 +28,10 @@ SCRIPT_DIR = Path(__file__).parent.parent
 sys.path.insert(0, str(SCRIPT_DIR))
 
 from utils.logger import get_logger
+# The repo's one sanctioned ASCII coercion. NFKD-folds what it can and drops
+# what it cannot, so 'St. Poelten' survives as 'St. Polten' rather than
+# 'St. P?lten'. CLAUDE.md forbids the '?' fallback by name.
+from adapters._base import to_ascii
 
 logger = get_logger('enriched_transform')
 
@@ -197,8 +201,8 @@ class EnrichedTransformer:
             description = paragraphs[0] if paragraphs else text[:500]
 
         description = description.strip()
-        # Clean any non-ASCII for game compatibility
-        description = description.encode('ascii', 'replace').decode('ascii')
+        # Coerce to ASCII for game compatibility -- fold, never '?'.
+        description = to_ascii(description)
 
         if len(description) > 1000:
             description = description[:997] + '...'
@@ -261,7 +265,7 @@ class EnrichedTransformer:
 
         # Clean title
         title = record.get('title', 'Unknown')[:200]
-        title = title.encode('ascii', 'replace').decode('ascii')
+        title = to_ascii(title)
 
         event = {
             'id': event_id,
