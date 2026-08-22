@@ -246,3 +246,18 @@ microdata; attribution is opt-in with a persisted contributor preference.
 docs/adr/, matching pdoom1's convention. ADRs 001-003 remain inline above.
 Numbers 004, 005 and 006 were already reserved by the Future ADRs list and were
 deliberately not taken.
+
+## ADR-009: Funding data - atoms here, aggregates in the consumer (2026-08-22)
+
+Full text: [docs/adr/ADR-009-funding-atoms-not-aggregates.md](adr/ADR-009-funding-atoms-not-aggregates.md)
+
+pdoom-data ingests grant atoms -- one funder, one recipient, one date, one
+stated allocation, with its source URL -- and publishes no total. Aggregates,
+if ever served, are namespaced by definition like salience_by_profile, never a
+bare total. The source's own field is preserved (recommended_usd,
+funding_goal_usd, transacted_usd) because stated and moved money differ by 18x
+on Manifund and SFF says outright that its recommendations may not become
+disbursements. Every collection carries coverage metadata: history is patchy
+because funding history was patchy, and that is publishable, but silent
+patchiness is not. Conflict of interest is a machine-readable field, not a
+prose footnote. Metaculus, if adopted, is the first credentialed source here.

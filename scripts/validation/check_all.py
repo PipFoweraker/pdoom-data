@@ -62,6 +62,15 @@ GATING = [
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),
     ("transcoding detector fires", ["tests/test_transcoding_detector.py"], True),
+    # The transcoding detector above scans data AT REST, and by then the ASCII
+    # fold has already destroyed the lead character it greps for: UTF-8 read as
+    # latin-1 gives U+00C3, NFKD folds that to the letter "A", and
+    # "Universite de Montreal" is stored as "UniversitA de MontrAal" -- valid
+    # ASCII, no lead character, unrecoverable. Two correct guards composing into
+    # a hole (found 2026-08-22 in the 2026-07-25 Epoch dump). This one covers the
+    # boundary instead: a wrong decode must raise where it happens, and the fold
+    # must repair before it folds.
+    ("mojibake fails at the boundary", ["tests/test_mojibake_boundary.py"], True),
     # The bronze rung is awarded for "has a schema" and "validates", and both
     # are passed by a schema of {"type": "object"}. These four keep the rung
     # meaning something: candidate_v1 provably rejects bad records; the URL

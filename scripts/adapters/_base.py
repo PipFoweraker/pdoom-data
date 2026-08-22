@@ -136,10 +136,94 @@ def polite_post(session, url, max_attempts=5, timeout=60, **kwargs):
     return last
 
 
-def to_ascii(text):
-    """Lossy but predictable ASCII coercion for text destined for the repo."""
+class MojibakeError(ValueError):
+    """Raised when text we just decoded is UTF-8 that was read as latin-1."""
+
+
+def looks_like_mojibake(text):
+    """True if `text` looks like UTF-8 bytes that were decoded as latin-1.
+
+    The test is a round trip, not a character blacklist: only genuine mojibake
+    re-encodes cleanly to latin-1 AND decodes as valid UTF-8 to something
+    DIFFERENT. A legitimately accented string ('cafe' with an acute) fails the
+    latin-1 re-encode or decodes back to itself, so it is not flagged.
+    """
+    return _mojibake_repair(text) is not None
+
+
+# Two codecs, because this repo has now met BOTH species. The 2026-08-06
+# timeline-events corruption was UTF-8 read as CP1252. The 2026-07-25 Epoch
+# corruption was UTF-8 read as ISO-8859-1, which is what `requests` falls back
+# to for a text/* body carrying no charset. The two codecs disagree over
+# 0x80-0x9F, so neither alone finds both.
+_MOJIBAKE_CODECS = ("cp1252", "latin-1")
+
+
+def _mojibake_repair(text):
+    """The repaired string, or None if `text` is not mojibake."""
     if text is None:
         return None
+    s = str(text)
+    if not s or all(ord(ch) < 128 for ch in s):
+        return None
+    for codec in _MOJIBAKE_CODECS:
+        try:
+            recovered = s.encode(codec).decode("utf-8")
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            continue
+        if recovered != s:
+            return recovered
+    return None
+
+
+def repair_mojibake(text):
+    """Undo one latin-1/UTF-8 double decode. Returns text unchanged if it is
+    not mojibake, so this is safe to call on anything."""
+    repaired = _mojibake_repair(text)
+    return text if repaired is None else repaired
+
+
+def decode_response(response):
+    """Text from an HTTP response, decoded correctly and checked.
+
+    WHY THIS EXISTS. `requests` guesses: for a `text/*` body with no `charset`
+    parameter it falls back to ISO-8859-1 per RFC 2616. Epoch AI serves
+    `Content-Type: text/csv` with no charset, so `response.text` decoded UTF-8
+    bytes as latin-1 and every accent mojibaked -- silently, because a latin-1
+    decode of UTF-8 never raises. `to_ascii` then folded the mojibake to a
+    LETTER: 'Universite de Montreal' was stored as 'UniversitA de MontrAal' in
+    the 2026-07-25 Epoch dump, and 'e' cannot be recovered from 'A'.
+
+    This is the `open()`-without-encoding defect that CLAUDE.md already warns
+    about, arriving through a different door.
+
+    Raises MojibakeError rather than returning damaged text: a wrong decode is
+    a wrong answer, and a wrong answer is worse than no answer.
+    """
+    ctype = response.headers.get("Content-Type", "")
+    if "charset=" not in ctype.lower():
+        response.encoding = "utf-8"
+    text = response.text
+    if looks_like_mojibake(text):
+        raise MojibakeError(
+            "Decoded text from %s still looks double-decoded (declared "
+            "Content-Type: %r). Refusing to hand back damaged text."
+            % (getattr(response, "url", "<unknown>"), ctype))
+    return text
+
+
+def to_ascii(text):
+    """Lossy but predictable ASCII coercion for text destined for the repo.
+
+    Repairs mojibake FIRST. Folding double-decoded text is how an accent
+    becomes an unrelated letter: NFKD of 'A-tilde' keeps 'A', so 'e-acute'
+    read as latin-1 folds to 'A' rather than 'e'. Repairing first means even
+    legacy text folds to the right letter. This never raises -- the boundary
+    (decode_response) is where a bad decode should fail.
+    """
+    if text is None:
+        return None
+    text = repair_mojibake(text)
     out = []
     for char in str(text):
         if ord(char) < 128:
