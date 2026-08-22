@@ -141,5 +141,91 @@
       }
     ],
     "notes": "Adapter landed 2026-07-25 (scripts/adapters/mit_airr.py); this is the tagging spine. Licence additionally confirmed inside the workbook itself. Day unknown, pinned to month start. Database access via Google Sheets copy link and OneDrive mirror linked from the /risks page. Now also published in Patterns (2026). The initiative additionally hosts an AI Incident Tracker, an AI Governance database, and expert survey results under the same licence -- all unexplored."
+  },
+  "sff": {
+    "name": "Survival and Flourishing Fund",
+    "url": "https://survivalandflourishing.fund/",
+    "license_spdx": null,
+    "source_available_at": null,
+    "confidence": "low",
+    "corpus_start": "2019",
+    "evidence": [
+      {
+        "claim": "Per-round recommendation pages are published from 2019 through 2026. The 2019 page describes itself as covering 2019-Q4. Nine rounds parsed to 324 grant rows totalling USD 75,101,415; four later pages could not be parsed by the same code and are NOT known to be empty.",
+        "url": "https://survivalandflourishing.fund/2019/recommendations",
+        "retrieved_at": "2026-08-22",
+        "via": "direct HTTP probe and table parse from the Windows seat"
+      },
+      {
+        "claim": "The source states that recommendations may not become disbursements: some grants might not happen if they are logistically difficult or time-consuming for the Funders.",
+        "url": "https://survivalandflourishing.fund/2019/recommendations",
+        "retrieved_at": "2026-08-22",
+        "via": "first-party page text"
+      }
+    ],
+    "notes": "NOT INGESTED. Reuse terms not located, so license_spdx is null and no dump may be published until confirmed. Publishes RECOMMENDATIONS, not disbursements: store recommended_usd, never amount (ADR-009 s3). Rounds are jointly funded -- 2019 names Jaan Tallinn (independent) alongside SFF -- so the column is not attributable to SFF alone. Markup changed after 2023-H2 from table/td to div class=in-grid (673 divs, 618 dollar amounts on the 2025 page), so one parser will silently return zero rows for 2024 onward. Pages are UTF-8 with curly quotes; decode explicitly or reproduce #68. See #94."
+  },
+  "manifund": {
+    "name": "Manifund",
+    "url": "https://manifund.org/",
+    "license_spdx": null,
+    "source_available_at": null,
+    "confidence": "low",
+    "corpus_start": "2023",
+    "evidence": [
+      {
+        "claim": "api/v0/projects returns HTTP 200 without a key or account, 100 records per page, paginated by a before cursor. A probe with before=2024-01-01 returned projects created 2023-12-30, so history reaches at least that far back. Earlier bound not probed.",
+        "url": "https://manifund.org/api/v0/projects",
+        "retrieved_at": "2026-08-22",
+        "via": "direct HTTP probe from the Windows seat"
+      },
+      {
+        "claim": "Stated and moved money differ by 18x. The newest 100 projects on this date sum to USD 9,039,076 of funding_goal and USD 502,800 of txns, with 9 of 100 projects carrying any transaction and 90 at stage proposal.",
+        "url": "https://manifund.org/api/v0/projects",
+        "retrieved_at": "2026-08-22",
+        "via": "local computation over the fetched payload"
+      }
+    ],
+    "notes": "NOT INGESTED. Reuse terms not checked. Carries a native cause taxonomy usable for AI-safety filtering: tais (Technical AI safety), ai-gov, gcr, forecasting, biosec. Never sum funding_goal and call it funding (ADR-009 s3). RELATED PARTY: Pip has a live Manifund campaign, ruled 2026-08-22 to be INCLUDED and flagged with related_party true rather than silently excluded (ADR-009 s5)."
+  },
+  "metaculus": {
+    "name": "Metaculus",
+    "url": "https://www.metaculus.com/",
+    "license_spdx": null,
+    "source_available_at": null,
+    "confidence": "low",
+    "corpus_start": null,
+    "evidence": [
+      {
+        "claim": "The API is token-gated, not bot-blocked. An unauthenticated request returns HTTP 403 with the body: Permission Error: The API is only available to authenticated users. Please create an account and use your API token to access the API.",
+        "url": "https://www.metaculus.com/api/posts/?limit=1",
+        "retrieved_at": "2026-08-22",
+        "via": "direct HTTP probe from the Windows seat, browser user-agent, redirects followed"
+      }
+    ],
+    "notes": "NOT INGESTED. Would be the FIRST credentialed source in this repo: no adapter currently reads a token (grep getenv|API_KEY|TOKEN over scripts/adapters/ returns nothing). Requires a CI secret and must not re-arm either de-armed committing workflow. A community forecast is an attributed published number, so it is a fact about an opinion and permitted under ADR-001. Note coordination/forecasts/register.jsonl already holds the same record shape (statement, p, criterion, resolves_on, outcome) and the two want one schema."
+  },
+  "coefficient_giving": {
+    "name": "Coefficient Giving (formerly Open Philanthropy)",
+    "url": "https://coefficientgiving.org/",
+    "license_spdx": null,
+    "source_available_at": null,
+    "confidence": "low",
+    "corpus_start": null,
+    "evidence": [
+      {
+        "claim": "Open Philanthropy renamed to Coefficient Giving in November 2025 and restructured into 13 cause-specific funds. openphilanthropy.org/grants/ now returns 301 to coefficientgiving.org/funds/.",
+        "url": "https://coefficientgiving.org/research/open-philanthropy-is-now-coefficient-giving/",
+        "retrieved_at": "2026-08-22",
+        "via": "redirect chain observed directly, corroborated by web search of first-party and trade-press pages"
+      },
+      {
+        "claim": "No machine-readable grants feed located. The site is WordPress with 309 wp-json routes and none is a grant post type; the sitemap indexes page, careers, research, team, content-type and focus-area only; /grants is Algolia-backed and returns 403 to non-browser fetchers.",
+        "url": "https://coefficientgiving.org/wp-json/",
+        "retrieved_at": "2026-08-22",
+        "via": "direct HTTP probe and route enumeration from the Windows seat"
+      }
+    ],
+    "notes": "NOT INGESTED. Largest AI-safety funder by volume and the dominant term in any 2017-2026 series, so its absence is the main coverage gap. The data/raw/funding_sources/open_philanthropy/ scaffold directory name is stale as of Nov 2025. Ingest path is unresolved: Algolia index credentials are published to the browser but reuse terms are unchecked. See #94."
   }
 }
