@@ -87,7 +87,12 @@ def normalise_date(raw):
 
 def fetch(session):
     response = _base.polite_get(session, CSV_URL)
-    text = response.text
+    # NOT response.text. Epoch serves "Content-Type: text/csv" with no charset,
+    # and requests then falls back to ISO-8859-1, mojibaking every accent
+    # without ever raising. That is how the 2026-07-25 dump stored
+    # "UniversitA de MontrAal". decode_response pins UTF-8 and refuses to
+    # return text that still looks double-decoded.
+    text = _base.decode_response(response)
     rows = list(csv.DictReader(io.StringIO(text)))
     return rows, _base.sha256_text(text)
 

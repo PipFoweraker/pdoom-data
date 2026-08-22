@@ -142,6 +142,9 @@ jobs:
       - name: The transcoding detector still fires
         run: python tests/test_transcoding_detector.py
 
+      - name: A wrong decode still fails at the boundary
+        run: python tests/test_mojibake_boundary.py
+
       - name: Serveable zone matches a fresh build (candidates)
         run: python scripts/build/project_candidates.py --check
 
