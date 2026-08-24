@@ -788,6 +788,7 @@ def main():
     print("  Every keypress is appended and fsync'd before the next card.")
     print("  Ctrl-C when done; nothing is lost by closing the tab.")
     print("")
+    sys.stdout.flush()   # so the banner survives a redirected stdout
 
     handler = make_handler(pass_dir, frame, records, args.by, pass_id)
     httpd = ThreadingHTTPServer(("127.0.0.1", port), handler)
