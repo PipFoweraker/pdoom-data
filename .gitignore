@@ -74,3 +74,14 @@ data/curated/watchlist/triage_log.jsonl
 # and this is the mechanism version.
 walkpack.html
 walkpack*.pdf
+
+# Fetched arXiv abstracts for a corpus-review sitting. Same treatment as the
+# alignment_research dumps above and for the same two reasons: it is a fetch
+# that scripts/review/prepare_corpus_review.py reproduces from the seed in
+# frame.json, and real abstracts carry non-ASCII author names and mathematics
+# that the ASCII gate would reject. Folding them would be damage, not
+# compliance. _metadata.json IS tracked -- that is the provenance.
+data/raw/arxiv_abstracts/dumps/*/data.jsonl
+
+# The generated corpus-review sheet. Rebuilt every time the server starts.
+tools/corpus_review.html
