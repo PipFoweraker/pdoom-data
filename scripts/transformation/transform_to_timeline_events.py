@@ -358,7 +358,7 @@ class TimelineEventTransformer:
     def save_json(self, events: List[Dict[str, Any]], file_path: Path):
         """Save events to JSON file."""
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(events, f, indent=2, ensure_ascii=True)
 
     def transform_directory(self):

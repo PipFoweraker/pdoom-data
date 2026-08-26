@@ -321,7 +321,7 @@ class DataCleaner:
     def save_jsonl(self, records: List[Dict[str, Any]], file_path: Path):
         """Save records to JSONL file."""
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w', encoding='utf-8', newline='\n') as f:
             for record in records:
                 json.dump(record, f, ensure_ascii=True)
                 f.write('\n')
@@ -329,7 +329,7 @@ class DataCleaner:
     def save_json(self, records: List[Dict[str, Any]], file_path: Path):
         """Save records to JSON file (array)."""
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(records, f, indent=2, ensure_ascii=True)
 
     def clean_directory(self):

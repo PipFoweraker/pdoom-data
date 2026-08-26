@@ -46,7 +46,7 @@ def test_migration_basic():
         ]
         
         test_file = source_dir / "test.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(test_data, f)
         
         # Create config
@@ -105,7 +105,7 @@ def test_migration_idempotent():
         # Create test data
         test_data = [{"grant_id": "TEST-001", "amount": 50000, "date": "2024-01-15", "source": "Other"}]
         test_file = source_dir / "test.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(test_data, f)
         
         # Create config
@@ -168,7 +168,7 @@ def test_validation_failure():
         ]
         
         test_file = source_dir / "test.json"
-        with open(test_file, 'w') as f:
+        with open(test_file, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(test_data, f)
         
         # Create config
