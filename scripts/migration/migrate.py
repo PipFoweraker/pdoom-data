@@ -34,7 +34,7 @@ class MigrationState:
         """Load state from file"""
         if self.state_file.exists():
             try:
-                with open(self.state_file) as f:
+                with open(self.state_file, encoding='utf-8') as f:
                     data = json.load(f)
                     self.processed_files = data.get('processed_files', {})
             except Exception:
@@ -43,7 +43,7 @@ class MigrationState:
     def save(self):
         """Save state to file"""
         self.state_file.parent.mkdir(parents=True, exist_ok=True)
-        with open(self.state_file, 'w') as f:
+        with open(self.state_file, 'w', encoding='utf-8', newline='\n') as f:
             json.dump({
                 'processed_files': self.processed_files,
                 'last_updated': datetime.utcnow().isoformat()
@@ -119,7 +119,7 @@ class DataMigrator:
         
         if config_path and config_path.exists():
             try:
-                with open(config_path) as f:
+                with open(config_path, encoding='utf-8') as f:
                     user_config = json.load(f)
                     default_config.update(user_config)
             except Exception as e:

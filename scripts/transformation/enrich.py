@@ -3,7 +3,7 @@
 Generalized data enrichment pipeline for the transformed zone.
 
 This script implements the enrichment layer of the data lake:
-    data/transformed/cleaned/* → data/transformed/enriched/*
+    data/transformed/cleaned/* -> data/transformed/enriched/*
 
 Operations:
 - Extract temporal fields (year, quarter, month, decade)
@@ -329,7 +329,7 @@ class DataEnricher:
     def save_jsonl(self, records: List[Dict[str, Any]], file_path: Path):
         """Save records to JSONL file."""
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w', encoding='utf-8', newline='\n') as f:
             for record in records:
                 json.dump(record, f, ensure_ascii=True)
                 f.write('\n')
@@ -337,7 +337,7 @@ class DataEnricher:
     def save_json(self, records: List[Dict[str, Any]], file_path: Path):
         """Save records to JSON file (array)."""
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(records, f, indent=2, ensure_ascii=True)
 
     def enrich_directory(self):

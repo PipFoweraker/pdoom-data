@@ -77,12 +77,27 @@ read-only and therefore safe to have armed.
 
 ## Served collections
 
+Paths below are relative to `data/serveable/`. There is no top-level `api/`;
+this table said there was until 2026-08-15. Counts re-measured 2026-08-15.
+
 | Path | What it is |
 |---|---|
-| `api/timeline_events/all_events.json` | 1,194 events. 28 hand-authored, 1,166 bulk arXiv import whose descriptions are unparsed PDF text. |
+| `api/timeline_events/all_events.json` | 1,194 events, keyed by slug. 28 hand-authored narrative records; 1,166 bulk, which is **1,129 arXiv plus 37 Distill**, not arXiv alone. Bulk descriptions are unparsed PDF text. |
 | `api/candidates/all_candidates.jsonl` | 3,434 candidates, 2023-2026 forward-fill. Unreviewed unless `review_status` says otherwise. |
-| `api/reviewed/all_reviewed.jsonl` | 140 human-accepted candidates, attributed. Not `event_v1` shape; not engine-ingestible without a mapping layer. |
-| `api/frontier_labs/all_labs.json` | 46 organisations with founding dates and per-date evidence. |
+| `api/reviewed/all_reviewed.jsonl` | 518 reviewed candidates carrying 526 attributed reviews: 337 accept, 166 unsure, 23 reject, all by Pip Foweraker; 8 records hold two reviews. **Reviewed, not accepted** -- do not read this file as an accept list. Not `event_v1` shape; not engine-ingestible without a mapping layer. |
+| `api/frontier_labs/all_labs.json` | 46 organisations with founding dates and per-date evidence. 4 founded-null, 16 contested. |
+| `api/watch/accepted.jsonl` | The Watch mechanic's output: atoms a named human accepted, in a **neutral** shape. Currently 0 records because nothing is triaged. Deliberately NOT `event_v1` -- see below. |
+| `api/meta/dataset_quality.json` | Measured counts about the corpus, regenerated and gated. Quote figures from here rather than retyping them. |
+
+**`api/watch/accepted.jsonl` does not go through `all_events.json`, and that is
+a decision rather than an omission.** `event_v1` *requires* `impacts`, `rarity`,
+`pdoom_impact`, `safety_researcher_reaction` and `media_reaction`, with
+`additionalProperties: false`, so a record cannot be partly conformant.
+Promoting an atom through it means inventing a cash delta and a rarity tier for
+a real-world event. That is the `#34` breach, and 93 promotions would have
+multiplied it. `all_events.json` also has exactly one producer, which was hard
+won. Three gates apply to promotion -- a date, a source, and a named decider --
+and a blocked atom is reported with its reason rather than dropped.
 
 ## Landmines
 
@@ -103,14 +118,30 @@ have destroyed data. The repair and the de-arm landed together, and
 regains an unattended trigger. Re-arming is a deliberate act: remove the entry
 from `DISARMED` in the same commit that arms it.
 
-**Do not clear the ASCII backlog to make CI green.** About 20 files in `docs/`
-fail the gate on box-drawing and arrows. That failure is the only thing keeping
-the `documentation-publish` job from running, and that job appends to
-`DEVBLOG.md` with `echo >>` on every push to main, so the file grows without
-bound. Both are de-armed now, but the coupling is real. Also: never run
-`legacy/2025-09_prototype/fix_ascii.py`, whose `?` fallback would shred every
-tree diagram. Use an explicit substitution map that errors on unmapped
-characters.
+**The ASCII backlog is CLEARED, 2026-08-10, and the reason it was safe is the
+part worth keeping.** Nineteen files failed the gate on box-drawing, arrows and
+emoji. This paragraph used to say clearing them would arm `documentation-publish`,
+a job that appends to `DEVBLOG.md` with `echo >>` on every push to main so the
+file grows without bound.
+
+**That coupling was already dead when this warning was written and the warning
+outlived it.** The job was de-armed on 2026-07-30 by being **commented out** --
+`.github/workflows/documentation-ci.yml` lines 195-242, which is prose, not YAML.
+A commented job cannot run whether the gate above it is red or green, so the red
+was protecting nothing. **This is the stale-copy failure this file warns about
+two sections below, committed by this file, about itself.** Check the workflow
+before trusting a claim about the workflow.
+
+Still true and still load-bearing: **never run
+`legacy/2025-09_prototype/fix_ascii.py`**, whose `?` fallback would shred every
+tree diagram. The 2026-08-10 clearance used an explicit substitution map that
+**errors on unmapped characters**, keeps box-drawing at one ASCII character per
+box character so tree alignment survives, and hand-corrected the three Python
+files rather than substituting in them -- `check_evidence.py` carried en and em
+dashes **inside the string literals that normalise en and em dashes**, so a
+textual pass would have produced `replace("-", "-")` and silently disabled the
+check while turning the file green. That is the whole argument for an explicit
+map in one example.
 
 **Never open an existing file with `encoding="ascii"` for writing.** Python
 truncates on open, then raises on the first non-ASCII byte, destroying the file
@@ -289,4 +320,36 @@ printing and capture to `coordination`.
     python scripts/**/*.py
     python -m json.tool
     git add / commit / push / pull / fetch
-    gh issue list / view
+    gh issue list / view       NOT INSTALLED on the Linux seat -- see below
+
+`gh` is INSTALLED on the Linux seat as of 2026-08-16: version 2.97.0 at
+`~/.local/bin/gh`, from the release tarball, since there is no `apt` and no
+`sudo` here. CI status and the issue queue are readable again.
+
+**Installing the binary was not sufficient and this is the part worth keeping.**
+`git` still could not authenticate afterwards, because
+`credential.https://github.com.helper` had been configured on 2026-08-10 to run
+**`/usr/bin/gh`, a path that has never existed on this machine**. Two defects
+wearing one symptom: the earlier note here said only "gh is absent", which was
+true and would have led the next person to install it, watch `git` keep failing,
+and conclude the token was revoked. Both helpers -- github and gist -- now point
+at `~/.local/bin/gh`. Verify with a real fetch, not with `gh auth status`:
+
+    git config --global --get-regexp 'credential.*helper'
+    git fetch
+
+Verifying the repo needs two packages that are deliberately not in
+`requirements.txt`. **There is already a virtualenv holding them**, untracked
+and, until 2026-08-15, undocumented:
+
+    .venv-checks/bin/python scripts/validation/check_all.py
+
+Use that interpreter. Bare `python` on the Linux seat is a Codium-scoped
+interpreter that does NOT see them, so `check_all.py` refuses to run and
+reports missing dependencies -- which is correct behaviour and reads exactly
+like a broken repo. It is not. It is the wrong interpreter. A fresh clone with
+no venv wants `pip install -r requirements-checks.txt` instead.
+
+This cost an hour on 2026-08-15: the missing-dependency message was read as
+"the de-arm guard cannot run on this seat", and the fix looked like installing
+the packages globally. The guard had been runnable the whole time.

@@ -114,10 +114,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 **Legend**:
-- 🎯 Major feature
-- ✨ Enhancement
-- 🐛 Bug fix
-- 📚 Documentation
-- 🔧 Configuration
-- ⚡ Performance
-- 🔒 Security
+- [TARGET] Major feature
+- [NEW] Enhancement
+- [BUG] Bug fix
+- [DOCS] Documentation
+- [TOOL] Configuration
+- [FAST] Performance
+- [LOCK] Security

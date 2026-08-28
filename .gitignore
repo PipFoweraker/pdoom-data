@@ -60,3 +60,25 @@ dev_metrics.db
 # Embeds the current unreviewed pile, so it is stale the moment a verdict
 # lands. Regenerable in a second; 600KB of derived HTML is not history.
 tools/scan_view.html
+.venv-checks/
+.venv-print/
+.venv-checks/
+.venv-print/
+# data/curated/watchlist/triage_log.jsonl was ignored here from 2026-08-15,
+# the same commit that built the writer. Un-ignored 2026-08-21 on Pip's
+# ruling. The log is the ONLY durable record of how a verdict was reached:
+# candidates.jsonl holds the final state, and triage_watch.py's own docstring
+# says why that is not enough -- "under a state file alone every earlier
+# judgement would have been lost and the record would have shown a confident
+# single verdict that was never how it happened". Ignored, that record was
+# local to one machine, which is the same as not existing. It is human
+# judgement in the curated zone, attributed by name, and it belongs in git.
+
+# Render artifacts from coordination's walkpack printer. Printing any doc in
+# this repo drops four of these in the root: walkpack.html, walkpack.pdf, and
+# two numbered PDFs. They are build output of a tool that lives in another
+# repo, so nothing here regenerates them and nothing here should carry them.
+# Ignored rather than deleted by hand -- remembering to delete is a document,
+# and this is the mechanism version.
+walkpack.html
+walkpack*.pdf

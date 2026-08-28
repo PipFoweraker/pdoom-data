@@ -50,7 +50,7 @@ class ManifestGenerator:
 
         # Manual curated events
         if (timeline_dir / 'all_events.json').exists():
-            with open(timeline_dir / 'all_events.json', 'r') as f:
+            with open(timeline_dir / 'all_events.json', 'r', encoding='utf-8') as f:
                 manual_events = json.load(f)
 
             datasets['manual_events'] = {
@@ -74,7 +74,7 @@ class ManifestGenerator:
         # Alignment research events
         alignment_dir = timeline_dir / 'alignment_research'
         if alignment_dir.exists() and (alignment_dir / 'alignment_research_events.json').exists():
-            with open(alignment_dir / 'alignment_research_events.json', 'r') as f:
+            with open(alignment_dir / 'alignment_research_events.json', 'r', encoding='utf-8') as f:
                 research_events = json.load(f)
 
             datasets['alignment_research_events'] = {
@@ -209,7 +209,7 @@ class ManifestGenerator:
 
         logger.info(f"Saving manifest to {manifest_path}")
 
-        with open(manifest_path, 'w', encoding='utf-8') as f:
+        with open(manifest_path, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(manifest, f, indent=2, ensure_ascii=True)
 
         logger.info(f"Manifest saved successfully")

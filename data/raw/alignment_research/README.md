@@ -131,18 +131,18 @@ Get token from: https://huggingface.co/settings/tokens
 
 ```
 alignment_research/
-├── README.md                   # This file
-├── extraction_script.py        # Main extraction script
-├── _templates/
-│   ├── _metadata.json         # Metadata template
-│   └── data_schema.json       # Schema definition
-└── dumps/
-    ├── 2025-11-06_140000/     # Timestamped dumps
-    │   ├── data.jsonl         # Extracted records (JSONL format)
-    │   └── _metadata.json     # Extraction metadata
-    └── 2025-11-13_020000/     # Delta update
-        ├── data.jsonl
-        └── _metadata.json
++-- README.md                   # This file
++-- extraction_script.py        # Main extraction script
++-- _templates/
+|   +-- _metadata.json         # Metadata template
+|   +-- data_schema.json       # Schema definition
++-- dumps/
+    +-- 2025-11-06_140000/     # Timestamped dumps
+    |   +-- data.jsonl         # Extracted records (JSONL format)
+    |   +-- _metadata.json     # Extraction metadata
+    +-- 2025-11-13_020000/     # Delta update
+        +-- data.jsonl
+        +-- _metadata.json
 ```
 
 ## Metadata Tracking
@@ -268,17 +268,17 @@ Solution: Delta mode checks last_extraction_date. Use --force-full to re-extract
 
 ```
 Hugging Face API
-    ↓
+    v
 [extraction_script.py]
-    ↓
+    v
 data/raw/alignment_research/dumps/[timestamp]/data.jsonl
-    ↓
+    v
 [scripts/migration/migrate.py]
-    ↓
+    v
 data/transformed/validated/
-    ↓
+    v
 [Future: Cleaning & Enrichment]
-    ↓
+    v
 data/serveable/
 ```
 

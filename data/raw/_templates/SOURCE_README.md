@@ -95,18 +95,18 @@ Get token from: [URL for getting token]
 
 ```
 [source_name]/
-├── README.md                   # This file
-├── extraction_script.py        # Main extraction script
-├── _templates/
-│   ├── _metadata.json         # Metadata template
-│   └── data_schema.json       # Schema definition
-└── dumps/
-    ├── [timestamp]/           # Timestamped dumps
-    │   ├── data.jsonl         # Extracted records (JSONL format)
-    │   └── _metadata.json     # Extraction metadata
-    └── [timestamp]/           # Subsequent dumps
-        ├── data.jsonl
-        └── _metadata.json
++-- README.md                   # This file
++-- extraction_script.py        # Main extraction script
++-- _templates/
+|   +-- _metadata.json         # Metadata template
+|   +-- data_schema.json       # Schema definition
++-- dumps/
+    +-- [timestamp]/           # Timestamped dumps
+    |   +-- data.jsonl         # Extracted records (JSONL format)
+    |   +-- _metadata.json     # Extraction metadata
+    +-- [timestamp]/           # Subsequent dumps
+        +-- data.jsonl
+        +-- _metadata.json
 ```
 
 ## Metadata Tracking
@@ -225,17 +225,17 @@ Solution: [Solution description]
 
 ```
 [Data Source]
-    ↓
+    v
 [extraction_script.py]
-    ↓
+    v
 data/raw/[source_name]/dumps/[timestamp]/data.jsonl
-    ↓
+    v
 [scripts/migration/migrate.py]
-    ↓
+    v
 data/transformed/validated/
-    ↓
+    v
 [Future: Cleaning & Enrichment]
-    ↓
+    v
 data/serveable/
 ```
 

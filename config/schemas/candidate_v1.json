@@ -1,0 +1,375 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pdoom.org/schemas/candidate_v1.json",
+  "title": "pdoom-data candidate record, v1",
+  "version": "1.0.0",
+  "description": "The shape of one record in api/candidates/all_candidates.jsonl. Derived by measuring all 3,434 served records on 2026-08-21, not from intent. Every constraint here is one that the corpus already satisfies AND that a wrong record would violate; see tests/test_schema_gates.py, which exists to prove the second half.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "_provenance",
+    "actors",
+    "archive_urls",
+    "content_sha256",
+    "extra",
+    "id",
+    "ingested_at",
+    "kind",
+    "license",
+    "occurred_at",
+    "privacy_review_required",
+    "published_at",
+    "review_status",
+    "reviews",
+    "salience_basis_by_profile",
+    "salience_by_profile",
+    "salience_tier_by_profile",
+    "signals",
+    "source_available_at",
+    "source_raw_key",
+    "source_urls",
+    "summary",
+    "title"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+:[A-Za-z0-9_.:+/-]+$",
+      "description": "source_prefix:upstream_key. The prefix names the adapter."
+    },
+    "source_raw_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "forum_post",
+        "model_release"
+      ],
+      "description": "Closed deliberately. A new adapter introducing a new kind should be a decision that edits this file, not a value that appears in the feed unannounced."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "actors": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "occurred_at": {
+      "$ref": "#/definitions/nullable_date"
+    },
+    "published_at": {
+      "$ref": "#/definitions/nullable_date"
+    },
+    "source_available_at": {
+      "$ref": "#/definitions/nullable_date"
+    },
+    "ingested_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}"
+    },
+    "source_urls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/url"
+      }
+    },
+    "archive_urls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/url"
+      }
+    },
+    "content_sha256": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      ]
+    },
+    "license": {
+      "type": "object",
+      "required": [
+        "spdx",
+        "attribution",
+        "citation",
+        "source_terms_url",
+        "verified_at",
+        "verified_by",
+        "url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "pattern": "-SA"
+          },
+          "description": "Share-Alike is refused at the door. validate_candidate() enforces the same rule in code; this is the second, independently written statement of it."
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "citation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_terms_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reuse_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/definitions/url"
+            }
+          ]
+        },
+        "verified_at": {
+          "$ref": "#/definitions/nullable_date"
+        },
+        "verified_by": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "unreviewed",
+        "reviewed",
+        "needs_privacy_review"
+      ]
+    },
+    "privacy_review_required": {
+      "type": "boolean"
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "reviewer",
+          "verdict",
+          "at"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "reviewer": {
+            "type": "string",
+            "minLength": 1,
+            "description": "ADR-001: no anonymous verdicts. An empty or absent reviewer is not a record with a missing field, it is an unattributed opinion, which this repo does not publish."
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "accept",
+              "unsure",
+              "reject",
+              "privacy"
+            ]
+          },
+          "at": {
+            "type": "string",
+            "minLength": 1
+          },
+          "layer": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "tier_override": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "salience_by_profile": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9_]+_v[0-9]+$": {
+          "type": "number"
+        }
+      },
+      "description": "ADR-001: no bare salience. A profile key must name a profile and a version, so a consumer that disagrees can ignore a key rather than fork the data."
+    },
+    "salience_tier_by_profile": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9_]+_v[0-9]+$": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ]
+        }
+      }
+    },
+    "salience_basis_by_profile": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9_]+_v[0-9]+$": {}
+      }
+    },
+    "signals": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "observed_at",
+            "value"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "observed_at": {
+              "type": "string",
+              "minLength": 1
+            },
+            "value": {
+              "type": [
+                "number",
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "description": "A signal is a time series, never a bare number. A number without an observed_at is a measurement whose date has been thrown away."
+      }
+    },
+    "airr_tags_by_layer": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z0-9_]+_v[0-9]+$": {
+          "type": "object",
+          "required": [
+            "confidence"
+          ],
+          "properties": {
+            "confidence": {
+              "type": "string",
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "very_low"
+              ]
+            }
+          }
+        }
+      },
+      "description": "Optional: machine enrichment, absent on 299 of 3,434 records. Layered so a human layer can later disagree with the machine layer without overwriting it."
+    },
+    "_provenance": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "confidence",
+          "layer",
+          "method"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "layer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "extra": {
+      "type": "object",
+      "description": "Deliberately unconstrained: source-specific passthrough. Anything a consumer is expected to rely on must be promoted to a named field above rather than left here."
+    }
+  },
+  "definitions": {
+    "nullable_date": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        }
+      ],
+      "description": "null is permitted and is the honest value for an unknown date. A guessed date is indistinguishable from a real one later, so the schema must never make null the harder option."
+    },
+    "url": {
+      "type": "string",
+      "allOf": [
+        {
+          "pattern": "^https?://"
+        },
+        {
+          "not": {
+            "pattern": "\\s"
+          }
+        }
+      ],
+      "description": "One URL, not a list: it must start with a scheme and contain no whitespace anywhere. Two earlier attempts at this were wrong and both failed OPEN, which is the direction that matters. ^https?://[^ ]+$ excluded spaces but not newlines and reported 19 bad records where there were 65. Replacing the class with the negated-whitespace class still let a URL with ONE TRAILING newline through, because Python's re treats $ as end-of-string-or-before-final-newline while ECMA-262, which JSON Schema specifies, treats it as end-of-input. The form here depends on neither anchor semantics nor the host regex engine."
+    }
+  }
+}

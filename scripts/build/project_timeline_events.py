@@ -166,6 +166,67 @@ def normalise(record, record_id, problems):
     return out
 
 
+CURATED_DESCRIPTIONS = os.path.join(
+    REPO_ROOT, "data", "curated", "event_descriptions", "decisions.jsonl")
+
+
+def load_description_overlay(problems):
+    """Descriptions a named human accepted, keyed by event id.
+
+    The 1,166 bulk records describe themselves with a slice of raw PDF text --
+    "1 Introduction", a technical report cover page, median 30 characters --
+    and they are 97.7% of the public event pages (pdoom-data#88). The repair is
+    the author's own abstract, fetched from arXiv by scripts/adapters/
+    arxiv_abstracts.py and accepted one at a time in
+    scripts/review/review_descriptions.py.
+
+    This function applies ONLY what a named person accepted. Four rules, and
+    each one is here because the alternative is a build that can quietly change
+    what 1,166 public pages say about real papers:
+
+      1. `accept_abstract` and nothing else. `keep_current` and `undecided` are
+         recorded decisions and both mean "do not touch this record".
+      2. A decision with no reviewer is DROPPED and reported. ADR-001 permits
+         no anonymous verdicts, and this is the point where one would become a
+         published sentence.
+      3. The text served is the exact string the reviewer saw and approved,
+         taken from the decision, never re-derived from the abstract. If the
+         trim length or the ASCII coercion ever changes, previously approved
+         text does not silently change with it -- that would require a new
+         review, which is the point.
+      4. Last decision wins, because the file is append-only and a person is
+         allowed to change their mind. The earlier decision stays on disk.
+    """
+    overlay = {}
+    if not os.path.isfile(CURATED_DESCRIPTIONS):
+        return overlay
+    for number, line in enumerate(io.open(CURATED_DESCRIPTIONS, encoding="utf-8"), 1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except ValueError as exc:
+            problems.append("decisions.jsonl line %d does not parse: %s"
+                            % (number, exc))
+            continue
+        if row.get("verdict") != "accept_abstract":
+            continue
+        if not (row.get("reviewer") or "").strip():
+            problems.append("decisions.jsonl line %d accepts a description with "
+                            "no reviewer named; refusing to serve it" % number)
+            continue
+        text = row.get("description")
+        if not text or not str(text).strip():
+            problems.append("decisions.jsonl line %d accepts an empty "
+                            "description for %s" % (number, row.get("id")))
+            continue
+        overlay[row["id"]] = {"description": text,
+                              "reviewer": row["reviewer"],
+                              "at": row.get("at"),
+                              "source_url": row.get("source_url")}
+    return overlay
+
+
 def build():
     problems = []
     records = {}
@@ -193,6 +254,22 @@ def build():
         record_id = record["id"]
         records[record_id] = normalise(record, record_id, problems)
         provenance.setdefault(record_id, "enriched_alignment_research")
+
+    overlay = load_description_overlay(problems)
+    applied = 0
+    for record_id, decision in overlay.items():
+        if record_id not in records:
+            problems.append("decisions.jsonl accepts a description for %s, "
+                            "which is not in this corpus" % record_id)
+            continue
+        records[record_id]["description"] = to_ascii(
+            decision["description"], "description of %s" % record_id, problems)
+        provenance[record_id] = "%s + description accepted by %s" % (
+            provenance.get(record_id, "unknown"), decision["reviewer"])
+        applied += 1
+    if overlay:
+        print("applied %d human-accepted description(s) of %d recorded"
+              % (applied, len(overlay)))
 
     return records, hand_authored, provenance, problems
 
@@ -250,6 +327,89 @@ def render(records, hand_authored, provenance):
     return payload, lineage
 
 
+def render_sidecars(records):
+    """manifest.json, stats.json and event_index.json, derived from the feed.
+
+    These three sat at 28 records while all_events.json held 1,194, from
+    2025-11-09 to 2026-08-10 -- nine months of a published catalogue describing
+    2.3% of the collection it catalogues. check_invariants.py knew, printed all
+    three as KNOWN divergences, and passed, because they had no producer and
+    there was nothing to compare them against. That is the whole of
+    pdoom-data#52 and it is the reason this function exists rather than a patch
+    to the numbers.
+
+    The key sets are preserved EXACTLY. A consumer reading manifest.json today
+    gets the same shape tomorrow with true values in it; nothing is added and
+    nothing is removed, because widening a published file is a consumer
+    decision and this is a correctness fix.
+
+    generated_at becomes null, deliberately. It read 2025-11-09 -- a stamp that
+    was true once and had been false for nine months, which is exactly the
+    fabricated-clock failure this repo forbids. A fresh wall-clock stamp is the
+    alternative and it would make --check non-deterministic, which this producer
+    already refuses for the feed itself. null is ungated and honest; freshness
+    belongs to LINEAGE.json and to the rebuild check.
+
+    What these numbers now show, and it is not flattering: by_rarity is 1,076
+    'rare' out of 1,194, and by_category is 1,174 'technical_research_breakthrough'
+    out of 1,194. Both are artefacts of the bulk arXiv import rather than
+    editorial judgement -- pdoom-data#51 records that rarity is a length
+    threshold on a discarded field. Publishing the true distribution makes that
+    visible in a served file instead of only in an issue.
+    """
+    years = sorted(set(r["year"] for r in records.values()))
+    categories = sorted(set(r["category"] for r in records.values()))
+
+    def tally(field):
+        out = {}
+        for r in records.values():
+            out[str(r[field])] = out.get(str(r[field]), 0) + 1
+        return dict(sorted(out.items()))
+
+    impact_variables = {}
+    pdoom_distribution = {}
+    for r in records.values():
+        for impact in r.get("impacts", []):
+            name = impact.get("variable") if isinstance(impact, dict) else None
+            if name:
+                impact_variables[name] = impact_variables.get(name, 0) + 1
+        key = str(r.get("pdoom_impact"))
+        pdoom_distribution[key] = pdoom_distribution.get(key, 0) + 1
+
+    manifest = {
+        "version": "1.0.0",
+        "schema_version": "1.0.0",
+        "generated_at": None,
+        "total_events": len(records),
+        "years": years,
+        "categories": categories,
+        "files": {
+            "all_events": "all_events.json",
+            "by_year": "by_year/{year}.json",
+            "by_category": "by_category/{category}.json",
+            "event_index": "event_index.json",
+            "stats": "stats.json",
+        },
+    }
+    stats = {
+        "total_events": len(records),
+        "by_year": tally("year"),
+        "by_category": tally("category"),
+        "by_rarity": tally("rarity"),
+        "impact_variables": dict(sorted(impact_variables.items())),
+        "pdoom_impact_distribution": dict(sorted(pdoom_distribution.items())),
+    }
+    index = dict(
+        (rid, {
+            "title": r["title"],
+            "year": r["year"],
+            "category": r["category"],
+            "rarity": r["rarity"],
+        })
+        for rid, r in records.items())
+    return manifest, stats, index
+
+
 def write_json(path, obj):
     """Write via temp + os.replace.
 
@@ -289,6 +449,11 @@ def main():
     feed_path = os.path.join(OUT_DIR, "all_events.json")
     lineage_path = os.path.join(OUT_DIR, "LINEAGE.json")
 
+    manifest, stats, index = render_sidecars(records)
+    sidecars = [("manifest.json", manifest), ("stats.json", stats),
+                ("event_index.json", index)]
+    print("  sidecars          : %d, all derived from the feed" % len(sidecars))
+
     if args.check or args.diff:
         if not os.path.isfile(feed_path):
             print("CHECK FAILED: %s does not exist" % feed_path)
@@ -315,13 +480,28 @@ def main():
             if load(lineage_path) != lineage:
                 print("CHECK FAILED: committed LINEAGE differs from a fresh build.")
                 return 1
-        print("CHECK OK: committed output matches a fresh build")
+        for name, fresh in sidecars:
+            path = os.path.join(OUT_DIR, name)
+            if not os.path.isfile(path):
+                print("CHECK FAILED: %s does not exist" % name)
+                return 1
+            if load(path) != fresh:
+                print("CHECK FAILED: %s differs from a fresh build. This is the "
+                      "check that did not exist while it claimed 28 of 1,194 "
+                      "records for nine months (pdoom-data#52)." % name)
+                return 1
+        print("CHECK OK: committed output matches a fresh build "
+              "(feed, lineage and %d sidecars)" % len(sidecars))
         return 0
 
     write_json(feed_path, payload)
     write_json(lineage_path, lineage)
     print("wrote %s" % os.path.relpath(feed_path, REPO_ROOT).replace("\\", "/"))
     print("wrote %s" % os.path.relpath(lineage_path, REPO_ROOT).replace("\\", "/"))
+    for name, fresh in sidecars:
+        write_json(os.path.join(OUT_DIR, name), fresh)
+        print("wrote %s" % os.path.relpath(
+            os.path.join(OUT_DIR, name), REPO_ROOT).replace("\\", "/"))
     return 0
 
 

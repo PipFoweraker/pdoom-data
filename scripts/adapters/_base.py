@@ -12,6 +12,7 @@ escape sequences, never literals, so the file passes its own gate.
 import hashlib
 import json
 import os
+import re
 import time
 import unicodedata
 from datetime import datetime, timezone
@@ -178,6 +179,56 @@ def signal(name, value, observed_at=None):
     observation date makes that answerable rather than a fudge.
     """
     return {name: [{"observed_at": observed_at or utc_now_iso(), "value": value}]}
+
+
+URL_TRAILING = ",;"
+SCHEMELESS_HOST = re.compile(r"^[a-z0-9][a-z0-9.-]*\.[a-z]{2,24}/")
+
+
+def split_url_cell(value):
+    """Recover the URLs from one upstream cell that may hold several.
+
+    Lives here, not in the adapter or the projection, because BOTH need it and
+    a second copy becomes a variant the moment either side changes. The
+    projection needs it because 65 served records were built from a dump that
+    already had the defect, and raw dumps are immutable; the adapter needs it
+    so the next dump does not repeat it.
+
+    Epoch AI's `Link` column is free text. 65 of 3,434 served candidates
+    carried two or three URLs joined into a SINGLE value -- by a comma, a
+    semicolon, or a newline -- so `source_urls[0]` was a string no consumer
+    could fetch. Found 2026-08-21 by config/schemas/candidate_v1.json, the
+    first thing in this repo that ever asserted the element was a URL.
+
+    This is a parse, not a judgement: the cell says two URLs and the record now
+    says two URLs. Prose in the cell -- "(was withdrawn)", "training code:" --
+    is dropped here and stays in the raw dump, which is immutable and is where
+    an unparsed original belongs.
+
+    Deliberately conservative in three ways, each of which has a test:
+
+      - Only whitespace splits.
+      - Only a trailing comma or semicolon is stripped. A trailing full stop is
+        NOT, because a URL may legitimately end in one and sentence punctuation
+        in this column is rarer than the URLs it would corrupt.
+      - A schemeless value is rescued to https ONLY if it carries a path
+        separator. `arxiv.org/abs/2501.14818` is a URL that Epoch wrote without
+        a scheme and that epoch_models.py dropped for exactly that reason,
+        costing epoch_ai:eagle_2 its only source. `vs.something` in prose is
+        not, and without the path-separator condition it would become
+        `https://vs.something`.
+    """
+    out = []
+    for token in str(value).split():
+        token = token.rstrip(URL_TRAILING)
+        if not (token.startswith("http://") or token.startswith("https://")):
+            if SCHEMELESS_HOST.match(token.lower()):
+                token = "https://" + token
+            else:
+                continue
+        if token not in out:
+            out.append(token)
+    return out
 
 
 def provenance(field_map):

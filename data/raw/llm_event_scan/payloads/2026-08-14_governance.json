@@ -1,0 +1,301 @@
+{
+  "scan_id": "2026-08-14_governance",
+  "scan_scope": "AI governance, regulation, policy, international coordination, standards bodies, institutional change, 2024-08-01 to 2026-08-14",
+  "scanned_at": "2026-08-14T09:30:00Z",
+  "scanner": "claude-opus-5[1m] subagent with WebSearch/WebFetch",
+  "operator": "pdoom-data seat, session 2026-08-14",
+  "instruction_summary": "Find gap candidates not already in the dataset. Facts only. Never invent a date; null is acceptable, fabrication is not. Report confidence honestly and flag anything unverified.",
+  "scanner_limits": [
+    "Session WebSearch budget exhausted at 200 calls before coverage was complete.",
+    "Named as unreached: California SB 243 companion-chatbot law, state chatbot/therapy laws, G7 Hiroshima Process reporting framework, NIST AI RMF and ISO/IEC 42001 developments, completed EU AI Act enforcement actions.",
+    "Chip Security Act and GAIN AI Act considered and deliberately omitted rather than guessed."
+  ],
+  "records": [
+    {
+      "slug": "coe_ai_framework_convention_2024",
+      "title": "Council of Europe opens first binding AI treaty for signature",
+      "date": "2024-09-05",
+      "date_kind": "action",
+      "description": "The Council of Europe Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law was adopted and opened for signature in Vilnius, the first international legally binding instrument on AI. Negotiated from September 2022 by the Committee on Artificial Intelligence, it was signed on day one by eight member states plus the European Union, the United States and Israel.",
+      "sources": ["https://www.coe.int/en/web/artificial-intelligence/the-framework-convention-on-artificial-intelligence"],
+      "why_it_matters": "The first time AI obligations were written into binding international law rather than a voluntary declaration.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "newsom_vetoes_sb1047_2024",
+      "title": "Newsom vetoes California SB 1047 frontier AI safety bill",
+      "date": "2024-09-29",
+      "date_kind": "action",
+      "description": "Governor Gavin Newsom vetoed SB 1047, the Safe and Secure Innovation for Frontier Artificial Intelligence Models Act, which would have imposed safety testing, shutdown capability and whistleblower obligations on developers of models above compute thresholds. Newsom wrote that the bill did not take into account whether an AI system is deployed in high-risk environments, and that a California-only approach must be based on empirical evidence and science.",
+      "sources": ["https://www.gibsondunn.com/regulating-the-future-eight-key-takeaways-from-californias-sb-1047-vetoed-by-governor-newsom/"],
+      "why_it_matters": "The highest-profile defeat of binding frontier-model safety regulation, and the direct precursor to SB 53.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "intl_network_ai_safety_institutes_2024",
+      "title": "International Network of AI Safety Institutes first convening",
+      "date": "2024-11-20",
+      "date_kind": "action",
+      "description": "The US Departments of Commerce and State hosted the inaugural convening of the International Network of AI Safety Institutes in San Francisco on 20-21 November 2024, with ten founding members: Australia, Canada, the EU, France, Japan, Kenya, the Republic of Korea, Singapore, the UK and the US. Technical working sessions covered synthetic content risks, foundation model testing, and risk assessment for advanced systems.",
+      "sources": ["https://www.nist.gov/news-events/news/2024/11/fact-sheet-us-department-commerce-us-department-state-launch-international"],
+      "why_it_matters": "The institutional high-water mark for state-level AI safety coordination, before the renamings and the drift already in the dataset.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "trump_revokes_biden_ai_eo_2025",
+      "title": "Trump revokes EO 14110, signs AI leadership order 14179",
+      "date": "2025-01-23",
+      "date_kind": "action",
+      "description": "On 20 January 2025 President Trump revoked Executive Order 14110, the Biden administration's October 2023 AI order, and on 23 January 2025 signed Executive Order 14179, Removing Barriers to American Leadership in Artificial Intelligence. EO 14179 directs agencies to pursue AI development free from ideological bias and to produce an action plan for sustaining US AI dominance.",
+      "sources": ["https://oecd.ai/en/dashboards/policy-initiatives/executive-order-14179-removing-barriers-to-american-leadership-in-ai"],
+      "why_it_matters": "The formal reversal of US federal AI policy from risk management to acceleration, and the legal basis for everything downstream.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "eu_ai_act_prohibitions_in_force_2025",
+      "title": "EU AI Act bans and AI literacy duties become applicable",
+      "date": "2025-02-02",
+      "date_kind": "action",
+      "description": "The first substantive tranche of the EU AI Act became applicable on 2 February 2025: Articles 1-4 including the Article 4 AI-literacy duty, and Article 5, prohibiting manipulative or deceptive techniques, exploitation of vulnerable groups, social scoring, untargeted facial-image scraping, and certain emotion recognition and biometric categorisation. The Commission published non-binding guidelines on 4 February 2025.",
+      "sources": ["https://www.hoganlovells.com/en/publications/the-eu-ai-act-prohibited-practices-and-ai-literacy-requirements-take-effect"],
+      "why_it_matters": "The first legally enforceable AI prohibitions anywhere, and the start of the AI Act's staged application clock.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "china_ai_content_labeling_2025",
+      "title": "China mandates labeling of AI-generated content",
+      "date": "2025-03-14",
+      "date_kind": "action",
+      "description": "The Cyberspace Administration of China, with three other agencies, issued the Measures for Labeling AI-Generated Synthetic Content on 14 March 2025, alongside mandatory national standard GB 45438-2025. The rules took effect on 1 September 2025 and require both explicit labels visible to users and implicit labels embedded in file metadata, binding internet information service providers and content distribution platforms.",
+      "sources": ["https://www.chinalawtranslate.com/en/ai-labeling/"],
+      "why_it_matters": "The first nationwide mandatory provenance-labeling regime, in force a year before comparable EU transparency duties bite.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "us_rescinds_ai_diffusion_rule_2025",
+      "title": "Commerce rescinds the Biden AI Diffusion Rule",
+      "date": "2025-05-13",
+      "date_kind": "action",
+      "description": "The Bureau of Industry and Security announced on 13 May 2025 that it would rescind the Artificial Intelligence Diffusion Framework, issued 15 January 2025, which would have imposed a tiered worldwide licensing regime on advanced computing chips and model weights from 15 May 2025. BIS simultaneously issued guidance stating that supplying advanced computing ICs for AI training can enable military-intelligence and WMD end uses in Country Group D:5 states.",
+      "sources": ["https://www.wilmerhale.com/en/insights/client-alerts/20250515-us-export-controls-on-ai-diffusion-officially-paused-but-new-guidance-elevates-risk-for-ai-related-exports"],
+      "why_it_matters": "Compute governance shifted from a rules-based global licensing tier system to case-by-case deals.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "texas_traiga_2025",
+      "title": "Texas enacts Responsible AI Governance Act (HB 149)",
+      "date": "2025-06-22",
+      "date_kind": "action",
+      "description": "Governor Greg Abbott signed HB 149, the Texas Responsible Artificial Intelligence Governance Act, on 22 June 2025, effective 1 January 2026. The enacted version was substantially narrowed from the introduced bill: it uses an intent-based liability standard, prohibits AI developed for social scoring, certain biometric identification and intentional discrimination, creates a state AI regulatory sandbox, and vests exclusive enforcement in the Attorney General.",
+      "sources": ["https://www.dlapiper.com/en/insights/publications/2025/06/texas-adopts-the-responsible-ai-governance-act"],
+      "why_it_matters": "Third US state comprehensive AI law, and the template for intent-based rather than duty-of-care regulation.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "senate_strips_ai_moratorium_2025",
+      "title": "Senate strips 10-year state AI moratorium, 99-1",
+      "date": "2025-07-01",
+      "date_kind": "action",
+      "description": "On 1 July 2025 the US Senate voted 99-1 to remove from the budget reconciliation bill (H.R. 1) a provision that would have barred states from enforcing AI regulations for ten years. The amendment was offered by a bipartisan group including Senators Blackburn, Cantwell, Markey and Collins; Senator Thom Tillis was the sole no vote. H.R. 1 was signed into law on 4 July 2025 without the moratorium.",
+      "sources": ["https://www.insideglobaltech.com/2025/07/07/senate-nixes-state-ai-enforcement-moratorium-for-now/"],
+      "why_it_matters": "Congress declined to preempt state AI law, which pushed the preemption fight into executive orders and the courts.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "us_ai_action_plan_2025",
+      "title": "White House issues America's AI Action Plan",
+      "date": "2025-07-23",
+      "date_kind": "action",
+      "description": "The Trump administration released America's AI Action Plan on 23 July 2025 pursuant to Executive Order 14179, setting out federal policy across innovation, infrastructure and international diplomacy and security. It tasked the Center for AI Standards and Innovation with evaluating adversary AI systems, a mandate later cited in CAISI's DeepSeek evaluation.",
+      "sources": ["https://www.sidley.com/en/insights/newsupdates/2025/12/unpacking-the-december-11-2025-executive-order", "https://www.nist.gov/news-events/news/2025/09/caisi-evaluation-deepseek-ai-models-finds-shortcomings-and-risks"],
+      "why_it_matters": "The governing document of US federal AI policy for this whole period; nearly every later US action cites it.",
+      "confidence": "medium",
+      "flags": ["Date consistent across multiple legal-alert sources but the primary whitehouse.gov document returned 403 on fetch. Verify before promotion."]
+    },
+    {
+      "slug": "china_world_ai_cooperation_org_2026",
+      "title": "29 states sign agreement founding World AI Cooperation Organization",
+      "date": "2026-07-16",
+      "date_kind": "action",
+      "description": "Premier Li Qiang proposed a global AI cooperation body at the World AI Conference in Shanghai on 26 July 2025, headquartered in Shanghai. On 16 July 2026 representatives of 29 countries signed the agreement establishing the World Artificial Intelligence Cooperation Organization as founding members, with Foreign Minister Wang Yi signing for China. Reported founding members include Russia, Belarus, Serbia, Cuba, Brazil and Venezuela; the United States is not among them.",
+      "sources": ["https://english.news.cn/20260716/2d364f232dd7456c8edf1d67d5125d37/c.html", "https://global.chinadaily.com.cn/a/202507/26/WS6884a4e6a310ad07b5d92304.html"],
+      "why_it_matters": "A parallel AI governance institution built outside the OECD/G7 orbit, with a treaty and a headquarters.",
+      "confidence": "high",
+      "flags": ["Both sources are Chinese state media. Corroboration from a third-party outlet would strengthen this."]
+    },
+    {
+      "slug": "un_ai_scientific_panel_global_dialogue_2025",
+      "title": "UN creates AI scientific panel and Global Dialogue",
+      "date": "2025-08-26",
+      "date_kind": "action",
+      "description": "UN General Assembly resolution A/RES/79/325, adopted 26 August 2025, established the Independent International Scientific Panel on AI and the Global Dialogue on AI Governance, implementing commitments in the Global Digital Compact. The Assembly appointed the Panel's 40 members on 12 February 2026, and at its inaugural meeting on 3 March 2026 the Panel elected Yoshua Bengio and Maria Ressa as co-chairs.",
+      "sources": ["https://dig.watch/updates/un-general-assembly-adopts-terms-of-reference-for-ai-scientific-panel-and-global-dialogue-on-ai-governance"],
+      "why_it_matters": "An IPCC-shaped body for AI, with Bengio moving from the UK-convened International AI Safety Report to a UN mandate.",
+      "confidence": "high",
+      "flags": ["Panel membership and co-chair details rest on a single secondary aggregator; the resolution number and August date are corroborated."]
+    },
+    {
+      "slug": "eu_ai_act_gpai_obligations_2025",
+      "title": "EU AI Act GPAI duties apply; Code of Practice approved",
+      "date": "2025-08-02",
+      "date_kind": "action",
+      "description": "Obligations for providers of general-purpose AI models became applicable on 2 August 2025, covering transparency, copyright policy, and for models with systemic risk, model evaluation and adversarial testing, systemic risk assessment and mitigation, serious incident reporting and cybersecurity. The Commission published the General-Purpose AI Code of Practice on 10 July 2025 and confirmed formal approval on 1 August 2025.",
+      "sources": ["https://artificialintelligenceact.eu/introduction-to-code-of-practice/"],
+      "why_it_matters": "The first binding obligations aimed squarely at frontier model developers rather than deployers.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "nvidia_h20_china_revenue_share_2025",
+      "title": "US takes 15% of Nvidia and AMD China chip sales for licenses",
+      "date": "2025-08-11",
+      "date_kind": "reported",
+      "description": "After halting AI chip exports to China in April 2025, the administration reversed course in July 2025 and Commerce began issuing licenses for Nvidia's H20 and AMD's MI308. Under an arrangement reported in August 2025, both firms agreed to remit 15 percent of their China revenue from those chips to the US government in exchange for export licenses.",
+      "sources": ["https://www.pbs.org/newshour/politics/under-new-unusual-agreement-u-s-will-get-a-15-cut-of-nvidia-and-amd-chip-sales-to-china"],
+      "why_it_matters": "Export control became a negotiable revenue instrument rather than a security bright line.",
+      "confidence": "medium",
+      "flags": ["The 15 percent arrangement was widely reported but never published as a rule. The date is the reporting date, not an official action date."]
+    },
+    {
+      "slug": "colorado_ai_act_delayed_2025",
+      "title": "Colorado delays its AI Act in special session",
+      "date": "2025-08-28",
+      "date_kind": "action",
+      "description": "Governor Jared Polis signed SB25B-004 on 28 August 2025, moving the effective date of the Colorado Artificial Intelligence Act (SB 24-205) from 1 February 2026 to 30 June 2026. The delay followed a special legislative session convened after the 2025 regular session ended without agreement on substantive amendments to the algorithmic-discrimination duties the Act imposed.",
+      "sources": ["https://www.gtlaw.com/en/insights/2025/9/colorado-delays-comprehensive-ai-law-with-further-changes-anticipated"],
+      "why_it_matters": "The first US comprehensive AI law was postponed twice before ever taking effect.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "italy_national_ai_law_2025",
+      "title": "Italy passes first national AI law in the EU",
+      "date": "2025-09-17",
+      "date_kind": "action",
+      "description": "The Italian Parliament approved Law No. 132/2025 on 17 September 2025, making Italy the first EU member state with a domestic AI statute complementing the AI Act. Published in the Official Gazette on 25 September and effective 10 October 2025, its 28 articles set sectoral rules for healthcare, employment, professional services and intellectual property, and authorise up to EUR 1 billion of state-backed venture capital.",
+      "sources": ["https://www.clearygottlieb.com/news-and-insights/publication-listing/italy-adopts-the-first-national-ai-law-in-europe-complementing-the-eu-ai-act"],
+      "why_it_matters": "Member states legislating on top of the AI Act rather than waiting for it, fragmenting the single market the Act was meant to unify.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "california_sb53_frontier_transparency_2025",
+      "title": "California enacts SB 53 frontier AI transparency law",
+      "date": "2025-09-29",
+      "date_kind": "action",
+      "description": "Governor Newsom signed SB 53, the Transparency in Frontier Artificial Intelligence Act, on 29 September 2025, one year to the day after vetoing SB 1047. It requires large frontier developers to publish a framework describing how they incorporate national, international and industry-consensus standards; creates a channel for reporting critical safety incidents to the California Office of Emergency Services; protects whistleblowers; and establishes civil penalties enforceable by the Attorney General.",
+      "sources": ["https://www.gov.ca.gov/2025/09/29/governor-newsom-signs-sb-53-advancing-californias-world-leading-artificial-intelligence-industry/"],
+      "why_it_matters": "The surviving US frontier-safety statute, built from SB 1047's wreckage on transparency rather than liability.",
+      "confidence": "high",
+      "flags": ["A secondary source gives 25 September. The primary gov.ca.gov release says 29 September; the primary is used."]
+    },
+    {
+      "slug": "caisi_deepseek_evaluation_2025",
+      "title": "CAISI publishes adversary-model evaluation of DeepSeek",
+      "date": "2025-09-30",
+      "date_kind": "action",
+      "description": "The Center for AI Standards and Innovation at NIST published an evaluation of three DeepSeek models against four US reference models across 19 benchmarks, conducted under the AI Action Plan mandate to assess adversary AI systems. It reported that US models solved over 20 percent more software-engineering and cybersecurity tasks, that DeepSeek R1-0528 followed malicious instructions on average 12 times more often than the US frontier models evaluated, and that DeepSeek outputs echoed CCP-aligned narratives.",
+      "sources": ["https://www.nist.gov/news-events/news/2025/09/caisi-evaluation-deepseek-ai-models-finds-shortcomings-and-risks"],
+      "why_it_matters": "The renamed US institute's first major public output was a competitiveness and adversary assessment, not a domestic safety evaluation.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "eu_digital_omnibus_ai_act_delay_2025",
+      "title": "EU Digital Omnibus proposes delaying high-risk AI rules",
+      "date": "2025-11-19",
+      "date_kind": "action",
+      "description": "The European Commission published the Digital Omnibus on 19 November 2025, proposing the first amendments to the AI Act since adoption, chiefly deferring high-risk obligations from 2 August 2026. The Internal Market and Civil Liberties committees adopted Parliament's position on 18 March 2026 by 101 votes to 9 with 8 abstentions, setting 2 December 2027 for listed standalone high-risk systems and 2 August 2028 for high-risk AI embedded in products covered by EU sectoral safety law.",
+      "sources": ["https://www.europarl.europa.eu/news/en/press-room/20260316IPR38219/meps-support-postponement-of-certain-rules-on-artificial-intelligence", "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/"],
+      "why_it_matters": "The AI Act's core high-risk regime slipped by 16 to 24 months before it ever applied.",
+      "confidence": "medium",
+      "flags": ["High confidence on the proposal and the committee vote. Medium on the reported 7 May 2026 political agreement and on final adoption status as at 2026-08-14. Distinct from the existing eu_ai_act_watering_down_2024, which concerns the 2024 negotiation."]
+    },
+    {
+      "slug": "trump_eo_state_ai_preemption_2025",
+      "title": "Executive order targets state AI laws for preemption",
+      "date": "2025-12-11",
+      "date_kind": "action",
+      "description": "President Trump signed Executive Order 14365, Ensuring a National Policy Framework for Artificial Intelligence, on 11 December 2025. Building on the July 2025 AI Action Plan, it directs the establishment of a DOJ AI Litigation Task Force to challenge state AI laws on Commerce Clause, preemption and other grounds, and directs agencies to consider conditioning certain federal funding on states' AI regulation. It carves out state laws on child safety, AI compute and data centre infrastructure, and state procurement.",
+      "sources": ["https://www.gibsondunn.com/president-trump-latest-executive-order-on-ai-seeks-to-preempt-state-laws/"],
+      "why_it_matters": "After Congress refused preemption 99-1, the executive branch attempted it by litigation and funding leverage.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "korea_ai_basic_act_2026",
+      "title": "South Korea's AI Basic Act enters into force",
+      "date": "2026-01-22",
+      "date_kind": "action",
+      "description": "South Korea's Framework Act on the Development of Artificial Intelligence and Establishment of a Foundation for Trustworthiness, with its Enforcement Decree, took effect on 22 January 2026, the second comprehensive national AI framework after the EU's. It imposes transparency duties on generative and high-impact AI, safety requirements for frontier models, and governance duties for high-impact systems. The Ministry of Science and ICT is operating a grace period of at least one year during which fines are generally deferred except in cases of serious social harm.",
+      "sources": ["https://www.cooley.com/news/insight/2026/2026-01-27-south-koreas-ai-basic-act-overview-and-key-takeaways"],
+      "why_it_matters": "Second comprehensive AI regime in force worldwide, and it arrived with its penalties switched off.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "nvidia_h200_china_export_2026",
+      "title": "US clears Nvidia H200 sales to China with 25% cut",
+      "date": "2026-01-13",
+      "date_kind": "action",
+      "description": "On 13 January 2026 the Bureau of Industry and Security published a rule shifting the license review policy for Nvidia H200 and AMD MI325X-equivalent chips bound for China from presumption of denial to case-by-case review. President Trump said the following day that the US government would take 25 percent of the sales. Reported conditions include third-party lab verification of chip capability, a volume cap relative to US customers, and a prohibition on military use.",
+      "sources": ["https://www.cnbc.com/2026/01/14/trump-nvidia-h200-china-ai-chips.html", "https://www.nbcnews.com/world/asia/us-approves-nvidia-h200-chip-exports-china-conditions-rcna253948"],
+      "why_it_matters": "A second, larger step of export control converted into a revenue-sharing arrangement, this time at the H200 capability tier.",
+      "confidence": "high",
+      "flags": ["The 13 January BIS rule is the action. The 25 percent figure is a reported presidential statement of the following day, not a published rule term."]
+    },
+    {
+      "slug": "doj_ai_litigation_task_force_2026",
+      "title": "DOJ task force intervenes against Colorado AI Act",
+      "date": "2026-04-24",
+      "date_kind": "action",
+      "description": "The Department of Justice established the AI Litigation Task Force on 9 January 2026 under the December 2025 executive order. xAI sued in the US District Court for the District of Colorado to enjoin SB 24-205 before its 30 June 2026 effective date; on 24 April 2026 the DOJ moved to intervene in support, the first federal intervention in a challenge to a state AI law. On 27 April 2026 the court granted a joint motion temporarily suspending enforcement.",
+      "sources": ["https://www.axios.com/2026/04/24/justice-department-joins-xai-challenge-colorado-ai-law", "https://www.nortonrosefulbright.com/en/knowledge/publications/de3ad9de/xai-sues-doj-intervenes-enforcement-of-colorado-ai-act-suspended"],
+      "why_it_matters": "The federal government and a frontier lab litigating on the same side against a state safety law.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "colorado_ai_act_repealed_replaced_2026",
+      "title": "Colorado repeals and replaces its AI Act with SB 26-189",
+      "date": "2026-05-14",
+      "date_kind": "action",
+      "description": "Governor Polis signed SB 26-189 on 14 May 2026, repealing the Colorado AI Act and replacing its high-risk-system regime with a framework governing automated decision making technology used to make consequential decisions. The replacement drops SB 24-205's duty of care, risk management programme and impact assessment obligations in favour of disclosure, documentation and consumer rights, and takes effect 1 January 2027.",
+      "sources": ["https://www.dwt.com/blogs/privacy--security-law-blog/2026/05/colorado-ai-act-repeal-new-transparency-law"],
+      "why_it_matters": "The first US algorithmic-discrimination duty was repealed before ever applying, under litigation and federal pressure.",
+      "confidence": "high",
+      "flags": []
+    },
+    {
+      "slug": "india_ai_impact_summit_2026",
+      "title": "India AI Impact Summit adopts New Delhi Declaration",
+      "date": "2026-02-19",
+      "date_kind": "action",
+      "description": "The India AI Impact Summit ran 16-21 February 2026 at Bharat Mandapam, New Delhi, with participation reported from 118 countries and over 20 heads of government. The New Delhi Declaration on AI Impact was adopted on 19 February 2026, endorsed by 89 countries and international organisations, organised around seven pillars covering human capital, access, trustworthiness, energy efficiency, AI for science, democratised AI resources, and economic and social good.",
+      "sources": ["https://www.pib.gov.in/PressReleasePage.aspx?PRID=2231208", "https://impact.indiaai.gov.in/outcome-resources"],
+      "why_it_matters": "The successor to Bletchley, Seoul and Paris framed entirely around impact and diffusion, with safety demoted to one pillar among seven.",
+      "confidence": "high",
+      "flags": ["Scanner noted this is the concrete endpoint of the trend the existing ai_summit_pivot_2023_2025 record describes, and may be better attached as evidence to that record than added separately. Boundary judgement for a human."]
+    },
+    {
+      "slug": "eu_ai_act_gpai_enforcement_begins_2026",
+      "title": "Commission gains power to fine GPAI providers",
+      "date": "2026-08-02",
+      "date_kind": "action",
+      "description": "On 2 August 2026 the European Commission, through the AI Office, became entitled to exercise investigation and enforcement powers over providers of general-purpose AI models and over prohibited practices, after a one-year adjustment period. Powers include requiring model evaluations, risk mitigation, market restriction, recall or withdrawal, and fines up to the higher of EUR 15 million or 3 percent of worldwide annual turnover for GPAI breaches, and EUR 35 million or 7 percent for prohibited practices.",
+      "sources": ["https://artificialintelligenceact.eu/enforcement-of-chapter-v-under-the-eu-ai-act/", "https://www.wsgr.com/en/insights/eu-ai-act-enforcement-phase-begins.html"],
+      "why_it_matters": "The moment the AI Act acquired teeth against frontier labs, twelve days before the end of the scan window.",
+      "confidence": "high",
+      "flags": ["A CNBC report of 3 August 2026 naming specific companies under scrutiny returned 403 on fetch. Treat any company-specific investigation claim as unverified."]
+    }
+  ]
+}

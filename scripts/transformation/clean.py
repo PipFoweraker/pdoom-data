@@ -3,7 +3,7 @@
 Generalized data cleaning pipeline for the transformed zone.
 
 This script implements the cleaning layer of the data lake:
-    data/raw/* → data/transformed/validated/* → data/transformed/cleaned/*
+    data/raw/* -> data/transformed/validated/* -> data/transformed/cleaned/*
 
 Operations:
 - Deduplication (by ID, by content similarity)
@@ -164,9 +164,9 @@ class DataCleaner:
         """
         Convert non-ASCII characters to ASCII equivalents.
 
-        Smart quotes → straight quotes
-        Em/en dashes → hyphens
-        Accented characters → base characters
+        Smart quotes -> straight quotes
+        Em/en dashes -> hyphens
+        Accented characters -> base characters
 
         Args:
             text: Text potentially containing non-ASCII
@@ -195,7 +195,7 @@ class DataCleaner:
         for old, new in replacements.items():
             text = text.replace(old, new)
 
-        # Decompose accented characters (é → e)
+        # Decompose accented characters (e-acute -> e)
         # NFKD = Compatibility Decomposition
         text = unicodedata.normalize('NFKD', text)
 
@@ -321,7 +321,7 @@ class DataCleaner:
     def save_jsonl(self, records: List[Dict[str, Any]], file_path: Path):
         """Save records to JSONL file."""
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w', encoding='utf-8', newline='\n') as f:
             for record in records:
                 json.dump(record, f, ensure_ascii=True)
                 f.write('\n')
@@ -329,7 +329,7 @@ class DataCleaner:
     def save_json(self, records: List[Dict[str, Any]], file_path: Path):
         """Save records to JSON file (array)."""
         file_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(records, f, indent=2, ensure_ascii=True)
 
     def clean_directory(self):

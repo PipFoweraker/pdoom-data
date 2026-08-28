@@ -1,0 +1,12 @@
+{
+  "_for_consumers": "Promotion into a game remains your call. 'accepted' means one named person accepted this into pdoom-data's curated set. It does not mean verified, endorsed, or game-ready, and there is no game_facing flag here.",
+  "_shape": "Neutral. No impacts, rarity, pdoom_impact or reaction text. This collection is NOT event_v1 and does not claim to be -- event_v1 requires those fields, and ADR-001 says they are on the wrong side of the boundary (pdoom-data#34).",
+  "blocked_from_promotion": [],
+  "build_version": "0.1.0",
+  "producer": "scripts/build/project_watch_accepted.py",
+  "record_count": 0,
+  "source": "data/curated/watchlist/candidates.jsonl",
+  "watch_status_counts": {
+    "undecided": 110
+  }
+}

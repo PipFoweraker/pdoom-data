@@ -1,4 +1,4 @@
-# Integration Guide: pdoom-data → pdoom1 Game
+# Integration Guide: pdoom-data -> pdoom1 Game
 
 **Version**: 1.0.0
 **Last Updated**: 2025-11-09
@@ -13,19 +13,19 @@ This guide explains how to integrate data from pdoom-data into the pdoom1 game, 
 
 ```
 pdoom-data (this repo)
-    ├── data/raw/                    # Source of truth (never modified)
-    ├── data/transformed/            # Processed data (cleaned, enriched)
-    └── data/serveable/              # Production-ready, optimized
-            ↓
+    +-- data/raw/                    # Source of truth (never modified)
+    +-- data/transformed/            # Processed data (cleaned, enriched)
+    +-- data/serveable/              # Production-ready, optimized
+            v
     [Database Import or Direct Sync]
-            ↓
+            v
 pdoom1-website
-    └── PostgreSQL events table
-            ↓
+    +-- PostgreSQL events table
+            v
     [REST API: GET /api/events]
-            ↓
-        ┌───────┴───────┐
-        ↓               ↓
+            v
+        +-------+-------+
+        v               v
     pdoom (game)    pdoom-dashboard
 ```
 
