@@ -16,9 +16,7 @@
     "sources",
     "tags",
     "rarity",
-    "pdoom_impact",
-    "safety_researcher_reaction",
-    "media_reaction"
+    "pdoom_impact"
   ],
   "properties": {
     "id": {
@@ -132,14 +130,14 @@
       "maximum": 50
     },
     "safety_researcher_reaction": {
-      "type": "string",
-      "description": "Quote or paraphrase of safety researcher reaction",
+      "type": ["string", "null"],
+      "description": "Reaction attributed to a NAMED safety researcher; null when nobody has been asked. This was a required string until 2026-08-29, which meant the schema demanded a sentence for events where no such sentence existed -- and all 1,194 served records duly carried an invented one. See pdoom-data#92, pdoom-data#76, and ADR-001 on anonymous verdicts.",
       "minLength": 10,
       "maxLength": 500
     },
     "media_reaction": {
-      "type": "string",
-      "description": "How the media covered this event",
+      "type": ["string", "null"],
+      "description": "How a NAMED outlet covered this event; null when no coverage has been recorded. Was a required string until 2026-08-29 -- see safety_researcher_reaction.",
       "minLength": 10,
       "maxLength": 500
     }

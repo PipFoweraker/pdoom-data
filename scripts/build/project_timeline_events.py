@@ -166,6 +166,48 @@ def normalise(record, record_id, problems):
     return out
 
 
+# Every served record carried two sentences describing how safety researchers
+# and the media reacted to it. Nobody said any of them.
+#
+# The 1,166 bulk records drew theirs from a five-element list by random.choice
+# (scripts/transformation/transform_to_timeline_events.py:270 and
+# scripts/enrichment/transform_enriched.py:242), so "Notable work on AI safety"
+# appears 232 times as what safety researchers think about 232 different
+# papers. The 28 hand-authored records are not better, only rarer: their
+# reactions are the seed author's own prose, and one of them
+# ("Microsoft's AI chatbot goes full Nazi in under 24 hours") is styled as a
+# newspaper headline credited to no newspaper.
+#
+# Two standing rules already cover this and neither was applied:
+# RULED_2026-08-12 -- "No shipped sentence states a fact nobody has checked" --
+# and ADR-001, which forbids anonymous verdicts. A reaction attributed to an
+# unnamed "safety researcher" fails both.
+#
+# So the field is emitted as null rather than removed. null is the repo's
+# standing spelling for absent-and-honest, it keeps the key in place for
+# consumers that index on it, and it makes the absence visible instead of
+# letting a reader assume the reaction was simply not fetched. Restoring a
+# value means attributing it to someone by name, which is what ADR-001 asks
+# for and what these strings never had.
+UNATTRIBUTED_REACTION_FIELDS = ("safety_researcher_reaction", "media_reaction")
+
+
+def suppress_unattributed_reactions(records):
+    """Null the two reaction fields on every record. Returns the count changed.
+
+    Deliberately unconditional. There is no attribution anywhere in the corpus
+    to preserve, so a predicate that tried to keep the "good" ones would be
+    inventing the distinction it claimed to be reading.
+    """
+    changed = 0
+    for record in records.values():
+        for field in UNATTRIBUTED_REACTION_FIELDS:
+            if record.get(field) is not None:
+                record[field] = None
+                changed += 1
+    return changed
+
+
 CURATED_DESCRIPTIONS = os.path.join(
     REPO_ROOT, "data", "curated", "event_descriptions", "decisions.jsonl")
 
@@ -271,6 +313,11 @@ def build():
         print("applied %d human-accepted description(s) of %d recorded"
               % (applied, len(overlay)))
 
+    suppressed = suppress_unattributed_reactions(records)
+    if suppressed:
+        print("suppressed %d unattributed reaction field(s) across %d record(s)"
+              % (suppressed, len(records)))
+
     return records, hand_authored, provenance, problems
 
 
@@ -304,6 +351,15 @@ def render(records, hand_authored, provenance):
             "collection is published under. Tracked as pdoom-data#65. This "
             "producer does not rule on it -- all three seats voted for two "
             "projections and the contents question is open."
+        ),
+        "suppressed": (
+            "safety_researcher_reaction and media_reaction are emitted as null "
+            "on all 1,194 records. They previously carried invented text: the "
+            "1,166 bulk records drew from a five-element list by random.choice, "
+            "and the 28 hand-authored ones carry the seed author's own prose "
+            "styled as quotation. Neither was attributable, which ADR-001 "
+            "forbids. Tracked as pdoom-data#92 and pdoom-data#76. A non-null "
+            "value returns only with a named source."
         ),
         "repairs_applied": (
             "uk_ai_safety_to_security_2025 and us_aisi_to_caisi_2025 carried a "
