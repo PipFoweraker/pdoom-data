@@ -9,6 +9,13 @@
 *.yaml text eol=lf
 *.yml text eol=lf
 
+# Shell scripts were the one extension the ASCII gate globbed, the pre-commit
+# hook cased on, and this file never pinned. With core.autocrlf=true a Windows
+# checkout hands pre-commit-hook.sh and blog_manager.sh a "#!/bin/bash\r"
+# shebang, and the kernel then reports the interpreter as missing under a name
+# that looks correct in every editor.
+*.sh text eol=lf
+
 # Source code files - treat as text
 *.py text
 *.md text

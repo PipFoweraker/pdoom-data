@@ -124,7 +124,7 @@ def test_validate_dump_valid():
         metadata['record_count'] = 0
         metadata['extraction_status'] = 'complete'
         
-        with open(metadata_file, 'w', encoding='ascii') as f:
+        with open(metadata_file, 'w', encoding='ascii', newline='\n') as f:
             json.dump(metadata, f, indent=2)
         
         # Validate
@@ -151,7 +151,7 @@ def test_validate_dump_missing_metadata():
         
         # Create only data file, no metadata
         data_file = dump_dir / 'data.json'
-        with open(data_file, 'w', encoding='ascii') as f:
+        with open(data_file, 'w', encoding='ascii', newline='\n') as f:
             json.dump([], f)
         
         # Validate
@@ -185,7 +185,7 @@ def test_validate_dump_record_count_mismatch():
             {"grant_id": "TEST-002", "amount": 2000}
         ]
         data_file = dump_dir / 'data.json'
-        with open(data_file, 'w', encoding='ascii') as f:
+        with open(data_file, 'w', encoding='ascii', newline='\n') as f:
             json.dump(data, f)
         
         # Update metadata with wrong count
@@ -197,7 +197,7 @@ def test_validate_dump_record_count_mismatch():
         metadata['record_count'] = 5  # Wrong count
         metadata['extraction_status'] = 'complete'
         
-        with open(metadata_file, 'w', encoding='ascii') as f:
+        with open(metadata_file, 'w', encoding='ascii', newline='\n') as f:
             json.dump(metadata, f)
         
         # Validate

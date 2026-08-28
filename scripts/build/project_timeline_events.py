@@ -166,6 +166,67 @@ def normalise(record, record_id, problems):
     return out
 
 
+CURATED_DESCRIPTIONS = os.path.join(
+    REPO_ROOT, "data", "curated", "event_descriptions", "decisions.jsonl")
+
+
+def load_description_overlay(problems):
+    """Descriptions a named human accepted, keyed by event id.
+
+    The 1,166 bulk records describe themselves with a slice of raw PDF text --
+    "1 Introduction", a technical report cover page, median 30 characters --
+    and they are 97.7% of the public event pages (pdoom-data#88). The repair is
+    the author's own abstract, fetched from arXiv by scripts/adapters/
+    arxiv_abstracts.py and accepted one at a time in
+    scripts/review/review_descriptions.py.
+
+    This function applies ONLY what a named person accepted. Four rules, and
+    each one is here because the alternative is a build that can quietly change
+    what 1,166 public pages say about real papers:
+
+      1. `accept_abstract` and nothing else. `keep_current` and `undecided` are
+         recorded decisions and both mean "do not touch this record".
+      2. A decision with no reviewer is DROPPED and reported. ADR-001 permits
+         no anonymous verdicts, and this is the point where one would become a
+         published sentence.
+      3. The text served is the exact string the reviewer saw and approved,
+         taken from the decision, never re-derived from the abstract. If the
+         trim length or the ASCII coercion ever changes, previously approved
+         text does not silently change with it -- that would require a new
+         review, which is the point.
+      4. Last decision wins, because the file is append-only and a person is
+         allowed to change their mind. The earlier decision stays on disk.
+    """
+    overlay = {}
+    if not os.path.isfile(CURATED_DESCRIPTIONS):
+        return overlay
+    for number, line in enumerate(io.open(CURATED_DESCRIPTIONS, encoding="utf-8"), 1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except ValueError as exc:
+            problems.append("decisions.jsonl line %d does not parse: %s"
+                            % (number, exc))
+            continue
+        if row.get("verdict") != "accept_abstract":
+            continue
+        if not (row.get("reviewer") or "").strip():
+            problems.append("decisions.jsonl line %d accepts a description with "
+                            "no reviewer named; refusing to serve it" % number)
+            continue
+        text = row.get("description")
+        if not text or not str(text).strip():
+            problems.append("decisions.jsonl line %d accepts an empty "
+                            "description for %s" % (number, row.get("id")))
+            continue
+        overlay[row["id"]] = {"description": text,
+                              "reviewer": row["reviewer"],
+                              "at": row.get("at"),
+                              "source_url": row.get("source_url")}
+    return overlay
+
+
 def build():
     problems = []
     records = {}
@@ -193,6 +254,22 @@ def build():
         record_id = record["id"]
         records[record_id] = normalise(record, record_id, problems)
         provenance.setdefault(record_id, "enriched_alignment_research")
+
+    overlay = load_description_overlay(problems)
+    applied = 0
+    for record_id, decision in overlay.items():
+        if record_id not in records:
+            problems.append("decisions.jsonl accepts a description for %s, "
+                            "which is not in this corpus" % record_id)
+            continue
+        records[record_id]["description"] = to_ascii(
+            decision["description"], "description of %s" % record_id, problems)
+        provenance[record_id] = "%s + description accepted by %s" % (
+            provenance.get(record_id, "unknown"), decision["reviewer"])
+        applied += 1
+    if overlay:
+        print("applied %d human-accepted description(s) of %d recorded"
+              % (applied, len(overlay)))
 
     return records, hand_authored, provenance, problems
 

@@ -31,12 +31,46 @@ directory.
 | `organizational_events.py` | hand-authored organisational events |
 | `technical_breakthrough_events.py` | hand-authored technical events |
 | `game_integration_helpers.py` | shaping for the game; imports the four above |
-| `setup_script.py` | scaffolding, imports the event modules |
+| `setup_script.py` | scaffolding -- **has never parsed, see below** |
 | `setup_clean.py` | scaffolding variant; CI greps it for the VERSION string |
 | `purify_historical_data.py` | one-shot historical cleanup |
 | `dev_metrics.py` | writes `dev_metrics.db` |
 | `version_manager.py` | bumps `VERSION` and appends to `DEVBLOG.md` |
 | `fix_ascii.py` | **see the warning below** |
+
+## `setup_script.py` has never been valid Python
+
+Measured 2026-08-24 while acting on the seat-portability sweep. `ast.parse`
+raises `SyntaxError: invalid syntax` at line 250 on the file as it stands, and
+on every revision git has of it -- `b810351` of 2025-09-14, the commit that
+introduced it, and `d475e7d` of 2026-07-31, the move into this directory. The
+cause is `generate_integration_guide()` building its Markdown inside a `"""`
+string that itself contains a fenced Python block with a `"""docstring"""` in
+it, so the outer literal terminates on line 250 and the remainder of the file
+is parsed as code.
+
+The consequence was not academic. `pre-commit-hook.sh` told every developer
+whose commit failed the ASCII gate to run this script to auto-fix the problem,
+which it cannot do because it cannot start. That pointer is now gone, and the
+hook says what to do instead.
+
+This is also a correction to what the 2026-08-17 sweep recorded. It read line
+479, `open("README.md", "w", encoding='ascii')`, as an instance of the
+truncate-then-raise pattern CLAUDE.md forbids by name, and ranked it as a
+file-destroying hazard aimed at whatever directory you were standing in. Two
+things are wrong with that reading. The first is that `create_readme()` pipes
+its content through `ensure_ascii_only()` first, which coerces anything left
+over into `?` -- the same fallback that gets `fix_ascii.py` banned two sections
+down -- so the write would never raise, it would SUCCEED and silently replace
+the README of whichever repository the caller happened to be in. The second is
+that neither can happen, because the module does not import. A loud
+`SyntaxError` at import time is the cheapest possible failure and it is what
+has been happening all along.
+
+The remaining question about this directory is unchanged and still unanswered:
+whether the hand-authored event modules are the provenance of the 28 curated
+events. That a scaffolding script never ran is weak evidence they are not, but
+it is evidence, and it is written down here rather than acted on.
 
 ## Warning: do not run `fix_ascii.py`
 
@@ -61,7 +95,9 @@ before re-enabling anything.
 Two things outside this directory still reach into it, and both were updated in
 the same commit as the move:
 
-- `pre-commit-hook.sh` suggests `setup_script.py` in an error message
+- `pre-commit-hook.sh` suggested `setup_script.py` in an error message. Removed
+  2026-08-24: the script has never parsed, so the suggestion was advice to run
+  a file that cannot start. Nothing outside this directory reaches into it now.
 - `.github/workflows/documentation-ci.yml` greps `setup_clean.py` for the
   current version string
 

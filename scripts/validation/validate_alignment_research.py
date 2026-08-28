@@ -51,7 +51,7 @@ class AlignmentResearchValidator:
         self.logger = get_logger('alignment_validation', log_dir='logs/alignment_validation')
 
         # Load schema
-        with open(schema_path, 'r') as f:
+        with open(schema_path, 'r', encoding='utf-8') as f:
             self.schema = json.load(f)
 
         self.logger.info("Loaded schema", path=str(schema_path))
@@ -290,7 +290,7 @@ class AlignmentResearchValidator:
 
         # Validate metadata
         try:
-            with open(metadata_file, 'r') as f:
+            with open(metadata_file, 'r', encoding='utf-8') as f:
                 metadata = json.load(f)
 
             # Check required metadata fields

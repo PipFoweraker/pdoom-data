@@ -255,7 +255,7 @@ def run_scoring(input_path: Path, output_path: Path, source_dump: str = None):
 
     # Save output
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, 'w', encoding='utf-8') as f:
+    with open(output_path, 'w', encoding='utf-8', newline='\n') as f:
         json.dump(output, f, indent=2, ensure_ascii=True)
 
     # Print summary
