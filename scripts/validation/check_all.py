@@ -62,6 +62,15 @@ GATING = [
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),
     ("transcoding detector fires", ["tests/test_transcoding_detector.py"], True),
+    # The transcoding detector above scans data AT REST, and by then the ASCII
+    # fold has already destroyed the lead character it greps for: UTF-8 read as
+    # latin-1 gives U+00C3, NFKD folds that to the letter "A", and
+    # "Universite de Montreal" is stored as "UniversitA de MontrAal" -- valid
+    # ASCII, no lead character, unrecoverable. Two correct guards composing into
+    # a hole (found 2026-08-22 in the 2026-07-25 Epoch dump). This one covers the
+    # boundary instead: a wrong decode must raise where it happens, and the fold
+    # must repair before it folds.
+    ("mojibake fails at the boundary", ["tests/test_mojibake_boundary.py"], True),
     # The bronze rung is awarded for "has a schema" and "validates", and both
     # are passed by a schema of {"type": "object"}. These four keep the rung
     # meaning something: candidate_v1 provably rejects bad records; the URL
@@ -78,6 +87,14 @@ GATING = [
     # verdict, no unexplained decision, and no decision recorded that the
     # promotion gate would silently refuse to serve.
     ("watch decisions are named and explained", ["tests/test_decide_watch.py"], True),
+    # Reads the curated review layers -- files a human wrote and no build
+    # produces -- and asserts each id still resolves in the served feed. The
+    # expectation comes from outside the projection, so a self-consistent
+    # projection bug cannot hide from it. See pdoom-data#95.
+    ("human verdicts still point at records",
+     ["scripts/validation/check_review_targets.py"], True),
+    ("review-targets gate can still fail",
+     ["tests/test_review_targets_gate.py"], True),
     # The point where a keystroke becomes a sentence on 1,166 public pages
     # about real papers by named researchers. Everything upstream of it is a
     # proposal; everything downstream is published. It must refuse an

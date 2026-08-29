@@ -10,7 +10,7 @@
       "data/curated/frontier_labs/research/batch4.json"
     ],
     "curation_table": "data/curated/frontier_labs/curation_table.json",
-    "epoch_dump": "data/raw/epoch_ai/dumps/2026-07-25_053622/raw.jsonl"
+    "epoch_dump": "data/raw/epoch_ai/dumps/2026-08-22_005823/raw.jsonl"
   },
   "inclusion_rule": {
     "epoch_frontier_model": "Credited on at least one model flagged 'Frontier model' in the Epoch AI notable-models database with a publication date in 2000 or later. Mechanical: it is a query, not a judgement.",

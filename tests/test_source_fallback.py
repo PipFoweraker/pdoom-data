@@ -44,15 +44,20 @@ FEED = os.path.join(REPO, "data", "serveable", "api", "candidates",
                     "all_candidates.jsonl")
 SOURCES = os.path.join(REPO, "config", "sources.json")
 
-# The six measured on 2026-08-21, with the reason each carried no source. They
+# The five measured on 2026-08-29, with the reason each carried no source. They
 # are listed rather than counted so that a change of WHICH records fall back is
-# as visible as a change of how many.
+# as visible as a change of how many -- which is exactly what it caught.
+#
+# epoch_ai:eagle_2 was the sixth until 2026-08-29. It fell back because the
+# adapter dropped its schemeless URL; _base.py now parses that form, so the
+# record carries https://arxiv.org/abs/2501.14818 from upstream and no longer
+# needs the registry. Removed because the fix landed, NOT because the
+# expectation was inconvenient -- the URL was checked in the served feed.
 EXPECTED_FALLBACK = {
     "epoch_ai:yi_large":        "Link blank in Epoch's own CSV",
     "epoch_ai:gpt_5_2":         "Link blank in Epoch's own CSV",
     "epoch_ai:gpt_5_1_codex":   "Link blank in Epoch's own CSV",
     "epoch_ai:midjourney_v1":   "Link blank in Epoch's own CSV",
-    "epoch_ai:eagle_2":         "schemeless URL dropped by the adapter",
     "epoch_ai:exaone_4_5":      "author list in the Link column upstream",
 }
 
