@@ -95,6 +95,13 @@ GATING = [
      ["scripts/validation/check_review_targets.py"], True),
     ("review-targets gate can still fail",
      ["tests/test_review_targets_gate.py"], True),
+    # The LIVE receipt check needs the network and a gh token and refuses to
+    # run inside Actions, so it cannot be gated here -- that refusal is the
+    # point of it. Its decision logic is offline and deterministic, and the
+    # case that matters (no runs at all) is the one every other surface
+    # renders as the previous commit's green. See pdoom-data#97 / C5.
+    ("push-receipt logic can still fail",
+     ["tests/test_push_receipt_gate.py"], True),
     # The point where a keystroke becomes a sentence on 1,166 public pages
     # about real papers by named researchers. Everything upstream of it is a
     # proposal; everything downstream is published. It must refuse an
@@ -138,6 +145,14 @@ REBUILD = [
 
 REPORTING = [
     ("maturity ladder", ["scripts/validation/check_maturity.py"], False),
+    # Reports, does not gate, because four dumps predate the rule and inventing
+    # a regeneration command for them would be a guess. It is here rather than
+    # unwired because a checker nothing invokes is this estate's most-repeated
+    # failure -- check_claims.py and check_estate.py both run correctly and are
+    # run by nothing. Promote to GATING once the four are declared or
+    # tombstoned. See pdoom-data#99.
+    ("dumps account for the records they claim",
+     ["scripts/validation/check_dump_data_present.py"], False),
 ]
 
 # module -> what installs it, and what stops working without it.

@@ -35,10 +35,11 @@
     "n": 150
   },
   "abstract_dump": {
-    "path": "data/raw/arxiv_abstracts/dumps/2026-08-24_010736/data.jsonl",
+    "path": "data/raw/arxiv_abstracts/dumps/2026-08-29_230810/data.jsonl",
     "record_count": 150,
     "missing": [],
-    "fetched_at": "2026-08-24T11:10:44+10:00"
+    "fetched_at": "2026-08-30T07:08:18+08:00",
+    "refetched_because": "The 2026-08-24 dump directory carried _metadata.json claiming 150 records and no data.jsonl beside it, so the sitting could not start. Re-fetched 2026-08-30 from the ids already in this frame; the sample is byte-identical, which is the seed doing its job. The frame's created stamps are NOT updated: the draw preceded the fetch by six days and that ordering is the point."
   },
   "sample": [
     {
