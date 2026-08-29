@@ -44,5 +44,8 @@
     "<- entry_id, the versioned arXiv Atom entry this was read from",
     "<- the paper itself at source_url"
   ],
-  "note": "Abstracts for records in enriched_alignment_research_events.json, which has no raw provenance in this repo. See pdoom-data#88."
+  "note": "Abstracts for records in enriched_alignment_research_events.json, which has no raw provenance in this repo. See pdoom-data#88.",
+  "regenerate_with": "python scripts/adapters/arxiv_abstracts.py --limit 1200 --offset 0  (fetches an abstract for every served timeline_events record carrying an arXiv id; 1129 of 1129 retrieved on 2026-08-30)",
+  "data_file_tracked": false,
+  "record_count": null
 }

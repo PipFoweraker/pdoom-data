@@ -58,5 +58,7 @@
   "data_quality": {
     "ascii_compliance_checked": false,
     "ascii_note": "data.jsonl is UTF-8 and gitignored, like the other raw dumps. Author names and mathematics in real abstracts are not ASCII and folding them would be damage, not compliance."
-  }
+  },
+  "regenerate_with": "python scripts/review/prepare_corpus_review.py --n 150 --seed 20260824 --pass-id 2026-08-24_worth-carrying_n150  (the ids are pinned in the frame, so the draw is reproducible; the abstracts are re-fetched)",
+  "data_file_tracked": false
 }

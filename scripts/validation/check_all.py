@@ -145,6 +145,14 @@ REBUILD = [
 
 REPORTING = [
     ("maturity ladder", ["scripts/validation/check_maturity.py"], False),
+    # Reports, does not gate, because four dumps predate the rule and inventing
+    # a regeneration command for them would be a guess. It is here rather than
+    # unwired because a checker nothing invokes is this estate's most-repeated
+    # failure -- check_claims.py and check_estate.py both run correctly and are
+    # run by nothing. Promote to GATING once the four are declared or
+    # tombstoned. See pdoom-data#99.
+    ("dumps account for the records they claim",
+     ["scripts/validation/check_dump_data_present.py"], False),
 ]
 
 # module -> what installs it, and what stops working without it.
