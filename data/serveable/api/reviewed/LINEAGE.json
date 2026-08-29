@@ -47,7 +47,7 @@
   ],
   "counts": {
     "included": 518,
-    "scanned": 3434,
+    "scanned": 3450,
     "verdict_accept": 332,
     "verdict_reject": 22,
     "verdict_unsure": 164,

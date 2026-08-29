@@ -87,6 +87,14 @@ GATING = [
     # verdict, no unexplained decision, and no decision recorded that the
     # promotion gate would silently refuse to serve.
     ("watch decisions are named and explained", ["tests/test_decide_watch.py"], True),
+    # Reads the curated review layers -- files a human wrote and no build
+    # produces -- and asserts each id still resolves in the served feed. The
+    # expectation comes from outside the projection, so a self-consistent
+    # projection bug cannot hide from it. See pdoom-data#95.
+    ("human verdicts still point at records",
+     ["scripts/validation/check_review_targets.py"], True),
+    ("review-targets gate can still fail",
+     ["tests/test_review_targets_gate.py"], True),
     # The point where a keystroke becomes a sentence on 1,166 public pages
     # about real papers by named researchers. Everything upstream of it is a
     # proposal; everything downstream is published. It must refuse an

@@ -186,6 +186,53 @@ def main():
     check(_base.to_ascii("already ascii") == "already ascii", "ASCII is identity")
     check(_base.to_ascii(CURLY) == "'quoted'", "CHAR_REPLACEMENTS still applied")
 
+    # -- 7. the OTHER half of the same defect: silent deletion --------------
+    #
+    # Repairing the decode fixed characters that had been folded to a WRONG
+    # letter. It did nothing for characters that folded to NOTHING, and that
+    # was the second corruption on the same records. NFKD has no ASCII
+    # decomposition for a Greek letter or an interpunct, so the old fallback
+    # emitted the empty string and the character left the corpus without a
+    # trace. "x" was mapped, so ResNeXt-101 (64x4d) survived and the defect
+    # read as working.
+    print("\n7. a character with no ASCII fold is transliterated, never deleted")
+    for src, want in (
+            (u"PanGu-\u03a3", "PanGu-Sigma"),
+            (u"\u03a3-WASP", "Sigma-WASP"),
+            (u"DALL\u00b7E 2", "DALL-E 2"),
+            (u"\u03c00.6", "pi0.6"),
+            (u"ResNeXt-101 (64\u00d74d)", "ResNeXt-101 (64x4d)"),
+    ):
+        got = _base.to_ascii(src)
+        check(got == want, "%s -> %s" % (ascii(src), ascii(got)))
+        check(got != "", "and is not emptied")
+
+    print("\n   the historical fold DELETED these, which is the damage being fixed")
+    check(naive_fold(u"PanGu-\u03a3") == "PanGu-",
+          "naive fold reproduces 'PanGu-' exactly: the trailing hyphen with nothing after it")
+    check(naive_fold(u"DALL\u00b7E 2") == "DALLE 2",
+          "and 'DALLE 2', which is the id that orphaned two of Pip's accepts")
+
+    print("\n8. FORCED FAILURE: an unmapped character stops the run")
+    raised = None
+    try:
+        _base.to_ascii(u"name with \u4e2d in it")
+    except _base.UnmappableCharacterError as exc:
+        raised = exc
+    check(raised is not None,
+          "UnmappableCharacterError on a character that is neither mapped nor droppable")
+    check(raised is None or "U+4E2D" in str(raised),
+          "and the message names the codepoint, so the fix is one line")
+    check(raised is None or "CHAR_REPLACEMENTS" in str(raised),
+          "and says where to put it")
+
+    print("\n9. declared-droppable characters are dropped, and only those")
+    check(_base.to_ascii(u"emoji \U0001f600 here") == "emoji  here",
+          "an emoji is dropped by declaration, not by accident")
+    check(_base.to_ascii(u"zwj\u200djoin") == "zwjjoin", "a ZWJ is dropped")
+    check(_base.to_ascii(u"caf\u00e9") == "cafe",
+          "accented Latin still folds through NFKD as before")
+
     print("\n%d checks, %d failed" % (CHECKS[0], len(FAILURES)))
     if FAILURES:
         for f in FAILURES:

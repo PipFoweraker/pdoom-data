@@ -19,7 +19,7 @@
     }
   ],
   "build_version": "0.2.0",
-  "built_at": "2026-08-20T21:53:24.881027+00:00",
+  "built_at": "2026-08-29T01:03:50.363008+00:00",
   "counts": {
     "by_year": {
       "1950": 1,
@@ -82,33 +82,33 @@
       "2022": 91,
       "2023": 719,
       "2024": 698,
-      "2025": 703,
-      "2026": 644
+      "2025": 706,
+      "2026": 657
     },
     "dropped": 0,
-    "input_records": 3434,
-    "kept": 3434,
+    "input_records": 3450,
+    "kept": 3450,
     "privacy_flagged": 23,
     "tier_cut_points_by_profile": {
       "default_v1": {
         "A": {
           "count": 172,
           "salience_max": 0.9902,
-          "salience_min": 0.788
+          "salience_min": 0.7887
         },
         "B": {
-          "count": 687,
-          "salience_max": 0.7865,
+          "count": 690,
+          "salience_max": 0.788,
           "salience_min": 0.415
         },
         "C": {
-          "count": 1717,
-          "salience_max": 0.4143,
-          "salience_min": 0.0637
+          "count": 1725,
+          "salience_max": 0.415,
+          "salience_min": 0.064
         },
         "D": {
-          "count": 858,
-          "salience_max": 0.0635,
+          "count": 863,
+          "salience_max": 0.064,
           "salience_min": 0.0025
         }
       }
@@ -140,9 +140,9 @@
   ],
   "inputs": [
     {
-      "dump": "data/raw/epoch_ai/dumps/2026-07-25_053622",
-      "dump_data_sha256": "aa0d01333140451f8cb8eb6810ea54d4d5601a6418438a02b051b38790e5cd5f",
-      "records": 1034,
+      "dump": "data/raw/epoch_ai/dumps/2026-08-22_005823",
+      "dump_data_sha256": "563677d2f7f40a85f6c7c334fa0e24db323b83e1daf9c011ffc28918b59c1c55",
+      "records": 1050,
       "source_id": "epoch_ai"
     },
     {
