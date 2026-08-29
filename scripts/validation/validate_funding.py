@@ -79,7 +79,7 @@ class FundingDataValidator:
         self.required_columns = required_columns or []
         
         if schema_path and schema_path.exists():
-            with open(schema_path) as f:
+            with open(schema_path, encoding='utf-8') as f:
                 self.schema = json.load(f)
     
     def validate_file(self, file_path: Path) -> ValidationResult:
@@ -101,7 +101,7 @@ class FundingDataValidator:
         
         # Check file is readable
         try:
-            content = file_path.read_text()
+            content = file_path.read_text(encoding='utf-8')
             result.add_info('file_size_bytes', len(content))
         except Exception as e:
             result.add_error(f"Cannot read file: {e}")
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     ]
     
     test_file = test_dir / "test_data.json"
-    with open(test_file, 'w') as f:
+    with open(test_file, 'w', encoding='utf-8', newline='\n') as f:
         json.dump(test_data, f, indent=2)
     
     # Validate

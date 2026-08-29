@@ -245,7 +245,11 @@ if __name__ == "__main__":
     
     # Create test file
     test_file = test_dir / "test.txt"
-    test_file.write_text("Test content")
+    # Not Path.write_text: its `newline` argument arrived in Python 3.10 and
+    # documentation-ci.yml still pins 3.9, so the portable spelling of "do not
+    # inherit the platform's codec or its line ending" is an explicit open().
+    with open(test_file, "w", encoding="utf-8", newline="\n") as fh:
+        fh.write("Test content")
     
     # Test checksum
     checksum = calculate_checksum(test_file)

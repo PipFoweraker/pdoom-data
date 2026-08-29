@@ -317,7 +317,7 @@ class EnrichedTransformer:
         # Save all events
         self.output_dir.mkdir(parents=True, exist_ok=True)
         output_file = self.output_dir / 'enriched_alignment_research_events.json'
-        with open(output_file, 'w', encoding='utf-8') as f:
+        with open(output_file, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(events, f, indent=2, ensure_ascii=True)
         logger.info(f"\nSaved {len(events)} events to {output_file}")
 
@@ -333,7 +333,7 @@ class EnrichedTransformer:
         by_year_dir.mkdir(parents=True, exist_ok=True)
         for year, year_events in sorted(events_by_year.items()):
             year_file = by_year_dir / f'{year}.json'
-            with open(year_file, 'w', encoding='utf-8') as f:
+            with open(year_file, 'w', encoding='utf-8', newline='\n') as f:
                 json.dump(year_events, f, indent=2, ensure_ascii=True)
             logger.info(f"  Year {year}: {len(year_events)} events")
 

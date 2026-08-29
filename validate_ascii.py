@@ -22,6 +22,19 @@ The rule that follows from that: when this is told to check a named path it
 must either check that exact path or fail. A path that does not exist, or is a
 directory, or cannot be read, is a FAILURE and not a skip, because a skip is
 indistinguishable from a pass to the shell that called us.
+
+The no-argument sweep had the same defect one level up, found 2026-08-24 by
+the seat-portability sweep of 2026-08-17. It globbed `*.py *.md *.txt *.json`
+and skipped every path with a dot-prefixed component, so shell scripts and the
+whole of `.github/` were outside the gate while it printed "SUCCESS: All files
+are ASCII-compliant" over 255 of them. `pre-commit-hook.sh` -- the file whose
+entire job is enforcing this rule on other people's commits -- carried six
+non-ASCII bytes through that SUCCESS, because it is a `.sh`. The pre-commit
+hook has always gated `*.yaml` and `*.yml` too, so the two halves of one gate
+disagreed about what ASCII-only covers, and the half that runs in CI was the
+narrower one. `.github` is now swept by name rather than by exception: it is
+the only dot-directory in this repository holding hand-written text, and the
+skip is still what keeps `.venv-checks/` out.
 """
 
 import sys
@@ -63,13 +76,27 @@ def check_file_ascii(filepath):
         # were asked about, and either way the answer is not "pass".
         return False, "could not read: %s" % e
 
+# Kept in step with the `case` list in pre-commit-hook.sh deliberately. If you
+# add an extension to one, add it to the other: a commit gate and a CI gate
+# that disagree about scope produce a green CI on a file the hook rejects, or
+# worse, the reverse.
+FILE_PATTERNS = ["*.py", "*.md", "*.txt", "*.json", "*.yaml", "*.yml", "*.sh"]
+
+# Dot-directories are skipped because `.venv-checks/` and `.git/` are not ours
+# to police and would drown the run. `.github/` is: six tracked files of
+# hand-written YAML and prose, previously invisible to the only ASCII gate CI
+# runs. Named rather than un-skipped wholesale, so a new dot-directory does not
+# join the sweep by accident.
+VISIBLE_DOT_DIRS = {".github"}
+
+
 def glob_tree():
     """Every file the no-argument sweep considers, below the working directory."""
-    file_patterns = ["*.py", "*.md", "*.txt", "*.json"]
-    for pattern in file_patterns:
+    for pattern in FILE_PATTERNS:
         for filepath in Path(".").rglob(pattern):
-            # Skip hidden files and directories
-            if any(part.startswith('.') for part in filepath.parts):
+            hidden = [part for part in filepath.parts[:-1]
+                      if part.startswith('.') and part not in VISIBLE_DOT_DIRS]
+            if hidden or filepath.name.startswith('.'):
                 continue
             yield filepath
 

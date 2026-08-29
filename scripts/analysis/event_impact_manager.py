@@ -64,7 +64,7 @@ class EventImpactManager:
 
     def save_metadata(self):
         """Save custom metadata to file."""
-        with open(self.metadata_path, 'w', encoding='utf-8') as f:
+        with open(self.metadata_path, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(self.metadata, f, indent=2, ensure_ascii=True)
         logger.info(f"Saved metadata for {len(self.metadata)} events")
 
@@ -268,7 +268,7 @@ class EventImpactManager:
         output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        with open(output_path, 'w', encoding='utf-8') as f:
+        with open(output_path, 'w', encoding='utf-8', newline='\n') as f:
             json.dump(export_data, f, indent=2, ensure_ascii=True)
 
         logger.info(f"Exported {len(export_data)} events to {output_path}")

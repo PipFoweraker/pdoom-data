@@ -84,12 +84,12 @@ def create_dump_directory(source, method, base_dir=None):
     }
     
     metadata_file = dump_dir / '_metadata.json'
-    with open(metadata_file, 'w', encoding='ascii') as f:
+    with open(metadata_file, 'w', encoding='ascii', newline='\n') as f:
         json.dump(metadata, f, indent=2, ensure_ascii=True)
     
     # Create placeholder data file
     data_file = dump_dir / 'data.json'
-    with open(data_file, 'w', encoding='ascii') as f:
+    with open(data_file, 'w', encoding='ascii', newline='\n') as f:
         json.dump([], f, indent=2, ensure_ascii=True)
     
     return dump_dir

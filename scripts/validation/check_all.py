@@ -87,6 +87,13 @@ GATING = [
     # verdict, no unexplained decision, and no decision recorded that the
     # promotion gate would silently refuse to serve.
     ("watch decisions are named and explained", ["tests/test_decide_watch.py"], True),
+    # The point where a keystroke becomes a sentence on 1,166 public pages
+    # about real papers by named researchers. Everything upstream of it is a
+    # proposal; everything downstream is published. It must refuse an
+    # unattributed acceptance, and it must serve the exact string the reviewer
+    # approved rather than re-deriving it.
+    ("descriptions serve only what a human accepted",
+     ["tests/test_description_overlay.py"], True),
 ]
 
 REBUILD = [
