@@ -1,0 +1,48 @@
+{
+  "source_id": "arxiv_abstracts",
+  "dump_stamp": "2026-08-29_231114",
+  "fetched_at": "2026-08-29T23:11:14.900753+00:00",
+  "api": "http://export.arxiv.org/api/query",
+  "requested": 1129,
+  "retrieved": 1129,
+  "not_returned": [],
+  "license": {
+    "spdx": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "attribution": "arXiv.org. Abstracts are authored text, offered by arXiv as descriptive metadata. Attributed here as a courtesy that CC0 does not require.",
+    "citation": "arXiv API (export.arxiv.org/api/query), Atom summary field",
+    "source_terms_url": "https://info.arxiv.org/help/api/tou.html",
+    "verified_at": "2026-08-21",
+    "verified_by": "Fetched and read the arXiv API Terms of Use and its footnote 1 defining descriptive metadata; see the comment above this constant for both quotations."
+  },
+  "transformations": [
+    {
+      "step": "whitespace_collapse",
+      "what": "runs of whitespace and newlines collapsed to single spaces",
+      "why": "arXiv wraps the abstract for display; the wrapping is not content",
+      "lossy": false
+    },
+    {
+      "step": "ascii_coerce",
+      "what": "_base.to_ascii, NFKD decomposition with no '?' fallback",
+      "why": "the repository is ASCII-only and enforces it in CI",
+      "lossy": true,
+      "note": "an accented letter survives as its base letter; a character with no ASCII decomposition is DELETED, which is why chars_dropped is recorded per record and shown to the reviewer before the choice"
+    },
+    {
+      "step": "sentence_trim",
+      "what": "cut at the last sentence boundary at or before 600 characters",
+      "why": "event_v1 allows 1000; 600 is an editorial choice, not a schema requirement, so it is named here as a choice",
+      "lossy": true,
+      "note": "applied only when the abstract exceeds the limit; is_excerpt records it"
+    }
+  ],
+  "audit_chain": [
+    "served description",
+    "<- data/curated/event_descriptions/decisions.jsonl (named reviewer, exact approved string)",
+    "<- this dump's data.jsonl, field abstract (verbatim, unmodified)",
+    "<- entry_id, the versioned arXiv Atom entry this was read from",
+    "<- the paper itself at source_url"
+  ],
+  "note": "Abstracts for records in enriched_alignment_research_events.json, which has no raw provenance in this repo. See pdoom-data#88."
+}

@@ -95,6 +95,13 @@ GATING = [
      ["scripts/validation/check_review_targets.py"], True),
     ("review-targets gate can still fail",
      ["tests/test_review_targets_gate.py"], True),
+    # The LIVE receipt check needs the network and a gh token and refuses to
+    # run inside Actions, so it cannot be gated here -- that refusal is the
+    # point of it. Its decision logic is offline and deterministic, and the
+    # case that matters (no runs at all) is the one every other surface
+    # renders as the previous commit's green. See pdoom-data#97 / C5.
+    ("push-receipt logic can still fail",
+     ["tests/test_push_receipt_gate.py"], True),
     # The point where a keystroke becomes a sentence on 1,166 public pages
     # about real papers by named researchers. Everything upstream of it is a
     # proposal; everything downstream is published. It must refuse an
