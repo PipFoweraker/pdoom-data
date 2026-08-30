@@ -98,6 +98,28 @@ need permission, which is the actual cost of this feature and is worth paying.
 
 Do not re-run the abstract scan expecting a different answer.
 
+## Held back, and why: two licence-clear quotes with no archive
+
+Two quotes are licence-clear and are NOT in the corpus, because the Wayback
+Machine holds no snapshot of their source and a save request did not complete:
+
+- Gwern Branwen, `https://gwern.net/mcts-ai`, CC0. "The bad solutions and
+  actions are simple and predictable outcomes of the most straightforward easy
+  approaches, and that it is the good solutions and actions which are hard to
+  make the AIs reliably discover."
+- Zvi Mowshowitz, `thezvi.wordpress.com/2023/05/01/the-rocket-alignment-problem-part-2/`.
+  "If you create an AGI and fail at its alignment, you do not get to scrap the
+  experiment, learn from what happened. You do not get to try, try again until
+  you succeed, the way we do for things like rocket launches."
+
+Both were verified verbatim. The gate requires an archive before anything is
+servable, and it is right to: a personal site can change or vanish, and without
+a capture we could not later show we quoted someone correctly. Retry the
+capture and they can go straight in, no permission needed.
+
+The second one is a notable near-miss for the brief. It is the best statement
+of "no retries" in the whole set, on a death screen that exists to offer one.
+
 ## Permissions are part of the fun
 
 Pip's view, and it matches what the sourcing research found: most people will
