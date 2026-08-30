@@ -142,6 +142,11 @@ def main():
                            "evidence_urls": ["https://example.org/report"],
                            "evidence_retrieved_at": "2026-08-30"},
             framing_text="Said in 2022. In 2024 the team was disbanded.",
+            right_of_reply={"attempted": True, "attempted_at": "2026-08-20",
+                            "attempted_via": "email to press office",
+                            "outcome": "no_response"},
+            sources_shown_in_product=True,
+            editorial_note="Quoted for the assurance; outcome is on the record.",
             permission={"basis": "granted", "granted_by": "Subject",
                         "granted_at": "2026-08-30", "granted_via": "email",
                         "context_shown_to_author": "shown the screen"})
@@ -163,6 +168,23 @@ def main():
           "MUST FIRE: an accountability quote with nothing set against it")
     check(fails(acct(speaker_status=None)),
           "MUST FIRE: no record of whether the speaker is a public figure")
+
+    print("\nRUSSELL v ABC: the factor that sank a national broadcaster")
+    check(fails(acct(right_of_reply=None)),
+          "MUST FIRE: no right of reply attempted at all")
+    check(fails(acct(right_of_reply={"attempted": True})),
+          "MUST FIRE: attempted but undated and with no channel recorded")
+    check(not fails(acct(right_of_reply={"attempted": True,
+                                         "attempted_at": "2026-08-20",
+                                         "attempted_via": "email",
+                                         "outcome": "declined"})),
+          "a DECLINED request is fine: they need not answer, we need to ask")
+
+    print("\ns 31 proper material must be visible to the PLAYER")
+    check(fails(acct(sources_shown_in_product=False)),
+          "MUST FIRE: evidence held in a repo the player never sees")
+    check(fails(acct(editorial_note=None)),
+          "MUST FIRE: no contemporaneous record of why, for s 29A reasonableness")
 
     print("\nTHE FRAMING GUARD: say what happened, not what they knew")
     for phrase in ("He lied about it.", "She knowingly downplayed it.",

@@ -122,6 +122,64 @@ actual lawyer before anything ships, and Australian defamation law is the
 relevant law here rather than the US assumptions most writing on this subject
 carries.
 
+## The Australian position, because that is the law that applies
+
+Researched 2026-08-30. Most writing on quoting public figures assumes US law,
+where `New York Times v Sullivan` makes a public figure prove actual malice.
+**Australia has no equivalent**, and this seat publishes from Tasmania.
+
+**Correction to a comfortable assumption: juxtaposition is not a shield here.**
+Australian law reaches defamatory IMPUTATIONS arising from implication and
+context, not only express statements. "I only quoted them accurately" answers
+whether the quote is true; it does not answer what the screen as a whole
+conveys to an ordinary player.
+
+What the framing choice actually does is decide **which imputation** a court
+finds, and the defences are imputation-specific. "They said something that did
+not survive contact with events" is provable from two dated facts. "They
+knowingly lied" requires proving what was in someone's head at the time, which
+public statements almost never establish. That is the whole reason the framing
+guard exists, and it is a real effect: it is just narrower than "safe".
+
+Three defences do the work, and each has a build requirement:
+
+- **s 25 justification.** Truth of the imputation. Rests entirely on quote
+  accuracy, which is why primary-source verification is a hard gate.
+- **s 31 honest opinion.** Needs the opinion to rest on "proper material"
+  **stated or referenced in the same publication**. Evidence sitting in this
+  repository that a player never sees does not count, which is why
+  `sources_shown_in_product` is required. It is a UI obligation that only the
+  data can record.
+- **s 29A public interest.** Judged on whether the belief was REASONABLE, on
+  what was actually done. In `Russell v ABC (No 3) [2023] FCA 1223`, the first
+  full trial of this defence, **the ABC lost and paid over AUD 400,000** --
+  decisively because it did not seek the subject's response. Hence
+  `right_of_reply` is required. A declined or ignored request is fine, so long
+  as it is documented. Silence from them is acceptable; silence from us is not.
+
+**s 10A serious harm** is a real first gate: a niche game and an already very
+public reputation make it contestable. **Corporations with 10 or more employees
+cannot sue** (s 9), but s 9(3) preserves the individual's own action, so the
+named executive simply sues personally and the corporate exclusion buys
+nothing.
+
+**Australia has no right of publicity.** That risk is genuinely low, lower than
+a US-focused reader would assume. Defamation is the exposure; personality
+rights are not.
+
+**A complaint arrives as a letter first.** A concerns notice under s 12A is a
+mandatory pre-litigation step, with 28 days to make an offer to make amends.
+Responding well inside that window can end the matter, so the correction and
+withdrawal paths in this schema are load-bearing rather than decorative.
+
+**The dominant risk is cost, not merit.** Australian defence costs run from
+about AUD 20,000 to 780,000 and there is no anti-SLAPP statute. Tasmania has
+its own precedent in the Gunns 20 case, where the claims largely failed and the
+chilling effect landed anyway.
+
+Not legal advice. The accountability tier wants a paid hour with an Australian
+defamation lawyer on the actual shortlist before anything ships.
+
 ## A person can always change their mind
 
 `id` is stable forever precisely so that a request years later to correct,

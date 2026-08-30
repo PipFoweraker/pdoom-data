@@ -228,6 +228,39 @@ def _accountability_failures(row, qid):
         out.append("%s: no full_context_url. The answer to 'you cropped me' is "
                    "that the whole thing is one click away." % qid)
 
+    # Russell v ABC (No 3) [2023] FCA 1223: the first full trial of the s 29A
+    # public interest defence. It FAILED, and the ABC paid over AUD 400,000.
+    # Lee J accepted the ABC honestly believed publication served the public
+    # interest but held the belief unreasonable, decisively because it did not
+    # seek and fairly consider the subject's response. A national broadcaster
+    # lost on this one factor. It is not a courtesy.
+    reply = row.get("right_of_reply") or {}
+    if not reply.get("attempted"):
+        out.append(
+            "%s: no right of reply attempted. This is the factor that sank the "
+            "ABC's public interest defence in Russell v ABC (No 3) [2023] FCA "
+            "1223. A declined or ignored request is fine; not asking is not."
+            % qid)
+    elif not reply.get("attempted_at") or not reply.get("attempted_via"):
+        out.append("%s: right of reply attempted but undated or with no channel "
+                   "recorded. An attempt that cannot be evidenced is, in front "
+                   "of a court, an attempt that did not happen." % qid)
+
+    # s 31 honest opinion requires the opinion to rest on "proper material"
+    # stated or referenced IN THE SAME PUBLICATION. Evidence sitting in a
+    # repository the player never opens does not satisfy that.
+    if not row.get("sources_shown_in_product"):
+        out.append(
+            "%s: sources are not shown to the player. The honest opinion "
+            "defence needs its material referenced in the publication itself, "
+            "so a citation the player cannot see does not count. This is a UI "
+            "requirement, and it is the cheapest defence available." % qid)
+
+    if not row.get("editorial_note"):
+        out.append("%s: no editorial_note. The s 29A defence is judged on "
+                   "whether the belief was REASONABLE, on what was actually "
+                   "done, and that record cannot be written afterwards." % qid)
+
     jux = row.get("juxtaposition") or {}
     if not jux.get("what_happened"):
         out.append("%s: an accountability quote with nothing set against it is "
