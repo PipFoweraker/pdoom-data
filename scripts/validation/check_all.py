@@ -147,6 +147,10 @@ REBUILD = [
     # its collection.
     ("timeline_events rebuild is byte-identical", ["scripts/build/project_timeline_events.py", "--check"], True),
     ("taxonomy rebuild is byte-identical", ["scripts/build/project_taxonomy.py", "--check"], True),
+    # The game reads the SERVED file, never the curated research index. This
+    # asserts the boundary is a build step rather than a rule someone remembers.
+    ("approved quotes project cleanly",
+     ["scripts/build/project_quotes.py", "--check"], True),
 ]
 
 REPORTING = [
