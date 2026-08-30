@@ -62,6 +62,15 @@ GATING = [
     ("dump-space tests", ["tests/test_dump_spaces.py"], True),
     ("migration tests", ["tests/test_migration.py"], True),
     ("transcoding detector fires", ["tests/test_transcoding_detector.py"], True),
+    # The transcoding detector above scans data AT REST, and by then the ASCII
+    # fold has already destroyed the lead character it greps for: UTF-8 read as
+    # latin-1 gives U+00C3, NFKD folds that to the letter "A", and
+    # "Universite de Montreal" is stored as "UniversitA de MontrAal" -- valid
+    # ASCII, no lead character, unrecoverable. Two correct guards composing into
+    # a hole (found 2026-08-22 in the 2026-07-25 Epoch dump). This one covers the
+    # boundary instead: a wrong decode must raise where it happens, and the fold
+    # must repair before it folds.
+    ("mojibake fails at the boundary", ["tests/test_mojibake_boundary.py"], True),
     # The bronze rung is awarded for "has a schema" and "validates", and both
     # are passed by a schema of {"type": "object"}. These four keep the rung
     # meaning something: candidate_v1 provably rejects bad records; the URL
@@ -78,6 +87,27 @@ GATING = [
     # verdict, no unexplained decision, and no decision recorded that the
     # promotion gate would silently refuse to serve.
     ("watch decisions are named and explained", ["tests/test_decide_watch.py"], True),
+    # Reads the curated review layers -- files a human wrote and no build
+    # produces -- and asserts each id still resolves in the served feed. The
+    # expectation comes from outside the projection, so a self-consistent
+    # projection bug cannot hide from it. See pdoom-data#95.
+    ("human verdicts still point at records",
+     ["scripts/validation/check_review_targets.py"], True),
+    ("review-targets gate can still fail",
+     ["tests/test_review_targets_gate.py"], True),
+    # The LIVE receipt check needs the network and a gh token and refuses to
+    # run inside Actions, so it cannot be gated here -- that refusal is the
+    # point of it. Its decision logic is offline and deterministic, and the
+    # case that matters (no runs at all) is the one every other surface
+    # renders as the previous commit's green. See pdoom-data#97 / C5.
+    ("push-receipt logic can still fail",
+     ["tests/test_push_receipt_gate.py"], True),
+    # Quotes are real people's words. Nothing is servable until a named basis
+    # says so, and the default state is an absence rather than a permission.
+    ("quotes are servable only on a named basis",
+     ["scripts/validation/check_quote_permissions.py"], True),
+    ("quote permission gate can still fail",
+     ["tests/test_quote_permissions.py"], True),
     # The point where a keystroke becomes a sentence on 1,166 public pages
     # about real papers by named researchers. Everything upstream of it is a
     # proposal; everything downstream is published. It must refuse an
@@ -117,10 +147,22 @@ REBUILD = [
     # its collection.
     ("timeline_events rebuild is byte-identical", ["scripts/build/project_timeline_events.py", "--check"], True),
     ("taxonomy rebuild is byte-identical", ["scripts/build/project_taxonomy.py", "--check"], True),
+    # The game reads the SERVED file, never the curated research index. This
+    # asserts the boundary is a build step rather than a rule someone remembers.
+    ("approved quotes project cleanly",
+     ["scripts/build/project_quotes.py", "--check"], True),
 ]
 
 REPORTING = [
     ("maturity ladder", ["scripts/validation/check_maturity.py"], False),
+    # Reports, does not gate, because four dumps predate the rule and inventing
+    # a regeneration command for them would be a guess. It is here rather than
+    # unwired because a checker nothing invokes is this estate's most-repeated
+    # failure -- check_claims.py and check_estate.py both run correctly and are
+    # run by nothing. Promote to GATING once the four are declared or
+    # tombstoned. See pdoom-data#99.
+    ("dumps account for the records they claim",
+     ["scripts/validation/check_dump_data_present.py"], False),
 ]
 
 # module -> what installs it, and what stops working without it.

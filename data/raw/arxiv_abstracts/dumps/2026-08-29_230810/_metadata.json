@@ -1,0 +1,64 @@
+{
+  "extraction_date": "2026-08-29T23:08:18+00:00",
+  "source_name": "arxiv_abstracts",
+  "source_url": "https://export.arxiv.org/api/query",
+  "extraction_method": "api",
+  "extractor_version": "0.1.0",
+  "data_format": "jsonl",
+  "record_count": 150,
+  "extraction_type": "sample",
+  "filters_applied": {
+    "id_list": "the 150 arXiv ids drawn in 2026-08-24_worth-carrying_n150/frame.json",
+    "pass_id": "2026-08-24_worth-carrying_n150",
+    "seed": 20260824
+  },
+  "extraction_status": "complete",
+  "extraction_notes": "Abstracts for one corpus-review sitting. Fetched AFTER the frame was written, per docs/design/REVIEW_THE_BULK_2026-08-19.md B1.",
+  "fields_extracted": [
+    "_fetched_via",
+    "abs_url",
+    "abstract",
+    "arxiv_id",
+    "arxiv_id_base",
+    "atom_published_v1",
+    "atom_updated",
+    "authors",
+    "categories",
+    "comment",
+    "display_date",
+    "doi",
+    "id_month",
+    "primary_category",
+    "record_id",
+    "source_id",
+    "title"
+  ],
+  "attribution": "arXiv.org, per its API terms of use",
+  "license": "arXiv metadata is CC0 1.0; abstracts remain under their authors' terms and are used here for review display only",
+  "rate_limit_info": {
+    "authenticated": false,
+    "endpoints": [
+      "atom-api",
+      "oai-pmh"
+    ],
+    "pause_seconds": {
+      "atom_api": 3.0,
+      "oai": 1.0
+    },
+    "time_elapsed_seconds": 8.56
+  },
+  "extraction_statistics": {
+    "records_requested": 150,
+    "records_written": 150,
+    "records_missing": 0,
+    "missing_arxiv_ids": [],
+    "errors_encountered": 0,
+    "errors": []
+  },
+  "data_quality": {
+    "ascii_compliance_checked": false,
+    "ascii_note": "data.jsonl is UTF-8 and gitignored, like the other raw dumps. Author names and mathematics in real abstracts are not ASCII and folding them would be damage, not compliance."
+  },
+  "regenerate_with": "python scripts/review/prepare_corpus_review.py --n 150 --seed 20260824 --pass-id 2026-08-24_worth-carrying_n150  (the ids are pinned in the frame, so the draw is reproducible; the abstracts are re-fetched)",
+  "data_file_tracked": false
+}

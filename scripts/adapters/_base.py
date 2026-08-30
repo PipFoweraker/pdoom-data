@@ -40,6 +40,49 @@ VALID_KINDS = {
 
 CONFIDENCE_LEVELS = {"high", "medium", "low"}
 
+# Every non-ASCII character this repo will accept, and what it becomes.
+#
+# WHY THIS IS A MAP AND NOT A FOLD. CLAUDE.md records the 2026-08-10 ASCII
+# clearance as using "an explicit substitution map that errors on unmapped
+# characters", and that is the rule this table implements. Until 2026-08-29 it
+# was only half of it: the map existed, but to_ascii's fallback ran NFKD and
+# kept whatever came out as ASCII -- which for a character that does not
+# decompose is the EMPTY STRING. So mapped characters were transliterated and
+# unmapped ones were silently deleted.
+#
+# The cost was not cosmetic. "PanGu-Sigma" became "PanGu-", "Sigma-WASP" became
+# "-WASP", "DALL(interpunct)E 2" became "DALLE 2". A deleted character changes
+# the title, which changes the slug, which changes the id -- and two of Pip's
+# 2026-07-26 accepts were orphaned against ids that no longer existed, with
+# nothing going red. "x" was in the map so ResNeXt-101 (64x4d) survived intact,
+# which is precisely why the defect read as working.
+GREEK_TRANSLITERATIONS = {
+    "\u03b1": "alpha", "\u0391": "Alpha",
+    "\u03b2": "beta", "\u0392": "Beta",
+    "\u03b3": "gamma", "\u0393": "Gamma",
+    "\u03b4": "delta", "\u0394": "Delta",
+    "\u03b5": "epsilon", "\u0395": "Epsilon",
+    "\u03b6": "zeta", "\u0396": "Zeta",
+    "\u03b7": "eta", "\u0397": "Eta",
+    "\u03b8": "theta", "\u0398": "Theta",
+    "\u03b9": "iota", "\u0399": "Iota",
+    "\u03ba": "kappa", "\u039a": "Kappa",
+    "\u03bb": "lambda", "\u039b": "Lambda",
+    "\u03bc": "mu", "\u039c": "Mu",
+    "\u03bd": "nu", "\u039d": "Nu",
+    "\u03be": "xi", "\u039e": "Xi",
+    "\u03bf": "omicron", "\u039f": "Omicron",
+    "\u03c0": "pi", "\u03a0": "Pi",
+    "\u03c1": "rho", "\u03a1": "Rho",
+    "\u03c3": "sigma", "\u03a3": "Sigma", "\u03c2": "sigma",
+    "\u03c4": "tau", "\u03a4": "Tau",
+    "\u03c5": "upsilon", "\u03a5": "Upsilon",
+    "\u03c6": "phi", "\u03a6": "Phi",
+    "\u03c7": "chi", "\u03a7": "Chi",
+    "\u03c8": "psi", "\u03a8": "Psi",
+    "\u03c9": "omega", "\u03a9": "Omega",
+}
+
 CHAR_REPLACEMENTS = {
     "\u2018": "'",
     "\u2019": "'",
@@ -55,7 +98,57 @@ CHAR_REPLACEMENTS = {
     "\u2212": "-",
     "\u2010": "-",
     "\u2011": "-",
+    # Model names carry these, and each one cost an id when it was dropped.
+    "\u00b7": "-",       # interpunct, as in DALL-E
+    "\u2022": "-",       # bullet
+    "\u00b0": " degrees",
+    "\u00b5": "micro",   # MICRO SIGN
+    "\u2032": "'",       # prime
+    "\u2033": "\"",      # double prime
+    "\u00b1": "+/-",
+    "\u2264": "<=",
+    "\u2265": ">=",
+    "\u2260": "!=",
+    "\u2248": "~",
+    "\u221e": "infinity",
+    "\u2044": "/",       # fraction slash
+    "\u2122": "(TM)",
+    "\u00ae": "(R)",
+    "\u00a9": "(C)",
+    "\u2020": "+",       # dagger
+    "\u00ab": "<<",
+    "\u00bb": ">>",
+    "\u201a": ",",
+    "\u201e": ",,",
+    "\u2039": "<",
+    "\u203a": ">",
 }
+CHAR_REPLACEMENTS.update(GREEK_TRANSLITERATIONS)
+
+# Characters we have DECIDED carry no textual meaning, so dropping them is a
+# ruling rather than an accident. Forum titles are full of emoji and the corpus
+# would be unusable if every one of them stopped an adapter run; the point of
+# listing them is that the deletion is declared here and can be argued with,
+# instead of falling out of an NFKD fold nobody reads.
+DROPPABLE_UNICODE_CATEGORIES = frozenset([
+    "Cf",   # format characters: ZWJ, ZWNJ, variation selectors, BOM
+    "Mn",   # non-spacing marks left over after NFKD has taken the base letter
+    "So",   # other symbols: emoji, dingbats, arrows we have not mapped
+    "Sk",   # modifier symbols: skin-tone modifiers, spacing accents
+    "Cs",   # surrogates
+    "Co",   # private use
+])
+
+
+class UnmappableCharacterError(ValueError):
+    """A character reached to_ascii that is neither mapped nor declared droppable.
+
+    Deliberately fatal. The alternative -- the behaviour this replaced -- is to
+    emit nothing for it, which silently rewrites identifiers. Add the character
+    to CHAR_REPLACEMENTS with a transliteration, or to the droppable categories
+    if it genuinely carries no meaning. Both are one-line decisions; neither is
+    a guess.
+    """
 
 
 def utc_now_iso():
@@ -136,10 +229,94 @@ def polite_post(session, url, max_attempts=5, timeout=60, **kwargs):
     return last
 
 
-def to_ascii(text):
-    """Lossy but predictable ASCII coercion for text destined for the repo."""
+class MojibakeError(ValueError):
+    """Raised when text we just decoded is UTF-8 that was read as latin-1."""
+
+
+def looks_like_mojibake(text):
+    """True if `text` looks like UTF-8 bytes that were decoded as latin-1.
+
+    The test is a round trip, not a character blacklist: only genuine mojibake
+    re-encodes cleanly to latin-1 AND decodes as valid UTF-8 to something
+    DIFFERENT. A legitimately accented string ('cafe' with an acute) fails the
+    latin-1 re-encode or decodes back to itself, so it is not flagged.
+    """
+    return _mojibake_repair(text) is not None
+
+
+# Two codecs, because this repo has now met BOTH species. The 2026-08-06
+# timeline-events corruption was UTF-8 read as CP1252. The 2026-07-25 Epoch
+# corruption was UTF-8 read as ISO-8859-1, which is what `requests` falls back
+# to for a text/* body carrying no charset. The two codecs disagree over
+# 0x80-0x9F, so neither alone finds both.
+_MOJIBAKE_CODECS = ("cp1252", "latin-1")
+
+
+def _mojibake_repair(text):
+    """The repaired string, or None if `text` is not mojibake."""
     if text is None:
         return None
+    s = str(text)
+    if not s or all(ord(ch) < 128 for ch in s):
+        return None
+    for codec in _MOJIBAKE_CODECS:
+        try:
+            recovered = s.encode(codec).decode("utf-8")
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            continue
+        if recovered != s:
+            return recovered
+    return None
+
+
+def repair_mojibake(text):
+    """Undo one latin-1/UTF-8 double decode. Returns text unchanged if it is
+    not mojibake, so this is safe to call on anything."""
+    repaired = _mojibake_repair(text)
+    return text if repaired is None else repaired
+
+
+def decode_response(response):
+    """Text from an HTTP response, decoded correctly and checked.
+
+    WHY THIS EXISTS. `requests` guesses: for a `text/*` body with no `charset`
+    parameter it falls back to ISO-8859-1 per RFC 2616. Epoch AI serves
+    `Content-Type: text/csv` with no charset, so `response.text` decoded UTF-8
+    bytes as latin-1 and every accent mojibaked -- silently, because a latin-1
+    decode of UTF-8 never raises. `to_ascii` then folded the mojibake to a
+    LETTER: 'Universite de Montreal' was stored as 'UniversitA de MontrAal' in
+    the 2026-07-25 Epoch dump, and 'e' cannot be recovered from 'A'.
+
+    This is the `open()`-without-encoding defect that CLAUDE.md already warns
+    about, arriving through a different door.
+
+    Raises MojibakeError rather than returning damaged text: a wrong decode is
+    a wrong answer, and a wrong answer is worse than no answer.
+    """
+    ctype = response.headers.get("Content-Type", "")
+    if "charset=" not in ctype.lower():
+        response.encoding = "utf-8"
+    text = response.text
+    if looks_like_mojibake(text):
+        raise MojibakeError(
+            "Decoded text from %s still looks double-decoded (declared "
+            "Content-Type: %r). Refusing to hand back damaged text."
+            % (getattr(response, "url", "<unknown>"), ctype))
+    return text
+
+
+def to_ascii(text):
+    """Lossy but predictable ASCII coercion for text destined for the repo.
+
+    Repairs mojibake FIRST. Folding double-decoded text is how an accent
+    becomes an unrelated letter: NFKD of 'A-tilde' keeps 'A', so 'e-acute'
+    read as latin-1 folds to 'A' rather than 'e'. Repairing first means even
+    legacy text folds to the right letter. This never raises -- the boundary
+    (decode_response) is where a bad decode should fail.
+    """
+    if text is None:
+        return None
+    text = repair_mojibake(text)
     out = []
     for char in str(text):
         if ord(char) < 128:
@@ -147,8 +324,32 @@ def to_ascii(text):
         elif char in CHAR_REPLACEMENTS:
             out.append(CHAR_REPLACEMENTS[char])
         else:
-            normalised = unicodedata.normalize("NFKD", char)
-            out.append("".join(c for c in normalised if ord(c) < 128))
+            # NFKD first, because it correctly resolves the whole accented-Latin
+            # range: 'e-acute' -> 'e' plus a combining mark we then drop. It is
+            # only a fold, though -- for a character with no decomposition it
+            # returns the character itself, and filtering that to ASCII yields
+            # the EMPTY STRING. That silent deletion is the defect this guard
+            # closes, so an empty fold is an error and not an answer.
+            folded = "".join(
+                c for c in unicodedata.normalize("NFKD", char)
+                if ord(c) < 128
+                or unicodedata.category(c) in DROPPABLE_UNICODE_CATEGORIES
+            )
+            folded = "".join(c for c in folded if ord(c) < 128)
+            if folded:
+                out.append(folded)
+            elif unicodedata.category(char) in DROPPABLE_UNICODE_CATEGORIES:
+                continue
+            else:
+                raise UnmappableCharacterError(
+                    "no ASCII spelling for %r (U+%04X, %s, %s) in %r. Add it to "
+                    "CHAR_REPLACEMENTS with a transliteration, or to "
+                    "DROPPABLE_UNICODE_CATEGORIES if it carries no meaning. Do "
+                    "not let it be deleted: dropping a character rewrites the "
+                    "title, which rewrites the slug, which orphans every human "
+                    "verdict recorded against the old id."
+                    % (char, ord(char), unicodedata.category(char),
+                       unicodedata.name(char, "unnamed"), str(text)[:80]))
     return "".join(out)
 
 

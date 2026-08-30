@@ -1,0 +1,104 @@
+{
+  "build_version": "0.1.0",
+  "counts": {
+    "served": 8,
+    "withheld": 22,
+    "withheld_by_basis": {
+      "not_yet_asked": 22
+    }
+  },
+  "producer": "scripts/build/project_quotes.py",
+  "rule": "A quote reaches this file only with a named permission basis: a licence that permits it, or a person who said yes. There is no flag to emit anything else.",
+  "withheld": [
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:bensinger_no_better_idea"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:christiano_no_proof_of_safety"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:cotra_alien_employees"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:cotra_substantial_risk_of_takeover"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:garrabrant_embedded_confused"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:garrabrant_wrong_basic_concepts"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:grace_no_procedure_to_do_it"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:hubinger_bits_underwater"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:karnofsky_no_easy_countermeasure"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:karnofsky_unusually_difficult_science"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:ngo_dont_know_even_in_theory"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:ngo_dont_understand_what_were_doing"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:olah_easy_to_misunderstand"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:ord_finding_it_extremely_difficult"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:russell_solve_the_ones_we_can_see"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:seiler_30_years_hard_work"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:shah_complex_and_fragile"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:shlegeris_amazing_function_approximator"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:soares_aim_at_all"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:weidai_target_even_smaller"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:yudkowsky_conclude_too_early"
+    },
+    {
+      "basis": "not_yet_asked",
+      "id": "quote:yudkowsky_terrifically_difficult"
+    }
+  ],
+  "withheld_carry_no_text": "Withheld records appear here as an id and a basis and nothing else. Printing the text of a quote we are refusing to publish would republish it, which is the thing being refused.",
+  "zone": "data/serveable/ is a build output. Never hand-edit it."
+}

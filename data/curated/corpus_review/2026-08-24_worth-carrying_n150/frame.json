@@ -1,0 +1,1097 @@
+{
+  "pass_id": "2026-08-24_worth-carrying_n150",
+  "created": "2026-08-24T11:07:36+10:00",
+  "created_utc": "2026-08-24T01:07:36+00:00",
+  "tool": "prepare_corpus_review.py 0.1.0",
+  "question": "Would you want this paper in an AI-safety reference corpus?",
+  "verdict_vocabulary": {
+    "yes": "worth carrying in an AI-safety reference corpus",
+    "no": "not worth carrying",
+    "unknown": "looked at it and could not tell -- NOT a rejection, NOT an absence of review",
+    "skip": "deliberately passed over without judging -- NOT unreviewed, NOT 'could not tell'"
+  },
+  "unreviewed_is_absence": "A record with no row in verdicts.jsonl is NOT YET REVIEWED. That state is represented by absence and must never be rendered as a verdict value.",
+  "population": {
+    "source": "data/serveable/api/timeline_events/all_events.json",
+    "definition": "bulk records (source_id present) whose first source URL is on arxiv.org",
+    "size": 1129,
+    "excluded": {
+      "distill": {
+        "count": 37,
+        "reason": "the abstract fetch is keyed on an arXiv identifier; no equivalent single call exists for Distill. Not a judgement about Distill."
+      },
+      "hand_authored_narrative": {
+        "count": 28,
+        "reason": "not bulk records; not part of this question"
+      },
+      "unparseable_source_url": {
+        "count": 0
+      }
+    }
+  },
+  "draw": {
+    "method": "random.Random(seed).sample over the population sorted by record_id",
+    "seed": 20260824,
+    "n": 150
+  },
+  "abstract_dump": {
+    "path": "data/raw/arxiv_abstracts/dumps/2026-08-29_230810/data.jsonl",
+    "record_count": 150,
+    "missing": [],
+    "fetched_at": "2026-08-30T07:08:18+08:00",
+    "refetched_because": "The 2026-08-24 dump directory carried _metadata.json claiming 150 records and no data.jsonl beside it, so the sitting could not start. Re-fetched 2026-08-30 from the ids already in this frame; the sample is byte-identical, which is the seed doing its job. The frame's created stamps are NOT updated: the draw preceded the fetch by six days and that ordering is the point."
+  },
+  "sample": [
+    {
+      "record_id": "arxiv_d33fcb4bef6132b8",
+      "arxiv_id": "2211.03540",
+      "title": "Measuring Progress on Scalable Oversight for Large Language Models",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2211.03540"
+    },
+    {
+      "record_id": "arxiv_92a5e7db3083500c",
+      "arxiv_id": "1807.10272",
+      "title": "Evaluating and Understanding the Robustness of Adversarial Logit Pairing",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1807.10272"
+    },
+    {
+      "record_id": "arxiv_0ef3ae9d9df8bf40",
+      "arxiv_id": "1803.04585",
+      "title": "Categorizing Variants of Goodhart's Law",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1803.04585"
+    },
+    {
+      "record_id": "arxiv_b6b762b2e10ccbe9",
+      "arxiv_id": "1803.04765",
+      "title": "Deep k-Nearest Neighbors: Towards Confident, Interpretable and Robust Deep Learning",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1803.04765"
+    },
+    {
+      "record_id": "arxiv_29912d5e770917b0",
+      "arxiv_id": "1907.02908",
+      "title": "On Inductive Biases in Deep Reinforcement Learning",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1907.02908"
+    },
+    {
+      "record_id": "arxiv_d17f296dd337d166",
+      "arxiv_id": "1910.14599",
+      "title": "Adversarial NLI: A New Benchmark \nfor Natural Language Understanding",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1910.14599"
+    },
+    {
+      "record_id": "arxiv_e279806c12c8a668",
+      "arxiv_id": "2107.14093",
+      "title": "A Decision Model for Decentralized Autonomous Organization Platform Selection: Three Industry Case Studies",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2107.14093"
+    },
+    {
+      "record_id": "arxiv_0dc012241e048d4d",
+      "arxiv_id": "2008.09293",
+      "title": "A Composable Specification Language for Reinforcement Learning Tasks",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2008.09293"
+    },
+    {
+      "record_id": "arxiv_4d58fc236181a582",
+      "arxiv_id": "1809.02925",
+      "title": "Discriminator-Actor-Critic: Addressing Sample Inefficiency and Reward Bias in Adversarial Imitation Learning",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1809.02925"
+    },
+    {
+      "record_id": "arxiv_c67778b1627c19d8",
+      "arxiv_id": "2310.17230",
+      "title": "Codebook Features: Sparse and Discrete Interpretability for Neural Networks",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2310.17230"
+    },
+    {
+      "record_id": "arxiv_d3e76392f9627e93",
+      "arxiv_id": "2202.01197",
+      "title": "VOS: Learning What You Don't Know by Virtual Outlier Synthesis",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2202.01197"
+    },
+    {
+      "record_id": "arxiv_5ab3b57cc0401a5d",
+      "arxiv_id": "1811.00525",
+      "title": "On the Geometry of Adversarial Examples.",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/1811.00525"
+    },
+    {
+      "record_id": "arxiv_19f1abcbac7010a1",
+      "arxiv_id": "1811.07871",
+      "title": "Scalable agent alignment via reward modeling: a research direction",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1811.07871"
+    },
+    {
+      "record_id": "arxiv_90c0cd83d6e802b5",
+      "arxiv_id": "2004.14990",
+      "title": "Reinforcement Learning with Augmented Data",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2004.14990"
+    },
+    {
+      "record_id": "arxiv_da2deeeadbeab086",
+      "arxiv_id": "2103.12656",
+      "title": "Replacing Rewards with Examples: Example-Based Policy Search via Recursive Classification",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2103.12656"
+    },
+    {
+      "record_id": "arxiv_db5b97196116c843",
+      "arxiv_id": "1912.02781",
+      "title": "AugMix: A Simple Data Processing Method to Improve Robustness and Uncertainty.",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/1912.02781"
+    },
+    {
+      "record_id": "arxiv_52818dc9c9b0ec8f",
+      "arxiv_id": "1806.09795",
+      "title": "Multi-agent Inverse Reinforcement Learning for Certain General-sum Stochastic Games",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1806.09795"
+    },
+    {
+      "record_id": "arxiv_7c7c5101e999d894",
+      "arxiv_id": "2112.09332",
+      "title": "WebGPT: Browser-assisted question-answering with human feedback",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2112.09332"
+    },
+    {
+      "record_id": "arxiv_c66e65c42875adef",
+      "arxiv_id": "1807.10299",
+      "title": "Variational Option Discovery Algorithms",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1807.10299"
+    },
+    {
+      "record_id": "arxiv_6e217576bd92ec66",
+      "arxiv_id": "2002.11708",
+      "title": "Generalized Hindsight for Reinforcement Learning",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2002.11708"
+    },
+    {
+      "record_id": "arxiv_f1216e608f8dd839",
+      "arxiv_id": "1808.04096",
+      "title": "Directed Policy Gradient for Safe Reinforcement Learning with Human Advice",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1808.04096"
+    },
+    {
+      "record_id": "arxiv_235c017226022315",
+      "arxiv_id": "1805.12152",
+      "title": "Robustness May Be at Odds with Accuracy",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1805.12152"
+    },
+    {
+      "record_id": "arxiv_b09f079287d7fbd3",
+      "arxiv_id": "1912.09729",
+      "title": "Mastering Complex Control in MOBA Games with Deep Reinforcement Learning",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1912.09729"
+    },
+    {
+      "record_id": "arxiv_21f2bad360e8a7d2",
+      "arxiv_id": "1210.4915",
+      "title": "Self-confirming price-prediction strategies for simultaneous one-shot auctions.",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1210.4915"
+    },
+    {
+      "record_id": "arxiv_da59e3fffc6d024a",
+      "arxiv_id": "2204.05151",
+      "title": "Metaethical Perspectives on 'Benchmarking' AI Ethics",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2204.05151"
+    },
+    {
+      "record_id": "arxiv_568da857b5fce82c",
+      "arxiv_id": "2204.12822",
+      "title": "A Survey on XAI for Beyond 5G Security: Technical Aspects, Use Cases, Challenges and Research Directions",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2204.12822"
+    },
+    {
+      "record_id": "arxiv_62e683d54a625bee",
+      "arxiv_id": "2107.09045",
+      "title": "On the Veracity of Local, Model-agnostic Explanations in Audio Classification: Targeted Investigations with Adversarial Examples",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2107.09045"
+    },
+    {
+      "record_id": "arxiv_9312ad006aca35cb",
+      "arxiv_id": "2102.09677",
+      "title": "Training a Resilient Q-Network against Observational Interference",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2102.09677"
+    },
+    {
+      "record_id": "arxiv_ecbf833c92b33a47",
+      "arxiv_id": "2007.16096",
+      "title": "On Single Point Forecasts for Fat-Tailed Variables",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2007.16096"
+    },
+    {
+      "record_id": "arxiv_a644f0a3cb02d2e2",
+      "arxiv_id": "2004.13654",
+      "title": "Pitfalls of learning a reward function online",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2004.13654"
+    },
+    {
+      "record_id": "arxiv_e0208f404de76bd7",
+      "arxiv_id": "1705.03394",
+      "title": "That is not dead which can eternal lie: the aestivation hypothesis for resolving Fermi's paradox",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1705.03394"
+    },
+    {
+      "record_id": "arxiv_ae08d781c06efe3d",
+      "arxiv_id": "2110.08412",
+      "title": "Evaluating the Faithfulness of Importance Measures in NLP by Recursively Masking Allegedly Important Tokens and Retraining",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2110.08412"
+    },
+    {
+      "record_id": "arxiv_b7e2676767766152",
+      "arxiv_id": "1912.00782",
+      "title": "The relationship between trust in AI and trustworthy machine learning technologies",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1912.00782"
+    },
+    {
+      "record_id": "arxiv_c515598ed82b0e38",
+      "arxiv_id": "2110.01834",
+      "title": "Thinking Fast and Slow in AI: the Role of Metacognition",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2110.01834"
+    },
+    {
+      "record_id": "arxiv_793b9faea6d52daf",
+      "arxiv_id": "1908.01007",
+      "title": "Improving Deep Reinforcement Learning in Minecraft with Action Advice",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1908.01007"
+    },
+    {
+      "record_id": "arxiv_e7aa7614cdd5882a",
+      "arxiv_id": "2206.09360",
+      "title": "Modeling Transformative AI Risks (MTAIR) Project -- Summary Report",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2206.09360"
+    },
+    {
+      "record_id": "arxiv_5bb7ca04067a7d2f",
+      "arxiv_id": "2210.13382",
+      "title": "Emergent world representations: Exploring a sequence model trained on a synthetic task",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2210.13382"
+    },
+    {
+      "record_id": "arxiv_aed15d8ec6db81a2",
+      "arxiv_id": "2205.01663",
+      "title": "Adversarial Training for High-Stakes Reliability",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2205.01663"
+    },
+    {
+      "record_id": "arxiv_4aede7012db72353",
+      "arxiv_id": "1809.03008",
+      "title": "Training for Faster Adversarial Robustness Verification via Inducing ReLU Stability",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1809.03008"
+    },
+    {
+      "record_id": "arxiv_38b411043c9d563e",
+      "arxiv_id": "2001.05068",
+      "title": "Social and Governance Implications of Improved Data Efficiency",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2001.05068"
+    },
+    {
+      "record_id": "arxiv_004aec5c84faaf31",
+      "arxiv_id": "2009.09071",
+      "title": "Measurement in AI Policy: Opportunities and Challenges",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2009.09071"
+    },
+    {
+      "record_id": "arxiv_4af897b4f7e8de9e",
+      "arxiv_id": "1811.06606",
+      "title": "Economics of Human-AI Ecosystem: Value Bias and Lost Utility in Multi-Dimensional Gaps",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1811.06606"
+    },
+    {
+      "record_id": "arxiv_0de42c1e48b1ed52",
+      "arxiv_id": "1712.04172",
+      "title": "A Low-Cost Ethics Shaping Approach for Designing Reinforcement Learning Agents",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1712.04172"
+    },
+    {
+      "record_id": "arxiv_7d71464129d360de",
+      "arxiv_id": "2202.05302",
+      "title": "Trust in AI: Interpretability is not necessary or sufficient, while black-box interaction is necessary and sufficient",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2202.05302"
+    },
+    {
+      "record_id": "arxiv_231c1c7eb2d22544",
+      "arxiv_id": "2206.15474",
+      "title": "Forecasting Future World Events \nwith Neural Networks",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2206.15474"
+    },
+    {
+      "record_id": "arxiv_21e5965ab022e732",
+      "arxiv_id": "1905.06922",
+      "title": "On Variational Bounds of Mutual Information",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1905.06922"
+    },
+    {
+      "record_id": "arxiv_89cd3ef79c4ea526",
+      "arxiv_id": "1905.12888",
+      "title": "Imitation Learning as $f$-Divergence Minimization",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1905.12888"
+    },
+    {
+      "record_id": "arxiv_dfb9b33fc00b483f",
+      "arxiv_id": "2303.08112",
+      "title": "Eliciting Latent Predictions from Transformers with the Tuned Lens",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2303.08112"
+    },
+    {
+      "record_id": "arxiv_aa17774e4a5a1010",
+      "arxiv_id": "2006.01855",
+      "title": "Aligning Superhuman AI with Human Behavior: Chess as a Model System",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2006.01855"
+    },
+    {
+      "record_id": "arxiv_73478b418cc33143",
+      "arxiv_id": "1910.02910",
+      "title": "Scaled Autonomy: Enabling Human Operators to Control Robot Fleets",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1910.02910"
+    },
+    {
+      "record_id": "arxiv_28dfb02c5189ee73",
+      "arxiv_id": "2303.16200",
+      "title": "Natural Selection Favors AIs over Humans",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2303.16200"
+    },
+    {
+      "record_id": "arxiv_76fd04d6177fa7e4",
+      "arxiv_id": "2111.04158",
+      "title": "A Word on Machine Ethics: A Response to Jiang et al. (2021)",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2111.04158"
+    },
+    {
+      "record_id": "arxiv_1b99331610432995",
+      "arxiv_id": "2007.04068",
+      "title": "Decolonial AI: Decolonial Theory as Sociotechnical Foresight in Artificial Intelligence",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2007.04068"
+    },
+    {
+      "record_id": "arxiv_fa6d0106af1c5665",
+      "arxiv_id": "1806.08874",
+      "title": "The Foundations of Deep Learning with a Path Towards General Intelligence",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1806.08874"
+    },
+    {
+      "record_id": "arxiv_8712b809a4aca35e",
+      "arxiv_id": "1804.09160",
+      "title": "No Metrics Are Perfect: Adversarial Reward Learning for Visual Storytelling",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1804.09160"
+    },
+    {
+      "record_id": "arxiv_30d197f2abc4241f",
+      "arxiv_id": "1901.08573",
+      "title": "Theoretically Principled Trade-off between Robustness and Accuracy",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1901.08573"
+    },
+    {
+      "record_id": "arxiv_3a9a29b53f0b3b7e",
+      "arxiv_id": "2202.07789",
+      "title": "Safe Reinforcement Learning by Imagining the Near Future",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2202.07789"
+    },
+    {
+      "record_id": "arxiv_8ab49e34de5d3ecd",
+      "arxiv_id": "2007.08124",
+      "title": "LogiQA: A Challenge Dataset for Machine Reading Comprehension with Logical Reasoning",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2007.08124"
+    },
+    {
+      "record_id": "arxiv_5d8d41b153d13a07",
+      "arxiv_id": "1810.06284",
+      "title": "CURIOUS: Intrinsically Motivated Modular Multi-Goal Reinforcement Learning",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1810.06284"
+    },
+    {
+      "record_id": "arxiv_d5d871f8c38b8423",
+      "arxiv_id": "1902.06744",
+      "title": "Using Machine Learning to Guide Cognitive Modeling: A Case Study in Moral Reasoning.",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1902.06744"
+    },
+    {
+      "record_id": "arxiv_c9abd238dd2b341d",
+      "arxiv_id": "2202.10608",
+      "title": "It Takes Four to Tango: Multiagent Self Play for Automatic Curriculum Generation.",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2202.10608"
+    },
+    {
+      "record_id": "arxiv_e442648d2f9714c2",
+      "arxiv_id": "1808.03845",
+      "title": "Social Cohesion in Autonomous Driving.",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1808.03845"
+    },
+    {
+      "record_id": "arxiv_41f01220cbd1248e",
+      "arxiv_id": "2208.12645",
+      "title": "The Brussels Effect and Artificial Intelligence: How EU regulation will impact the global AI market",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2208.12645"
+    },
+    {
+      "record_id": "arxiv_ee653d87f7edfc97",
+      "arxiv_id": "2201.07719",
+      "title": "Improving Behavioural Cloning with Human-Driven Dynamic Dataset Augmentation",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2201.07719"
+    },
+    {
+      "record_id": "arxiv_bae10359a6547ffd",
+      "arxiv_id": "2105.00385",
+      "title": "pyBKT: An Accessible Python Library of Bayesian Knowledge Tracing Models",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2105.00385"
+    },
+    {
+      "record_id": "arxiv_64e368da441409b5",
+      "arxiv_id": "1909.05863",
+      "title": "Finding Generalizable Evidence by Learning to Convince Q&A Models",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1909.05863"
+    },
+    {
+      "record_id": "arxiv_f60dc3ec42354be6",
+      "arxiv_id": "2102.13195",
+      "title": "Reinforcement Learning of Implicit and Explicit Control Flow Instructions.",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2102.13195"
+    },
+    {
+      "record_id": "arxiv_68da4ab0079db520",
+      "arxiv_id": "2202.11812",
+      "title": "Investigations of Performance and Bias in Human-AI Teamwork in Hiring",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2202.11812"
+    },
+    {
+      "record_id": "arxiv_6311d79b1c153e4a",
+      "arxiv_id": "2001.09318",
+      "title": "Silly rules improve the capacity of agents to learn stable enforcement and compliance behaviors",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2001.09318"
+    },
+    {
+      "record_id": "arxiv_40981833e4aac1ab",
+      "arxiv_id": "2110.15191",
+      "title": "URLB: Unsupervised Reinforcement Learning Benchmark.",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2110.15191"
+    },
+    {
+      "record_id": "arxiv_63f483a077d61ed3",
+      "arxiv_id": "2107.06857",
+      "title": "Scalable Evaluation of Multi-Agent Reinforcement Learning with Melting Pot",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2107.06857"
+    },
+    {
+      "record_id": "arxiv_714861efdafd1851",
+      "arxiv_id": "2109.08904",
+      "title": "Towards Resilient Artificial Intelligence: Survey and Research Issues",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2109.08904"
+    },
+    {
+      "record_id": "arxiv_56ff800292644bea",
+      "arxiv_id": "2107.14052",
+      "title": "The Role of Social Movements, Coalitions, and Workers in Resisting Harmful Artificial Intelligence and Contributing to the Development of Responsible AI",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2107.14052"
+    },
+    {
+      "record_id": "arxiv_c61fe8a59ccfaa31",
+      "arxiv_id": "2302.08582",
+      "title": "Pretraining Language Models with Human Preferences",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2302.08582"
+    },
+    {
+      "record_id": "arxiv_62f122481baeefc3",
+      "arxiv_id": "1804.05296",
+      "title": "Adversarial Attacks Against Medical Deep Learning Systems",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1804.05296"
+    },
+    {
+      "record_id": "arxiv_44744bf31057f3d2",
+      "arxiv_id": "2002.04833",
+      "title": "Reward-rational (implicit) choice: A unifying formalism for reward learning.",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/2002.04833"
+    },
+    {
+      "record_id": "arxiv_42706567777fd6de",
+      "arxiv_id": "1701.01302",
+      "title": "Toward negotiable reinforcement learning: shifting priorities in Pareto optimal sequential decision-making",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1701.01302"
+    },
+    {
+      "record_id": "arxiv_f283b89018a0ba9f",
+      "arxiv_id": "1811.05590",
+      "title": "Emergence of Addictive Behaviors in Reinforcement Learning Agents",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1811.05590"
+    },
+    {
+      "record_id": "arxiv_033334e7f192c5e2",
+      "arxiv_id": "2009.00802",
+      "title": "Estimating the Brittleness of AI: Safety Integrity Levels and the Need for Testing Out-Of-Distribution Performance",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2009.00802"
+    },
+    {
+      "record_id": "arxiv_02d29384d4f1acc9",
+      "arxiv_id": "1806.00109",
+      "title": "Probabilistically Safe Robot Planning with Confidence-Based Human Predictions",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1806.00109"
+    },
+    {
+      "record_id": "arxiv_8d6bfe9fd2b3c455",
+      "arxiv_id": "2007.05408",
+      "title": "Machine Learning Explainability for External Stakeholders",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2007.05408"
+    },
+    {
+      "record_id": "arxiv_1405aec1edf8be7e",
+      "arxiv_id": "2002.00941",
+      "title": "Quantifying Hypothesis Space Misspecification in Learning from Human-Robot Demonstrations and Physical Corrections.",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/2002.00941"
+    },
+    {
+      "record_id": "arxiv_ddb3aebf3b13c647",
+      "arxiv_id": "2006.13900",
+      "title": "Quantifying Differences in Reward Functions",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2006.13900"
+    },
+    {
+      "record_id": "arxiv_2bc37a9bb4a99905",
+      "arxiv_id": "1810.01032",
+      "title": "Reinforcement Learning with Perturbed Rewards",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1810.01032"
+    },
+    {
+      "record_id": "arxiv_0d235ae393c51863",
+      "arxiv_id": "1807.11655",
+      "title": "Security and Privacy Issues in Deep Learning",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1807.11655"
+    },
+    {
+      "record_id": "arxiv_1dd6134f73afc290",
+      "arxiv_id": "1805.07914",
+      "title": "Imitating Latent Policies from Observation",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1805.07914"
+    },
+    {
+      "record_id": "arxiv_342c6984900004ff",
+      "arxiv_id": "2107.04303",
+      "title": "Integrating Planning, Execution and Monitoring in the presence of Open World Novelties: Case Study of an Open World Monopoly Solver",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2107.04303"
+    },
+    {
+      "record_id": "arxiv_5cb441d6c32c9e98",
+      "arxiv_id": "2010.05150",
+      "title": "Safe Reinforcement Learning with Natural Language Constraints",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2010.05150"
+    },
+    {
+      "record_id": "arxiv_eaf0dda90bdb58bc",
+      "arxiv_id": "2007.04973",
+      "title": "Contrastive Code Representation Learning.",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2007.04973"
+    },
+    {
+      "record_id": "arxiv_aee49bba8b9aac67",
+      "arxiv_id": "2201.04200",
+      "title": "The Turing Trap: The Promise & Peril of Human-Like Artificial Intelligence",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2201.04200"
+    },
+    {
+      "record_id": "arxiv_0dfde4014fcd105b",
+      "arxiv_id": "2202.01679",
+      "title": "Certifying Out-of-Domain Generalization for Blackbox Functions",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2202.01679"
+    },
+    {
+      "record_id": "arxiv_16e9dd5f9342483a",
+      "arxiv_id": "1812.00190",
+      "title": "Deep Learning Application in Security and Privacy -- Theory and Practice: A Position Paper",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1812.00190"
+    },
+    {
+      "record_id": "arxiv_ffbaa6c6637a57a2",
+      "arxiv_id": "1808.08946",
+      "title": "Why Self-Attention? A Targeted Evaluation of Neural Machine Translation Architectures",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1808.08946"
+    },
+    {
+      "record_id": "arxiv_230fb9bb493fe9e0",
+      "arxiv_id": "2010.04112",
+      "title": "Information-Driven Adaptive Sensing Based on Deep Reinforcement Learning",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2010.04112"
+    },
+    {
+      "record_id": "arxiv_441024d88860cc55",
+      "arxiv_id": "2104.06613",
+      "title": "Detection of Dataset Shifts in Learning-Enabled Cyber-Physical Systems using Variational Autoencoder for Regression",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2104.06613"
+    },
+    {
+      "record_id": "arxiv_352fdb904551171a",
+      "arxiv_id": "1912.01683",
+      "title": "Optimal Policies Tend to Seek Power",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1912.01683"
+    },
+    {
+      "record_id": "arxiv_9957f33fc4faa835",
+      "arxiv_id": "1606.02447",
+      "title": "Learning Language Games through Interaction",
+      "year": 2016,
+      "url": "https://arxiv.org/abs/1606.02447"
+    },
+    {
+      "record_id": "arxiv_408fdf74dfa3936a",
+      "arxiv_id": "1805.11592",
+      "title": "Playing hard exploration games by watching YouTube",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1805.11592"
+    },
+    {
+      "record_id": "arxiv_118b4f6716338f5b",
+      "arxiv_id": "2111.13786",
+      "title": "Learning from learning machines: a new generation of AI technology to meet the needs of science",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2111.13786"
+    },
+    {
+      "record_id": "arxiv_e7bcd86ebcadbd8e",
+      "arxiv_id": "2002.09595",
+      "title": "The Pragmatic Turn in Explainable Artificial Intelligence (XAI)",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2002.09595"
+    },
+    {
+      "record_id": "arxiv_ab9d8313ec8c9ad6",
+      "arxiv_id": "1805.08915",
+      "title": "A Psychopathological Approach to Safety Engineering in AI and AGI",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1805.08915"
+    },
+    {
+      "record_id": "arxiv_ad6d23e1b1a90af6",
+      "arxiv_id": "2010.02419",
+      "title": "Providing Actionable Feedback in Hiring Marketplaces using Generative Adversarial Networks",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2010.02419"
+    },
+    {
+      "record_id": "arxiv_ab6a3d0259d74218",
+      "arxiv_id": "2209.13578",
+      "title": "Learning When to Advise Human Decision Makers",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2209.13578"
+    },
+    {
+      "record_id": "arxiv_b489d7cfa3b043cd",
+      "arxiv_id": "1812.03980",
+      "title": "Building Ethically Bounded AI",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1812.03980"
+    },
+    {
+      "record_id": "arxiv_153bcb3b49c0c598",
+      "arxiv_id": "1904.12901",
+      "title": "Challenges of Real-World Reinforcement Learning",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1904.12901"
+    },
+    {
+      "record_id": "arxiv_6a8d9093f9310ee6",
+      "arxiv_id": "1810.00184",
+      "title": "Stakeholders in Explainable AI",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1810.00184"
+    },
+    {
+      "record_id": "arxiv_e00f358687aa7aed",
+      "arxiv_id": "2011.08827",
+      "title": "Avoiding Tampering Incentives in Deep RL via Decoupled Approval",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2011.08827"
+    },
+    {
+      "record_id": "arxiv_4d20560a864f229f",
+      "arxiv_id": "1702.08608",
+      "title": "Towards A Rigorous Science of Interpretable Machine Learning",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1702.08608"
+    },
+    {
+      "record_id": "arxiv_e02500165c9882ce",
+      "arxiv_id": "2102.02454",
+      "title": "Exploring Beyond-Demonstrator via Meta Learning-Based Reward Extrapolation",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2102.02454"
+    },
+    {
+      "record_id": "arxiv_ce9119bdee8da16b",
+      "arxiv_id": "2004.07213",
+      "title": "Toward Trustworthy AI Development: Mechanisms for Supporting Verifiable Claims",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2004.07213"
+    },
+    {
+      "record_id": "arxiv_160879eef4774db7",
+      "arxiv_id": "2003.13350",
+      "title": "Agent57: Outperforming the Atari Human Benchmark",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2003.13350"
+    },
+    {
+      "record_id": "arxiv_1aef4c64a68bc52e",
+      "arxiv_id": "2202.03172",
+      "title": "The 6-Ds of Creating AI-Enabled Systems",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2202.03172"
+    },
+    {
+      "record_id": "arxiv_3514608b30257527",
+      "arxiv_id": "1907.07273",
+      "title": "An Inductive Synthesis Framework for Verifiable Reinforcement Learning",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1907.07273"
+    },
+    {
+      "record_id": "arxiv_0141cd563881ab4f",
+      "arxiv_id": "2104.03741",
+      "title": "Voluntary safety commitments provide an escape from over-regulation in AI development",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2104.03741"
+    },
+    {
+      "record_id": "arxiv_3f4254f317701007",
+      "arxiv_id": "1812.04606",
+      "title": "Deep Anomaly Detection with Outlier Exposure.",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1812.04606"
+    },
+    {
+      "record_id": "arxiv_2fd7f04f95ad5171",
+      "arxiv_id": "1602.06462",
+      "title": "The Singularity May Never Be Near",
+      "year": 2016,
+      "url": "https://arxiv.org/abs/1602.06462"
+    },
+    {
+      "record_id": "arxiv_40adcd148ad64c63",
+      "arxiv_id": "2210.15767",
+      "title": "Gathering Strength, Gathering Storms: The One Hundred Year Study on Artificial Intelligence (AI100) 2021 Study Panel Report",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2210.15767"
+    },
+    {
+      "record_id": "arxiv_cb0bea2dbf3f6dba",
+      "arxiv_id": "1802.01604",
+      "title": "Learning from Richer Human Guidance: Augmenting Comparison-Based Learning with Feature Queries",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1802.01604"
+    },
+    {
+      "record_id": "arxiv_6d9c643dc346070e",
+      "arxiv_id": "1903.03425",
+      "title": "The Ethics of AI Ethics -- An Evaluation of Guidelines",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1903.03425"
+    },
+    {
+      "record_id": "arxiv_9e60622ab79fb17b",
+      "arxiv_id": "1807.03748",
+      "title": "Representation Learning with Contrastive Predictive Coding",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1807.03748"
+    },
+    {
+      "record_id": "arxiv_bedbb9cfa9a577eb",
+      "arxiv_id": "1912.02757",
+      "title": "Deep Ensembles: A Loss Landscape Perspective",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1912.02757"
+    },
+    {
+      "record_id": "arxiv_0fdf5b2c39518e9d",
+      "arxiv_id": "1907.07174",
+      "title": "Natural Adversarial Examples.",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1907.07174"
+    },
+    {
+      "record_id": "arxiv_44220c5f671b2e28",
+      "arxiv_id": "2002.11174",
+      "title": "TanksWorld: A Multi-Agent Environment for AI Safety Research",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2002.11174"
+    },
+    {
+      "record_id": "arxiv_cf093524c33472b7",
+      "arxiv_id": "2005.07648",
+      "title": "Language Conditioned Imitation Learning over Unstructured Data",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2005.07648"
+    },
+    {
+      "record_id": "arxiv_36050c782f2880a8",
+      "arxiv_id": "2012.05876",
+      "title": "Neurosymbolic AI: The 3rd Wave",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2012.05876"
+    },
+    {
+      "record_id": "arxiv_176a4ddb834e0c5f",
+      "arxiv_id": "1602.07029",
+      "title": "Latent Skill Embedding for Personalized Lesson Sequence Recommendation",
+      "year": 2016,
+      "url": "https://arxiv.org/abs/1602.07029"
+    },
+    {
+      "record_id": "arxiv_060a27387c4518c0",
+      "arxiv_id": "1906.09453",
+      "title": "Image Synthesis with a Single (Robust) Classifier",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1906.09453"
+    },
+    {
+      "record_id": "arxiv_0ebf56aabf1e884f",
+      "arxiv_id": "1810.12282",
+      "title": "Assessing Generalization in Deep Reinforcement Learning",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1810.12282"
+    },
+    {
+      "record_id": "arxiv_5d45e51f2ea6d22b",
+      "arxiv_id": "1906.00945",
+      "title": "Adversarial Robustness as a Prior for Learned Representations",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1906.00945"
+    },
+    {
+      "record_id": "arxiv_0475b257aaff02e4",
+      "arxiv_id": "1812.02953",
+      "title": "Building Ethics into Artificial Intelligence",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1812.02953"
+    },
+    {
+      "record_id": "arxiv_3df04342ed5b89b2",
+      "arxiv_id": "2110.14051",
+      "title": "A Unified Survey on Anomaly, Novelty, Open-Set, and Out-of-Distribution Detection: Solutions and Future Challenges.",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2110.14051"
+    },
+    {
+      "record_id": "arxiv_9e8530cde437a62a",
+      "arxiv_id": "2001.09768",
+      "title": "Artificial Intelligence, Values and Alignment",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2001.09768"
+    },
+    {
+      "record_id": "arxiv_7cdb1233cf82deb9",
+      "arxiv_id": "1708.08611",
+      "title": "Safe Reinforcement Learning via Shielding",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1708.08611"
+    },
+    {
+      "record_id": "arxiv_d802a08e209a39aa",
+      "arxiv_id": "2006.09436",
+      "title": "SAMBA: Safe Model-Based & Active Reinforcement Learning",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2006.09436"
+    },
+    {
+      "record_id": "arxiv_2693c7142eae6286",
+      "arxiv_id": "2103.03938",
+      "title": "Causal Analysis of Agent Behavior for AI Safety",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2103.03938"
+    },
+    {
+      "record_id": "arxiv_996788ee14c025d6",
+      "arxiv_id": "2206.06091",
+      "title": "Towards Autonomous Grading In The Real World",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2206.06091"
+    },
+    {
+      "record_id": "arxiv_7902a1192772be3d",
+      "arxiv_id": "2203.13236",
+      "title": "Differential Assessment of Black-Box AI Agents..",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2203.13236"
+    },
+    {
+      "record_id": "arxiv_e25da3f1799e8a25",
+      "arxiv_id": "2011.04328",
+      "title": "Risk Assessment for Machine Learning Models",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2011.04328"
+    },
+    {
+      "record_id": "arxiv_266a1fefecfd5b20",
+      "arxiv_id": "1903.03171",
+      "title": "Challenges for an Ontology of Artificial Intelligence",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1903.03171"
+    },
+    {
+      "record_id": "arxiv_7b03a29a7f0a47cb",
+      "arxiv_id": "2101.06060",
+      "title": "The Challenge of Value Alignment: from Fairer Algorithms to AI Safety",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2101.06060"
+    },
+    {
+      "record_id": "arxiv_f02af23f63156be9",
+      "arxiv_id": "2105.02704",
+      "title": "AI Risk Skepticism",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2105.02704"
+    },
+    {
+      "record_id": "arxiv_fa94eb811e4ed6f4",
+      "arxiv_id": "2204.06407",
+      "title": "Flexible Multiple-Objective Reinforcement Learning for Chip Placement",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2204.06407"
+    },
+    {
+      "record_id": "arxiv_a8e7867b6a274601",
+      "arxiv_id": "1905.03030",
+      "title": "Meta-learning of Sequential Strategies",
+      "year": 2019,
+      "url": "https://arxiv.org/abs/1905.03030"
+    },
+    {
+      "record_id": "arxiv_e58ee43c60372af1",
+      "arxiv_id": "1806.09030",
+      "title": "On Adversarial Examples for Character-Level Neural Machine Translation",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1806.09030"
+    },
+    {
+      "record_id": "arxiv_2645dbafdafd63d5",
+      "arxiv_id": "2111.11401",
+      "title": "Balancing Efficiency and Comfort in Robot-Assisted Bite Transfer.",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2111.11401"
+    },
+    {
+      "record_id": "arxiv_15eb203180cab2f1",
+      "arxiv_id": "2110.09506",
+      "title": "MEMO: Test Time Robustness via Adaptation and Augmentation",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2110.09506"
+    },
+    {
+      "record_id": "arxiv_c5fc3042c65ffa89",
+      "arxiv_id": "1805.07468",
+      "title": "Unsupervised Learning of Neural Networks to Explain Neural Networks",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1805.07468"
+    },
+    {
+      "record_id": "arxiv_12c150d8843037cc",
+      "arxiv_id": "1812.02900",
+      "title": "Off-Policy Deep Reinforcement Learning without Exploration",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1812.02900"
+    },
+    {
+      "record_id": "arxiv_ebbdc0ac967f34cd",
+      "arxiv_id": "2009.06114",
+      "title": "Towards the Quantification of Safety Risks in Deep Neural Networks",
+      "year": 2020,
+      "url": "https://arxiv.org/abs/2009.06114"
+    },
+    {
+      "record_id": "arxiv_6e27957f99ea08be",
+      "arxiv_id": "2110.14419",
+      "title": "Toward a Theory of Justice for Artificial Intelligence",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2110.14419"
+    }
+  ],
+  "human_fields_set_by_this_tool": 0
+}

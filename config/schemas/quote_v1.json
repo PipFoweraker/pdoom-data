@@ -1,0 +1,338 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "quote_v1.json",
+  "title": "quote_v1",
+  "description": "One real person's real words, with the basis on which we may show them. A quote is an ATTRIBUTED OPINION in ADR-001's sense: the fact is that they said it, the opinion is theirs, and the decision to display it belongs to the consumer. This repository never anonymises a quote and never invents one; both of those failures have already shipped here (pdoom-data#92, #76).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "text",
+    "author",
+    "source_url",
+    "retrieved_at",
+    "permission"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+:[a-z0-9_-]+$",
+      "description": "Stable forever. A person asking years later to correct, re-attribute or withdraw their words must be executable against this id without re-deriving which line in the game is theirs."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 500,
+      "description": "Verbatim. Never paraphrased, never trimmed in a way that changes the sense. If it needs an ellipsis, the ellipsis is part of the text."
+    },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "is_pseudonym"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "is_pseudonym": {
+          "type": "boolean",
+          "description": "True when only a handle is known. A pseudonymous private commenter gets the MOST diligence, not the least: they chose not to attach their name to this, and a game screen re-attaches it to a context they never saw."
+        },
+        "identification_attempts": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "What was actually done to reach the person behind a pseudonym. Required in practice before any pseudonymous quote is served."
+        },
+        "affiliation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "display_preference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "How they asked to be credited, in their words. Overrides name for display."
+        }
+      }
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "archive_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Wayback or equivalent, captured AT RETRIEVAL TIME. Forum posts get edited and deleted; without this the quote becomes unverifiable and we cannot prove we quoted it correctly."
+    },
+    "source_platform": {
+      "type": "string",
+      "enum": [
+        "lesswrong",
+        "alignment_forum",
+        "ea_forum",
+        "arxiv_abstract",
+        "arxiv_fulltext",
+        "distill",
+        "personal_blog",
+        "book",
+        "podcast",
+        "conference_talk",
+        "x_twitter",
+        "youtube",
+        "journalism",
+        "other"
+      ]
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO date the source was published. Load-bearing for ea_forum: CC BY 4.0 is mandatory only from 2022-12-01. Earlier posts are ordinary copyright unless that author added a licence clause to that post."
+    },
+    "retrieved_at": {
+      "type": "string"
+    },
+    "context_note": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "What the person was actually talking about. Guards against context collapse (Marwick and boyd 2011): a 2018 forum comment on a 2026 death screen has lost its audience, its thread and possibly the author's current view."
+    },
+    "permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "basis"
+      ],
+      "properties": {
+        "basis": {
+          "type": "string",
+          "enum": [
+            "licence",
+            "granted",
+            "not_yet_asked",
+            "asked_no_reply",
+            "refused",
+            "withdrawn"
+          ],
+          "description": "not_yet_asked is the DEFAULT and is an absence, not a permission. asked_no_reply is also not permission: silence means no. refused and withdrawn are permanent tombstones."
+        },
+        "licence_spdx": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Required when basis is licence. Checked mechanically: anything containing -SA is refused, per the standing rule that share-alike would reach into this project's own licensing. NC and ND are refused too, because the game is a commercial product."
+        },
+        "licence_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "granted_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The person who said yes, named. Required when basis is granted."
+        },
+        "granted_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "granted_via": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Email, DM, or wherever. A grant we cannot point at is not a grant."
+        },
+        "context_shown_to_author": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "What we told them about WHERE it would appear. Consent is to a context, not just to a reuse, so a grant obtained without describing the death screen is not a grant for the death screen."
+        },
+        "refused_note": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Kept so a refusal cannot be silently reversed by someone who never saw it. A refused quote stays in this file, unservable, forever."
+        }
+      }
+    },
+    "placements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Which in-game surfaces this was cleared for. A grant for a loading screen is not a grant for a death screen."
+    },
+    "quote_kind": {
+      "type": "string",
+      "enum": [
+        "difficulty",
+        "accountability",
+        "other"
+      ],
+      "description": "What the quote is DOING. 'difficulty' is the Call of Duty shape: the player lost, and here is someone saying why this problem is genuinely hard. 'accountability' places a named public figure's own words beside what later happened. They carry different risk and the gate treats them differently: an accountability quote must be verified against a primary source, must carry the dated evidence of the outcome it is set against, and its framing may not assert what the speaker knew or intended."
+    },
+    "speaker_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "public_figure",
+        "private_individual",
+        null
+      ],
+      "description": "An executive speaking publicly about their own company is not the same as a forum commenter, legally or ethically. Required for accountability quotes."
+    },
+    "verbatim_verified": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "against_primary_source": {
+          "type": "boolean",
+          "description": "Checked against the original recording, transcript or filing, NOT against someone else's report of the quote. A misquote repeated accurately is still a misquote, and this repo has already run one primary-source pass that refuted six claims, four of them high confidence."
+        },
+        "checked_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checked_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "full_context_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Where a player or a subject can read the WHOLE thing. The defence against a cropping accusation is that the crop is one click from the original."
+        }
+      }
+    },
+    "juxtaposition": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "description": "For accountability quotes: what happened afterwards, evidenced. The player draws the inference; the game does not draw it for them. This is both the stronger rhetoric and the safer position.",
+      "properties": {
+        "what_happened": {
+          "type": "string",
+          "description": "Dated, factual, and checkable. An event, not a characterisation."
+        },
+        "occurred_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "At least one. The outcome carries its own evidence, exactly as every date in config/sources.json does."
+        },
+        "evidence_retrieved_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "framing_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Any words the GAME says around the quote, in its own voice. This is the actual risk surface: reproducing what someone said is one thing, and asserting what they knew or intended is another. Checked mechanically."
+    },
+    "right_of_reply": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "description": "REQUIRED for accountability quotes, and not out of courtesy. In Russell v Australian Broadcasting Corporation (No 3) [2023] FCA 1223, the first full trial of the s 29A public interest defence, the ABC's defence FAILED and it paid over AUD 400,000. Lee J accepted the ABC honestly believed publication was in the public interest but found the belief unreasonable, decisively because it did not seek and fairly consider a response from the subject. A declined or ignored request still counts, PROVIDED it is documented. Silence from them is fine; silence from us is not.",
+      "properties": {
+        "attempted": {
+          "type": "boolean"
+        },
+        "attempted_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attempted_via": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outcome": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "replied",
+            "declined",
+            "no_response",
+            "not_attempted",
+            null
+          ]
+        },
+        "their_response": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Verbatim if they gave one. Carrying their answer beside the quote is worth more than any framing we could write."
+        }
+      }
+    },
+    "sources_shown_in_product": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "Whether the source and the evidence are VISIBLE TO THE PLAYER beside the quote, not merely recorded in this file. The s 31 honest opinion defence requires the opinion to rest on 'proper material' that is stated or referenced in the same publication, by link or other access point. Evidence held in a repository the player never sees does not satisfy it. This is a UI requirement that only the data can record."
+    },
+    "editorial_note": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Why this quote, why this juxtaposition, and what was checked. The s 29A defence turns on whether the belief that publication served the public interest was REASONABLE, which is judged on what was actually done. A contemporaneous record of the decision is the evidence of that, and it cannot be reconstructed afterwards."
+    }
+  }
+}

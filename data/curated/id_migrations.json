@@ -1,0 +1,41 @@
+{
+  "_metadata": {
+    "what": "Record ids that CHANGED identity between dumps, and where the human verdicts recorded against the old id must follow.",
+    "why": "An id here is derived from a title by slugify(). When an adapter repairs a title the slug moves, and every attributed verdict keyed on the old id silently stops matching anything. On 2026-08-22 that orphaned two of Pip Foweraker's accepts and moved the reviewed count from 518 to 516 with nothing going red. See pdoom-data#95.",
+    "nature": "CURATED. Each entry asserts that two ids name the SAME REAL THING. That is a judgement about identity and it carries evidence, a decider and a date. It is not derivable from the data -- if it were, the ids would not have diverged.",
+    "not_for": "Records that genuinely left upstream. A model dropped from the Epoch dataset is an absence, not a rename, and must NOT be given an entry here to keep a count up.",
+    "applied_by": "scripts/build/project_candidates.py load_reviews(), and asserted by scripts/validation/check_review_targets.py"
+  },
+  "migrations": [
+    {
+      "old_id": "epoch_ai:dallae_2",
+      "new_id": "epoch_ai:dalle_2",
+      "reason": "to_ascii deleted the interpunct in 'DALL(U+00B7)E 2'. Before the 2026-08-22 encoding fix the character had already been mojibaked to the letter 'A', giving 'DALLAE 2'; after it, the character was dropped entirely, giving 'DALLE 2'. Two different corruptions of one name.",
+      "evidence": {
+        "title_before": "DALLAE 2",
+        "title_after": "DALLE 2",
+        "dump_before": "data/raw/epoch_ai/dumps/2026-07-25_053622/data.jsonl",
+        "dump_after": "data/raw/epoch_ai/dumps/2026-08-22_005823/data.jsonl"
+      },
+      "carries": "1 accept by Pip Foweraker, 2026-07-26T10:45:53.148Z, in human_review_2026-07-26.json",
+      "decided_by": "Claude Opus 5 (1M context), pdoom-data seat",
+      "decided_on": "2026-08-29",
+      "confidence": "high -- both titles are corruptions of the same upstream row, matched on the row's other fields, not on the name alone"
+    },
+    {
+      "old_id": "epoch_ai:pangu_i",
+      "new_id": "epoch_ai:pangu",
+      "reason": "to_ascii deleted a Greek letter from 'PanGu-<greek>'. Before the encoding fix it had been mojibaked to the letter 'I', giving 'PanGu-I'; after it, the letter was dropped, giving the dangling title 'PanGu-'.",
+      "evidence": {
+        "title_before": "PanGu-I",
+        "title_after": "PanGu-",
+        "dump_before": "data/raw/epoch_ai/dumps/2026-07-25_053622/data.jsonl",
+        "dump_after": "data/raw/epoch_ai/dumps/2026-08-22_005823/data.jsonl"
+      },
+      "carries": "1 accept by Pip Foweraker, 2026-07-26T10:47:03.864Z, in human_review_2026-07-26.json",
+      "decided_by": "Claude Opus 5 (1M context), pdoom-data seat",
+      "decided_on": "2026-08-29",
+      "confidence": "high for the identity, LOW for the title. Which Greek letter it was is NOT established here and is deliberately not guessed -- both dumps are ASCII-coerced, so the character is not recoverable from anything in this repository. 'epoch_ai:pangu' is itself a damaged id and will move again when a fetch runs with the repaired map. That is what this file and the gate exist to survive."
+    }
+  ]
+}

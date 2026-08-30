@@ -202,8 +202,17 @@ class DataCleaner:
         # Remove combining characters (accents)
         text = ''.join(c for c in text if not unicodedata.combining(c))
 
-        # Fallback: replace remaining non-ASCII with '?'
-        text = text.encode('ascii', errors='replace').decode('ascii')
+        # Fallback: DROP what NFKD could not fold, and count it. Never '?'.
+        # CLAUDE.md forbids the '?' fallback by name -- it is what fix_ascii.py
+        # did, and it "would shred every tree diagram". A '?' is also a silent
+        # corruption that looks like content: "St. P?lten" reads as a typo
+        # rather than as data loss. Dropping is honest, and the counter means
+        # the loss is measurable instead of invisible.
+        folded = ''.join(c for c in text if ord(c) < 128)
+        if len(folded) != len(text):
+            self.stats['ascii_unmappable'] = (
+                self.stats.get('ascii_unmappable', 0) + (len(text) - len(folded)))
+        text = folded
 
         if text != original:
             self.stats['ascii_conversions'] += 1

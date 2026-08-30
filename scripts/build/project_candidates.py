@@ -65,6 +65,7 @@ RAW_ROOT = os.path.join(REPO_ROOT, "data", "raw")
 OUT_ROOT = os.path.join(REPO_ROOT, "data", "serveable", "api", "candidates")
 TOMBSTONE_ROOT = os.path.join(RAW_ROOT, "_tombstones")
 REVIEW_ROOT = os.path.join(REPO_ROOT, "data", "curated", "human_review")
+ID_MIGRATIONS = os.path.join(REPO_ROOT, "data", "curated", "id_migrations.json")
 AIRR_TAG_ROOT = os.path.join(REPO_ROOT, "data", "enrichment", "airr_tags")
 
 # Source-level facts (notably source_available_at) are resolved here at build
@@ -147,17 +148,50 @@ def load_profiles():
     return profiles
 
 
+def load_id_migrations():
+    """old_id -> new_id, for records whose identity moved between dumps.
+
+    An id is a slug of a title, so repairing a title moves the id and every
+    verdict recorded against the old one stops matching. That is not a
+    hypothetical: it orphaned two of Pip's accepts on 2026-08-22 and the only
+    visible symptom was a reviewed count falling 518 -> 516. Migrations are
+    curated, evidenced and dated -- see data/curated/id_migrations.json.
+    """
+    if not os.path.isfile(ID_MIGRATIONS):
+        return {}
+    with open(ID_MIGRATIONS, encoding="ascii") as handle:
+        payload = json.load(handle)
+    mapping = {}
+    for entry in payload.get("migrations") or []:
+        old_id, new_id = entry.get("old_id"), entry.get("new_id")
+        if not old_id or not new_id:
+            continue
+        if old_id in mapping and mapping[old_id] != new_id:
+            raise ValueError(
+                "id_migrations.json sends %s to two different ids (%s and %s). "
+                "An identity claim cannot be ambiguous."
+                % (old_id, mapping[old_id], new_id))
+        mapping[old_id] = new_id
+    return mapping
+
+
 def load_reviews():
     """id -> list of attributed review entries.
 
     Reviews are opinions with an author. Storing them unattributed would make
     one person's taste indistinguishable from a source-derived property, and
     a disagreeing consumer would have to fork rather than filter.
+
+    Ids are rewritten through load_id_migrations() on the way in. The curated
+    file keeps the id the verdict was ACTUALLY recorded against -- rewriting it
+    in place would destroy the record of what was in front of the reviewer --
+    and the mapping stays a separate, evidenced, arguable artifact.
     """
     reviews = defaultdict(list)
     layers = []
     if not os.path.isdir(REVIEW_ROOT):
         return reviews, layers
+    migrations = load_id_migrations()
     for path in sorted(glob.glob(os.path.join(REVIEW_ROOT, "*.json"))):
         with open(path, encoding="ascii") as handle:
             payload = json.load(handle)
@@ -168,6 +202,7 @@ def load_reviews():
             if not entry.get("verdict") and not entry.get("tier_override") \
                     and not entry.get("note"):
                 continue
+            record_id = migrations.get(record_id, record_id)
             reviews[record_id].append({
                 "reviewer": entry.get("reviewer") or reviewer,
                 "verdict": entry.get("verdict"),
