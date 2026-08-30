@@ -102,6 +102,12 @@ GATING = [
     # renders as the previous commit's green. See pdoom-data#97 / C5.
     ("push-receipt logic can still fail",
      ["tests/test_push_receipt_gate.py"], True),
+    # Quotes are real people's words. Nothing is servable until a named basis
+    # says so, and the default state is an absence rather than a permission.
+    ("quotes are servable only on a named basis",
+     ["scripts/validation/check_quote_permissions.py"], True),
+    ("quote permission gate can still fail",
+     ["tests/test_quote_permissions.py"], True),
     # The point where a keystroke becomes a sentence on 1,166 public pages
     # about real papers by named researchers. Everything upstream of it is a
     # proposal; everything downstream is published. It must refuse an
