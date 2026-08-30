@@ -66,6 +66,11 @@ def build():
             # A consumer must be able to credit correctly without reading the
             # curated file, so the basis travels with the quote.
             out["permission_basis"] = basis
+            # CC BY requires attribution in the manner the author specifies.
+            # Where a source states its own citation form, that form is what a
+            # consumer must show, so it travels as the credit line.
+            author = row.get("author") or {}
+            out["credit"] = author.get("display_preference") or author.get("name")
             perm = row.get("permission") or {}
             out["licence_spdx"] = perm.get("licence_spdx")
             out["granted_by"] = perm.get("granted_by")
