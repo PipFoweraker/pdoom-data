@@ -46,6 +46,28 @@ import sys
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 QUOTES = os.path.join(REPO_ROOT, "data", "curated", "quotes", "quotes.jsonl")
 
+# Words that assert what a person KNEW or INTENDED, as opposed to what they
+# said and what later happened.
+#
+# THE DISTINCTION THIS ENCODES. Reproducing someone's own words accurately, and
+# setting them beside a dated, evidenced outcome, leaves the inference to the
+# player. Saying the person lied asserts a fact about their state of mind,
+# which is a much harder thing to stand behind and a much easier thing to sue
+# over. The juxtaposition is also the stronger rhetoric: a reader who works it
+# out themselves is more convinced than one who is told.
+#
+# Scoped to framing_text ONLY, the game's own voice. It never applies to the
+# quote itself: if the speaker used one of these words, that is what they said.
+#
+# This is a drafting guard, not legal advice, and it is not a substitute for a
+# lawyer on the accountability tier.
+STATE_OF_MIND_ASSERTIONS = (
+    "lied", "lying", "liar", "knowingly", "deliberately misled",
+    "deliberately", "intentionally", "covered up", "cover-up", "coverup",
+    "fraud", "fraudulent", "conspired", "conspiracy", "perjur", "corrupt",
+    "knew full well", "knew the truth",
+)
+
 SERVABLE_BASES = ("licence", "granted")
 TOMBSTONE_BASES = ("refused", "withdrawn")
 
@@ -163,6 +185,58 @@ def failures_for(rows):
         if not row.get("placements"):
             out.append("%s: servable but cleared for no placement. A grant for a "
                        "loading screen is not a grant for a death screen." % qid)
+
+        out.extend(_accountability_failures(row, qid))
+
+    return out
+
+
+def _accountability_failures(row, qid):
+    """Extra requirements for a quote that sets someone's words against events.
+
+    A 'difficulty' quote says the problem is hard, and the speaker is being
+    agreed with. An 'accountability' quote sets a named person's own words
+    beside what happened next, and the speaker is not. The second needs to be
+    right in ways the first does not.
+    """
+    out = []
+    framing = row.get("framing_text") or ""
+    lowered = framing.lower()
+    for phrase in STATE_OF_MIND_ASSERTIONS:
+        if phrase in lowered:
+            out.append(
+                "%s: framing_text says %r, which asserts what the speaker knew "
+                "or intended rather than what they said and what followed. Give "
+                "the dated evidence and let the player draw it: that is both "
+                "easier to stand behind and harder to argue with."
+                % (qid, phrase))
+
+    if row.get("quote_kind") != "accountability":
+        return out
+
+    if not row.get("speaker_status"):
+        out.append("%s: an accountability quote must record whether the speaker "
+                   "is a public figure or a private individual." % qid)
+
+    verified = row.get("verbatim_verified") or {}
+    if not verified.get("against_primary_source"):
+        out.append(
+            "%s: not verified against a PRIMARY source. A misquote repeated "
+            "accurately is still a misquote, and accuracy is the single "
+            "biggest thing standing between this and a problem." % qid)
+    if not verified.get("full_context_url"):
+        out.append("%s: no full_context_url. The answer to 'you cropped me' is "
+                   "that the whole thing is one click away." % qid)
+
+    jux = row.get("juxtaposition") or {}
+    if not jux.get("what_happened"):
+        out.append("%s: an accountability quote with nothing set against it is "
+                   "just a quote. Record the dated outcome, or file it as "
+                   "quote_kind 'other'." % qid)
+    elif not (jux.get("evidence_urls") or []):
+        out.append("%s: the outcome carries no evidence. Every date in "
+                   "config/sources.json names what was read; this is the same "
+                   "rule and it matters more here." % qid)
 
     return out
 

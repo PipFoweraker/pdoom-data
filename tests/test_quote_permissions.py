@@ -127,6 +127,59 @@ def main():
     check((row["permission"]["basis"] not in cqp.SERVABLE_BASES),
           "and it is not in SERVABLE_BASES: silence is not consent")
 
+    print("\nACCOUNTABILITY: quoting someone who is not being agreed with")
+    def acct(**over):
+        row = quote(
+            quote_kind="accountability",
+            speaker_status="public_figure",
+            source_platform="journalism",
+            verbatim_verified={"against_primary_source": True,
+                               "checked_by": "Pip Foweraker",
+                               "checked_at": "2026-08-30",
+                               "full_context_url": "https://example.org/full"},
+            juxtaposition={"what_happened": "The safety team was disbanded.",
+                           "occurred_at": "2024-05-17",
+                           "evidence_urls": ["https://example.org/report"],
+                           "evidence_retrieved_at": "2026-08-30"},
+            framing_text="Said in 2022. In 2024 the team was disbanded.",
+            permission={"basis": "granted", "granted_by": "Subject",
+                        "granted_at": "2026-08-30", "granted_via": "email",
+                        "context_shown_to_author": "shown the screen"})
+        row.update(over)
+        return row
+
+    check(not fails(acct()),
+          "a verified quote beside a dated, evidenced outcome passes")
+    check(fails(acct(verbatim_verified={"against_primary_source": False,
+                                        "full_context_url": "https://x"})),
+          "MUST FIRE: not checked against a primary source")
+    check(fails(acct(verbatim_verified={"against_primary_source": True,
+                                        "full_context_url": None})),
+          "MUST FIRE: no link to the full context, so a cropping claim has no answer")
+    check(fails(acct(juxtaposition={"what_happened": "The team was disbanded.",
+                                    "evidence_urls": []})),
+          "MUST FIRE: the outcome carries no evidence")
+    check(fails(acct(juxtaposition=None)),
+          "MUST FIRE: an accountability quote with nothing set against it")
+    check(fails(acct(speaker_status=None)),
+          "MUST FIRE: no record of whether the speaker is a public figure")
+
+    print("\nTHE FRAMING GUARD: say what happened, not what they knew")
+    for phrase in ("He lied about it.", "She knowingly downplayed it.",
+                   "They deliberately misled investors.",
+                   "This was a cover-up.", "A fraud on the public."):
+        check(fails(acct(framing_text=phrase)),
+              "MUST FIRE: game-voice framing %r asserts a state of mind" % phrase)
+    check(not fails(acct(framing_text=
+          "Said in 2022. By 2024 the team named here no longer existed.")),
+          "but dated evidence in the game's voice is fine")
+    check(not fails(acct(text="I did not lie about our safety work.")),
+          "and the guard NEVER touches the quote itself: if they said it, they said it")
+
+    print("\ndifficulty quotes are not held to the accountability bar")
+    check(not fails(quote(quote_kind="difficulty")),
+          "a CoD-style quote about the problem being hard needs no juxtaposition")
+
     print("\n%d checks, %d failed" % (CHECKS[0], len(FAILURES)))
     if FAILURES:
         for failure in FAILURES:

@@ -78,6 +78,50 @@ Moral rights make this a legal question too, not only a courteous one: the
 right to be correctly attributed and to object to derogatory treatment survives
 any licence, and is broader outside the United States.
 
+## Two kinds of quote, and they are not the same object
+
+**`difficulty`** is the Call of Duty shape. The player lost, and here is
+someone saying why this problem is genuinely hard. The speaker is being agreed
+with. Attribution and permission are the whole of it.
+
+**`accountability`** places a named public figure's own words beside what
+happened afterwards. The speaker is not being agreed with. It needs more, and
+the gate enforces four things:
+
+- **Verified against a PRIMARY source**, not against someone else's report of
+  the quote. A misquote repeated accurately is still a misquote. Accuracy is
+  the single biggest thing standing between this and a problem.
+- **A link to the full context.** The answer to "you cropped me" is that the
+  whole thing is one click away.
+- **The outcome carries its own dated evidence.** Same rule as every date in
+  `config/sources.json`, and it matters more here.
+- **`speaker_status` recorded.** An executive speaking publicly about their own
+  company is not a forum commenter, legally or ethically.
+
+## The framing guard
+
+`framing_text` is anything the GAME says in its own voice around a quote, and
+it is the actual risk surface. Reproducing what somebody said is one thing.
+Asserting what they knew or intended is another, and it is a much harder thing
+to stand behind.
+
+So the gate refuses game-voice framing containing `lied`, `knowingly`,
+`deliberately`, `covered up`, `fraud`, `conspired` and their relatives. Give
+the dated evidence and let the player do the arithmetic.
+
+**This is not squeamishness, it is the stronger move.** A reader who works out
+for themselves that a 2022 assurance did not survive contact with 2024 is more
+convinced than one who is told what to think, and the position is far easier to
+defend. The juxtaposition does the work; the epithet only adds exposure.
+
+**The guard never touches the quote itself.** If the speaker used one of those
+words, that is what they said, and it stands.
+
+It is a drafting guard, not legal advice. The accountability tier warrants an
+actual lawyer before anything ships, and Australian defamation law is the
+relevant law here rather than the US assumptions most writing on this subject
+carries.
+
 ## A person can always change their mind
 
 `id` is stable forever precisely so that a request years later to correct,
