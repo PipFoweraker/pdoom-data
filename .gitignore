@@ -93,3 +93,31 @@ data/raw/arxiv_abstracts/dumps/*/data.jsonl
 
 # The generated corpus-review sheet. Rebuilt every time the server starts.
 tools/corpus_review.html
+
+# Photos and camera raws never enter this repository. It is PUBLIC, a household
+# photo can carry the home location in EXIF GPS, and the only size guard on any
+# seat is a local hook that warns above 50 MiB -- an 8 MB JPEG passes it
+# silently, and a fresh clone has no hook at all. pdoom-data holds no images
+# (0 tracked on 2026-11-07); game art belongs to pdoom1. If one is ever needed
+# here, add it with `git add -f` and say why in the commit.
+# Estate pass 2026-11-05, card PDOOM-DATA-2; ruled yes by Pip 2026-11-07.
+*.jpg
+*.jpeg
+*.JPG
+*.JPEG
+*.png
+*.PNG
+*.heic
+*.HEIC
+*.cr2
+*.CR2
+*.cr3
+*.CR3
+*.nef
+*.NEF
+*.arw
+*.ARW
+*.dng
+*.DNG
+*.raw
+*.RAW
