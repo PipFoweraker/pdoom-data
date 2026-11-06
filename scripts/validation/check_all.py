@@ -115,6 +115,16 @@ GATING = [
     # approved rather than re-deriving it.
     ("descriptions serve only what a human accepted",
      ["tests/test_description_overlay.py"], True),
+    # Added 2026-08-26 and wired into nothing, so when it went red on a false
+    # positive three days later nobody saw it for ten weeks. CI is
+    # ubuntu-latest, which cannot reproduce the cp1252/CRLF writes this exists
+    # to prevent, so this gate is the only thing standing between a Windows
+    # seat and a silently re-encoded record. Found by the 2026-11-05 estate
+    # pass, card PDOOM-DATA-1.
+    ("text I/O names its codec and newline",
+     ["scripts/validation/check_source_portability.py"], True),
+    ("source portability gate can still fail",
+     ["tests/test_source_portability.py"], True),
 ]
 
 REBUILD = [

@@ -84,6 +84,17 @@ KNOWN_UNPARSEABLE = {
 # this entry is now stale cover for whatever lands next.
 EXEMPT = {os.path.join("scripts", "transformation", "clean_events.py"): 6}
 
+# Modules whose `.open` is not a file opener. The attribute arm below has to
+# catch `Path(...).open()` and `io.open()`, so it cannot simply ignore every
+# attribute call named `open` -- but it flagged `webbrowser.open(url)` in
+# serve_corpus_review.py on 2026-08-29 and the check sat red, unnoticed, for
+# ten weeks because nothing ran it. Each entry names why its `open` takes no
+# codec. Matched on a bare module name only, so `self.os.open` still counts.
+NOT_FILE_OPENERS = {
+    "webbrowser": "opens a URL in a browser; there is no file and no codec",
+    "os": "os.open returns a raw descriptor and takes no encoding argument",
+}
+
 
 def source_files():
     """Every .py in the repository, repo-relative, in a stable order."""
@@ -120,6 +131,10 @@ def offenders_in(tree):
             name = "open"
         elif isinstance(node.func, ast.Attribute) and node.func.attr in (
                 "open", "read_text", "write_text"):
+            receiver = node.func.value
+            if (node.func.attr == "open" and isinstance(receiver, ast.Name)
+                    and receiver.id in NOT_FILE_OPENERS):
+                continue
             # Attribute form only. `check_references.read_text` and
             # `redact_emails.write_text` are module-level helpers of the same
             # names that already do this correctly, and flagging their call
