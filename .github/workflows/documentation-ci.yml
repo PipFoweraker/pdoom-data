@@ -14,10 +14,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Python 3.9
+    # Was 3.9, pinned by the 2025-09 scaffold (b810351e) rather than chosen as a
+    # floor. ubuntu-latest became Ubuntu 26.04, which has no 3.9 build, and the
+    # job died in setup on every push from 2026-11-22. 3.11 matches
+    # data-integrity.yml and self-merge-eligibility.yml.
+    - name: Set up Python 3.11
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9'
+        python-version: '3.11'
     
     - name: Install dependencies
       run: |
