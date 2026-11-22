@@ -145,6 +145,12 @@ jobs:
       - name: A wrong decode still fails at the boundary
         run: python tests/test_mojibake_boundary.py
 
+      - name: Text I/O names its codec and newline
+        run: python scripts/validation/check_source_portability.py
+
+      - name: The source portability gate can still fail
+        run: python tests/test_source_portability.py
+
       - name: Serveable zone matches a fresh build (candidates)
         run: python scripts/build/project_candidates.py --check
 
