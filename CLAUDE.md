@@ -1,6 +1,10 @@
 # CLAUDE.md - context for AI assistants working in pdoom-data
 
-> **Style and reasoning conventions live in `D:\Local_Code\CLAUDE.md`** and are
+> **Style and reasoning conventions live in the parent CLAUDE.md** -- per seat,
+> `D:\Local_Code\CLAUDE.md` on the D-seat and
+> `G:\Documents\Organising_Life\Code\.claude\CLAUDE.md` on Bort (Bort measured
+> 2026-11-07, D-seat not re-measured; paths are per-seat facts, coordination
+> reference section 5b) -- and are
 > already loaded alongside this file. They are deliberately NOT repeated here.
 > Until 2026-07-30 this file duplicated 20,867 characters of that preamble
 > verbatim -- about 5k tokens paid on every session, for content the model had
@@ -78,13 +82,15 @@ read-only and therefore safe to have armed.
 ## Served collections
 
 Paths below are relative to `data/serveable/`. There is no top-level `api/`;
-this table said there was until 2026-08-15. Counts re-measured 2026-08-15.
+this table said there was until 2026-08-15. Counts re-measured 2026-11-07;
+the candidates figure had been stale since `pdoom-data#95` (2026-08-29) and no
+gate noticed, because nothing checks this table.
 
 | Path | What it is |
 |---|---|
 | `api/timeline_events/all_events.json` | 1,194 events, keyed by slug. 28 hand-authored narrative records; 1,166 bulk, which is **1,129 arXiv plus 37 Distill**, not arXiv alone. Bulk descriptions are unparsed PDF text. |
-| `api/candidates/all_candidates.jsonl` | 3,434 candidates, 2023-2026 forward-fill. Unreviewed unless `review_status` says otherwise. |
-| `api/reviewed/all_reviewed.jsonl` | 518 reviewed candidates carrying 526 attributed reviews: 337 accept, 166 unsure, 23 reject, all by Pip Foweraker; 8 records hold two reviews. **Reviewed, not accepted** -- do not read this file as an accept list. Not `event_v1` shape; not engine-ingestible without a mapping layer. |
+| `api/candidates/all_candidates.jsonl` | 3,450 candidates (3,434 before `pdoom-data#95`), 2023-2026 forward-fill. Unreviewed unless `review_status` says otherwise. |
+| `api/reviewed/all_reviewed.jsonl` | 518 reviewed candidates carrying 526 attributed reviews: 337 accept, 166 unsure, 23 reject, all by Pip Foweraker; 8 records hold two reviews. `check_review_targets.py` reports **528 verdicts across 520 records**, and that is not drift: it also counts the 2 `privacy` verdicts, whose records `project_reviewed.py` withholds from this file. **Reviewed, not accepted** -- do not read this file as an accept list. Not `event_v1` shape; not engine-ingestible without a mapping layer. |
 | `api/frontier_labs/all_labs.json` | 46 organisations with founding dates and per-date evidence. 4 founded-null, 16 contested. |
 | `api/watch/accepted.jsonl` | The Watch mechanic's output: atoms a named human accepted, in a **neutral** shape. Currently 0 records because nothing is triaged. Deliberately NOT `event_v1` -- see below. |
 | `api/meta/dataset_quality.json` | Measured counts about the corpus, regenerated and gated. Quote figures from here rather than retyping them. |
@@ -320,7 +326,7 @@ printing and capture to `coordination`.
     python scripts/**/*.py
     python -m json.tool
     git add / commit / push / pull / fetch
-    gh issue list / view       NOT INSTALLED on the Linux seat -- see below
+    gh issue list / view       (Linux seat: installed 2026-08-16, see below)
 
 `gh` is INSTALLED on the Linux seat as of 2026-08-16: version 2.97.0 at
 `~/.local/bin/gh`, from the release tarball, since there is no `apt` and no
