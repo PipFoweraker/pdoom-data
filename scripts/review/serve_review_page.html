@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="us-ascii">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pdoom-data review</title>
+<style>
+:root {
+  --bg: #f6f5f1; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a64;
+  --line: #dcd9d0; --accent: #1f5f8b; --warn-bg: #fff3cd; --warn-ink: #6b4e00;
+  --bad-bg: #fde2e1; --bad-ink: #8a1c17; --ok-bg: #e2f2e5; --ok-ink: #1d5e2c;
+  --sel: #e8eef4; --mono: ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181a; --panel: #202226; --ink: #e8e6e1; --muted: #9a988f;
+    --line: #34363b; --accent: #7fb6e0; --warn-bg: #3d3416; --warn-ink: #f0d58a;
+    --bad-bg: #3f1d1c; --bad-ink: #f1a29d; --ok-bg: #1b3322; --ok-ink: #9ad6a8;
+    --sel: #2a3340;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+header { display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  padding: 10px 16px; border-bottom: 1px solid var(--line); background: var(--panel);
+  position: sticky; top: 0; z-index: 2; }
+header h1 { font-size: 16px; margin: 0 12px 0 0; }
+.tab { border: 1px solid var(--line); background: transparent; color: var(--ink);
+  padding: 6px 12px; border-radius: 6px; cursor: pointer; font: inherit; font-size: 15px; }
+.tab.on { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+#who { margin-left: auto; color: var(--muted); font-size: 14px; }
+#status { font-size: 14px; color: var(--muted); min-width: 10em; text-align: right; }
+main { display: grid; grid-template-columns: minmax(220px, 320px) 1fr; min-height: calc(100vh - 54px); }
+@media (max-width: 760px) { main { grid-template-columns: 1fr; } #list { max-height: 35vh; } }
+#side { border-right: 1px solid var(--line); display: flex; flex-direction: column; min-width: 0; }
+#filters { padding: 8px; border-bottom: 1px solid var(--line); display: flex; gap: 6px; flex-wrap: wrap; }
+#filters select, #filters input { font: inherit; font-size: 14px; padding: 4px; background: var(--panel);
+  color: var(--ink); border: 1px solid var(--line); border-radius: 4px; }
+#counts { padding: 4px 10px; font-size: 13px; color: var(--muted); }
+#list { overflow-y: auto; flex: 1; }
+.item { padding: 7px 10px; border-bottom: 1px solid var(--line); cursor: pointer; font-size: 14px; }
+.item.sel { background: var(--sel); }
+.item .st { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+#card { padding: 18px 24px 80px; max-width: 900px; min-width: 0; }
+#card h2 { margin: 0 0 4px; font-size: 22px; line-height: 1.3; }
+.meta { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+.flags { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.flag { font-size: 13px; padding: 2px 8px; border-radius: 4px; background: var(--warn-bg); color: var(--warn-ink); }
+.flag.bad { background: var(--bad-bg); color: var(--bad-ink); }
+.flag.ok { background: var(--ok-bg); color: var(--ok-ink); }
+section.box { background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+  padding: 12px 14px; margin: 12px 0; overflow-wrap: anywhere; }
+section.box h3 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.junk { font-family: var(--mono); font-size: 14px; white-space: pre-wrap; }
+.feed { font-family: var(--mono); font-size: 14px; color: var(--muted); }
+ul.src { margin: 0; padding-left: 18px; }
+ul.src li { margin: 4px 0; }
+a { color: var(--accent); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 6px; }
+.actions button { font: inherit; font-size: 15px; padding: 8px 14px; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+.actions button.primary { border-color: var(--accent); }
+.actions button kbd { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-right: 4px; }
+textarea { width: 100%; min-height: 70px; font: inherit; font-size: 15px; padding: 8px;
+  background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; }
+.hint { font-size: 13px; color: var(--muted); }
+.current { font-size: 14px; margin-top: 6px; }
+details summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+.empty { color: var(--muted); padding: 40px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>pdoom-data review</h1>
+  <button class="tab" data-tab="triage">Watch triage</button>
+  <button class="tab" data-tab="decide">Month end</button>
+  <button class="tab" data-tab="desc">Descriptions</button>
+  <span id="who"></span>
+  <span id="status">loading</span>
+</header>
+<main>
+  <div id="side">
+    <div id="filters">
+      <select id="show"></select>
+      <input id="q" type="search" placeholder="filter titles" aria-label="filter titles">
+    </div>
+    <div id="counts"></div>
+    <div id="list"></div>
+  </div>
+  <div id="card"><p class="empty">Loading.</p></div>
+</main>
+<script>
+"use strict";
+// Every string from the data is placed with textContent, never innerHTML:
+// atoms are machine-scanned web text and must not be able to run as script.
+var S = { tab: "triage", watch: null, desc: null, sel: null, view: [] };
+
+function el(tag, attrs, kids) {
+  var n = document.createElement(tag);
+  if (attrs) for (var k in attrs) {
+    if (k === "text") n.textContent = attrs[k];
+    else if (k === "cls") n.className = attrs[k];
+    else if (k.slice(0, 2) === "on") n.addEventListener(k.slice(2), attrs[k]);
+    else n.setAttribute(k, attrs[k]);
+  }
+  (kids || []).forEach(function (c) { if (c) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+  return n;
+}
+function status(msg) { document.getElementById("status").textContent = msg; }
+function api(path, body) {
+  status("saving...");
+  return fetch(path, { method: "POST", headers: { "Content-Type": "application/json" },
+                       body: JSON.stringify(body) })
+    .then(function (r) { return r.json().then(function (j) {
+      if (!r.ok) throw new Error(j.error || r.status);
+      status("saved " + new Date().toLocaleTimeString()); return j; }); })
+    .catch(function (e) { status("NOT SAVED: " + e.message); alert("Not saved: " + e.message); throw e; });
+}
+function load() {
+  return Promise.all([fetch("/api/watch").then(function (r) { return r.json(); }),
+                      fetch("/api/descriptions").then(function (r) { return r.json(); })])
+    .then(function (both) {
+      S.watch = both[0]; S.desc = both[1];
+      document.getElementById("who").textContent = "deciding as " + S.watch.by;
+      status("ready"); setTab(S.tab);
+    });
+}
+
+// ---------- filters per tab ----------
+var FILTERS = {
+  triage: [["undecided", "Not yet triaged"], ["attention", "Needs attention"], ["watching", "On Watch"],
+           ["rejected", "Rejected"], ["all", "All"]],
+  decide: [["watching", "On Watch (to decide)"], ["decided", "Accepted or rejected"], ["all", "All on Watch or decided"]],
+  desc:   [["undecided", "Not yet decided"], ["flagged", "Flagged"], ["accept_abstract", "Accepted"],
+           ["keep_current", "Kept current"], ["undecided_v", "Marked undecided"], ["all", "All"]]
+};
+function setTab(t) {
+  S.tab = t; S.sel = null;
+  document.querySelectorAll(".tab").forEach(function (b) { b.classList.toggle("on", b.dataset.tab === t); });
+  var sel = document.getElementById("show"); sel.innerHTML = "";
+  FILTERS[t].forEach(function (f) { sel.appendChild(el("option", { value: f[0], text: f[1] })); });
+  refresh();
+}
+function attention(r) { return !r.sources.length || !r.date || (r.possible_duplicate_of || []).length || r.scan_confidence === "low"; }
+function rowsFor() {
+  var f = document.getElementById("show").value, q = document.getElementById("q").value.toLowerCase();
+  var out;
+  if (S.tab === "desc") {
+    out = S.desc.items.filter(function (it) {
+      var v = it.decision && it.decision.verdict;
+      if (f === "undecided") return !v;
+      if (f === "flagged") return !it.title_matches || it.chars_dropped.length;
+      if (f === "undecided_v") return v === "undecided";
+      if (f === "all") return true;
+      return v === f;
+    });
+    return out.filter(function (it) { return !q || (it.current_title || "").toLowerCase().indexOf(q) >= 0; });
+  }
+  out = S.watch.rows.filter(function (r) {
+    var s = r.watch_status;
+    if (S.tab === "decide") {
+      if (f === "watching") return s === "watching";
+      if (f === "decided") return s === "accepted" || s === "rejected";
+      return s === "watching" || s === "accepted" || s === "rejected";
+    }
+    if (f === "undecided") return !s;
+    if (f === "attention") return !s && attention(r);
+    if (f === "all") return true;
+    return s === f;
+  });
+  out.sort(function (a, b) { return (a.date || "9999").localeCompare(b.date || "9999") || a.id.localeCompare(b.id); });
+  return out.filter(function (r) { return !q || r.title.toLowerCase().indexOf(q) >= 0; });
+}
+function refresh(keepId) {
+  S.view = rowsFor();
+  var list = document.getElementById("list"); list.innerHTML = "";
+  var total = S.tab === "desc" ? S.desc.items.length : S.watch.rows.length;
+  document.getElementById("counts").textContent = S.view.length + " shown of " + total;
+  S.view.forEach(function (r) {
+    var st = S.tab === "desc" ? ((r.decision && r.decision.verdict) || "undecided")
+                              : ((r.rating || "-") + " / " + (r.watch_status || "untriaged"));
+    var n = el("div", { cls: "item" + (r.id === S.sel ? " sel" : ""), onclick: function () { select(r.id); } },
+      [el("div", { text: (S.tab === "desc" ? r.current_title : r.title) || r.id }), el("div", { cls: "st", text: st })]);
+    n.dataset.id = r.id; list.appendChild(n);
+  });
+  var still = S.view.some(function (r) { return r.id === keepId; });
+  if (still) select(keepId);
+  else if (S.view.length) select(S.view[0].id);
+  else { S.sel = null; document.getElementById("card").innerHTML = "";
+         document.getElementById("card").appendChild(el("p", { cls: "empty", text:
+           S.tab === "desc" && !S.desc.items.length ? "No abstract proposals on this seat. Run scripts/adapters/arxiv_abstracts.py first."
+                                                    : "Nothing in this view. Change the filter on the left." })); }
+}
+function select(id) {
+  S.sel = id;
+  document.querySelectorAll(".item").forEach(function (n) { n.classList.toggle("sel", n.dataset.id === id); });
+  var n = document.querySelector('.item[data-id="' + CSS.escape(id) + '"]'); if (n) n.scrollIntoView({ block: "nearest" });
+  if (S.tab === "desc") drawDesc(S.desc.items.filter(function (x) { return x.id === id; })[0]);
+  else drawAtom(S.watch.rows.filter(function (x) { return x.id === id; })[0]);
+}
+function next() {
+  // After a decision the record usually leaves the filtered view, so the next
+  // one is whatever now sits at the same index.
+  var i = S.view.map(function (r) { return r.id; }).indexOf(S.sel);
+  refresh(); if (S.view.length) select(S.view[Math.min(Math.max(i, 0), S.view.length - 1)].id);
+}
+function move(d) {
+  var i = S.view.map(function (r) { return r.id; }).indexOf(S.sel) + d;
+  if (i >= 0 && i < S.view.length) select(S.view[i].id);
+}
+function replaceRow(row) {
+  for (var i = 0; i < S.watch.rows.length; i++) if (S.watch.rows[i].id === row.id) S.watch.rows[i] = row;
+}
+
+// ---------- watch atoms ----------
+function sourcesBox(r) {
+  var ul = el("ul", { cls: "src" });
+  (r.sources || []).forEach(function (s) {
+    var url = typeof s === "string" ? s : (s.url || "");
+    var label = typeof s === "string" ? s : ((s.publisher || s.name || s.title || "") + (s.url ? "  " + s.url : ""));
+    var bits = [];
+    if (/^https?:\/\//.test(url)) bits.push(el("a", { href: url, target: "_blank", rel: "noopener noreferrer", text: label || url }));
+    else bits.push(document.createTextNode(label || JSON.stringify(s)));
+    if (typeof s === "object") {
+      var extra = ["tier", "kind", "retrieved", "date", "note"].filter(function (k) { return s[k]; })
+        .map(function (k) { return k + ": " + s[k]; }).join("  |  ");
+      if (extra) bits.push(el("div", { cls: "hint", text: extra }));
+    }
+    ul.appendChild(el("li", null, bits));
+  });
+  if (!(r.sources || []).length) ul.appendChild(el("li", { text: "NO SOURCE" }));
+  return el("section", { cls: "box" }, [el("h3", { text: "Sources (" + (r.sources || []).length + ")" }), ul,
+    el("div", { cls: "hint", text: r.primary_source_retrieved ? "Primary source was retrieved by the scan." :
+      "Primary source NOT retrieved by the scan -- what is above is what the scan cited, unread." })]);
+}
+function drawAtom(r) {
+  var card = document.getElementById("card"); card.innerHTML = "";
+  if (!r) return;
+  var flags = el("div", { cls: "flags" });
+  function flag(t, cls) { flags.appendChild(el("span", { cls: "flag " + (cls || ""), text: t })); }
+  if (!r.sources.length) flag("NO SOURCE", "bad");
+  if (!r.date) flag("NO DATE", "bad");
+  if (!r.primary_source_retrieved) flag("primary source not retrieved");
+  else flag("primary source retrieved", "ok");
+  if (r.scan_confidence) flag("scan confidence: " + r.scan_confidence, r.scan_confidence === "low" ? "bad" : "");
+  (r.possible_duplicate_of || []).forEach(function (d) { flag("DUP? " + d); });
+  (r.scan_flags || []).forEach(function (f) { flag(f); });
+  card.appendChild(el("h2", { text: r.title }));
+  card.appendChild(el("div", { cls: "meta", text: (r.date || "no date") + (r.date_kind ? "  (" + r.date_kind + ")" : "") +
+    "   |   " + r.id + "   |   scans: " + (r.scans || []).join(", ") }));
+  card.appendChild(flags);
+  card.appendChild(el("section", { cls: "box" }, [el("h3", { text: "What the scan says happened" }), el("div", { text: r.description || "" })]));
+  if (r.why_it_matters) card.appendChild(el("section", { cls: "box" }, [el("h3", { text: "Why it matters (scan's opinion)" }), el("div", { text: r.why_it_matters })]));
+  card.appendChild(sourcesBox(r));
+  card.appendChild(el("div", { cls: "current", text: "Currently: rating " + (r.rating || "-") + ", " + (r.watch_status || "untriaged") +
+    (r.decided_by ? ", decided by " + r.decided_by + " on " + r.decided_on : "") +
+    (r.decision_note ? '. Reason: "' + r.decision_note + '"' : "") }));
+  if (S.tab === "triage") triageActions(card, r); else decideActions(card, r);
+}
+function triageActions(card, r) {
+  var acts = el("div", { cls: "actions" });
+  Object.keys(S.watch.triage_keys).forEach(function (k) {
+    var v = S.watch.triage_keys[k];
+    acts.appendChild(el("button", { cls: k === "a" ? "primary" : "", onclick: function () { doTriage(r, k); } },
+      [el("kbd", { text: k }), v[2]]));
+  });
+  card.appendChild(acts);
+  var note = el("textarea", { placeholder: "Optional note -- saved when you press Save note. Not required to decide." });
+  note.value = r.note || "";
+  card.appendChild(note);
+  card.appendChild(el("div", { cls: "actions" }, [el("button", { onclick: function () {
+    api("/api/watch/note", { id: r.id, note: note.value }).then(function (row) { replaceRow(row); refresh(r.id); }); } }, ["Save note"])]));
+  card.appendChild(el("p", { cls: "hint", text: "Keys: a b x ? decide, j / k or arrows move. Same mapping as triage_watch.py; " +
+    "a and b put the atom ON Watch, they do not accept it. Accepting happens in Month end, with a reason." }));
+}
+function doTriage(r, k) {
+  api("/api/watch/triage", { id: r.id, key: k }).then(function (row) { replaceRow(row); next(); });
+}
+function decideActions(card, r) {
+  var reason = el("textarea", { placeholder: "Reason -- required to accept or reject, because it is published with the decision." });
+  if (r.decision_note) reason.value = r.decision_note;
+  var gateBox = el("div");
+  var acts = el("div", { cls: "actions" });
+  Object.keys(S.watch.decide_keys).forEach(function (k) {
+    var v = S.watch.decide_keys[k];
+    acts.appendChild(el("button", { cls: k === "y" ? "primary" : "", onclick: function () { doDecide(r, v[0], reason, gateBox); } },
+      [el("kbd", { text: k }), v[1]]));
+  });
+  card.appendChild(reason); card.appendChild(acts); card.appendChild(gateBox);
+  card.appendChild(el("p", { cls: "hint", text: "Keys work when the reason box is not focused: y accept, x reject, k keep watching. " +
+    "Before an accept is recorded, the producer's own gate is asked whether it would actually be served." }));
+}
+function doDecide(r, status_, reason, gateBox) {
+  var note = reason.value.trim();
+  if ((status_ === "accepted" || status_ === "rejected") && !note) { reason.focus(); status("a reason is required"); return; }
+  var go = function () { api("/api/watch/decide", { id: r.id, status: status_, note: note }).then(function (row) { replaceRow(row); next(); }); };
+  if (status_ !== "accepted") return go();
+  api("/api/watch/gate", { id: r.id }).then(function (g) {
+    if (!g.reasons.length) return go();
+    gateBox.innerHTML = "";
+    var ul = el("ul"); g.reasons.forEach(function (x) { ul.appendChild(el("li", { text: x })); });
+    gateBox.appendChild(el("section", { cls: "box" }, [el("h3", { text: "Accepting this will NOT serve it" }), ul,
+      el("div", { cls: "actions" }, [el("button", { onclick: go }, ["Record the acceptance anyway"])])]));
+  });
+}
+
+// ---------- descriptions ----------
+function drawDesc(it) {
+  var card = document.getElementById("card"); card.innerHTML = "";
+  if (!it) return;
+  var flags = el("div", { cls: "flags" });
+  if (!it.title_matches) flags.appendChild(el("span", { cls: "flag bad", text: "TITLE DIFFERS -- arXiv says: " + it.arxiv_title }));
+  if (it.chars_dropped.length) flags.appendChild(el("span", { cls: "flag bad", text: "CHARACTERS WOULD BE DELETED: " +
+    it.chars_dropped.map(function (c) { return "U+" + c.charCodeAt(0).toString(16).toUpperCase(); }).join(" ") }));
+  card.appendChild(el("h2", { text: it.current_title }));
+  card.appendChild(el("div", { cls: "meta" }, [it.id + "   |   ",
+    el("a", { href: it.source_url, target: "_blank", rel: "noopener noreferrer", text: it.source_url })]));
+  card.appendChild(flags);
+  card.appendChild(el("section", { cls: "box" }, [el("h3", { text: "Served now (" + (it.current_description || "").length + " chars)" }),
+    el("div", { cls: "junk", text: it.current_description || "" })]));
+  card.appendChild(el("section", { cls: "box" }, [el("h3", { text: "Proposed: the arXiv abstract, exactly as it would be served (" + it.proposed.length + " chars)" }),
+    el("div", { text: it.proposed }),
+    it.full_abstract && it.full_abstract.length > it.proposed.length + 4 ?
+      el("details", null, [el("summary", { text: "Full abstract (" + it.full_abstract.length + " chars; the served text is trimmed at a sentence)" }),
+                          el("div", { text: it.full_abstract })]) : null]));
+  card.appendChild(el("section", { cls: "box" }, [el("h3", { text: "How it shows today" }),
+    el("div", { cls: "hint", text: "pdoom1 in-game feed (godot/scripts/game_manager.gd:809), flavour channel, hidden from the default view. The description is not shown there:" }),
+    el("div", { cls: "feed", text: "FEED | " + it.id + " -- " + it.served_title }),
+    el("div", { cls: "hint", text: "pdoom1-website event page: title, then the description -- the box above is what a visitor reads after this change." })]));
+  var ed = el("textarea", { placeholder: "Optional: your own condensation for in-game display. Stored as EDITORIALISED, attributed to you, beside the abstract -- never served as the description." });
+  if (it.decision && it.decision.editorial) ed.value = it.decision.editorial.text;
+  var count = el("div", { cls: "hint", text: "" });
+  ed.addEventListener("input", function () { count.textContent = ed.value.trim() ? ed.value.trim().length + " chars, editorialised" : ""; });
+  card.appendChild(ed); card.appendChild(count);
+  var acts = el("div", { cls: "actions" });
+  Object.keys(S.desc.keys).forEach(function (k) {
+    var v = S.desc.keys[k];
+    acts.appendChild(el("button", { cls: k === "y" ? "primary" : "", onclick: function () { doDesc(it, v[0], ed.value); } },
+      [el("kbd", { text: k }), v[1]]));
+  });
+  card.appendChild(acts);
+  if (it.decision) card.appendChild(el("div", { cls: "current", text: "Last decision: " + it.decision.verdict + " by " +
+    it.decision.reviewer + " at " + it.decision.at + (it.decision.editorial ? " (with an editorial)" : "") }));
+  card.appendChild(el("p", { cls: "hint", text: "Keys when the text box is not focused: y accept, n keep current, ? undecided, j / k move. " +
+    "Nothing is served until the timeline build runs; decisions go to data/curated/event_descriptions/decisions.jsonl." }));
+}
+function doDesc(it, verdict, editorial) {
+  api("/api/descriptions/decide", { id: it.id, verdict: verdict, editorial: editorial }).then(function (row) {
+    it.decision = row; next(); });
+}
+
+// ---------- keys ----------
+document.addEventListener("keydown", function (e) {
+  var t = e.target.tagName;
+  if (t === "TEXTAREA" || t === "INPUT" || t === "SELECT" || e.ctrlKey || e.metaKey || e.altKey) return;
+  var k = e.key;
+  if (k === "j" || k === "ArrowDown") { move(1); e.preventDefault(); return; }
+  if (k === "k" && S.tab !== "decide" || k === "ArrowUp") { move(-1); e.preventDefault(); return; }
+  if (!S.sel) return;
+  if (S.tab === "triage" && S.watch.triage_keys[k]) {
+    doTriage(S.watch.rows.filter(function (r) { return r.id === S.sel; })[0], k);
+  } else if (S.tab === "decide" && S.watch.decide_keys[k]) {
+    var b = Array.prototype.filter.call(document.querySelectorAll(".actions button"), function (x) {
+      return x.querySelector("kbd") && x.querySelector("kbd").textContent === k; })[0];
+    if (b) b.click();
+  } else if (S.tab === "desc" && S.desc.keys[k]) {
+    var it = S.desc.items.filter(function (x) { return x.id === S.sel; })[0];
+    var ta = document.querySelector("#card textarea");
+    doDesc(it, S.desc.keys[k][0], ta ? ta.value : "");
+  }
+});
+document.querySelectorAll(".tab").forEach(function (b) { b.addEventListener("click", function () { setTab(b.dataset.tab); }); });
+document.getElementById("show").addEventListener("change", function () { refresh(S.sel); });
+document.getElementById("q").addEventListener("input", function () { refresh(S.sel); });
+load();
+</script>
+</body>
+</html>
