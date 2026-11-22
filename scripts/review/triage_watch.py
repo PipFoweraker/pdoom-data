@@ -152,6 +152,88 @@ def append_log(entry):
         handle.write(json.dumps(entry, ensure_ascii=True, sort_keys=True) + "\n")
 
 
+def _now():
+    return datetime.now(timezone.utc).isoformat()
+
+
+# ---------------------------------------------------------------------------
+# The three mutations, ONE implementation each.
+#
+# Until 2026-11-22 these lived inline in the two keyboard loops below. A
+# browser front end (scripts/review/serve_review.py) needs exactly the same
+# semantics, and a second copy of "what does pressing b do to an atom" would be
+# a variant the moment either side changed -- the failure gate_reasons() below
+# already documents for the promotion rules. Both front ends call these. Each
+# appends to the log BEFORE mutating and saves after, so a crash loses the atom
+# file, never the record.
+# ---------------------------------------------------------------------------
+
+def apply_triage(rows, row, key, by, today=None):
+    """Triage key a/b/x/? -> rating + watch_status. Returns the log entry."""
+    today = today or date.today().isoformat()
+    rating, status, _label = KEYS[key]
+    entry = {
+        "id": row["id"],
+        "prev": {"rating": row.get("rating"),
+                 "watch_status": row.get("watch_status")},
+        "next": {"rating": rating, "watch_status": status},
+        "by": by,
+        "at": _now(),
+    }
+    append_log(entry)
+    row["rating"] = rating
+    row["watch_status"] = status
+    if status == "watching":
+        row["watching_since"] = row.get("watching_since") or today
+        row["decided_on"] = None
+        row["decided_by"] = None
+    elif status == "rejected":
+        row["decided_on"] = today
+        row["decided_by"] = by
+    else:
+        row["watching_since"] = None
+    save(rows)
+    return entry
+
+
+def apply_decide(rows, row, status, note, by, today=None):
+    """Month-end: accepted / rejected (note required) / watching."""
+    if status not in [v[0] for v in DECIDE_KEYS.values()]:
+        raise ValueError("unknown decide status %r" % status)
+    if status in ("accepted", "rejected") and not (note or "").strip():
+        raise ValueError("accept and reject both require a reason")
+    today = today or date.today().isoformat()
+    entry = {
+        "id": row["id"],
+        "pass": "decide",
+        "prev": {"watch_status": row.get("watch_status"),
+                 "decision_note": row.get("decision_note")},
+        "next": {"watch_status": status, "decision_note": note},
+        "by": by,
+        "at": _now(),
+    }
+    append_log(entry)
+    row["watch_status"] = status
+    if status == "watching":
+        row["decided_on"] = None
+        row["decided_by"] = None
+    else:
+        row["decided_on"] = today
+        row["decided_by"] = by
+        row["decision_note"] = note
+    save(rows)
+    return entry
+
+
+def apply_note(rows, row, note, by):
+    entry = {"id": row["id"], "field": "note", "value": note,
+             "by": by, "at": _now()}
+    append_log(entry)
+    row["note"] = note
+    save(rows)
+    return entry
+
+
 def render(row, position, total):
     flags = []
     if not row["sources"]:
@@ -272,27 +354,7 @@ def decide_loop(args, rows, queue):
                 print("  (left alone)")
                 continue
 
-        prior = {"watch_status": row.get("watch_status"),
-                 "decision_note": row.get("decision_note")}
-        append_log({
-            "id": row["id"],
-            "pass": "decide",
-            "prev": prior,
-            "next": {"watch_status": status, "decision_note": note},
-            "by": args.by,
-            "at": datetime.now(timezone.utc).isoformat(),
-        })
-
-        row["watch_status"] = status
-        if status == "watching":
-            row["decided_on"] = None
-            row["decided_by"] = None
-        else:
-            row["decided_on"] = today
-            row["decided_by"] = args.by
-            row["decision_note"] = note
-
-        save(rows)
+        apply_decide(rows, row, status, note, args.by, today)
         decided += 1
 
     print("\n%d decision(s) recorded by %s." % (decided, args.by))
@@ -397,42 +459,13 @@ def main():
                 continue
             note = input("  note> ").strip()
             if note:
-                by_id[last]["note"] = note
-                append_log({"id": last, "field": "note", "value": note,
-                            "by": args.by,
-                            "at": datetime.now(timezone.utc).isoformat()})
-                save(rows)
+                apply_note(rows, by_id[last], note, args.by)
             continue
         if key not in KEYS:
             print("  (unrecognised key, nothing changed)")
             continue
 
-        rating, status, _label = KEYS[key]
-        prior = {"rating": row.get("rating"),
-                 "watch_status": row.get("watch_status")}
-
-        # Log BEFORE mutating, so a crash loses the atom file, never the record.
-        append_log({
-            "id": row["id"],
-            "prev": prior,
-            "next": {"rating": rating, "watch_status": status},
-            "by": args.by,
-            "at": datetime.now(timezone.utc).isoformat(),
-        })
-
-        row["rating"] = rating
-        row["watch_status"] = status
-        if status == "watching":
-            row["watching_since"] = row.get("watching_since") or today
-            row["decided_on"] = None
-            row["decided_by"] = None
-        elif status == "rejected":
-            row["decided_on"] = today
-            row["decided_by"] = args.by
-        else:
-            row["watching_since"] = None
-
-        save(rows)
+        apply_triage(rows, row, key, args.by, today)
         decided += 1
         last = row["id"]
 

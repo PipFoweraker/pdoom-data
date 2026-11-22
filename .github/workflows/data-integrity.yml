@@ -151,6 +151,9 @@ jobs:
       - name: The source portability gate can still fail
         run: python tests/test_source_portability.py
 
+      - name: Screen review writes what the keyboard tools write
+        run: python tests/test_serve_review.py
+
       - name: Serveable zone matches a fresh build (candidates)
         run: python scripts/build/project_candidates.py --check
 

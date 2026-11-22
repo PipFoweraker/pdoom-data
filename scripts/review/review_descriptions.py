@@ -115,6 +115,43 @@ def append_decision(entry):
         handle.write(json.dumps(entry, ensure_ascii=True, sort_keys=True) + "\n")
 
 
+def build_decision(p, verdict, proposed, by, proposals_file, editorial=None):
+    """One decision row. Shared by this keyboard tool and serve_review.py.
+
+    `editorial` is Pip's own condensation of the abstract, when he writes one.
+    It is an ATTRIBUTED OPINION, held beside the source's words and never in
+    place of them: the overlay in project_timeline_events.py reads only
+    `description`, which is always the abstract exactly as shown. A consumer
+    that wants the shorter text (pdoom1, for in-game display) can take
+    `editorial`; one that does not can ignore the key. That is ADR-001's
+    fork-or-ignore test passed on purpose. Ruled by Pip 2026-11-22: "I will
+    want to note that it's been editorialised by me rather than the raw
+    extract".
+    """
+    if verdict not in [v[0] for v in KEYS.values()]:
+        raise ValueError("unknown verdict %r" % verdict)
+    if not (by or "").strip():
+        raise ValueError("no anonymous verdicts")
+    row = {
+        "id": p["id"],
+        "arxiv_id": p["arxiv_id"],
+        "source_url": p["source_url"],
+        "verdict": verdict,
+        "description": proposed if verdict == "accept_abstract" else None,
+        "replaces": p["current_description"],
+        "reviewer": by,
+        "at": datetime.now(timezone.utc).isoformat(),
+        "proposals_file": proposals_file,
+        "title_matches": p.get("title_matches"),
+        "chars_dropped": p.get("chars_dropped") or [],
+    }
+    text = " ".join((editorial or "").split())
+    if text:
+        row["editorial"] = {"text": text, "by": by,
+                            "kind": "editorialised -- not the source's words"}
+    return row
+
+
 def render(p, position, total, proposed):
     print("\n" + "=" * 78)
     print("[%d/%d]  %s" % (position, total, p["current_title"][:64]))
@@ -204,19 +241,9 @@ def main():
             continue
 
         verdict, _label = KEYS[key]
-        append_decision({
-            "id": p["id"],
-            "arxiv_id": p["arxiv_id"],
-            "source_url": p["source_url"],
-            "verdict": verdict,
-            "description": proposed if verdict == "accept_abstract" else None,
-            "replaces": p["current_description"],
-            "reviewer": args.by,
-            "at": datetime.now(timezone.utc).isoformat(),
-            "proposals_file": os.path.relpath(args.proposals, REPO).replace("\\", "/"),
-            "title_matches": p.get("title_matches"),
-            "chars_dropped": p.get("chars_dropped") or [],
-        })
+        append_decision(build_decision(
+            p, verdict, proposed, args.by,
+            os.path.relpath(args.proposals, REPO).replace("\\", "/")))
         counts[verdict] = counts.get(verdict, 0) + 1
 
     print("\n%d decision(s) recorded by %s: %s"

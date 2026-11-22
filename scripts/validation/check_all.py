@@ -125,6 +125,12 @@ GATING = [
      ["scripts/validation/check_source_portability.py"], True),
     ("source portability gate can still fail",
      ["tests/test_source_portability.py"], True),
+    # The browser review front end writes human judgement into data/curated/,
+    # which nothing can rebuild. It must write exactly what the keyboard tools
+    # write, refuse an empty reason and a foreign Origin, and keep an
+    # editorial condensation out of the served description.
+    ("screen review writes what the keyboard tools write",
+     ["tests/test_serve_review.py"], True),
 ]
 
 REBUILD = [
